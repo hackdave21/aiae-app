@@ -102,7 +102,7 @@
       <!-- BOUTON -->
       <div class="mt-10 flex justify-center w-full">
 
-        <a href="#"
+        <a href="{{ route('energie.calculator') }}" target="_blank"
           class="bg-[#f78b0c] hover:bg-orange-600 transition text-white text-sm sm:text-lg font-semibold px-6 sm:px-8 py-4 rounded-full flex items-center justify-center gap-3 w-full sm:w-auto">
 
           Ouvrir Le Calculateur d’énergies Renouvelables

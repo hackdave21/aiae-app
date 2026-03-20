@@ -496,7 +496,7 @@ function renderStep1(){
       <h2 class="text-2xl font-bold text-gray-800">1. Type de projet</h2>
       <p class="text-gray-500 text-sm">Sélectionnez le secteur et le type de bâtiment</p>
     </div>
-    <div class="card p-6 mb-8 shadow-sm ${S.secteur?'hidden md:block opacity-50':''}">
+    <div class="card p-6 mb-8 shadow-sm ${S.secteur?'hidden':''}">
       <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Secteur d'activité</h3>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
         ${Object.keys(TYPES).map(k=>`

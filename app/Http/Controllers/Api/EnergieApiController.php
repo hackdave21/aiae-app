@@ -94,4 +94,60 @@ class EnergieApiController extends Controller
     {
         return response()->json(DB::table('zones_irradiation')->get());
     }
+
+    /**
+     * Enregistre une estimation et génère un lead
+     */
+    public function saveEstimation(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'telephone' => 'required|string',
+            'nom' => 'nullable|string',
+            'resultats' => 'required|array',
+            'details_techniques' => 'nullable|array'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $code = 'EST-EN-' . strtoupper(substr(uniqid(), -6));
+            
+            DB::table('estimations_energie')->insert([
+                'code_estimation' => $code,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'resultats_json' => json_encode($request->resultats),
+                'bilan_puissance_json' => json_encode($request->details_techniques),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            DB::table('leads')->insert([
+                'first_name' => $request->nom ?? 'Client',
+                'last_name' => 'Energie',
+                'email' => $request->email,
+                'phone' => $request->telephone,
+                'source' => 'Calculateur Energie',
+                'status' => 'new',
+                'notes' => 'Demande de devis issue du calculateur d\'énergie: ' . $code,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'reference' => $code,
+                'message' => 'Votre demande de devis a été enregistrée avec succès. Un conseiller vous contactera sous peu.'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erreur lors de l\'enregistrement de votre demande.'
+            ], 500);
+        }
+    }
 }

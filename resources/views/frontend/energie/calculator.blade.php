@@ -28,6 +28,12 @@
     .fade-enter-from, .fade-leave-to { opacity: 0; }
     
     #navBar { background-color: var(--aiae-blue) !important; }
+    
+    @media print {
+        body { background-color: white; }
+        #navBar, footer, .no-print { display: none !important; }
+        #energy-app { padding-top: 0 !important; }
+    }
 </style>
 @endsection
 
@@ -283,17 +289,55 @@
                     </div>
 
                     <!-- Call to Action -->
-                    <div class="p-8 bg-white rounded-[40px] shadow-sm border border-gray-100 space-y-4">
-                        <button class="w-full bg-[#162064] text-white py-4 rounded-3xl font-bold uppercase tracking-widest hover:bg-[#FF8400] transition-all shadow-lg shadow-blue-900/10">
+                    <div class="p-8 bg-white rounded-[40px] shadow-sm border border-gray-100 space-y-4 no-print">
+                        <button @click="showQuoteModal = true" class="w-full bg-[#162064] text-white py-4 rounded-3xl font-bold uppercase tracking-widest hover:bg-[#FF8400] transition-all shadow-lg shadow-blue-900/10">
                             Demander un devis formel
                         </button>
-                        <button class="w-full bg-gray-50 text-gray-400 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest hover:text-[#162064] transition-all">
+                        <button @click="printPdf" class="w-full bg-gray-50 text-gray-400 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest hover:text-[#162064] transition-all">
                             Télécharger la fiche PDF
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Quote Modal -->
+        <transition name="fade">
+            <div v-if="showQuoteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm no-print">
+                <div class="bg-white rounded-[32px] p-8 max-w-md w-full shadow-2xl relative">
+                    <button @click="showQuoteModal = false" class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                    
+                    <h3 class="text-2xl font-black text-[#162064] mb-2">Devis Personnalisé</h3>
+                    <p class="text-sm text-gray-500 mb-6">Recevez une proposition détaillée basée sur votre estimation technique.</p>
+                    
+                    <div v-if="quoteSuccess" class="p-4 bg-green-50 text-green-700 rounded-2xl mb-6 text-sm font-bold border border-green-200">
+                        ✅ Votre demande a été enregistrée avec succès. Notre équipe vous contactera très prochainement.
+                    </div>
+                    
+                    <form v-else @submit.prevent="submitQuote" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Nom Complet</label>
+                            <input type="text" v-model="quoteForm.nom" required class="w-full py-3 px-4 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none input-aiae">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Téléphone</label>
+                            <input type="tel" v-model="quoteForm.telephone" required class="w-full py-3 px-4 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none input-aiae">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Email</label>
+                            <input type="email" v-model="quoteForm.email" required class="w-full py-3 px-4 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none input-aiae">
+                        </div>
+                        
+                        <button type="submit" :disabled="submitting" class="w-full mt-2 bg-[#FF8400] text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-[#e67700] transition-all flex items-center justify-center disabled:opacity-50">
+                            <span v-if="submitting">Envoi en cours...</span>
+                            <span v-else>Confirmer ma demande</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </transition>
     </div>
 </div>
 @endsection
@@ -312,6 +356,11 @@
             const inputMode = ref('bill');
             const loading = ref(false);
             const selectedItem = ref('');
+            
+            const showQuoteModal = ref(false);
+            const submitting = ref(false);
+            const quoteSuccess = ref(false);
+            const quoteForm = ref({ nom: '', email: '', telephone: '' });
             
             const equipements = @json($equipements);
             const zones = @json($zones);
@@ -405,6 +454,38 @@
                 return new Intl.NumberFormat('fr-FR').format(Math.round(val));
             };
 
+            const printPdf = () => {
+                window.print();
+            };
+
+            const submitQuote = async () => {
+                if(!quoteForm.value.email || !quoteForm.value.telephone) return;
+                submitting.value = true;
+                
+                try {
+                    const payload = {
+                        nom: quoteForm.value.nom,
+                        email: quoteForm.value.email,
+                        telephone: quoteForm.value.telephone,
+                        resultats: results.value,
+                        details_techniques: form.value
+                    };
+                    
+                    await axios.post('/api/site/energy/save', payload);
+                    quoteSuccess.value = true;
+                    setTimeout(() => { 
+                        showQuoteModal.value = false; 
+                        quoteSuccess.value = false; 
+                        quoteForm.value = {nom: '', email: '', telephone: ''}; 
+                    }, 4000);
+                } catch(err) {
+                    alert("Une erreur est survenue lors de l'envoi de votre demande.");
+                    console.error("Erreur de sauvegarde devis", err);
+                } finally {
+                    submitting.value = false;
+                }
+            };
+
             // Watch for changes to trigger calculation
             watch([mainTab, () => form.value], () => {
                 calculate();
@@ -418,7 +499,8 @@
             return {
                 mainTab, inputMode, form, results, loading, selectedItem,
                 equipements, zones, cheptels, collectes,
-                getEquipmentName, getEquipmentPower, addItem, removeItem, formatMoney
+                showQuoteModal, submitting, quoteSuccess, quoteForm,
+                getEquipmentName, getEquipmentPower, addItem, removeItem, formatMoney, printPdf, submitQuote
             }
         }
     }).mount('#energy-app');

@@ -65,7 +65,7 @@
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">À propos</a>
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Nos divisions</a>
       <a href="{{ route('simulator.index') }}" class="block px-4 py-2 rounded-lg @if(Route::is('simulator.index')) bg-white @else bg-glassDark @endif">Simulateurs</a>
-      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Projets & Réalisations</a>
+      <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">Diaspora</a>
       <a href="#" class="block px-4 py-2 rounded-lg bg-glassDark">FAQ</a>
     </div>
   </header>

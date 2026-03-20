@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
             PricingRuleSeeder::class,
             PricingCoefficientSeeder::class,
 
-            // 4. Business & Simulation
-            LeadSeeder::class,
-            SimulationSeeder::class,
-            SimulationResultSeeder::class,
-            QuotationSeeder::class,
-            AppointmentSeeder::class,
+            // 4. Business & Simulation - Commented out to prevent fake admin data
+            // LeadSeeder::class,
+            // SimulationSeeder::class,
+            // SimulationResultSeeder::class,
+            // QuotationSeeder::class,
+            // AppointmentSeeder::class,
 
             // 5. Config & System
             CurrencySeeder::class,

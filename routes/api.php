@@ -55,5 +55,6 @@ Route::prefix('site')->group(function () {
         Route::get('/zones', [Api\EnergieApiController::class, 'getZones']);
         Route::post('/calculate', [Api\EnergieApiController::class, 'calculer'])->middleware('throttle:30,1');
         Route::post('/calculate-biogaz', [Api\EnergieApiController::class, 'calculerBiogaz'])->middleware('throttle:30,1');
+        Route::post('/save', [Api\EnergieApiController::class, 'saveEstimation']);
     });
 });

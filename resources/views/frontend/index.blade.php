@@ -67,26 +67,26 @@
       <!-- Onglets -->
       <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 mb-4" id="categoryButtons">
         <div class="flex flex-wrap gap-2">
-          <button data-img="{{ asset('aiae-frontend/Images/residentiel.png') }}"
+          <button data-img="{{ asset('aiae-frontend/Images/residentiel.png') }}" data-secteur="residentiel"
             class="tabBtn px-3 py-2 rounded-lg bg-white text-xs sm:text-sm shadow">
             Résidentiel
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/tertiaire.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/tertiaire.png') }}" data-secteur="tertiaire" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Tertiaire
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/industriel.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/industriel.png') }}" data-secteur="industriel" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Industriel
           </button>
 
-          <button data-img="{{ asset('aiae-frontend/Images/agricole.png') }}" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
+          <button data-img="{{ asset('aiae-frontend/Images/agricole.png') }}" data-secteur="agricole" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
             Agricole
           </button>
         </div>
 
-        <a href="{{ route('simulator.index') }}" class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm text-center">
-          Ouvrir le Calculateur d'Énergies Renouvelables
+        <a href="{{ route('energie.calculator') }}"  class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-[#f78b0c] text-white rounded-lg text-xs sm:text-sm text-center font-bold hover:bg-orange-600 transition">
+          Ouvrir le Calculateur d'Énergies
         </a>
       </div>
 
@@ -194,8 +194,8 @@
         </div>
 
         <!-- BOUTON FINAL -->
-        <a href="{{ route('simulator.index') }}"
-          class="col-span-1 sm:col-span-2 md:col-span-2 h-10 bg-[#05482C] text-white rounded-lg text-xs sm:text-sm flex items-center justify-center whitespace-nowrap">
+        <a id="btn-poursuivre" href="{{ route('simulator.v1', ['secteur' => 'residentiel']) }}"
+          class="col-span-1 sm:col-span-2 md:col-span-2 h-10 bg-[#05482C] text-white rounded-lg text-xs sm:text-sm flex items-center justify-center whitespace-nowrap hover:bg-[#0b5b3a] transition">
           Poursuivre la simulation
         </a>
       </div>
@@ -477,54 +477,1005 @@
 
   <!-- ================= SECTION AVANTAGES ================= -->
   <section class="bg-[#f3f3f3] py-20">
+
     <div class="max-w-[1200px] mx-auto px-6">
+
       <div class="grid md:grid-cols-2 gap-x-16 gap-y-14">
+
+        <!-- 01 -->
         <div class="flex gap-6">
-          <div class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">01</div>
+
+          <div
+            class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">
+            01
+          </div>
+
           <div>
-            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">UN INTERLOCUTEUR UNIQUE</h3>
+            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">
+              UN INTERLOCUTEUR UNIQUE
+            </h3>
+
             <p class="text-gray-700 text-[24px] leading-relaxed">
               Fini la coordination entre architecte, bureau d’études, constructeur
               et installateurs. <strong>AIAE prend en charge l’intégralité de votre projet</strong>,
               de la première esquisse à la remise des clés.
             </p>
           </div>
+
         </div>
+
+
+        <!-- 02 -->
         <div class="flex gap-6">
-          <div class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">02</div>
+
+          <div
+            class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">
+            02
+          </div>
+
           <div>
-            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">EXPERTISE TECHNIQUE AVANCÉE</h3>
+            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">
+              EXPERTISE TECHNIQUE AVANCÉE
+            </h3>
+
             <p class="text-gray-700 text-[24px] leading-relaxed">
               <strong>Forte de plus de 15 ans d’expérience en génie civil</strong>, AIAE dispose
               de compétences rares pour traiter des projets complexes :
               ouvrages d’art, béton précontraint, structures spéciales.
             </p>
           </div>
+
         </div>
+
+
+        <!-- 03 -->
         <div class="flex gap-6">
-           <div class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">03</div>
-           <div>
-             <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">TRANSPARENCE ET CONTRÔLE</h3>
-             <p class="text-gray-700 text-[24px] leading-relaxed">
-               Grâce à nos simulateurs et à nos process rigoureux, vous connaissez les
-               <strong>coûts et les délais avant même le premier coup de pioche</strong>.
-               Pas de surprises, des engagements contractuels tenus.
-             </p>
-           </div>
+
+          <div
+            class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">
+            03
+          </div>
+
+          <div>
+            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">
+              DES ENGAGEMENTS TENUS
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Dans un secteur où la parole ne vaut souvent rien,
+              <strong>nous faisons de la fiabilité notre marque de fabrique.</strong>
+              Délais respectés, budgets maîtrisés, qualité garantie.
+            </p>
+          </div>
+
         </div>
+
+
+        <!-- 04 -->
         <div class="flex gap-6">
-           <div class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">04</div>
-           <div>
-             <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">ACCOMPAGNEMENT DIASPORA</h3>
-             <p class="text-gray-700 text-[24px] leading-relaxed">
-               Nous offrons aux Togolais de l'extérieur la <strong>garantie d'un projet bien géré</strong>
-               sans besoin de présence physique constante, avec un reporting régulier et transparent.
-             </p>
-           </div>
+
+          <div
+            class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">
+            04
+          </div>
+
+          <div>
+            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">
+              TRANSPARENCE TOTALE
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              <strong>Devis détaillés basés sur notre Bordereau des Prix Unitaires (BPU)</strong>,
+              suivi de chantier accessible, facturation claire.
+              Vous savez exactement ce que vous payez et pourquoi.
+            </p>
+          </div>
+
         </div>
+
+
+        <!-- 05 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-start justify-center w-12 h-12 rounded-full bg-[#0b5b3a] text-white font-bold text-lg shrink-0">
+            05
+          </div>
+
+          <div>
+            <h3 class="text-[#0b5b3a] font-extrabold text-2xl mb-2">
+              SOLUTIONS INTÉGRÉES UNIQUES
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Construction + Énergie + Sécurité :
+              <strong>nous pouvons livrer un bâtiment autonome en énergie et sécurisé
+                dès la conception.</strong> Une combinaison rare sur le marché togolais.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- BOUTONS -->
+        <div class="flex flex-col gap-6 justify-center">
+
+          <!-- bouton RDV -->
+          <button class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit">
+            Prendre rendez-vous maintenant
+          </button>
+
+          <!-- bouton devis -->
+          <button class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
+
+            Demander un devis gratuit
+
+            <span class="flex items-center justify-center w-7 h-7 border border-black rounded-full">
+              <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
+            </span>
+
+          </button>
+
+        </div>
+
       </div>
+
     </div>
+
   </section>
+
+  <!-- ================= SECTION ENGAGEMENTS================= -->
+  <section class="relative w-full bg-[#0E1540] overflow-hidden">
+
+    <div class="max-w-[1600px] mx-auto px-6 pt-10">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+
+        <!-- GAUCHE : TEXTE -->
+        <div class="text-white relative mx-auto lg:ml-20 max-w-xl">
+
+          <h2 class="text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-10 text-center lg:text-left">
+            Nos<br> Engagements<br> Concrets
+          </h2>
+
+        </div>
+
+        <!-- DROITE : IMAGE -->
+        <div class="relative lg:mr-20 flex justify-center">
+
+          <img src="{{ asset('aiae-frontend/Images/engagement.png') }}" alt="bloc glass" class="ml-20">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION GARANTIES ================= -->
+  <section class="bg-[#f3f3f3] py-20">
+
+    <div class="max-w-[1200px] mx-auto px-6">
+
+      <div class="grid md:grid-cols-2 gap-x-16 gap-y-14">
+
+        <!-- 01 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            01
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              DEVIS GRATUIT DÉTAILLÉ
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Vous recevez un devis ligne par ligne,
+              <strong>basé sur notre BPU.</strong> Pas de mauvaises surprises.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 02 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            02
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              PLANNING CONTRACTUEL
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Les délais sont inscrits au contrat. En cas de retard de notre fait,
+              <strong>des pénalités s’appliquent.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 03 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            03
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              GARANTIE DÉCENNALE
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Conformément à la loi, <strong>nous garantissons la solidité
+                de l’ouvrage pendant 10 ans.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 04 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            04
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              ASSURANCE RC PRO
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Notre responsabilité civile professionnelle couvre
+              <strong>les dommages éventuels sur le chantier.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 05 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            05
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              PAIEMENT PAR ÉTAPES
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Vous payez au fur et à mesure de l’avancement,
+              selon un échéancier défini ensemble.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 06 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            06
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              CONFIDENTIALITÉ
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Tous nos projets sont traités avec discrétion.
+              <strong>Secret professionnel contractualisé.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 07 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#162064] text-white font-bold text-lg shrink-0">
+            07
+          </div>
+
+          <div>
+            <h3 class="text-[#162064] font-extrabold text-xl mb-2">
+              ACCOMPAGNEMENT FINANCEMENT
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Nous pouvons vous orienter dans vos démarches
+              de crédit auprès des banques partenaires.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- BOUTONS -->
+        <div class="flex flex-col gap-6 justify-center">
+
+          <!-- bouton RDV -->
+          <button class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit">
+            Prendre rendez-vous maintenant
+          </button>
+
+          <!-- bouton devis -->
+          <button class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
+
+            Demander un devis gratuit
+
+            <span class="flex items-center justify-center w-7 h-7 border border-black rounded-full">
+              <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION VALEURS ================= -->
+  <section class="relative w-full bg-[#D97706] overflow-hidden pt-10">
+
+    <div class="max-w-[1600px] mx-auto px-6">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- GAUCHE : TEXTE -->
+        <div class="text-white lg:ml-20 max-w-xl">
+
+          <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
+            Nos Valeurs
+          </h2>
+
+          <p class="text-[18px] leading-relaxed opacity-95">
+            Ces valeurs constituent l’ADN d’AIAE. Elles<br>
+            ne sont pas négociables, quelles que soient<br>
+            les circonstances.
+          </p>
+
+        </div>
+
+        <!-- DROITE : BLOC VALEURS -->
+        <div class="relative lg:mr-20 flex justify-center lg:justify-end">
+
+          <img src="{{ asset('aiae-frontend/Images/valeurs.png') }}" alt="Valeurs AIAE" class="w-[420px] drop-shadow-2xl">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION VALEURS DETAILS ================= -->
+  <section class="bg-[#f3f3f3] py-20">
+
+    <div class="max-w-[1200px] mx-auto px-6">
+
+      <div class="grid md:grid-cols-2 gap-x-20 gap-y-14">
+
+        <!-- 01 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97706] text-white font-bold text-lg shrink-0">
+            01
+          </div>
+
+          <div>
+            <h3 class="text-[#d97706] font-extrabold text-xl mb-2">
+              LA QUALITÉ EST PRIMORDIALE
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              Nous ne construisons pas pour aujourd’hui,
+              <strong>nous construisons pour des générations.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 02 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97706] text-white font-bold text-lg shrink-0">
+            02
+          </div>
+
+          <div>
+            <h3 class="text-[#d97706] font-extrabold text-xl mb-2">
+              LA PAROLE DONNÉE EST SACRÉE
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              <strong>Un engagement pris est un engagement tenu.</strong>
+              Sans exception.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 03 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97706] text-white font-bold text-lg shrink-0">
+            03
+          </div>
+
+          <div>
+            <h3 class="text-[#d97706] font-extrabold text-xl mb-2">
+              HONNÊTETÉ ENVERS LES CLIENTS
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              <strong>Un client bien informé</strong> est un client satisfait.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 04 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97706] text-white font-bold text-lg shrink-0">
+            04
+          </div>
+
+          <div>
+            <h3 class="text-[#d97706] font-extrabold text-xl mb-2">
+              RESPECT DES ÉQUIPES
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              La qualité dépend du <strong>respect accordé à ceux qui réalisent.</strong>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 05 -->
+        <div class="flex gap-6">
+
+          <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-[#d97706] text-white font-bold text-lg shrink-0">
+            05
+          </div>
+
+          <div>
+            <h3 class="text-[#d97706] font-extrabold text-xl mb-2">
+              RESPECT DES DÉLAIS ET DES COÛTS
+            </h3>
+
+            <p class="text-gray-700 text-[24px] leading-relaxed">
+              <strong>Un projet en retard ou hors budget est un échec</strong>,
+              même s’il est techniquement parfait.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- BOUTONS -->
+        <div class="flex flex-col gap-6 justify-center">
+
+          <!-- bouton RDV -->
+          <button class="bg-[#0b5b3a] text-white px-8 py-3 rounded-lg text-sm font-medium w-fit">
+            Prendre rendez-vous maintenant
+          </button>
+
+          <!-- bouton devis -->
+          <button class="flex items-center gap-3 border border-black px-8 py-3 rounded-full text-sm font-medium w-fit">
+
+            Demander un devis gratuit
+
+            <span class="flex items-center justify-center w-7 h-7 border border-black rounded-full">
+              <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION DIASPORA ================= -->
+
+  <section class="bg-[#f3f3f3] py-24">
+
+    <div class="max-w-[1200px] mx-auto px-6">
+
+      <!-- Bloc vert -->
+      <div class="bg-[#0b5b3a] rounded-[30px] p-12">
+
+        <!-- TITRE -->
+        <h2 class="text-white text-5xl font-extrabold mb-3">
+          Vous vivez à l’étranger ?
+        </h2>
+
+        <p class="text-white/90 mb-12 text-[24px]">
+          Construire au Togo depuis l’étranger, c’est<br> possible et serein avec AIAE.
+        </p>
+
+
+        <!-- GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <!-- CARD -->
+          <div class="bg-white rounded-xl overflow-hidden">
+            <img src="{{ asset('aiae-frontend/Images/Interlocuteur.png') }}" class="w-full h-40 object-cover">
+
+            <div class="p-5">
+              <h3 class="font-semibold text-[#0b5b3a] mb-2 text-[18px]">
+                Interlocuteur unique francophone
+              </h3>
+
+              <p class="text-gray-600 text-[18px]">
+                Un chef de projet dédié qui parle votre<br> langue et comprend vos contraintes de<br> décalage horaire.
+              </p>
+            </div>
+          </div>
+
+
+          <!-- CARD -->
+          <div class="bg-white rounded-xl overflow-hidden">
+            <img src="{{ asset('aiae-frontend/Images/Suivi à distance.png') }}" class="w-full h-40 object-cover">
+
+            <div class="p-5">
+              <h3 class="font-semibold text-[#0b5b3a] mb-2 text-[18px]">
+                Suivi à distance en temps réel
+              </h3>
+
+              <p class="text-gray-600 text-[18px]">
+                Rapports photos et vidéos réguliers,<br> visioconférences de suivi, accès à<br> l’avancement du
+                chantier.
+              </p>
+            </div>
+          </div>
+
+
+          <!-- CARD -->
+          <div class="bg-white rounded-xl overflow-hidden">
+            <img src="{{ asset('aiae-frontend/Images/Paiement.png') }}" class="w-full h-40 object-cover">
+
+            <div class="p-5">
+              <h3 class="font-semibold text-[#0b5b3a] mb-2 text-[18px]">
+                Paiements sécurisés
+              </h3>
+
+              <p class="text-gray-600 text-[18px]">
+                Virements internationaux vers un<br> compte bancaire togolais vérifié.<br> Échéancier clair.
+              </p>
+            </div>
+          </div>
+
+
+          <!-- CARD -->
+          <div class="bg-white rounded-xl overflow-hidden">
+            <img src="{{ asset('aiae-frontend/Images/Gestion.png') }}" class="w-full h-40 object-cover">
+
+            <div class="p-5">
+              <h3 class="font-semibold text-[#0b5b3a] mb-2 text-[18px]">
+                Gestion clé en main
+              </h3>
+
+              <p class="text-gray-600 text-[18px]">
+                Nous gérons les démarches<br> administratives locales (permis,<br> raccordements) pour vous.
+              </p>
+            </div>
+          </div>
+
+
+          <!-- CARD -->
+          <div class="bg-white rounded-xl overflow-hidden">
+            <img src="{{ asset('aiae-frontend/Images/Transpaence.png') }}" class="w-full h-40 object-cover">
+
+            <div class="p-5">
+              <h3 class="font-semibold text-[#0b5b3a] mb-2 text-[18px]">
+                Transparence totale
+              </h3>
+
+              <p class="text-gray-600 text-[18px]">
+                Devis détaillé, contrat clair<br> signable devant le notaire au Togo,<br> aucune mauvaise surprise à
+                votre retour.
+              </p>
+            </div>
+          </div>
+
+
+          <!-- CALL TO ACTION -->
+          <div class="flex flex-col justify-center text-white px-6">
+
+            <p class="text-[24px] leading-relaxed mb-6">
+              <strong>Appelez-nous</strong> ou <strong>prenez<br> rendez-vous en visio</strong>
+              nous<br> nous adaptons à votre<br> fuseau horaire.
+            </p>
+
+            <button class="bg-[#b7ff00] text-black px-6 py-3 rounded-lg w-fit mb-4">
+              Prendre rendez-vous maintenant
+            </button>
+
+            <button class="flex items-center gap-3 border border-white px-6 py-3 rounded-full text-sm w-fit">
+
+              Demander un devis gratuit
+
+              <span class="flex items-center justify-center w-7 h-7 border border-white rounded-full">
+                <img src="{{ asset('aiae-frontend/Images/envoi.png') }}" class="w-3">
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION FAQ ================= -->
+  <section class="bg-[#111a4b] py-10">
+
+    <div class="max-w-[1000px] mx-auto px-6 text-center">
+
+      <!-- TITRE -->
+      <h2 class="text-white text-5xl font-extrabold mb-6">
+        Foire Aux Questions
+      </h2>
+
+      <!-- TEXTE -->
+      <p class="text-white/80 text-[18px] leading-relaxed max-w-2xl mx-auto">
+        Trouvez rapidement des réponses aux questions les plus fréquentes
+        et contactez-nous pour poser vos questions gratuitement.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION QUESTIONS ================= -->
+  <section class="bg-[#f3f3f3] py-10">
+
+    <div class="max-w-[900px] mx-auto px-6 space-y-4">
+
+
+      <!-- QUESTION -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              01
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Combien coûte la construction d’une maison au Togo ?
+            </p>
+
+          </div>
+
+          <!-- ICON -->
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Le coût dépend du standing, des matériaux et de la localisation.
+          Chez AIAE, les projets démarrent à partir de <strong>330 000 FCFA/m²</strong>.
+        </div>
+
+      </details>
+
+      <!-- QUESTION 02 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              02
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Quels sont les délais de construction ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          En moyenne entre 6 et 12 mois selon la taille et la complexité du projet.
+        </div>
+
+      </details>
+
+      <!-- QUESTION 03 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              03
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Je vis à l’étranger, comment suivre mon chantier ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Nous proposons un suivi à distance avec photos, vidéos et réunions
+          régulières en visioconférence.
+        </div>
+
+      </details>
+
+      <!-- QUESTION 04 (ouverte par défaut) -->
+      <details open class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              04
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Proposez-vous des facilités de paiement ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Oui. Le paiement se fait par étapes, au fur et à mesure de l’avancement
+          des travaux. L’échéancier est défini ensemble avant le démarrage du chantier.
+        </div>
+
+      </details>
+
+      <!-- QUESTION 05 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              05
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Intervenez-vous en dehors de Lomé ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Oui, nous intervenons partout au Togo et pouvons également accompagner
+          les projets dans la sous-région selon les besoins du client.
+        </div>
+
+      </details>
+
+
+      <!-- QUESTION 06 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              06
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Quelles garanties offrez-vous ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Nous garantissons la qualité des travaux, le respect des normes de
+          construction et la transparence dans la gestion du chantier.
+          Chaque projet est suivi par des professionnels qualifiés.
+        </div>
+
+      </details>
+
+
+      <!-- QUESTION 07 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              07
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Puis-je voir des exemples de vos réalisations ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          Bien sûr. Nous mettons à disposition un portfolio de nos projets
+          réalisés afin que vous puissiez apprécier la qualité de notre travail
+          et vous inspirer pour votre propre projet.
+        </div>
+
+      </details>
+
+
+      <!-- QUESTION 08 -->
+      <details class="group border border-[#1a1f4d] rounded-lg bg-white">
+
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+
+          <div class="flex items-center gap-4">
+
+            <span
+              class="bg-[#1a1f4d] text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold">
+              08
+            </span>
+
+            <p class="font-semibold text-[#1a1f4d]">
+              Comment AIAE se compare-t-elle aux grandes entreprises étrangères ?
+            </p>
+
+          </div>
+
+          <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon"
+            class="w-5 h-5 transition-transform duration-300 group-open:rotate-180" />
+
+        </summary>
+
+        <div class="px-16 pb-6 text-gray-600">
+          AIAE offre le même niveau d’expertise technique tout en proposant
+          une meilleure connaissance du terrain local, des coûts plus
+          compétitifs et une proximité avec les clients.
+        </div>
+
+      </details>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SECTION CTA ================= -->
+  <section class="bg-[#f3f3f3] py-10">
+
+    <div class="max-w-[900px] mx-auto text-center px-6">
+
+      <!-- TITRE -->
+      <h2 class="text-4xl font-bold  mb-6">
+        Prêt À Concrétiser Votre Projet ?
+      </h2>
+
+      <!-- TEXTE -->
+      <p class="text-gray-600 leading-relaxed mb-10 text-[24px]">
+        Vous êtes un particulier souhaitant construire votre résidence ?
+        Une entreprise cherchant l’autonomie énergétique ?
+        Une institution nécessitant des infrastructures sécurisées ?
+        Nos équipes sont à votre écoute.
+      </p>
+
+      <!-- BOUTONS -->
+      <div class="flex flex-col md:flex-row justify-center">
+
+        <!-- BOUTON 1 -->
+        <a href="#" class="bg-[#1a1f4d] text-white px-10 py-5 text-center font-semibold">
+
+          DEMANDER UN DEVIS GRATUIT
+          <span class="block text-sm font-normal opacity-80">
+            Réponse sous 48h
+          </span>
+
+        </a>
+
+        <!-- BOUTON 2 -->
+        <a href="#" class="bg-[#0a4f2c] text-white px-10 py-5 text-center font-semibold">
+
+          PRENDRE RENDEZ-VOUS
+          <span class="block text-sm font-normal opacity-80">
+            En personne ou en visio
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+  
 @endsection
 
 @section('scripts')
@@ -536,6 +1487,15 @@
     tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         hero.src = btn.dataset.img;
+        
+        // Update URL for simulation
+        const btnPoursuivre = document.getElementById('btn-poursuivre');
+        if (btnPoursuivre && btn.dataset.secteur) {
+            const url = new URL(btnPoursuivre.href);
+            url.searchParams.set('secteur', btn.dataset.secteur);
+            btnPoursuivre.href = url.toString();
+        }
+
         tabButtons.forEach((b) => {
           b.classList.remove("bg-white", "shadow");
           b.classList.add("bg-glassDark");
