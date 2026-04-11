@@ -186,16 +186,20 @@
 
   <script src="{{ asset('aiae-frontend/js/simulateur_energy_vanilla.js') }}"></script>
   <script>
-    // Injection des données depuis Laravel
-    const AIAE_ENERGY_CONFIG = {
-        equipements: @json($equipements->map(function($e) {
+    @php
+        $mappedEquipements = $equipements->map(function($e) {
             return [
                 'id' => $e->id,
-                'label' => $e->nom,
+                'label' => $e->designation,
                 'puis' => $e->puissance_watts,
-                'h' => $e->heures_utilisation_defaut ?? 8
+                'h' => $e->usage_heures_jour ?? 8
             ];
-        }))
+        });
+    @endphp
+    
+    // Injection des données depuis Laravel
+    const AIAE_ENERGY_CONFIG = {
+        equipements: @json($mappedEquipements)
     };
 
     window.addEventListener('DOMContentLoaded', () => {
