@@ -106,18 +106,18 @@
                                     <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
                                         <i class="feather-map-pin me-2"></i>Terrain & Zone
                                     </h6>
-                                    <div class="space-y-2">
-                                        <div class="d-flex justify-content-between py-1">
-                                            <span class="text-muted">Type de Sol :</span>
+                                    <div class="space-y-3">
+                                        <div class="py-1">
+                                            <span class="text-muted d-block fs-11 text-uppercase mb-1">Type de Sol</span>
                                             <span class="fw-bold text-dark">{{ $lookup['sols'][$config['sol'] ?? ''] ?? $config['sol'] ?? 'N/A' }}</span>
                                         </div>
-                                        <div class="d-flex justify-content-between py-1">
-                                            <span class="text-muted">Zone :</span>
-                                            <span class="fw-bold text-dark">{{ $lookup['zones'][$config['zone'] ?? ''] ?? $config['zone'] ?? 'N/A' }}</span>
+                                        <div class="py-1">
+                                            <span class="text-muted d-block fs-11 text-uppercase mb-1">Zone Géographique</span>
+                                            <span class="fw-bold text-dark d-block" style="line-height: 1.4;">{{ $lookup['zones'][$config['zone'] ?? ''] ?? $config['zone'] ?? 'N/A' }}</span>
                                         </div>
-                                        <div class="d-flex justify-content-between py-1">
+                                        <div class="py-1 border-top pt-2">
                                             <span class="text-muted">Terrain Disponible :</span>
-                                            <span class="fw-bold text-dark">{{ ($config['terrainDispo'] ?? '') === 'oui' ? 'Oui' : 'Non / À acquérir' }}</span>
+                                            <span class="fw-bold text-dark ms-2">{{ ($config['terrainDispo'] ?? '') === 'oui' ? 'Oui' : 'Non / À acquérir' }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -179,27 +179,27 @@
                                 <!-- 4. Section Options Équipements -->
                                 <div class="col-12 mt-2">
                                     <h6 class="fs-13 fw-bold text-uppercase mb-3 border-bottom pb-2 text-primary">
-                                        <i class="feather-plus-circle me-2"></i>Équipements Additionnels
+                                        <i class="feather-plus-circle me-2"></i>Aperçu Équipements
                                     </h6>
                                     <div class="row">
                                         @php
                                             $opts = $config['options'] ?? [];
                                         @endphp
-                                        <div class="col-md-4">
-                                            <small class="text-muted d-block mb-1">Énergie Solaire</small>
-                                            <p class="fw-bold">{{ $opts['solaire'] ? 'Inclus (' . strtoupper($opts['solaire']) . ')' : 'Non inclus' }}</p>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block mb-1">Solaire</small>
+                                            <p class="fw-bold">{{ $opts['solaire'] ? 'Oui (' . strtoupper($opts['solaire']) . ')' : 'Non' }}</p>
                                         </div>
-                                        <div class="col-md-4">
-                                            <small class="text-muted d-block mb-1">Groupe Électrogène</small>
-                                            <p class="fw-bold">{{ $opts['groupe'] ? 'Inclus (' . strtoupper($opts['groupe']) . ')' : 'Non inclus' }}</p>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block mb-1">Groupe</small>
+                                            <p class="fw-bold">{{ $opts['groupe'] ? 'Oui (' . strtoupper($opts['groupe']) . ')' : 'Non' }}</p>
                                         </div>
-                                        <div class="col-md-4">
-                                            <small class="text-muted d-block mb-1">Autres (Piscine/Forage)</small>
-                                            <p class="fw-bold">
-                                                {{ !empty($opts['piscine']) ? 'Piscine' : '' }}
-                                                {{ !empty($opts['forage']) ? ( !empty($opts['piscine']) ? ' + ' : '' ) . 'Forage' : '' }}
-                                                {{ empty($opts['piscine']) && empty($opts['forage']) ? 'Aucun' : '' }}
-                                            </p>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block mb-1">Sécurité</small>
+                                            <p class="fw-bold">{{ !empty($opts['alarme']) || !empty($opts['video']) ? 'Inclus' : 'Aucun' }}</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted d-block mb-1">Services</small>
+                                            <p class="fw-bold">{{ !empty($opts['piscine']) ? 'Piscine' : '' }} {{ !empty($opts['forage']) ? 'Forage' : '' }} {{ empty($opts['piscine']) && empty($opts['forage']) ? 'Aucun' : '' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -214,32 +214,47 @@
 
                 <div class="card stretch stretch-full">
                     <div class="card-header">
-                        <h5 class="card-title">Options Sélectionnées</h5>
+                        <h5 class="card-title">Détails des Options Sélectionnées</h5>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Option</th>
-                                        <th>Prix Unitaire</th>
-                                        <th>Quantité</th>
-                                        <th class="text-end">Sous-total</th>
+                                        <th>Équipement / Option</th>
+                                        <th>Catégorie</th>
+                                        <th class="text-end">Prix Est.</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($simulation->simulationOptions as $option)
+                                    @php
+                                        $hasOptions = $simulation->simulationOptions->count() > 0 || $selectedEquipments->count() > 0;
+                                    @endphp
+
+                                    @foreach($simulation->simulationOptions as $option)
                                     <tr>
                                         <td>{{ $option->option->name ?? 'Option #' . $option->id }}</td>
-                                        <td>{{ number_format($option->unit_price, 0, ',', ' ') }} XOF</td>
-                                        <td>{{ $option->quantity }}</td>
-                                        <td class="text-end fw-bold">{{ number_format($option->subtotal, 0, ',', ' ') }} XOF</td>
+                                        <td><span class="badge bg-soft-primary text-primary">Standard</span></td>
+                                        <td class="text-end fw-bold">{{ number_format($option->subtotal ?? 0, 0, ',', ' ') }} XOF</td>
                                     </tr>
-                                    @empty
+                                    @endforeach
+
+                                    @foreach($selectedEquipments as $equip)
                                     <tr>
-                                        <td colspan="4" class="text-center py-4 text-muted">Aucune option sélectionnée.</td>
+                                        <td>
+                                            <span class="fw-bold text-dark">{{ $equip->designation }}</span>
+                                            <small class="d-block text-muted">{{ $equip->code }}</small>
+                                        </td>
+                                        <td><span class="badge bg-soft-info text-info text-uppercase">{{ $equip->categorie }}</span></td>
+                                        <td class="text-end fw-bold">~ {{ number_format($equip->prix_min, 0, ',', ' ') }} XOF</td>
                                     </tr>
-                                    @endforelse
+                                    @endforeach
+
+                                    @if(!$hasOptions)
+                                    <tr>
+                                        <td colspan="3" class="text-center py-4 text-muted">Aucune option spécifique détaillée.</td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

@@ -95,8 +95,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('users', function() { return view('admin.users.index'); })->name('users.index');
         Route::get('users/create', function() { return view('admin.users.create'); })->name('users.create');
         Route::get('users/{user}/edit', function(\App\Models\User $user) { return view('admin.users.edit', compact('user')); })->name('users.edit');
-        Route::apiResource('users.api', UserController::class)->parameters(['users.api' => 'user']);
-        Route::post('users.api/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.api.toggle-status');
+        
+        // API Routes for Users
+        Route::group(['prefix' => 'users-api', 'as' => 'users.api.'], function() {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::post('/', [UserController::class, 'store'])->name('store');
+            Route::get('{user}', [UserController::class, 'show'])->name('show');
+            Route::put('{user}', [UserController::class, 'update'])->name('update');
+            Route::delete('{user}', [UserController::class, 'destroy'])->name('destroy');
+            Route::post('{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('toggle-status');
+        });
 
         Route::get('/help', [HelpController::class, 'index'])->name('help');
     });

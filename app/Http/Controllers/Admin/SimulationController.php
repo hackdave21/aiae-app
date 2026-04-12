@@ -75,6 +75,15 @@ class SimulationController extends Controller
             ]
         ];
 
+        // Extract selected options from configuration_data
+        $configOptions = $simulation->configuration_data['options'] ?? [];
+        $selectedOptionCodes = collect($configOptions)
+            ->filter(function($val) { return !is_null($val) && $val !== '' && $val !== false; })
+            ->values()
+            ->toArray();
+        
+        $selectedEquipments = \App\Models\EquipementOption::whereIn('code', $selectedOptionCodes)->get();
+
         if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
@@ -82,7 +91,7 @@ class SimulationController extends Controller
             ]);
         }
 
-        return view('admin.simulations.show', compact('simulation', 'lookup'));
+        return view('admin.simulations.show', compact('simulation', 'lookup', 'selectedEquipments'));
     }
 
     /**
