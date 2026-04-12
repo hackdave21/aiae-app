@@ -1128,7 +1128,7 @@
             Réponse sous 48h
           </span>
         </a>
-        <a href="#" class="bg-primary text-white px-10 py-5 text-center font-heavy">
+        <a onclick="openRdvModal('physique')"  class="bg-primary text-white px-10 py-5 text-center font-heavy">
           PRENDRE RENDEZ-VOUS
           <span class="block text-sm font-light text-white">
             En personne ou en visio
@@ -1267,7 +1267,7 @@
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
+              <a onclick="openRdvModal('physique')"  class="hover:text-darkBlue transition">
                 Prendre rendez-vous
               </a>
             </li>
@@ -1378,6 +1378,7 @@
       });
     }
   </script>
+  @include('frontend.partials.rdv-modal')
 </body>
 
 </html>

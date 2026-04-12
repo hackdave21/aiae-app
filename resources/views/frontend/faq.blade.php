@@ -1205,7 +1205,7 @@
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
+              <a onclick="openRdvModal('physique')" class="hover:text-darkBlue transition">
                 Prendre rendez-vous
               </a>
             </li>
@@ -1317,6 +1317,7 @@
       });
     }
   </script>
+  @include('frontend.partials.rdv-modal')
 </body>
 
 </html>

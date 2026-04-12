@@ -1052,7 +1052,7 @@
         <div class="flex flex-col justify-center gap-14">
 
           <!-- bouton RDV -->
-          <button class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               Prendre rendez-vous maintenant
             </span>
@@ -1238,7 +1238,7 @@
         <div class="flex flex-col justify-center gap-14">
 
           <!-- bouton RDV -->
-          <button class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               Prendre rendez-vous maintenant
             </span>

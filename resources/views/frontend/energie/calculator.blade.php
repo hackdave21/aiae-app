@@ -217,5 +217,6 @@
         }
     });
   </script>
+  @include('frontend.partials.rdv-modal')
 </body>
 </html>

@@ -30,7 +30,11 @@
           <label class="rdv-type-option group">
             <input type="radio" name="rdv_type" value="physique" class="hidden peer" checked>
             <div class="peer-checked:border-[#FF8400] peer-checked:bg-[#FF8400]/5 border-2 border-gray-200 rounded-2xl p-4 cursor-pointer transition-all hover:border-[#FF8400]/50 text-center">
-              <div class="text-3xl mb-2">🏢</div>
+              <div class="mb-2 flex justify-center text-[#162064] group-hover:text-[#FF8400] transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
               <div class="font-bold text-[#162064] text-sm">Au siège</div>
               <div class="text-[10px] text-gray-400 mt-1">Lomé, Togo</div>
             </div>
@@ -38,7 +42,11 @@
           <label class="rdv-type-option group">
             <input type="radio" name="rdv_type" value="appel" class="hidden peer">
             <div class="peer-checked:border-[#FF8400] peer-checked:bg-[#FF8400]/5 border-2 border-gray-200 rounded-2xl p-4 cursor-pointer transition-all hover:border-[#FF8400]/50 text-center">
-              <div class="text-3xl mb-2">📞</div>
+              <div class="mb-2 flex justify-center text-[#162064] group-hover:text-[#FF8400] transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
               <div class="font-bold text-[#162064] text-sm">Par appel</div>
               <div class="text-[10px] text-gray-400 mt-1">Téléphone / Visio</div>
             </div>

@@ -33,7 +33,7 @@
                             <span class="nxl-mtext">Rendez-vous</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.appointments.index') }}">Calendrier / Liste</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.appointments.index') }}">Liste des RDV</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="{{ route('admin.appointments.create') }}">Nouveau RDV</a></li>
                         </ul>
                     </li>
