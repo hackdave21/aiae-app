@@ -61,16 +61,23 @@ class SimulatorController extends Controller
                 'emprise' => ($st->emprise_max / 100),
                 'hsp' => $st->hsp,
                 'desc' => $st->description ?? "Qualité " . $st->name,
-                'icon' => $st->code === 'prestige' ? '🏰' : ($st->code === 'premium' ? '🏘️' : ($st->code === 'confort' ? '🏡' : '🏠'))
+                'icon' => $st->code === 'prestige' ? 'Crown' : ($st->code === 'premium' ? 'Gem' : ($st->code === 'confort' ? 'Armchair' : 'Home'))
             ]];
         });
 
         $typeBatiments = TypeBatiment::all()->groupBy('secteur')->map(function ($items) {
             return $items->map(function ($t) {
+                // Mapping icônes types
+                $icons = [
+                    'villa' => 'Home', 'immeuble' => 'Building2', 'residence' => 'Building',
+                    'bureaux' => 'Briefcase', 'commerce' => 'Store', 'hotel' => 'Hotel', 'clinique' => 'Hospital',
+                    'entrepot' => 'Box', 'usine' => 'Factory', 'atelier' => 'Wrench', 'frigo' => 'Snowflake',
+                    'hangar' => 'Warehouse', 'elevage_bovins' => 'Beef', 'elevage_volailles' => 'Bird', 'serres' => 'Sprout', 'stockage' => 'Wheat'
+                ];
                 return [
                     'id' => $t->code,
                     'name' => $t->nom,
-                    'icon' => $t->icone,
+                    'icon' => $icons[$t->code] ?? 'Building',
                     'max' => $t->niveaux_max ?? 5,
                     'prix' => $t->prix_base_m2 ?? 450000,
                     'ratio' => $t->ratio_surface ?? 1

@@ -50,6 +50,8 @@
 <script>
     window.INITIAL_SECTEUR = "{{ $secteur ?? '' }}";
     window.SAVE_ROUTE = "{{ route('simulator.save') }}";
+    window.BACK_ROUTE = "{{ route('simulator.index') }}";
+    window.SIMULATEUR_CONFIG = @json($config);
 </script>
 <script type="text/babel">
 @verbatim
@@ -87,8 +89,10 @@ const App=()=>{
     return <span ref={iconRef} className="inline-flex items-center justify-center lucide-icon-wrapper" style={{minWidth:size, minHeight:size, lineHeight:0}}></span>;
   };
   
-  // DONNÉES RÉFÉRENCE - PRIX INTERNES NON AFFICHÉS
-  const ZONES={
+  // DONNÉES RÉFÉRENCE - PRIORITÉ AUX DONNÉES BASE DE DONNÉES
+  const libConfig = window.SIMULATEUR_CONFIG || {};
+
+  const ZONES = libConfig.ZONES || {
     zone1:{name:'Zone 1 - Grand Lomé',localites:'Lomé, Baguida, Agoè',coef:1.00,forage:25,foncier:75000},
     zone2:{name:'Zone 2 - Maritime',localites:'Tsévié, Tabligbo, Aného',coef:1.08,forage:35,foncier:25000},
     zone3:{name:'Zone 3 - Plateaux',localites:'Atakpamé, Kpalimé, Badou',coef:1.14,forage:50,foncier:12000},
@@ -96,7 +100,7 @@ const App=()=>{
     zone5:{name:'Zone 5 - Kara & Savanes',localites:'Kara, Dapaong, Mango',coef:1.25,forage:75,foncier:4000}
   };
 
-  const SOLS={
+  const SOLS = libConfig.SOLS || {
     inconnu:{name:'Non déterminé',coef:1.15,portance:'?',fondation:'À définir après étude',prixFond:55000,risque:'moyen'},
     ferralitique:{name:'Ferralitique (Terre de barre)',coef:1.00,portance:'1.5-2.5 bars',fondation:'Semelles filantes',prixFond:32000,risque:'faible'},
     ferrugineux:{name:'Ferrugineux tropical',coef:1.10,portance:'1.0-2.0 bars',fondation:'Semelles renforcées',prixFond:38000,risque:'faible'},
@@ -107,18 +111,23 @@ const App=()=>{
     rocheux:{name:'Rocheux',coef:0.98,portance:'>5 bars',fondation:'Ancrages roche',prixFond:25000,risque:'faible'}
   };
 
-  // STANDINGS - SANS PRIX AFFICHÉS
-  const STANDINGS={
+  // STANDINGS ET PRIX SYNCHRONISÉS
+  const STANDINGS = libConfig.STANDINGS || {
     standard:{name:'Standard',desc:'Économique et fonctionnel',icon:'Home'},
     confort:{name:'Confort',desc:'Qualité-prix optimal',icon:'Armchair'},
     premium:{name:'Premium',desc:'Excellence et personnalisation',icon:'Gem'},
     prestige:{name:'Prestige',desc:'Luxe sans compromis',icon:'Crown'}
   };
-  const STANDINGS_PRIX={standard:375000,confort:500000,premium:690000,prestige:1025000};
-  const STANDINGS_HSP={standard:2.60,confort:2.80,premium:3.00,prestige:3.20};
-  const STANDINGS_EMPRISE={standard:0.40,confort:0.35,premium:0.30,prestige:0.25};
+  const STANDINGS_PRIX = {};
+  const STANDINGS_HSP = {};
+  const STANDINGS_EMPRISE = {};
+  Object.entries(STANDINGS).forEach(([k,v]) => {
+    STANDINGS_PRIX[k] = v.prix || 500000;
+    STANDINGS_HSP[k] = v.hsp || 2.80;
+    STANDINGS_EMPRISE[k] = v.emprise || 0.35;
+  });
 
-  const TYPES={
+  const TYPES = libConfig.TYPES || {
     residentiel:[
       {id:'villa',name:'Villa individuelle',max:3,icon:'Home'},
       {id:'immeuble',name:'Immeuble résidentiel',max:10,icon:'Building2'},
@@ -152,15 +161,16 @@ const App=()=>{
   ];
   const HOTELS_PRIX={'1s':430000,'2s':500000,'3s':625000,'4s':800000,'5s':1175000,'palace':2000000};
 
-  const SOLAIRES=[
+  const SOLAIRES = libConfig.SOLAIRES || [
     {id:'3',kw:3,prix:4500000},{id:'5',kw:5,prix:7500000},{id:'10',kw:10,prix:14000000},
     {id:'15',kw:15,prix:20000000},{id:'20',kw:20,prix:26000000},{id:'30',kw:30,prix:38000000},
     {id:'50',kw:50,prix:58000000},{id:'100',kw:100,prix:105000000}
   ];
 
-  const GROUPES=[
-    {id:'15',kva:15,prix:4500000},{id:'20',kva:20,prix:5500000},{id:'40',kva:40,prix:9000000},
-    {id:'60',kva:60,prix:14000000},{id:'100',kva:100,prix:22000000},{id:'150',kva:150,prix:32000000}
+  const GROUPES = libConfig.GROUPES || [
+    {id:'10',kva:10,prix:4500000},{id:'20',kva:20,prix:6500000},{id:'30',kva:30,prix:8500000},
+    {id:'45',kva:45,prix:11000000},{id:'60',kva:60,prix:14000000},{id:'100',kva:100,prix:22000000},
+    {id:'150',kva:150,prix:32000000}
   ];
 
   // ÉTAT
@@ -561,7 +571,10 @@ const App=()=>{
 
   const Nav=({canContinue=true})=>(
     <div className="flex justify-between items-center mt-8 pt-6 border-t no-print">
-      <button onClick={()=>etape>1?setEtape(etape-1):setPage('accueil')} className="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg">
+      <button 
+        onClick={() => etape > 1 ? setEtape(etape - 1) : (window.location.href = window.BACK_ROUTE)} 
+        className="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
+      >
         ← Retour
       </button>
       <button 
