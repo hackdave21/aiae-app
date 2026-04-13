@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole AIAE FINAL.png') }}">
   <style>
     :root{--bleu:#0E1540;--vert:#05482C;--orange:#CC6A00}
     body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#f8fafc}
@@ -28,20 +30,20 @@
     .input-num .value{flex:1;text-align:center;font-weight:600;font-family:'JetBrains Mono',monospace;min-width:60px}
     .option-btn{padding:16px;border:2px solid #e2e8f0;border-radius:10px;text-align:left;cursor:pointer;transition:all 0.2s;background:white}
     .option-btn:hover{border-color:#cbd5e1;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)}
-    .option-btn.selected{border-color:#3b82f6;background:#eff6ff}
+    .option-btn.selected{border-color:var(--bleu);background:#f0f7ff}
     .warn-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:0 8px 8px 0}
     .alert-box{background:#fee2e2;border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 8px 8px 0}
-    .info-box{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;border-radius:0 8px 8px 0}
-    .success-box{background:#ecfdf5;border-left:4px solid #10b981;padding:12px 16px;border-radius:0 8px 8px 0}
+    .info-box{background:#f0f7ff;border-left:4px solid var(--bleu);padding:12px 16px;border-radius:0 8px 8px 0}
+    .success-box{background:#f0fdf4;border-left:4px solid var(--vert);padding:12px 16px;border-radius:0 8px 8px 0}
     .badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600}
-    .badge-blue{background:#dbeafe;color:#1e40af}
-    .badge-green{background:#dcfce7;color:#166534}
-    .badge-orange{background:#ffedd5;color:#c2410c}
+    .badge-blue{background:#e0e7ff;color:var(--bleu)}
+    .badge-green{background:#dcfce7;color:var(--vert)}
+    .badge-orange{background:#ffedd5;color:var(--orange)}
     .badge-red{background:#fee2e2;color:#b91c1c}
     .badge-gray{background:#f3f4f6;color:#374151}
     .optimal-ring{box-shadow:0 0 0 3px rgba(34,197,94,0.4)}
   </style>
-  <script src="js/tailwind-config.js"></script>
+  <script src="{{ asset('aiae-frontend/js/tailwind-config.js') }}"></script>
 </head>
 <body>
 <div id="root"></div>
@@ -55,6 +57,35 @@ const {useState,useMemo}=React;
 
 const App=()=>{
   const VERSION='8.1';
+  
+  // COMPOSANT ICONES LUCIDE (Approche ultra-robuste via createIcons)
+  const Icon = ({name, size=20, className="", ...props}) => {
+    const iconRef = React.useRef(null);
+    
+    React.useEffect(() => {
+      if (window.lucide && iconRef.current) {
+        const kebabName = name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+        // On injecte un tag <i> que lucide va remplacer
+        iconRef.current.innerHTML = `<i data-lucide="${kebabName}"></i>`;
+        try {
+          window.lucide.createIcons({
+            attrs: {
+              width: size,
+              height: size,
+              'stroke-width': 1.5,
+              class: className,
+              stroke: 'currentColor'
+            },
+            nameAttr: 'data-lucide'
+          });
+        } catch (e) {
+          console.error("Lucide error:", e);
+        }
+      }
+    }, [name, size, className]);
+
+    return <span ref={iconRef} className="inline-flex items-center justify-center lucide-icon-wrapper" style={{minWidth:size, minHeight:size, lineHeight:0}}></span>;
+  };
   
   // DONNÉES RÉFÉRENCE - PRIX INTERNES NON AFFICHÉS
   const ZONES={
@@ -78,10 +109,10 @@ const App=()=>{
 
   // STANDINGS - SANS PRIX AFFICHÉS
   const STANDINGS={
-    standard:{name:'Standard',desc:'Économique et fonctionnel',icon:'🏠'},
-    confort:{name:'Confort',desc:'Qualité-prix optimal',icon:'🏡'},
-    premium:{name:'Premium',desc:'Excellence et personnalisation',icon:'🏘️'},
-    prestige:{name:'Prestige',desc:'Luxe sans compromis',icon:'🏰'}
+    standard:{name:'Standard',desc:'Économique et fonctionnel',icon:'Home'},
+    confort:{name:'Confort',desc:'Qualité-prix optimal',icon:'Armchair'},
+    premium:{name:'Premium',desc:'Excellence et personnalisation',icon:'Gem'},
+    prestige:{name:'Prestige',desc:'Luxe sans compromis',icon:'Crown'}
   };
   const STANDINGS_PRIX={standard:375000,confort:500000,premium:690000,prestige:1025000};
   const STANDINGS_HSP={standard:2.60,confort:2.80,premium:3.00,prestige:3.20};
@@ -89,28 +120,28 @@ const App=()=>{
 
   const TYPES={
     residentiel:[
-      {id:'villa',name:'Villa individuelle',max:3,icon:'🏠'},
-      {id:'immeuble',name:'Immeuble résidentiel',max:10,icon:'🏢'},
-      {id:'residence',name:'Résidence de standing',max:12,maj:1.15,icon:'🏛️'}
+      {id:'villa',name:'Villa individuelle',max:3,icon:'Home'},
+      {id:'immeuble',name:'Immeuble résidentiel',max:10,icon:'Building2'},
+      {id:'residence',name:'Résidence de standing',max:12,maj:1.15,icon:'Building'}
     ],
     tertiaire:[
-      {id:'bureaux',name:'Bureaux',max:20,prix:520000,icon:'🏢'},
-      {id:'commerce',name:'Commerce',max:4,prix:450000,icon:'🏪'},
-      {id:'hotel',name:'Hôtel',max:20,prix:625000,icon:'🏨'},
-      {id:'clinique',name:'Clinique',max:6,prix:720000,icon:'🏥'}
+      {id:'bureaux',name:'Bureaux',max:20,prix:520000,icon:'Briefcase'},
+      {id:'commerce',name:'Commerce',max:4,prix:450000,icon:'Store'},
+      {id:'hotel',name:'Hôtel',max:20,prix:625000,icon:'Hotel'},
+      {id:'clinique',name:'Clinique',max:6,prix:720000,icon:'Hospital'}
     ],
     industriel:[
-      {id:'entrepot',name:'Entrepôt',max:2,prix:220000,icon:'📦'},
-      {id:'usine',name:'Usine',max:3,prix:350000,icon:'🏭'},
-      {id:'atelier',name:'Atelier',max:2,prix:280000,icon:'🔧'},
-      {id:'frigo',name:'Chambre froide',max:2,prix:480000,icon:'❄️'}
+      {id:'entrepot',name:'Entrepôt',max:2,prix:220000,icon:'Box'},
+      {id:'usine',name:'Usine',max:3,prix:350000,icon:'Factory'},
+      {id:'atelier',name:'Atelier',max:2,prix:280000,icon:'Wrench'},
+      {id:'frigo',name:'Chambre froide',max:2,prix:480000,icon:'Snowflake'}
     ],
     agricole:[
-      {id:'hangar',name:'Hangar',max:1,prix:120000,icon:'🚜'},
-      {id:'elevage_bovins',name:'Élevage bovins',max:1,prix:85000,ratio:8,icon:'🐄'},
-      {id:'elevage_volailles',name:'Volailles',max:1,prix:45000,ratio:0.1,icon:'🐔'},
-      {id:'serres',name:'Serres',max:1,prix:65000,icon:'🌱'},
-      {id:'stockage',name:'Silos',max:1,prix:150000,icon:'🌾'}
+      {id:'hangar',name:'Hangar',max:1,prix:120000,icon:'Warehouse'},
+      {id:'elevage_bovins',name:'Élevage bovins',max:1,prix:85000,ratio:8,icon:'Beef'},
+      {id:'elevage_volailles',name:'Volailles',max:1,prix:45000,ratio:0.1,icon:'Bird'},
+      {id:'serres',name:'Serres',max:1,prix:65000,icon:'Sprout'},
+      {id:'stockage',name:'Silos',max:1,prix:150000,icon:'Wheat'}
     ]
   };
 
@@ -259,30 +290,30 @@ const App=()=>{
     const details=[];
     // Éclairage
     let pEcl=surfaceBatie*(secteur==='industriel'?0.008:secteur==='agricole'?0.005:0.012);
-    details.push({label:'💡 Éclairage',kw:Math.round(pEcl*10)/10,prio:1});
+    details.push({label:'Éclairage',icon:'Lightbulb',kw:Math.round(pEcl*10)/10,prio:1});
     // Prises
-    details.push({label:'🔌 Prises',kw:Math.round(surfaceBatie*0.015*10)/10,prio:2});
+    details.push({label:'Prises',icon:'Plug',kw:Math.round(surfaceBatie*0.015*10)/10,prio:2});
     // Clim
     let surfClim=surfaceBatie*(secteur==='industriel'?0.15:secteur==='agricole'?0.10:0.70);
-    if(surfClim>0)details.push({label:'❄️ Climatisation',kw:Math.round(surfClim*0.10*10)/10,prio:5});
+    if(surfClim>0)details.push({label:'Climatisation',icon:'Snowflake',kw:Math.round(surfClim*0.10*10)/10,prio:5});
     // Hôtel
     if(typeBat==='hotel'){
-      details.push({label:'🚿 Eau chaude',kw:Math.round(nbChambres*0.3*10)/10,prio:4});
-      if(espacesHotel.includes('restaurant'))details.push({label:'🍳 Cuisine pro',kw:15,prio:6});
-      if(espacesHotel.includes('spa'))details.push({label:'💆 Spa',kw:12,prio:7});
+      details.push({label:'Eau chaude',icon:'ShowerHead',kw:Math.round(nbChambres*0.3*10)/10,prio:4});
+      if(espacesHotel.includes('restaurant'))details.push({label:'Cuisine pro',icon:'CookingPot',kw:15,prio:6});
+      if(espacesHotel.includes('spa'))details.push({label:'Spa',icon:'Flower2',kw:12,prio:7});
     }
-    if(secteur==='residentiel')details.push({label:'🍳 Électroménager',kw:Math.round(surfaceBatie*0.008*10)/10,prio:6});
+    if(secteur==='residentiel')details.push({label:'Électroménager',icon:'CookingPot',kw:Math.round(surfaceBatie*0.008*10)/10,prio:6});
     // Équipements
-    if(nbAsc>0)details.push({label:'🛗 Ascenseurs',kw:Math.round(nbAsc*12*0.15*10)/10,prio:9});
-    if(pontRoulant)details.push({label:'🏗️ Pont roulant',kw:Math.round((pontCap<=5?15:pontCap<=10?25:40)*0.2*10)/10,prio:10});
-    if(typeBat==='frigo'||groupeFroid)details.push({label:'🧊 Groupe froid',kw:Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10,prio:3});
+    if(nbAsc>0)details.push({label:'Ascenseurs',icon:'ArrowUpSquare',kw:Math.round(nbAsc*12*0.15*10)/10,prio:9});
+    if(pontRoulant)details.push({label:'Pont roulant',icon:'Construction',kw:Math.round((pontCap<=5?15:pontCap<=10?25:40)*0.2*10)/10,prio:10});
+    if(typeBat==='frigo'||groupeFroid)details.push({label:'Groupe froid',icon:'Snowflake',kw:Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10,prio:3});
     // Sécurité
-    if(alarme)details.push({label:'🚨 Alarme',kw:0.5,prio:11});
-    if(video)details.push({label:'📹 Vidéo',kw:video==='16+'?1.5:0.8,prio:3});
+    if(alarme)details.push({label:'Alarme',icon:'Bell',kw:0.5,prio:11});
+    if(video)details.push({label:'Vidéo',icon:'Video',kw:video==='16+'?1.5:0.8,prio:3});
     // Extérieurs
-    if(piscine)details.push({label:'🏊 Piscine',kw:piscine==='12x5'?5:3.5,prio:8});
-    if(forage)details.push({label:'💧 Pompe forage',kw:secteur==='agricole'?5:2,prio:7});
-    if(irrigation==='goutte')details.push({label:'🌱 Irrigation',kw:surfExploit*0.8,prio:7});
+    if(piscine)details.push({label:'Piscine',icon:'Waves',kw:piscine==='12x5'?5:3.5,prio:8});
+    if(forage)details.push({label:'Pompe forage',icon:'Droplets',kw:secteur==='agricole'?5:2,prio:7});
+    if(irrigation==='goutte')details.push({label:'Irrigation',icon:'Sprout',kw:surfExploit*0.8,prio:7});
     
     details.sort((a,b)=>a.prio-b.prio);
     const total=Math.ceil(details.reduce((s,d)=>s+d.kw,0));
@@ -500,7 +531,7 @@ const App=()=>{
     <header className="bg-white border-b sticky top-0 z-50 no-print">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         <button onClick={()=>setPage('accueil')} className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{background:'var(--vert)'}}>
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#05482C]">
             <svg viewBox="0 0 40 40" className="w-6 h-6" fill="white"><rect x="8" y="16" width="5" height="18"/><rect x="17" y="10" width="5" height="24"/><rect x="26" y="13" width="5" height="21"/></svg>
           </div>
           <div>
@@ -512,10 +543,10 @@ const App=()=>{
           <div className="hidden sm:flex items-center gap-1">
             {[1,2,3,4,5].map(n=>(
               <div key={n} className="flex items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n<etape?'bg-green-500 text-white':n===etape?'bg-blue-600 text-white':'bg-gray-200 text-gray-500'}`}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n<etape?'bg-[#05482C] text-white':n===etape?'bg-[#0E1540] text-white':'bg-gray-200 text-gray-500'}`}>
                   {n<etape?'✓':n}
                 </div>
-                {n<5&&<div className={`w-6 h-0.5 ${n<etape?'bg-green-500':'bg-gray-200'}`}/>}
+                {n<5&&<div className={`w-6 h-0.5 ${n<etape?'bg-[#05482C]':'bg-gray-200'}`}/>}
               </div>
             ))}
           </div>
@@ -559,25 +590,26 @@ const App=()=>{
       <div className="min-h-screen" style={{background:'var(--bleu)'}}>
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6" style={{background:'var(--vert)'}}>
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 bg-[#05482C]">
               <svg viewBox="0 0 40 40" className="w-12 h-12" fill="white"><rect x="8" y="16" width="5" height="18"/><rect x="17" y="10" width="5" height="24"/><rect x="26" y="13" width="5" height="21"/></svg>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Simulateur d'Estimation</h1>
             <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY</p>
-            <p className="text-blue-300 text-sm mt-2">Version {VERSION} • Décembre 2025</p>
           </div>
           <div className="bg-white/10 backdrop-blur rounded-2xl p-6 mb-8">
             <h2 className="text-white font-semibold mb-4">Sélectionnez votre secteur</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                {id:'residentiel',icon:'🏠',name:'Résidentiel',desc:'Villas, immeubles'},
-                {id:'tertiaire',icon:'🏢',name:'Tertiaire',desc:'Bureaux, hôtels'},
-                {id:'industriel',icon:'🏭',name:'Industriel',desc:'Usines, entrepôts'},
-                {id:'agricole',icon:'🌾',name:'Agricole',desc:'Élevage, stockage'}
+                {id:'residentiel',icon:'Home',name:'Résidentiel',desc:'Villas, immeubles'},
+                {id:'tertiaire',icon:'Building2',name:'Tertiaire',desc:'Bureaux, hôtels'},
+                {id:'industriel',icon:'Factory',name:'Industriel',desc:'Usines, entrepôts'},
+                {id:'agricole',icon:'Sprout',name:'Agricole',desc:'Élevage, stockage'}
               ].map(s=>(
                 <button key={s.id} onClick={()=>{setSecteur(s.id);setPage('sim');}}
-                  className="bg-white rounded-xl p-5 text-left hover:shadow-lg hover:scale-[1.02] transition-all">
-                  <div className="text-3xl mb-3">{s.icon}</div>
+                  className="bg-white rounded-xl p-5 text-left hover:shadow-lg hover:scale-[1.02] transition-all group">
+                  <div className="mb-3 p-3 bg-gray-50 rounded-lg w-fit group-hover:bg-[#0E1540] group-hover:text-white transition-colors">
+                    <Icon name={s.icon} size={32} />
+                  </div>
                   <div className="font-semibold text-gray-800">{s.name}</div>
                   <div className="text-xs text-gray-500 mt-1">{s.desc}</div>
                 </button>
@@ -608,7 +640,9 @@ const App=()=>{
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {TYPES[secteur]?.map(t=>(
                   <button key={t.id} onClick={()=>setTypeBat(t.id)} className={`option-btn ${typeBat===t.id?'selected':''}`}>
-                    <div className="text-2xl mb-2">{t.icon}</div>
+                    <div className={`mb-3 p-2 rounded-lg w-fit ${typeBat===t.id?'bg-white/20':'bg-gray-50'}`}>
+                      <Icon name={t.icon} size={24} />
+                    </div>
                     <div className="font-medium text-gray-800">{t.name}</div>
                     <div className="text-xs text-gray-500 mt-1">Max R+{t.max-1}</div>
                   </button>
@@ -621,7 +655,9 @@ const App=()=>{
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {Object.entries(STANDINGS).map(([id,d])=>(
                     <button key={id} onClick={()=>setStanding(id)} className={`option-btn ${standing===id?'selected':''}`}>
-                      <div className="text-2xl mb-2">{d.icon}</div>
+                      <div className={`mb-3 p-2 rounded-lg w-fit ${standing===id?'bg-white/20':'bg-gray-50'}`}>
+                        <Icon name={d.icon} size={24} />
+                      </div>
                       <div className="font-semibold text-gray-800">{d.name}</div>
                       <div className="text-xs text-gray-500 mt-1">{d.desc}</div>
                     </button>
@@ -655,7 +691,7 @@ const App=()=>{
                 <h3 className="font-semibold text-gray-700 mb-4">Forme et dimensions</h3>
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   {['carre','rect','irregulier'].map(f=>(
-                    <button key={f} onClick={()=>setForme(f)} className={`py-2 px-3 rounded text-sm font-medium ${forme===f?'bg-blue-600 text-white':'bg-gray-100'}`}>
+                    <button key={f} onClick={()=>setForme(f)} className={`py-2 px-3 rounded text-sm font-medium ${forme===f?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
                       {f==='carre'?'Carré':f==='rect'?'Rectangle':'Irrégulier'}
                     </button>
                   ))}
@@ -762,7 +798,7 @@ const App=()=>{
                 <div className="flex flex-wrap gap-2">
                   {['restaurant','bar','spa','piscine','salle_conf','parking'].map(e=>(
                     <button key={e} onClick={()=>setEspacesHotel(espacesHotel.includes(e)?espacesHotel.filter(x=>x!==e):[...espacesHotel,e])}
-                      className={`px-3 py-1.5 rounded-full text-sm ${espacesHotel.includes(e)?'bg-blue-600 text-white':'bg-gray-100'}`}>
+                      className={`px-3 py-1.5 rounded-full text-sm ${espacesHotel.includes(e)?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
                       {e.replace('_',' ')}
                     </button>
                   ))}
@@ -788,7 +824,7 @@ const App=()=>{
                     <label className="text-sm text-gray-600">Groupe froid</label>
                     <div className="flex gap-2 mt-2">
                       {[{id:'',n:'Non'},{id:'positif',n:'Positif'},{id:'negatif',n:'Négatif'}].map(g=>(
-                        <button key={g.id} onClick={()=>setGroupeFroid(g.id)} className={`px-3 py-1.5 rounded text-sm ${groupeFroid===g.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{g.n}</button>
+                        <button key={g.id} onClick={()=>setGroupeFroid(g.id)} className={`px-3 py-1.5 rounded text-sm ${groupeFroid===g.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{g.n}</button>
                       ))}
                     </div>
                   </div>
@@ -821,7 +857,7 @@ const App=()=>{
                     <label className="text-sm text-gray-600">Alarme</label>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {[{id:'',n:'Non'},{id:'basique',n:'Basique'},{id:'connectee',n:'Connectée'},{id:'pro',n:'Pro'}].map(a=>(
-                        <button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-3 py-1.5 rounded text-sm ${alarme===a.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{a.n}</button>
+                        <button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-3 py-1.5 rounded text-sm ${alarme===a.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{a.n}</button>
                       ))}
                     </div>
                     {alarme&&<InputNum value={nbZones} onChange={setNbZones} min={2} max={24} label="Zones"/>}
@@ -830,7 +866,7 @@ const App=()=>{
                     <label className="text-sm text-gray-600">Vidéosurveillance</label>
                     <div className="flex gap-2 mt-2">
                       {[{id:'',n:'Non'},{id:'4-8',n:'4-8 cam'},{id:'16+',n:'16+ cam'}].map(v=>(
-                        <button key={v.id} onClick={()=>setVideo(v.id)} className={`px-3 py-1.5 rounded text-sm ${video===v.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{v.n}</button>
+                        <button key={v.id} onClick={()=>setVideo(v.id)} className={`px-3 py-1.5 rounded text-sm ${video===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{v.n}</button>
                       ))}
                     </div>
                   </div>
@@ -838,7 +874,7 @@ const App=()=>{
                     <label className="text-sm text-gray-600">Contrôle accès</label>
                     <div className="flex gap-2 mt-2">
                       {[{id:'',n:'Non'},{id:'badge',n:'Badge'},{id:'bio',n:'Biométrique'}].map(c=>(
-                        <button key={c.id} onClick={()=>setAcces(c.id)} className={`px-3 py-1.5 rounded text-sm ${acces===c.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{c.n}</button>
+                        <button key={c.id} onClick={()=>setAcces(c.id)} className={`px-3 py-1.5 rounded text-sm ${acces===c.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{c.n}</button>
                       ))}
                     </div>
                     {acces&&<InputNum value={nbPortes} onChange={setNbPortes} min={1} max={20} label="Portes"/>}
@@ -861,18 +897,18 @@ const App=()=>{
                     <input type="checkbox" checked={cloture} onChange={e=>setCloture(e.target.checked)} className="w-4 h-4"/>
                     <span>Clôture ({fmt(perimetre)} ml)</span>
                   </label>
-                  {cloture&&<div className="mt-2 flex gap-2">{[1.5,2,2.5,3].map(h=>(<button key={h} onClick={()=>setClotureH(h)} className={`px-3 py-1 rounded text-sm ${clotureH===h?'bg-blue-600 text-white':'bg-gray-100'}`}>{h}m</button>))}</div>}
+                  {cloture&&<div className="mt-2 flex gap-2">{[1.5,2,2.5,3].map(h=>(<button key={h} onClick={()=>setClotureH(h)} className={`px-3 py-1 rounded text-sm ${clotureH===h?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{h}m</button>))}</div>}
                 </div>
                 <div>
                   <label className="text-sm text-gray-600">Portail</label>
                   <div className="flex gap-2 mt-2">
-                    {[{id:'',n:'Non'},{id:'manuel',n:'Manuel'},{id:'motorise',n:'Motorisé'}].map(p=>(<button key={p.id} onClick={()=>setPortail(p.id)} className={`px-3 py-1.5 rounded text-sm ${portail===p.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{p.n}</button>))}
+                    {[{id:'',n:'Non'},{id:'manuel',n:'Manuel'},{id:'motorise',n:'Motorisé'}].map(p=>(<button key={p.id} onClick={()=>setPortail(p.id)} className={`px-3 py-1.5 rounded text-sm ${portail===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.n}</button>))}
                   </div>
                 </div>
                 <div>
                   <label className="text-sm text-gray-600">Piscine</label>
                   <div className="flex gap-2 mt-2">
-                    {[{id:'',n:'Non'},{id:'8x4',n:'8×4m'},{id:'12x5',n:'12×5m'}].map(p=>(<button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-3 py-1.5 rounded text-sm ${piscine===p.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{p.n}</button>))}
+                    {[{id:'',n:'Non'},{id:'8x4',n:'8×4m'},{id:'12x5',n:'12×5m'}].map(p=>(<button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-3 py-1.5 rounded text-sm ${piscine===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.n}</button>))}
                   </div>
                 </div>
               </div>
@@ -887,7 +923,7 @@ const App=()=>{
                 <div>
                   <label className="text-sm text-gray-600">Parking</label>
                   <div className="flex gap-2 mt-2">
-                    {[{id:'',n:'Non'},{id:'ext',n:'Ext.'},{id:'couvert',n:'Couvert'},{id:'souterrain',n:'Sous.'}].map(p=>(<button key={p.id} onClick={()=>setParkType(p.id)} className={`px-2 py-1 rounded text-xs ${parkType===p.id?'bg-blue-600 text-white':'bg-gray-100'}`}>{p.n}</button>))}
+                    {[{id:'',n:'Non'},{id:'ext',n:'Ext.'},{id:'couvert',n:'Couvert'},{id:'souterrain',n:'Sous.'}].map(p=>(<button key={p.id} onClick={()=>setParkType(p.id)} className={`px-2 py-1 rounded text-xs ${parkType===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.n}</button>))}
                   </div>
                   {parkType&&<InputNum value={parkPlaces} onChange={setParkPlaces} min={0} max={200} label="Places"/>}
                 </div>
@@ -905,12 +941,18 @@ const App=()=>{
                 <h2 className="text-xl font-bold text-gray-800">Récapitulatif et estimation</h2>
                 <p className="text-gray-500 text-sm">Besoins énergétiques • Propositions • Estimation</p>
               </div>
-              <button onClick={()=>window.print()} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">🖨️ Imprimer</button>
+              <button onClick={()=>window.print()} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+                <Icon name="Printer" size={18} />
+                Imprimer
+              </button>
             </div>
 
             {/* Synthèse */}
             <div className="card p-5 mb-6">
-              <h3 className="font-semibold text-gray-700 mb-4">📋 Synthèse du projet</h3>
+              <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <Icon name="ClipboardList" className="text-[#0E1540]" />
+                Synthèse du projet
+              </h3>
               <div className="grid md:grid-cols-4 gap-4">
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">Type</div><div className="font-semibold">{typeData?.name||typeBat}</div><div className="text-xs text-gray-500">{secteur==='residentiel'?STANDINGS[standing]?.name:''}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">Terrain</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{zoneData.name}</div></div>
@@ -920,29 +962,44 @@ const App=()=>{
             </div>
 
             {/* BESOINS ÉNERGÉTIQUES */}
-            <div className="card p-5 mb-6" style={{background:'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)'}}>
-              <h3 className="font-bold text-white mb-4">⚡ Besoins énergétiques calculés</h3>
+            <div className="card p-5 mb-6" style={{background:'linear-gradient(135deg, var(--orange) 0%, #ea580c 100%)'}}>
+              <h3 className="font-bold text-white mb-4 flex items-center gap-2">
+                <Icon name="Zap" />
+                Besoins énergétiques calculés
+              </h3>
               <div className="text-4xl font-bold text-white mb-4 mono">{besoins.total} kW</div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                {besoins.details.map((d,i)=>(<div key={i} className="bg-white/20 rounded px-3 py-2 flex justify-between text-white"><span className="text-sm">{d.label}</span><span className="mono font-semibold">{d.kw.toFixed(1)}</span></div>))}
+                {besoins.details.map((d,i)=>(
+                  <div key={i} className="bg-white/20 rounded px-3 py-2 flex items-center justify-between text-white">
+                    <div className="flex items-center gap-2">
+                      <Icon name={d.icon} size={14} />
+                      <span className="text-sm">{d.label}</span>
+                    </div>
+                    <span className="mono font-semibold">{d.kw.toFixed(1)}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* PROPOSITIONS SOLAIRES */}
             <div className="card p-5 mb-6">
-              <h3 className="font-semibold text-gray-700 mb-4">☀️ Installation solaire (40-150% couverture)</h3>
+              <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <Icon name="Sun" className="text-amber-500" />
+                Installation solaire (40-150% couverture)
+              </h3>
               <div className="space-y-3">
-                <button onClick={()=>setSolaire('')} className={`w-full p-3 rounded-lg border-2 text-left ${!solaire?'border-gray-600 bg-gray-100':'border-gray-200'}`}>
-                  <span className="font-medium">❌ Pas d'installation solaire</span>
+                <button onClick={()=>setSolaire('')} className={`w-full p-3 rounded-lg border-2 text-left transition-all flex items-center gap-3 ${!solaire?'border-[#0E1540] bg-blue-50':'border-gray-200'}`}>
+                  <Icon name="XCircle" className={!solaire?'text-[#0E1540]':'text-gray-400'} />
+                  <span className="font-medium">Pas d'installation solaire</span>
                 </button>
                 {propositionsSolaires.map(kit=>(
-                  <button key={kit.id} onClick={()=>setSolaire(kit.id)} className={`w-full p-4 rounded-lg border-2 text-left transition-all ${solaire===kit.id?'border-yellow-500 bg-yellow-50':'border-gray-200 hover:border-gray-300'} ${kit.optimal?'optimal-ring':''}`}>
+                  <button key={kit.id} onClick={()=>setSolaire(kit.id)} className={`w-full p-4 rounded-lg border-2 text-left transition-all ${solaire===kit.id?'border-[#0E1540] bg-blue-50':'border-gray-200 hover:border-gray-300'} ${kit.optimal?'optimal-ring':''}`}>
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <div className="font-bold text-lg">
                           {kit.kw} kWc
                           <span className={`ml-2 text-sm px-2 py-0.5 rounded ${kit.couv>=100?'bg-green-100 text-green-700':kit.couv>=70?'bg-amber-100 text-amber-700':'bg-red-100 text-red-600'}`}>{kit.couv}%</span>
-                          {kit.optimal&&<span className="text-green-600 text-sm ml-2">✓ Optimal</span>}
+                          {kit.optimal&&<span className="text-green-600 text-sm ml-2 flex items-center gap-1 inline-flex"><Icon name="CheckCircle2" size={14} /> Optimal</span>}
                         </div>
                         <div className="text-sm text-green-700 mt-2"><strong>Couvre:</strong> {kit.couverts.slice(0,5).join(' • ')}{kit.couverts.length>5?'...':''}</div>
                         {kit.nonCouverts.length>0&&<div className="text-xs text-red-500 mt-1"><strong>Non couvert:</strong> {kit.nonCouverts.slice(0,3).join(' • ')}</div>}
@@ -956,19 +1013,23 @@ const App=()=>{
 
             {/* PROPOSITIONS GROUPES */}
             <div className="card p-5 mb-6">
-              <h3 className="font-semibold text-gray-700 mb-4">🔌 Groupe électrogène (40-150% couverture)</h3>
+              <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <Icon name="Plug" className="text-blue-600" />
+                Groupe électrogène (40-150% couverture)
+              </h3>
               <div className="space-y-3">
-                <button onClick={()=>setGroupe('')} className={`w-full p-3 rounded-lg border-2 text-left ${!groupe?'border-gray-600 bg-gray-100':'border-gray-200'}`}>
-                  <span className="font-medium">❌ Pas de groupe électrogène</span>
+                <button onClick={()=>setGroupe('')} className={`w-full p-3 rounded-lg border-2 text-left transition-all flex items-center gap-3 ${!groupe?'border-[#0E1540] bg-blue-50':'border-gray-200'}`}>
+                  <Icon name="XCircle" className={!groupe?'text-[#0E1540]':'text-gray-400'} />
+                  <span className="font-medium">Pas de groupe électrogène</span>
                 </button>
                 {propositionsGroupes.map(grp=>(
-                  <button key={grp.id} onClick={()=>setGroupe(grp.id)} className={`w-full p-4 rounded-lg border-2 text-left transition-all ${groupe===grp.id?'border-orange-500 bg-orange-50':'border-gray-200 hover:border-gray-300'} ${grp.optimal?'optimal-ring':''}`}>
+                  <button key={grp.id} onClick={()=>setGroupe(grp.id)} className={`w-full p-4 rounded-lg border-2 text-left transition-all ${groupe===grp.id?'border-[#0E1540] bg-blue-50':'border-gray-200 hover:border-gray-300'} ${grp.optimal?'optimal-ring':''}`}>
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <div className="font-bold text-lg">
                           {grp.kva} kVA
                           <span className={`ml-2 text-sm px-2 py-0.5 rounded ${grp.couv>=100?'bg-green-100 text-green-700':grp.couv>=70?'bg-amber-100 text-amber-700':'bg-red-100 text-red-600'}`}>{grp.couv}%</span>
-                          {grp.optimal&&<span className="text-green-600 text-sm ml-2">✓ Optimal</span>}
+                          {grp.optimal&&<span className="text-green-600 text-sm ml-2 flex items-center gap-1 inline-flex"><Icon name="CheckCircle2" size={14} /> Optimal</span>}
                         </div>
                         <div className="text-sm text-green-700 mt-2"><strong>Couvre:</strong> {grp.couverts.slice(0,5).join(' • ')}{grp.couverts.length>5?'...':''}</div>
                         {grp.nonCouverts.length>0&&<div className="text-xs text-red-500 mt-1"><strong>Non couvert:</strong> {grp.nonCouverts.slice(0,3).join(' • ')}</div>}
@@ -982,7 +1043,10 @@ const App=()=>{
 
             {/* ESTIMATION FINANCIÈRE */}
             <div className="card p-5 mb-6">
-              <h3 className="font-semibold text-gray-700 mb-4">💰 Estimation budgétaire</h3>
+              <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <Icon name="CircleDollarSign" className="text-[#05482C]" />
+                Estimation budgétaire
+              </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="border-b"><th className="text-left py-2 px-2">Code</th><th className="text-left py-2">Poste</th><th className="text-left py-2">Détail</th><th className="text-right py-2 px-2">Montant</th></tr></thead>
@@ -1006,9 +1070,12 @@ const App=()=>{
               </div>
             </div>
 
-            <div className="warn-box mt-6">
-              <strong>⚠️ Avertissement</strong>
-              <p className="text-sm mt-1">Cette estimation est indicative et basée sur les paramètres saisis. Une étude détaillée sera réalisée pour l'établissement du devis définitif. Les prix peuvent varier selon la conjoncture du marché.</p>
+            <div className="warn-box mt-6 flex gap-3">
+              <Icon name="AlertTriangle" className="text-amber-600 shrink-0" size={24} />
+              <div>
+                <strong className="block mb-1">Avertissement</strong>
+                <p className="text-sm">Cette estimation est indicative et basée sur les paramètres saisis. Une étude détaillée sera réalisée pour l'établissement du devis définitif. Les prix peuvent varier selon la conjoncture du marché.</p>
+              </div>
             </div>
 
             <Nav/>
