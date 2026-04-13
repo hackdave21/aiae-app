@@ -110,16 +110,7 @@ class FrontendAuthController extends Controller
         $simulation->base_amount = $data['base_amount'] ?? 0;
         $simulation->options_amount = $data['options_amount'] ?? 0;
         $simulation->status = 'saved';
-        $simulation->configuration_data = [
-            'secteur' => $data['secteur'],
-            'typeBat' => $data['typeBat'],
-            'standing' => $data['standing'],
-            'zone' => $data['zone'],
-            'sol' => $data['sol'],
-            'dimensions' => $data['dimensions'],
-            'options' => $data['options'],
-            'details' => $data['details'] ?? []
-        ];
+        $simulation->configuration_data = $data;
         $simulation->save();
     }
 

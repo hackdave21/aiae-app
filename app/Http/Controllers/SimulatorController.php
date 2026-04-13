@@ -22,13 +22,24 @@ class SimulatorController extends Controller
     {
         $secteur = $request->query('secteur', 'residentiel');
         
+        // Secteurs (for step 1)
+        $secteurs = \App\Models\Sector::all()->map(function($s) {
+            return [
+                'id' => $s->slug,
+                'name' => $s->name,
+                'image' => $s->image_url,
+                'desc' => $s->description ?? ''
+            ];
+        });
+
         // Fetch reference data for the simulator
         $zones = Zone::all()->mapWithKeys(function ($z) {
             return [$z->code => [
                 'name' => $z->nom,
                 'coef' => $z->coefficient,
                 'forage' => $z->profondeur_forage,
-                'foncier' => $z->prix_foncier_m2
+                'foncier' => $z->prix_foncier_m2,
+                'localites' => 'Principales villes de la zone'
             ]];
         });
 
@@ -38,7 +49,8 @@ class SimulatorController extends Controller
                 'coef' => $s->coefficient,
                 'prixFond' => $s->prix_fondation_m2,
                 'fondation' => $s->description ?? 'À définir',
-                'risque' => ($s->coefficient > 1.25) ? 'élevé' : 'faible'
+                'risque' => ($s->coefficient > 1.25) ? 'élevé' : 'faible',
+                'portance' => $s->description // or another field if available
             ]];
         });
 
@@ -48,7 +60,8 @@ class SimulatorController extends Controller
                 'prix' => $st->prix_m2_min,
                 'emprise' => ($st->emprise_max / 100),
                 'hsp' => $st->hsp,
-                'desc' => "Jusqu'à R+" . ($st->niveaux_max - 1)
+                'desc' => $st->description ?? "Qualité " . $st->name,
+                'icon' => $st->code === 'prestige' ? '🏰' : ($st->code === 'premium' ? '🏘️' : ($st->code === 'confort' ? '🏡' : '🏠'))
             ]];
         });
 
@@ -58,29 +71,34 @@ class SimulatorController extends Controller
                     'id' => $t->code,
                     'name' => $t->nom,
                     'icon' => $t->icone,
-                    'max' => 5 // Default max levels if not in DB
+                    'max' => $t->niveaux_max ?? 5,
+                    'prix' => $t->prix_base_m2 ?? 450000,
+                    'ratio' => $t->ratio_surface ?? 1
                 ];
             });
         });
 
-        $options = EquipementOption::all();
+        $options = EquipementOption::where('actif', true)->get();
         $solaires = $options->where('categorie', 'solaire')->map(function ($o) {
             return [
                 'id' => $o->code,
-                'kw' => (int) filter_var($o->puissance, FILTER_SANITIZE_NUMBER_INT),
-                'prix' => $o->prix_min
+                'kw' => (int) filter_var($o->taille_puissance, FILTER_SANITIZE_NUMBER_INT),
+                'prix' => $o->prix_min,
+                'designation' => $o->designation
             ];
         })->values();
 
         $groupes = $options->where('categorie', 'groupe')->map(function ($o) {
             return [
                 'id' => $o->code,
-                'kva' => (int) filter_var($o->puissance, FILTER_SANITIZE_NUMBER_INT),
-                'prix' => $o->prix_min
+                'kva' => (int) filter_var($o->taille_puissance, FILTER_SANITIZE_NUMBER_INT),
+                'prix' => $o->prix_min,
+                'designation' => $o->designation
             ];
         })->values();
 
-        $config = [
+        $simulatorData = [
+            'SECTEURS' => $secteurs,
             'ZONES' => $zones,
             'SOLS' => $sols,
             'STANDINGS' => $standings,
@@ -91,7 +109,7 @@ class SimulatorController extends Controller
 
         return view('frontend.simulateur_v1', [
             'secteur' => $secteur,
-            'config' => $config,
+            'config' => $simulatorData,
             'hideHeaderFooter' => true
         ]);
     }
