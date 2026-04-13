@@ -161,17 +161,11 @@ const App=()=>{
   ];
   const HOTELS_PRIX={'1s':430000,'2s':500000,'3s':625000,'4s':800000,'5s':1175000,'palace':2000000};
 
-  const SOLAIRES = libConfig.SOLAIRES || [
-    {id:'3',kw:3,prix:4500000},{id:'5',kw:5,prix:7500000},{id:'10',kw:10,prix:14000000},
-    {id:'15',kw:15,prix:20000000},{id:'20',kw:20,prix:26000000},{id:'30',kw:30,prix:38000000},
-    {id:'50',kw:50,prix:58000000},{id:'100',kw:100,prix:105000000}
-  ];
-
-  const GROUPES = libConfig.GROUPES || [
-    {id:'10',kva:10,prix:4500000},{id:'20',kva:20,prix:6500000},{id:'30',kva:30,prix:8500000},
-    {id:'45',kva:45,prix:11000000},{id:'60',kva:60,prix:14000000},{id:'100',kva:100,prix:22000000},
-    {id:'150',kva:150,prix:32000000}
-  ];
+  const SOLAIRES = libConfig.SOLAIRES || [];
+  const GROUPES = libConfig.GROUPES || [];
+  const SECURITE_OPTS = libConfig.SECURITE || [];
+  const EXTERIEUR_OPTS = libConfig.EXTERIEUR || [];
+  const DOMOTIQUE_OPTS = libConfig.DOMOTIQUE || [];
 
   // ÉTAT
   const [page,setPage]=useState(window.INITIAL_SECTEUR ? 'sim' : 'accueil');
@@ -429,32 +423,39 @@ const App=()=>{
     if(irrigation==='goutte')equip+=surfExploit*1800000;
     if(equip>0)add('7','Équipements spécifiques','Ascenseurs, quais, pont, froid',equip);
     // Énergie
-    const kitSol=SOLAIRES.find(k=>k.id===solaire);
-    const grp=GROUPES.find(g=>g.id===groupe);
-    const energie=(kitSol?.prix||0)+(grp?.prix||0);
-    if(energie>0)add('8','Énergie',`${kitSol?kitSol.kw+' kWc':''}${grp?' + '+grp.kva+' kVA':''}`.trim(),energie);
+    const kitSol = SOLAIRES.find(k => k.id === solaire);
+    const grpKva = GROUPES.find(g => g.id === groupe);
+    const energie = (kitSol?.prix || 0) + (grpKva?.prix || 0);
+    if (energie > 0) add('8', 'Énergie', `${kitSol ? kitSol.kw + ' kWc' : ''}${grpKva ? ' + ' + grpKva.kva + ' kVA' : ''}`.trim(), energie);
+
     // Sécurité
-    let secu=0;
-    if(alarme==='basique')secu+=850000+nbZones*125000;
-    if(alarme==='connectee')secu+=1600000+nbZones*185000;
-    if(alarme==='pro')secu+=3800000+nbZones*295000;
-    if(video==='4-8')secu+=2200000;
-    if(video==='16+')secu+=8500000;
-    if(acces==='badge')secu+=950000+nbPortes*320000;
-    if(acces==='bio')secu+=1800000+nbPortes*720000;
-    if(secu>0)add('9','Sécurité','Alarme, vidéo, contrôle accès',secu);
+    let secu = 0;
+    const optAlarme = SECURITE_OPTS.find(o => o.id === alarme);
+    const optVideo = SECURITE_OPTS.find(o => o.id === video);
+    const optAcces = SECURITE_OPTS.find(o => o.id === acces);
+    
+    if (optAlarme) secu += optAlarme.prix + (nbZones * 125000); // Zone sup toujours fixe ou à dynamiser plus tard
+    if (optVideo) secu += optVideo.prix;
+    if (optAcces) secu += optAcces.prix + (nbPortes * 320000);
+    
+    if (secu > 0) add('9', 'Sécurité', 'Alarme, vidéo, contrôle accès', secu);
+
     // VRD
-    let vrd=surface*8500;
-    if(cloture)vrd+=perimetre*(clotureH<=2?88000:135000);
-    if(portail==='manuel')vrd+=550000;
-    if(portail==='motorise')vrd+=1650000;
-    if(piscine==='8x4')vrd+=14500000;
-    if(piscine==='12x5')vrd+=26000000;
-    if(forage)vrd+=forageProf*95000+1200000;
-    if(parkPlaces>0)vrd+=parkPlaces*(parkType==='souterrain'?3800000:parkType==='couvert'?1350000:420000);
-    add('10','VRD et aménagements','Clôture, portail, piscine, parking',vrd);
+    let vrd = surface * 8500;
+    const optPortail = EXTERIEUR_OPTS.find(o => o.id === portail);
+    const optPiscine = EXTERIEUR_OPTS.find(o => o.id === piscine);
+    const optForage = EXTERIEUR_OPTS.find(o => o.id.includes('forage')); // On prend le premier forage trouvé ou on affine
+
+    if (cloture) vrd += perimetre * (clotureH <= 2 ? 88000 : 135000);
+    if (optPortail) vrd += optPortail.prix;
+    if (optPiscine) vrd += optPiscine.prix;
+    if (forage) vrd += (forageProf * 95000) + 1200000;
+    if (parkPlaces > 0) vrd += parkPlaces * (parkType === 'souterrain' ? 3800000 : parkType === 'couvert' ? 1350000 : 420000);
+    
+    add('10', 'VRD et aménagements', 'Clôture, portail, piscine, parking', vrd);
+
     // Aléas 5%
-    add('11','Provisions aléas','5% recommandé',total*0.05);
+    add('11', 'Provisions aléas', '5% recommandé', total * 0.05);
 
     return{
       postes,foncier,total,
@@ -491,7 +492,18 @@ const App=()=>{
     const data = {
         secteur, typeBat, standing, zone, sol, niveaux, ssSol,
         dimensions: { surface, surfaceBatie, hauteurTotale },
-        besoins: besoins.total, solaire, groupe,
+        besoins: besoins.total, 
+        solaire, groupe,
+        options: {
+            solaire,
+            groupe,
+            alarme,
+            video,
+            acces,
+            piscine,
+            forage: forage ? 'oui' : '',
+            cloture: cloture ? 'oui' : ''
+        },
         total: estimation.total, 
         base_amount, 
         options_amount,
@@ -741,7 +753,7 @@ const App=()=>{
                   <button key={id} onClick={()=>setZone(id)} className={`option-btn ${zone===id?'selected':''}`}>
                     <div className="font-medium">{z.name}</div>
                     <div className="text-xs text-gray-500">{z.localites}</div>
-                    <span className="badge badge-blue mt-2">×{z.coef.toFixed(2)}</span>
+                    <span className="badge badge-blue mt-2">×{Number(z.coef || 0).toFixed(2)}</span>
                   </button>
                 ))}
               </div>
@@ -757,13 +769,13 @@ const App=()=>{
                         <div className="text-xs text-gray-500 mt-1">Portance: {s.portance}</div>
                         <div className="text-xs text-gray-500">{s.fondation}</div>
                       </div>
-                      <span className={`badge ${s.risque==='faible'?'badge-green':s.risque==='moyen'?'badge-blue':'badge-orange'}`}>×{s.coef.toFixed(2)}</span>
+                      <span className={`badge ${s.risque==='faible'?'badge-green':s.risque==='moyen'?'badge-blue':'badge-orange'}`}>×{Number(s.coef || 0).toFixed(2)}</span>
                     </div>
                   </button>
                 ))}
               </div>
               {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ Sol à risque</strong><p className="text-sm mt-1">Étude géotechnique G2 obligatoire.</p></div>}
-              {sol&&solData&&<div className="mt-4 p-4 bg-gray-50 rounded-lg"><div className="text-sm"><strong>Coefficient total:</strong> <span className="mono font-bold" style={{color:'var(--bleu)'}}>×{coefTotal.toFixed(3)}</span></div></div>}
+              {sol&&solData&&<div className="mt-4 p-4 bg-gray-50 rounded-lg"><div className="text-sm"><strong>Coefficient total:</strong> <span className="mono font-bold" style={{color:'var(--bleu)'}}>×{Number(coefTotal || 0).toFixed(3)}</span></div></div>}
             </div>
             <Nav canContinue={!!sol}/>
           </div>
@@ -790,7 +802,7 @@ const App=()=>{
                 <div className="space-y-3">
                   <div className="flex justify-between"><span className="text-gray-500">Emprise au sol</span><span className="mono font-semibold">{fmt(surface*emprise)} m² ({Math.round(emprise*100)}%)</span></div>
                   <div className="flex justify-between"><span className="text-gray-500">Surface plancher</span><span className="mono font-semibold">{fmt(surfaceBatie)} m²</span></div>
-                  <div className="flex justify-between"><span className="text-gray-500">Hauteur totale</span><span className="mono font-semibold">{hauteurTotale.toFixed(1)} m</span></div>
+                  <div className="flex justify-between"><span className="text-gray-500">Hauteur totale</span><span className="mono font-semibold">{Number(hauteurTotale || 0).toFixed(1)} m</span></div>
                 </div>
                 <div className="mt-4 p-3 bg-gray-50 rounded-lg">
                   <div className="flex items-center gap-2">
@@ -869,17 +881,19 @@ const App=()=>{
                   <div>
                     <label className="text-sm text-gray-600">Alarme</label>
                     <div className="flex flex-wrap gap-2 mt-2">
-                      {[{id:'',n:'Non'},{id:'basique',n:'Basique'},{id:'connectee',n:'Connectée'},{id:'pro',n:'Pro'}].map(a=>(
-                        <button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-3 py-1.5 rounded text-sm ${alarme===a.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{a.n}</button>
+                      <button onClick={()=>setAlarme('')} className={`px-2 py-1 rounded text-xs ${!alarme?'bg-[#0E1540] text-white':'bg-gray-100'}`}>Non</button>
+                      {SECURITE_OPTS.filter(o=>o.id.includes('alarme')).map(a=>(
+                        <button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-2 py-1 rounded text-xs ${alarme===a.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{a.name.replace('Alarme','').trim()}</button>
                       ))}
                     </div>
                     {alarme&&<InputNum value={nbZones} onChange={setNbZones} min={2} max={24} label="Zones"/>}
                   </div>
                   <div>
                     <label className="text-sm text-gray-600">Vidéosurveillance</label>
-                    <div className="flex gap-2 mt-2">
-                      {[{id:'',n:'Non'},{id:'4-8',n:'4-8 cam'},{id:'16+',n:'16+ cam'}].map(v=>(
-                        <button key={v.id} onClick={()=>setVideo(v.id)} className={`px-3 py-1.5 rounded text-sm ${video===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{v.n}</button>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      <button onClick={()=>setVideo('')} className={`px-2 py-1 rounded text-xs ${!video?'bg-[#0E1540] text-white':'bg-gray-100'}`}>Non</button>
+                      {SECURITE_OPTS.filter(o=>o.id.includes('video')).map(v=>(
+                        <button key={v.id} onClick={()=>setVideo(v.id)} className={`px-2 py-1 rounded text-xs ${video===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{v.name.replace('Vidéosurveillance','').trim()}</button>
                       ))}
                     </div>
                   </div>
@@ -914,14 +928,20 @@ const App=()=>{
                 </div>
                 <div>
                   <label className="text-sm text-gray-600">Portail</label>
-                  <div className="flex gap-2 mt-2">
-                    {[{id:'',n:'Non'},{id:'manuel',n:'Manuel'},{id:'motorise',n:'Motorisé'}].map(p=>(<button key={p.id} onClick={()=>setPortail(p.id)} className={`px-3 py-1.5 rounded text-sm ${portail===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.n}</button>))}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <button onClick={()=>setPortail('')} className={`px-2 py-1 rounded text-xs ${!portail?'bg-[#0E1540] text-white':'bg-gray-100'}`}>Non</button>
+                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('portail')).map(p=>(
+                      <button key={p.id} onClick={()=>setPortail(p.id)} className={`px-2 py-1 rounded text-xs ${portail===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.name.replace('Portail','').trim()}</button>
+                    ))}
                   </div>
                 </div>
                 <div>
                   <label className="text-sm text-gray-600">Piscine</label>
-                  <div className="flex gap-2 mt-2">
-                    {[{id:'',n:'Non'},{id:'8x4',n:'8×4m'},{id:'12x5',n:'12×5m'}].map(p=>(<button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-3 py-1.5 rounded text-sm ${piscine===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.n}</button>))}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <button onClick={()=>setPiscine('')} className={`px-2 py-1 rounded text-xs ${!piscine?'bg-[#0E1540] text-white':'bg-gray-100'}`}>Non</button>
+                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('piscine')).map(p=>(
+                      <button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-2 py-1 rounded text-xs ${piscine===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{p.name.replace('Piscine','').trim()}</button>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -988,7 +1008,7 @@ const App=()=>{
                       <Icon name={d.icon} size={14} />
                       <span className="text-sm">{d.label}</span>
                     </div>
-                    <span className="mono font-semibold">{d.kw.toFixed(1)}</span>
+                    <span className="mono font-semibold">{Number(d.kw || 0).toFixed(1)}</span>
                   </div>
                 ))}
               </div>

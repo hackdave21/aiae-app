@@ -187,19 +187,23 @@
                                         @endphp
                                         <div class="col-md-3">
                                             <small class="text-muted d-block mb-1">Solaire</small>
-                                            <p class="fw-bold">{{ $opts['solaire'] ? 'Oui (' . strtoupper($opts['solaire']) . ')' : 'Non' }}</p>
+                                            <p class="fw-bold">{{ ($opts['solaire'] ?? null) ? 'Oui (' . strtoupper($opts['solaire']) . ')' : 'Non' }}</p>
                                         </div>
                                         <div class="col-md-3">
                                             <small class="text-muted d-block mb-1">Groupe</small>
-                                            <p class="fw-bold">{{ $opts['groupe'] ? 'Oui (' . strtoupper($opts['groupe']) . ')' : 'Non' }}</p>
+                                            <p class="fw-bold">{{ ($opts['groupe'] ?? null) ? 'Oui (' . strtoupper($opts['groupe']) . ')' : 'Non' }}</p>
                                         </div>
                                         <div class="col-md-3">
                                             <small class="text-muted d-block mb-1">Sécurité</small>
-                                            <p class="fw-bold">{{ !empty($opts['alarme']) || !empty($opts['video']) ? 'Inclus' : 'Aucun' }}</p>
+                                            <p class="fw-bold">{{ (!empty($opts['alarme'] ?? null) || !empty($opts['video'] ?? null)) ? 'Inclus' : 'Aucun' }}</p>
                                         </div>
                                         <div class="col-md-3">
                                             <small class="text-muted d-block mb-1">Services</small>
-                                            <p class="fw-bold">{{ !empty($opts['piscine']) ? 'Piscine' : '' }} {{ !empty($opts['forage']) ? 'Forage' : '' }} {{ empty($opts['piscine']) && empty($opts['forage']) ? 'Aucun' : '' }}</p>
+                                            <p class="fw-bold">
+                                                {{ !empty($opts['piscine'] ?? null) ? 'Piscine' : '' }} 
+                                                {{ !empty($opts['forage'] ?? null) ? 'Forage' : '' }} 
+                                                {{ (empty($opts['piscine'] ?? null) && empty($opts['forage'] ?? null)) ? 'Aucun' : '' }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

@@ -86,10 +86,11 @@ class SimulatorController extends Controller
         });
 
         $options = EquipementOption::where('actif', true)->get();
+        
         $solaires = $options->where('categorie', 'solaire')->map(function ($o) {
             return [
                 'id' => $o->code,
-                'kw' => (int) filter_var($o->taille_puissance, FILTER_SANITIZE_NUMBER_INT),
+                'kw' => (int) filter_var($o->taille_puissance ?? $o->puissance, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
                 'designation' => $o->designation
             ];
@@ -98,10 +99,22 @@ class SimulatorController extends Controller
         $groupes = $options->where('categorie', 'groupe')->map(function ($o) {
             return [
                 'id' => $o->code,
-                'kva' => (int) filter_var($o->taille_puissance, FILTER_SANITIZE_NUMBER_INT),
+                'kva' => (int) filter_var($o->taille_puissance ?? $o->puissance, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
                 'designation' => $o->designation
             ];
+        })->values();
+
+        $securite = $options->where('categorie', 'securite')->map(function ($o) {
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min];
+        })->values();
+
+        $exterieur = $options->where('categorie', 'exterieur')->map(function ($o) {
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'unite' => $o->unite];
+        })->values();
+
+        $domotique = $options->where('categorie', 'domotique')->map(function ($o) {
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min];
         })->values();
 
         $simulatorData = [
@@ -111,7 +124,10 @@ class SimulatorController extends Controller
             'STANDINGS' => $standings,
             'TYPES' => $typeBatiments,
             'SOLAIRES' => $solaires,
-            'GROUPES' => $groupes
+            'GROUPES' => $groupes,
+            'SECURITE' => $securite,
+            'EXTERIEUR' => $exterieur,
+            'DOMOTIQUE' => $domotique
         ];
 
         return view('frontend.simulateur_v1', [
@@ -180,6 +196,25 @@ class SimulatorController extends Controller
             
             $simulation->configuration_data = $data;
             $simulation->save();
+
+            // Synchroniser les options dans la table simulation_options (pour l'admin)
+            if (isset($data['options']) && is_array($data['options'])) {
+                $simulation->simulationOptions()->delete();
+                $optionCodes = collect($data['options'])->filter()->values()->toArray();
+                $dbOptions = \App\Models\EquipementOption::whereIn('code', $optionCodes)->get();
+                
+                foreach ($dbOptions as $dbOpt) {
+                    $simulation->simulationOptions()->create([
+                        'equipement_option_id' => $dbOpt->id,
+                        'designation' => $dbOpt->designation,
+                        'code' => $dbOpt->code,
+                        'categorie' => $dbOpt->categorie,
+                        'prix_unitaire' => $dbOpt->prix_min,
+                        'quantite' => 1,
+                        'subtotal' => $dbOpt->prix_min
+                    ]);
+                }
+            }
             
             return response()->json([
                 'status' => 'success', 
