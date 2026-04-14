@@ -200,8 +200,9 @@
     </div>
   </main>
 
+ 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-[#f3f3f3] pt-20">
+  <footer class="bg-[#e6e6e6] pt-20">
 
     <div class="max-w-7xl mx-auto px-6">
 
@@ -210,11 +211,11 @@
         <!-- LOGO + DESCRIPTION -->
         <div>
 
-          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-64 pb-5" alt="AIAE Logo">
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5" alt="AIAE Logo">
 
-          <p class="text-[#1a1f4d] text-[22px] leading-relaxed max-w-md">
-            <strong>AIAE : Afrika Infrastructures And Equipments.</strong>
-            De la conception à la réalisation.
+          <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
+            <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
+            <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
 
         </div>
@@ -222,16 +223,16 @@
 
         <!-- DIVISIONS -->
         <div>
-          <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Nos divisions
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            {{ __('Nos divisions') }}
           </h3>
 
-          <ul class="space-y-2 text-gray-600 text-[16px]">
+          <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Construction</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Énergie</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Sécurité</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">Préfabrication</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Construction') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Énergie') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Préfabrication') }}</a></li>
 
           </ul>
         </div>
@@ -240,14 +241,13 @@
         <!-- CONTACT -->
         <div>
 
-          <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Contact
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            {{ __('Contact') }}
           </h3>
 
-          <ul class="space-y-2 text-gray-600 text-[16px]">
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li>Lomé, Togo</li>
-            <li>Interventions sur tout le territoire</li>
+            <li>{{ __('Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo') }}</li>
             <li>+228 90 03 54 16</li>
             <li>contact@aiae.services</li>
 
@@ -259,33 +259,33 @@
         <!-- ACCEDER -->
         <div>
 
-          <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            Accéder à
+          <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
+            {{ __('Accéder à') }}
           </h3>
 
-          <ul class="space-y-2 text-gray-600 text-[16px]">
+           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
             <li>
-              <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
-                Demander un devis
+              <a href="{{ route('contact') }}" class="hover:text-darkBlue transition">
+                {{ __('Demander un devis') }}
               </a>
             </li>
 
             <li>
-              <a href="{{ route('contact') }}" class="hover:text-[#1a1f4d] transition">
-                Prendre rendez-vous
+              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition cursor-pointer">
+                {{ __('Prendre rendez-vous') }}
               </a>
             </li>
 
             <li>
-              <a href="{{ route('faq') }}" class="hover:text-[#1a1f4d] transition">
-                FAQ
+              <a href="{{ route('faq') }}" class="hover:text-darkBlue transition">
+                {{ __('FAQ') }}
               </a>
             </li>
 
             <li>
-              <a href="{{ route('mentions-legales') }}" class="hover:text-[#1a1f4d] transition">
-                Mentions légales
+              <a href="{{ route('mentions-legales') }}" class="hover:text-darkBlue transition">
+                {{ __('Mentions légales') }}
               </a>
             </li>
 
@@ -299,9 +299,9 @@
 
 
     <!-- COPYRIGHT -->
-    <div class="bg-[#1a1f4d] text-white text-center mt-20 py-2 text-sm">
+    <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 

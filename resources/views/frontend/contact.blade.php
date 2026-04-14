@@ -698,21 +698,26 @@
           <a href="#" aria-label="Facebook">
             <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
           </a>
+
+          <!-- YouTube -->
+          <a href="#" aria-label="YouTube">
+            <img src="{{ asset('aiae-frontend/Images/YoutubeLogo.svg') }}" alt="YouTube" class="h-16 w-16" />
+          </a>
         </div>
 
         <!-- TEXTE DROIT -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            Suivez nous, <strong class="font-heavy text-gray-300">Abonnez vous</strong> &
-            <strong class="font-heavy text-gray-300">Likez nos post</strong>
+            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong> {{ __('&') }}
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
           </p>
         </div>
       </div>
     </div>
 
     <!-- BARRE CLAIRE -->
-    <div class="bg-[#f5f5f5] py-6">
+    <div class="bg-[#e6e6e6] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
         <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
@@ -723,15 +728,15 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy text-primary">Écrivez-nous</strong> pour toutes<br />
-            <strong class="font-heavy text-primary">informations</strong> supplémentaires
+            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+   <!-- ================= FOOTER ================= -->
   <footer class="bg-[#e6e6e6] pt-20">
 
     <div class="max-w-7xl mx-auto px-6">
@@ -745,8 +750,7 @@
 
           <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
             <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
-            <strong class="font-heavy">Equipements.</strong> De La Conception<br>
-            À La Réalisation.
+            <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
 
         </div>
@@ -755,15 +759,15 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Nos divisions
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li>Construction</li>
-            <li>Énergie</li>
-            <li>Sécurité</li>
-            <li>Préfabrication</li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Construction') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Énergie') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Préfabrication') }}</a></li>
 
           </ul>
         </div>
@@ -773,12 +777,12 @@
         <div>
 
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Contact
+            {{ __('Contact') }}
           </h3>
 
            <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li>Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</li>
+            <li>{{ __('Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo') }}</li>
             <li>+228 90 03 54 16</li>
             <li>contact@aiae.services</li>
 
@@ -791,32 +795,32 @@
         <div>
 
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Accéder à
+            {{ __('Accéder à') }}
           </h3>
 
            <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
-                Demander un devis
+              <a href="{{ route('contact') }}" class="hover:text-darkBlue transition">
+                {{ __('Demander un devis') }}
               </a>
             </li>
 
             <li>
-              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition">
-                Prendre rendez-vous
+              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition cursor-pointer">
+                {{ __('Prendre rendez-vous') }}
               </a>
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
-                FAQ
+              <a href="{{ route('faq') }}" class="hover:text-darkBlue transition">
+                {{ __('FAQ') }}
               </a>
             </li>
 
             <li>
-              <a href="{{ route('mentions-legales') }}" class="hover:text-primary transition">
-                Mentions Légales
+              <a href="{{ route('mentions-legales') }}" class="hover:text-darkBlue transition">
+                {{ __('Mentions légales') }}
               </a>
             </li>
 
@@ -832,7 +836,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 

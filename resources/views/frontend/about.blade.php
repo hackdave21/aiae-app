@@ -263,30 +263,21 @@
 
         <div class="mt-4">
           <!-- TITRE -->
-         <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8">
-            UNE EXPERTISE NÉE D’UN CONSTAT
+         <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 whitespace-nowrap">
+            {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
           </h2>
 
           <!-- TEXTE -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br class="hidden xl:block">
-              souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br class="hidden xl:block">
-            architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br class="hidden xl:block">
-              cohérence ni de respect des engagements.</strong>
+            {!! __('AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br class="hidden xl:block"> souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br class="hidden xl:block"> architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br class="hidden xl:block"> cohérence ni de respect des engagements.</strong>') !!}
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br class="hidden xl:block">
-            d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br class="hidden xl:block">
-              entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br class="hidden xl:block">
-            <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br class="hidden xl:block">
-              réalisation.</strong>
+            {!! __('Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br class="hidden xl:block"> d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br class="hidden xl:block"> entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br class="hidden xl:block"> <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br class="hidden xl:block"> réalisation.</strong>') !!}
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            <strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br class="hidden xl:block">
-            Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br class="hidden xl:block">
-              sécurité et de préfabrication.</strong>
+            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br class="hidden xl:block"> Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br class="hidden xl:block"> sécurité et de préfabrication.</strong>') !!}
           </p>
         </div>
 
@@ -308,7 +299,7 @@
 
         <!-- TITRE -->
         <h2 class="text-white text-center font-bold text-[12px] sm:text-[20px] md:text-[30px] leading-[1.05] mb-10">
-          UNE EXPERTISE NÉE D’UN CONSTAT
+          {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
@@ -320,12 +311,10 @@
               <img src="{{ asset('aiae-frontend/Images/col1.png') }}" class="w-14 h-14" />
             </div>
             <h3 class="font-black text-[24px] uppercase mb-2">
-              +18 ANS D’EXPERTISE
+              {{ __('+18 ANS D’EXPERTISE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré<br> dans <strong
-                class="text-white">plus de 15 ans de practice terrain</strong> :<br>
-              conception, dimensionnement, réalisation et<br> supervision d’ouvrages complexes.
+              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré<br> dans <strong class="text-white">plus de 15 ans de practice terrain</strong> :<br> conception, dimensionnement, réalisation et<br> supervision d’ouvrages complexes.') !!}
             </p>
           </div>
 
@@ -338,12 +327,10 @@
               </div>
             </div>
             <h3 class="font-black text-[24px] uppercase mb-2">
-              UN MODÈLE INTÉGRÉ UNIQUE
+              {{ __('UN MODÈLE INTÉGRÉ UNIQUE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Construction, énergie, sécurité, préfabrication<br> <strong class="text-white">quatre divisions
-                complémentaires sous une seule<br> enseigne,</strong>
-              sans équivalent en Afrique de l’Ouest.
+              {!! __('Construction, énergie, sécurité, préfabrication<br> <strong class="text-white">quatre divisions complémentaires sous une seule<br> enseigne,</strong> sans équivalent en Afrique de l’Ouest.') !!}
             </p>
           </div>
 
@@ -354,12 +341,10 @@
               <img src="{{ asset('aiae-frontend/Images/col3.png') }}" class="w-14 h-14" />
             </div>
             <h3 class="font-black text-[24px] uppercase mb-2">
-              RIGUEUR TECHNIQUE
+              {{ __('RIGUEUR TECHNIQUE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux<br> de standing normalisés,
-                devis détaillés</strong> ligne<br> par ligne.
-              <strong class="text-white">Chaque franc est justifié.</strong>
+              {!! __('Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux<br> de standing normalisés, devis détaillés</strong> ligne<br> par ligne. <strong class="text-white">Chaque franc est justifié.</strong>') !!}
             </p>
           </div>
 
@@ -370,12 +355,10 @@
               <img src="{{ asset('aiae-frontend/Images/col2.png') }}" class="w-14 h-14" />
             </div>
             <h3 class="font-black text-[24px] uppercase mb-2">
-              ENGAGEMENT CONTRACTUEL
+              {{ __('ENGAGEMENT CONTRACTUEL') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              Délais, coûts et qualité inscrits au contrat.<br> <strong class="text-white">Pénalités de retard.</strong>
-              Garantie décennale.<br>
-              <strong class="text-white">Contrat signable devant notaire.</strong>
+              {!! __('Délais, coûts et qualité inscrits au contrat.<br> <strong class="text-white">Pénalités de retard.</strong> Garantie décennale.<br> <strong class="text-white">Contrat signable devant notaire.</strong>') !!}
             </p>
           </div>
 
@@ -391,11 +374,11 @@
 
       <!-- TITRE -->
       <h2 class="text-[30px] md:text-[40px] font-black tracking-[1px] uppercase mb-6">
-        NOTRE MISSION
+        {{ __('NOTRE MISSION') }}
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[18px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">« Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »</p>
+      <p class="text-[18px] whitespace-nowrap md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">{!! __('« Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »') !!}</p>
 
     </div>
   </section>
@@ -415,7 +398,7 @@
 
           <!-- TITRE -->
           <h2 class="text-[40px] md:text-[46px] font-bold text-[#0b4a2b] leading-[1.2]">
-            Ce qui nous<br>anime :
+            {!! __('Ce qui nous<br>anime :') !!}
           </h2>
 
           <!-- 02 -->
@@ -424,10 +407,9 @@
               class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
               02</div>
             <div>
-              <h3 class="font-bold text-[#0b4a2b] text-[24px]">Respecter</h3>
+              <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Respecter') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                <strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong><br>
-                inscrits au contrat.
+                {!! __('<strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong><br> inscrits au contrat.') !!}
               </p>
             </div>
           </div>
@@ -438,10 +420,9 @@
               class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
               04</div>
             <div>
-              <h3 class="font-bold text-[#0b4a2b] text-[24px]">Innover</h3>
+              <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Innover') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                Énergie solaire, sécurité haute performance,<br>
-                <strong class="text-gray-700 font-heavy">préfabrication écologique.</strong>
+                {!! __('Énergie solaire, sécurité haute performance,<br> <strong class="text-gray-700 font-heavy">préfabrication écologique.</strong>') !!}
               </p>
             </div>
           </div>
@@ -457,10 +438,9 @@
               class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
               01</div>
             <div>
-              <h3 class="font-bold text-[#0b4a2b] text-[24px]">Simplifier</h3>
+              <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Simplifier') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                <strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong><br>
-                au lieu de cinq ou six.
+                {!! __('<strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong><br> au lieu de cinq ou six.') !!}
               </p>
             </div>
           </div>
@@ -471,10 +451,9 @@
               class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
               03</div>
             <div>
-              <h3 class="font-bold text-[#0b4a2b] text-[24px]">Démocratiser</h3>
+              <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Démocratiser') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                Du Standard au Prestige,<br>
-                <strong class="text-gray-700 font-heavy">chaque client mérite un travail bien fait.</strong>
+                {!! __('Du Standard au Prestige,<br> <strong class="text-gray-700 font-heavy">chaque client mérite un travail bien fait.</strong>') !!}
               </p>
             </div>
           </div>
@@ -485,10 +464,9 @@
               class="w-14 h-14 shrink-0 bg-[#0b4a2b] text-white rounded-full flex items-center justify-center text-xl font-bold">
               05</div>
             <div>
-              <h3 class="font-bold text-[#0b4a2b] text-[24px]">Durer</h3>
+              <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Durer') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                Solidité, durabilité,<br>
-                <strong class="text-gray-700 font-heavy">garantie décennale.</strong>
+                {!! __('Solidité, durabilité,<br> <strong class="text-gray-700 font-heavy">garantie décennale.</strong>') !!}
               </p>
             </div>
           </div>
@@ -519,20 +497,13 @@
 
       <!-- TITRE -->
       <h2 class="text-darkBlue font-bold text-[40px] sm:text-[60px] md:text-[90px] leading-[1.05]">
-        NOS <span class="text-primary">04</span><br>
-        DIVISIONS
+        {!! __('NOS <span class="text-primary">04</span><br> DIVISIONS') !!}
       </h2>
 
       <!-- TEXTE -->
       <p class="mt-4 sm:mt-6 font-normal text-[10px] min-[400px]:text-xs sm:text-sm md:text-base text-black max-w-[520px] mx-auto leading-relaxed">
 
-        AIAE STRUCTURE SON DÉVELOPPEMENT AUTOUR DE<br>
-
-        <span class="font-heavy">QUATRE DIVISIONS COMPLÉMENTAIRES</span>, ENSEMBLE,<br>
-
-        ELLES FORMENT UN <span class="font-heavy">ÉCOSYSTÈME INÉDIT SUR LE</span><br>
-
-        <span class="font-heavy">MARCHÉ OUEST-AFRICAIN.</span>
+        {!! __('AIAE STRUCTURE SON DÉVELOPPEMENT AUTOUR DE<br> <span class="font-heavy">QUATRE DIVISIONS COMPLÉMENTAIRES</span>, ENSEMBLE,<br> ELLES FORMENT UN <span class="font-heavy">ÉCOSYSTÈME INÉDIT SUR LE</span><br> <span class="font-heavy">MARCHÉ OUEST-AFRICAIN.</span>') !!}
 
       </p>
 
@@ -554,17 +525,15 @@
         <div class="flex flex-col justify-center h-full gap-5 py-4">
           <div>
             <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
-              CONSTRUCTION
+              {{ __('CONSTRUCTION') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong>
-              <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel,
-              tertiaire, industriel, agricole, ouvrages d’art.
+              {!! __('<strong class="font-heavy text-gray-800 text-[20px] md:text-[26px] block mb-2">Cœur de métier.</strong> <strong class="font-heavy text-gray-800">Conception et réalisation :</strong> résidentiel, tertiaire, industriel, agricole, ouvrages d’art.') !!}
             </p>
           </div>
           <div>
             <span class="inline-block bg-[#05482C] text-white px-8 py-2 md:px-10 border-[4px] border-[#00a651] rounded-[50px] text-[20px] md:text-[22px] font-book mt-2 shadow-sm">
-              Opérationnelle
+              {{ __('Opérationnelle') }}
             </span>
           </div>
         </div>
@@ -580,16 +549,15 @@
         <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
           <div>
             <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
-              ÉNERGIE
+              {{ __('ÉNERGIE') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              Solutions <strong class="font-heavy text-gray-800">d’autonomie<br> énergétique</strong> pour vos installations.<br>
-              Solaire C&I, systèmes hybrides, sites<br> isolés.
+              {!! __('Solutions <strong class="font-heavy text-gray-800">d’autonomie<br> énergétique</strong> pour vos installations.<br> Solaire C&I, systèmes hybrides, sites<br> isolés.') !!}
             </p>
           </div>
           <div>
             <p class="text-gray-600 text-[22px] md:text-[26px] mt-2">
-              Lancement <span class="font-black text-gray-800">2026</span>
+              {!! __('Lancement <span class="font-black text-gray-800">2026</span>') !!}
             </p>
           </div>
         </div>
@@ -610,15 +578,15 @@
         <div class="flex flex-col justify-center h-full gap-5 py-4">
           <div>
             <h3 class="text-[#05482C] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
-              SÉCURITÉ
+              {{ __('SÉCURITÉ') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d’accès.
+              {!! __('<strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d’accès.') !!}
             </p>
           </div>
           <div>
             <p class="text-[#05482C] text-[22px] md:text-[26px] mt-2">
-              Prochainement
+              {{ __('Prochainement') }}
             </p>
           </div>
         </div>
@@ -635,15 +603,15 @@
         <div class="text-right flex flex-col justify-center h-full gap-5 order-2 md:order-1 py-4">
           <div>
             <h3 class="text-[#CC6A00] font-bold text-[25px] md:text-[50px] uppercase tracking-tight mb-6 leading-none">
-              PRÉFABRICATION
+              {{ __('PRÉFABRICATION') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              <strong class="font-heavy text-gray-800">Production industrielle</strong> d’éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.
+              {!! __('<strong class="font-heavy text-gray-800">Production industrielle</strong> d’éléments de<br> construction. BTC, béton précontraint,<br> poutrelles. -15 à -25% sur les coûts.') !!}
             </p>
           </div>
           <div>
             <p class="text-[#CC6A00] text-[22px] md:text-[26px] mt-2">
-              Prochainement
+              {{ __('Prochainement') }}
             </p>
           </div>
         </div>
@@ -915,6 +883,7 @@
         </div>
       </div>
     </section>
+    
    <!-- ================= RÉSEAUX SOCIAUX ================= -->
   <section class="w-full">
     <!-- BARRE VERTE -->
