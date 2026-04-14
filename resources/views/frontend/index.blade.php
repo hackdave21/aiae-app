@@ -373,8 +373,8 @@
             <div class="relative w-full max-w-[460px] rounded-lg overflow-hidden flex items-center justify-center">
               <img src="{{ asset('aiae-frontend/Images/fExpertise.png') }}" class="w-full h-auto object-contain" alt="Expertise" />
               <div class="absolute inset-0 flex flex-col justify-center pl-[13%] pr-[30%] text-white">
-                <h4 class="font-extrabold text-[4vw] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('EXPERTISE :') }}</h4>
-                <p class="font-book text-gray-200 text-[3vw] min-[400px]:text-[14px] sm:text-[15px] md:text-[18px] leading-[1.2] drop-shadow-sm">
+                <h4 class="font-extrabold text-[12px] min-[400px]:text-[14px] sm:text-[18px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('EXPERTISE :') }}</h4>
+                <p class="font-book text-gray-200 text-[10px] min-[400px]:text-[12px] sm:text-[14px] md:text-[18px] leading-[1.2] drop-shadow-sm">
                   {!! __('+15 ans d\'expertise<br>en génie civil') !!}
                 </p>
               </div>
@@ -384,8 +384,8 @@
             <div class="relative w-full max-w-[460px] rounded-lg overflow-hidden flex items-center justify-center">
               <img src="{{ asset('aiae-frontend/Images/fSiège.png') }}" class="w-full h-auto object-contain" alt="Siège" />
               <div class="absolute inset-0 flex flex-col justify-center pl-[13%] pr-[30%] text-white">
-                <h4 class="font-extrabold text-[4vw] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('SIÈGE :') }}</h4>
-                <p class="font-book text-gray-200 text-[3vw] min-[400px]:text-[14px] sm:text-[15px] md:text-[18px] leading-[1.2] drop-shadow-sm">
+                <h4 class="font-extrabold text-[12px] min-[400px]:text-[14px] sm:text-[18px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('SIÈGE :') }}</h4>
+                <p class="font-book text-gray-200 text-[10px] min-[400px]:text-[12px] sm:text-[14px] md:text-[18px] leading-[1.2] drop-shadow-sm">
                   {!! __('Lomé, Togo,<br>Interventions sur<br>tout le territoire') !!}
                 </p>
               </div>
@@ -395,8 +395,8 @@
             <div class="relative w-full max-w-[460px] rounded-lg overflow-hidden flex items-center justify-center">
               <img src="{{ asset('aiae-frontend/Images/fAmbition.png') }}" class="w-full h-auto object-contain" alt="Modèle" />
               <div class="absolute inset-0 flex flex-col justify-center pl-[13%] pr-[30%] text-white">
-                <h4 class="font-extrabold text-[4vw] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('MODÈLE :') }}</h4>
-                <p class="font-book text-gray-200 text-[3vw] min-[400px]:text-[14px] sm:text-[15px] md:text-[17px] leading-[1.2] drop-shadow-sm">
+                <h4 class="font-extrabold text-[12px] min-[400px]:text-[14px] sm:text-[18px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('MODÈLE :') }}</h4>
+                <p class="font-book text-gray-200 text-[10px] min-[400px]:text-[12px] sm:text-[14px] md:text-[17px] leading-[1.2] drop-shadow-sm">
                   {!! __('4 divisions intégrées,<br>sans équivalent en<br>Afrique de l\'Ouest') !!}
                 </p>
               </div>
@@ -1048,7 +1048,7 @@
           <!-- bouton RDV -->
           <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
-              Prendre rendez-vous maintenant
+              {{ __('Prendre rendez-vous maintenant') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
           </button>
@@ -1056,7 +1056,7 @@
           <!-- bouton devis -->
           <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
-              Demander un devis gratuit
+              {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
           </button>
@@ -1119,7 +1119,7 @@
 
           <div>
             <h3 class="text-secondary font-extrabold text-2xl mb-2">
-              {!! __('LA QUALITÉ EST<br>\n              PRIMORDIALE') !!}
+              {!! __('LA QUALITÉ EST<br>PRIMORDIALE') !!}
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
@@ -1140,7 +1140,7 @@
 
           <div>
             <h3 class="text-secondary font-extrabold text-2xl mb-2">
-              {!! __('LA PAROLE DONNÉE<br>\n              EST SACRÉE') !!}
+              {!! __('LA PAROLE DONNÉE<br> EST SACRÉE') !!}
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
@@ -1161,7 +1161,7 @@
 
           <div>
             <h3 class="text-secondary font-extrabold text-2xl mb-2">
-              {!! __('HONNÊTETÉ ENVERS<br>\n              LES CLIENTS') !!}
+              {!! __('HONNÊTETÉ ENVERS<br>LES CLIENTS') !!}
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
@@ -1220,7 +1220,7 @@
           <!-- bouton RDV -->
           <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
-              Prendre rendez-vous maintenant
+              {{ __('Prendre rendez-vous maintenant') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
           </button>
@@ -1228,7 +1228,7 @@
           <!-- bouton devis -->
           <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
-              Demander un devis gratuit
+              {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
           </button>
