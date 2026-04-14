@@ -135,16 +135,16 @@
       <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 px-6 sm:px-10 md:px-16 max-w-7xl text-white drop-shadow-xl font-futura">
         <!-- TITRE -->
         <h1 class="text-[22px] sm:text-3xl md:text-4xl lg:text-[44px] font-heavy mb-3 sm:mb-6 leading-tight lg:leading-[1.1]">
-          De La Conception À La Réalisation
+          {{ __('De La Conception À La Réalisation') }}
         </h1>
 
         <!-- TEXTE -->
         <p class="text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed mb-4 sm:mb-8 max-w-xl">
-          <span class="whitespace-normal sm:whitespace-nowrap font-medium">Construction, énergie solaire, sécurité haute performance et préfabrication industrielle :</span><br class="hidden sm:block" />
-          AIAE réunit toutes les compétences pour <span class="font-medium">mener votre projet de A à Z.</span>
+          <span class="whitespace-normal sm:whitespace-nowrap font-medium">{{ __('Construction, énergie solaire, sécurité haute performance et préfabrication industrielle :') }}</span><br class="hidden sm:block" />
+          {!! __('AIAE réunit toutes les compétences pour <span class="font-medium">mener votre projet de A à Z.</span>') !!}
           <br class="hidden sm:block" /><br class="hidden sm:block" />
           <span class="font-medium">
-            Un interlocuteur unique, des engagements tenus.
+            {{ __('Un interlocuteur unique, des engagements tenus.') }}
           </span>
         </p>
 
@@ -153,7 +153,7 @@
           <!-- BOUTON GAUCHE -->
           <div onclick="openRdvModal('physique')" class="flex items-center bg-primary rounded-full shadow-lg p-1 w-full lg:w-fit cursor-pointer hover:opacity-90 transition">
             <span class="px-4 py-1.5 sm:px-6 sm:py-2 text-white whitespace-normal sm:whitespace-nowrap flex-1 text-center lg:text-left font-light text-xs sm:text-base">
-              Prendre rendez-vous maintenant
+              {{ __('Prendre rendez-vous maintenant') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-6 w-6 sm:h-7 sm:w-7" />
           </div>
@@ -161,7 +161,7 @@
           <!-- BOUTON MILIEU -->
           <div class="flex items-center bg-secondary rounded-full shadow-lg p-1 w-full lg:w-fit">
             <span class="px-4 py-1.5 sm:px-6 sm:py-2 text-white whitespace-normal sm:whitespace-nowrap flex-1 text-center lg:text-left font-light text-xs sm:text-base">
-              Demander un devis gratuit
+              {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-6 w-6 sm:h-7 sm:w-7" />
           </div>
@@ -170,8 +170,7 @@
           <div class="flex items-start text-white w-full lg:w-fit lg:justify-end drop-shadow-xl mt-4 lg:mt-0">
             <img src="{{ asset('aiae-frontend/Images/Arrow4Expertises.svg') }}" class="h-8 w-8 sm:h-9 sm:w-9 mt-[4px] sm:mt-[6px] mr-3 shrink-0" />
             <p class="text-base sm:text-lg md:text-xl font-medium leading-[1.1] md:leading-[1.2]">
-              Un partenaire. Quatre<br />
-              expertises. Zéro compromis.
+              {!! __('Un partenaire. Quatre<br />expertises. Zéro compromis.') !!}
             </p>
           </div>
         </div>
@@ -187,24 +186,24 @@
       <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 mb-4" id="categoryButtons">
         <div class="flex flex-wrap gap-2">
           <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="residentiel" class="tabBtn px-3 py-2 rounded-lg bg-white text-xs sm:text-sm shadow">
-            Résidentiel
+            {{ __('Résidentiel') }}
           </button>
 
           <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="tertiaire" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
-            Tertiaire
+            {{ __('Tertiaire') }}
           </button>
 
           <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="industriel" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
-            Industriel
+            {{ __('Industriel') }}
           </button>
 
           <button data-img="{{ asset('aiae-frontend/Images/home.png') }}" data-secteur="agricole" class="tabBtn px-3 py-2 rounded-lg bg-glassDark text-xs sm:text-sm">
-            Agricole
+            {{ __('Agricole') }}
           </button>
         </div>
 
         <button onclick="window.location.href='{{ route('energie.calculator') }}'" class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm">
-          Calculateur Énergies
+          {{ __('Calculateur Énergies') }}
         </button>
       </div>
 
@@ -212,32 +211,32 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
-          <input id="surfaceDispo" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm" placeholder="Surface Disponible (m²)" />
+          <input id="surfaceDispo" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm" placeholder="{{ __('Surface Disponible (m²)') }}" />
         </div>
 
         <!-- Surface Bâtie -->
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <img src="{{ asset('aiae-frontend/Images/PencilSimpleLine.png') }}" class="absolute left-3 top-1/2 -translate-y-1/2 w-[16px] opacity-70" />
           <input id="surfaceBatie" class="w-full h-10 pl-9 pr-3 rounded-lg text-xs sm:text-sm"
-            placeholder="Surface Bâtie Souhaitée (m²)" />
+            placeholder="{{ __('Surface Bâtie Souhaitée (m²)') }}" />
         </div>
 
         <!-- CONFIGURATION -->
         <div class="relative col-span-1 sm:col-span-2 md:col-span-2">
           <button id="openConfig"
             class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
-            Configuration
+            {{ __('Configuration') }}
             <span><img src="{{ asset('aiae-frontend/Images/Flèche haut.svg') }}" class="arrow transition-transform duration-200" alt="" /></span>
           </button>
 
           <div id="configPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-2 z-20">
             <label class="flex justify-between items-center text-xs sm:text-sm">
-              Espaces Communs <input type="checkbox" id="checkEspaces" />
+              {{ __('Espaces Communs') }} <input type="checkbox" id="checkEspaces" />
             </label>
 
             <div class="flex justify-between items-center text-xs sm:text-sm">
-              Salles De Bain
+              {{ __('Salles De Bain') }}
               <div class="flex items-center gap-2">
                 <button class="minusBath bg-gray-200 rounded-full w-6 h-6">
                   -
@@ -250,7 +249,7 @@
             </div>
 
             <div class="flex justify-between items-center text-xs sm:text-sm">
-              Chambres
+              {{ __('Chambres') }}
               <div class="flex items-center gap-2">
                 <button class="minusBed bg-gray-200 rounded-full w-6 h-6">
                   -
@@ -263,7 +262,7 @@
             </div>
 
             <button class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
-              Valider
+              {{ __('Valider') }}
             </button>
           </div>
         </div>
@@ -272,23 +271,23 @@
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <button id="openStand"
             class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
-            Standing
+            {{ __('Standing') }}
             <span><img src="{{ asset('aiae-frontend/Images/Flèche haut.svg') }}" class="arrow transition-transform duration-200" alt="" /></span>
           </button>
 
           <div id="standPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-1 z-20">
             <button data-value="prestige" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
-              Prestige
+              {{ __('Prestige') }}
             </button>
             <button data-value="premium" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
-              Premium
+              {{ __('Premium') }}
             </button>
             <button data-value="confort" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1 bg-gray-100">
-              Confort
+              {{ __('Confort') }}
             </button>
             <button data-value="standard" class="standOption block w-full text-left hover:bg-gray-100 rounded-lg px-2 py-1">
-              Standard
+              {{ __('Standard') }}
             </button>
           </div>
         </div>
@@ -297,22 +296,22 @@
         <div class="relative col-span-1 sm:col-span-1 md:col-span-2">
           <button id="openOptions"
             class="w-full h-10 bg-white text-left px-3 rounded-lg text-xs sm:text-sm flex justify-between items-center">
-            Options
+            {{ __('Options') }}
             <span><img src="{{ asset('aiae-frontend/Images/Flèche haut.svg') }}" class="arrow transition-transform duration-200" alt="" /></span>
           </button>
 
           <div id="optionsPanel"
             class="hidden absolute left-0 right-0 bottom-full mb-2 bg-white rounded-xl shadow-lg p-3 space-y-2 z-20">
-            <label class="flex justify-between text-xs sm:text-sm">Forage <input type="checkbox" id="checkForage" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Clôture <input type="checkbox" id="checkCloture" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Aménagement Paysager <input
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Forage') }} <input type="checkbox" id="checkForage" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Clôture') }} <input type="checkbox" id="checkCloture" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Aménagement Paysager') }} <input
                 type="checkbox" id="checkPaysage" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Domotique <input type="checkbox" id="checkDomotique" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Solaire <input type="checkbox" id="checkSolaire" /></label>
-            <label class="flex justify-between text-xs sm:text-sm">Piscine <input type="checkbox" id="checkPiscine" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Domotique') }} <input type="checkbox" id="checkDomotique" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Solaire') }} <input type="checkbox" id="checkSolaire" /></label>
+            <label class="flex justify-between text-xs sm:text-sm">{{ __('Piscine') }} <input type="checkbox" id="checkPiscine" /></label>
 
             <button class="w-full bg-primary text-white rounded-lg py-2 text-xs sm:text-sm">
-              Valider
+              {{ __('Valider') }}
             </button>
           </div>
         </div>
@@ -321,7 +320,7 @@
         <button
           onclick="startSimulation()"
           class="col-span-1 sm:col-span-2 md:col-span-2 w-full h-10 px-4 flex items-center justify-center bg-primary text-white rounded-lg text-xs sm:text-sm hover:bg-opacity-90">
-          Poursuivre La Simulation
+          {{ __('Poursuivre La Simulation') }}
         </button>
 
       </div>
