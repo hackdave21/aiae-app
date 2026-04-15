@@ -159,12 +159,12 @@
           </div>
 
           <!-- BOUTON MILIEU -->
-          <div class="flex items-center bg-secondary rounded-full shadow-lg p-1 w-full lg:w-fit">
+          <a href="{{ route('contact') }}" class="flex items-center bg-secondary rounded-full shadow-lg p-1 w-full lg:w-fit hover:opacity-90 transition">
             <span class="px-4 py-1.5 sm:px-6 sm:py-2 text-white whitespace-normal sm:whitespace-nowrap flex-1 text-center lg:text-left font-light text-xs sm:text-base">
               {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-6 w-6 sm:h-7 sm:w-7" />
-          </div>
+          </a>
 
           <!-- TEXTE DROITE -->
           <div class="flex items-start text-white w-full lg:w-fit lg:justify-end drop-shadow-xl mt-4 lg:mt-0">
@@ -680,12 +680,12 @@
       </button>
 
       <!-- Bouton devis -->
-      <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-fit hover:opacity-90 transition">
+      <a href="{{ route('contact') }}" class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-fit hover:opacity-90 transition">
         <span class="px-6 py-2 text-white text-center font-light">
           {{ __('Demander un devis gratuit') }}
         </span>
         <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
-      </button>
+      </a>
 
     </div>
 
@@ -709,9 +709,40 @@
 
         <!-- DROITE : IMAGE -->
         <div class="relative flex justify-center lg:justify-start">
-
-          <img src="{{ asset('aiae-frontend/Images/Défile.png') }}" alt="bloc glass" class="w-full max-w-[450px]">
-
+          <div class="relative w-full max-w-[450px]">
+            <img src="{{ asset('aiae-frontend/Images/Pourquoi choisir.png') }}" alt="bloc glass" class="w-full h-auto">
+            
+            <!-- Text Overlays -->
+            <div class="absolute inset-0 pointer-events-none flex items-center pl-[15%] sm:pl-[28%] pr-[5%]">
+              <div class="flex flex-col gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 text-white font-heavy text-left leading-tight">
+                <!-- Item 1 -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
+                  <span class="whitespace-nowrap">{!! __('Un Interlocuteur Unique') !!}</span>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
+                  <span class="whitespace-nowrap">{!! __('Expertise Technique Avancée') !!}</span>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
+                  <span class="whitespace-nowrap">{!! __('Des Engagements Tenus') !!}</span>
+                </div>
+                <!-- Item 4 -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
+                  <span class="whitespace-nowrap">{!! __('Transparence Totale') !!}</span>
+                </div>
+                <!-- Item 5 -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[15px] sm:text-[13px] md:text-[16px] lg:text-[19px]">
+                  <span class="w-1 h-1 sm:w-2 sm:h-2 bg-white rounded-full shrink-0"></span>
+                  <span class="whitespace-nowrap">{!! __('Solutions Intégrées Uniques') !!}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -844,12 +875,12 @@
           </button>
 
           <!-- bouton devis -->
-          <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <a href="{{ route('contact') }}" class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
-          </button>
+          </a>
 
         </div>
 
@@ -877,9 +908,49 @@
 
         <!-- DROITE : IMAGE -->
         <div class="relative lg:mr-20 flex justify-center scale-100 sm:scale-105 md:scale-125 lg:scale-150 transform transition duration-300">
-
-          <img src="{{ asset('aiae-frontend/Images/engagement.png') }}" alt="bloc glass" class="ml-0 lg:ml-20">
-
+          <div class="relative w-full">
+            <img src="{{ asset('aiae-frontend/Images/Nos engagements.png') }}" alt="bloc glass" class="ml-0 lg:ml-20 w-full h-auto">
+            
+            <!-- Text Overlays (2 Columns) -->
+            <div class="absolute inset-0 pointer-events-none flex items-center pl-[20%] sm:pl-[38%] pr-[5%]">
+              <div class="flex gap-x-[15%] w-full text-white font-heavy text-left leading-tight">
+                <!-- Column 1 -->
+                <div class="flex flex-col gap-0.5 sm:gap-1 md:gap-1.5 whitespace-nowrap">
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Devis Gratuit Détaillé') !!}</span>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Planning Contractuel') !!}</span>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Garantie Décennale') !!}</span>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Assurance RC Pro') !!}</span>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Paiement Par Étapes') !!}</span>
+                  </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="flex flex-col gap-0.5 sm:gap-1 md:gap-1.5 whitespace-nowrap">
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Confidentialité') !!}</span>
+                  </div>
+                  <div class="flex items-center gap-1 sm:gap-1.5 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[11px]">
+                    <span class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white rounded-full shrink-0"></span>
+                    <span>{!! __('Accompagnement<br> Financement') !!}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1054,12 +1125,12 @@
           </button>
 
           <!-- bouton devis -->
-          <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <a href="{{ route('contact') }}" class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
-          </button>
+          </a>
 
         </div>
 
@@ -1091,9 +1162,40 @@
 
         <!-- DROITE : BLOC VALEURS -->
         <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-
-          <img src="{{ asset('aiae-frontend/Images/valeurs.png') }}" alt="Valeurs AIAE" class="w-[420px] drop-shadow-2xl">
-
+          <div class="relative w-[350px] sm:w-[420px] max-w-full">
+            <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE" class="w-full h-auto drop-shadow-2xl">
+            
+            <!-- Text Overlays -->
+            <div class="absolute inset-0 pointer-events-none flex items-center px-[22%] sm:px-[25%]">
+              <div class="flex flex-col gap-0.5 sm:gap-2 md:gap-3 text-white font-heavy text-left leading-tight">
+                <!-- Item 1 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('La Qualité Est Primordiale') !!}</span>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
+                </div>
+                <!-- Item 4 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Respect Des Équipes') !!}</span>
+                </div>
+                <!-- Item 5 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1226,12 +1328,12 @@
           </button>
 
           <!-- bouton devis -->
-          <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <a href="{{ route('contact') }}" class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
-          </button>
+          </a>
 
         </div>
 
@@ -1336,7 +1438,7 @@
               </h3>
 
               <p class="text-gray-700 text-[16px] xl:text-[20px]">
-                {!! __('Devis détaillé, contrat clair<br class="hidden xl:block"> signable devant le notaire au Togo,<br class="hidden xl:block"> aucune mauvaise surprise à votre retour.') !!}
+                {!! __('Devis détaillé, contrat clair<br> signable devant le notaire au Togo,<br> aucune mauvaise surprise à votre retour.') !!}
               </p>
             </div>
           </div>
@@ -1353,20 +1455,20 @@
     
 
           <!-- bouton RDV -->
-          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary border-2 border-white rounded-full shadow-lg p-1 mb-6 w-full sm:w-[350px] hover:opacity-90 transition">
-            <span class="px-6 py-2 text-white text-center font-light">
+          <button onclick="openRdvModal('physique')" class="flex items-center justify-center bg-primary border-2 border-white rounded-full shadow-lg p-auto mb-6 w-full sm:w-[350px] hover:opacity-90 transition">
+            <span class="px-2 py-2 text-white text-center font-light whitespace-nowrap">
               {{ __('Prendre rendez-vous maintenant') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
           </button>
 
           <!-- bouton devis -->
-          <button class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
+          <a href="{{ route('contact') }}" class="flex items-center justify-center bg-secondary rounded-full shadow-lg p-1 w-full sm:w-[350px] hover:opacity-90 transition">
             <span class="px-6 py-2 text-white text-center font-light">
               {{ __('Demander un devis gratuit') }}
             </span>
             <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" class="h-7 w-7" />
-          </button>
+          </a>
 
    
 
@@ -1663,7 +1765,7 @@
       <div class="flex flex-col md:flex-row justify-center">
 
         <!-- BOUTON 1 -->
-        <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy hover:opacity-90 transition">
 
           {{ __('DEMANDER UN DEVIS GRATUIT') }}
           <span class="block text-sm font-light text-white">

@@ -255,15 +255,15 @@
   @include('frontend.partials.navbar')
 
   <!-- ================= HERO ================= -->
-  <section class="pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
-    <div class="max-w-[1450px] mx-auto grid lg:grid-cols-[1fr_1fr] xl:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-14 items-center">
+  <section class="pt-20 md:pt-28 pb-5 bg-[#f7f7f7] px-4 md:px-12">
+    <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
       <!-- TEXTE -->
       <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6">
 
         <div class="mt-4">
           <!-- TITRE -->
-         <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 whitespace-nowrap">
+         <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8">
             {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
           </h2>
 
@@ -285,7 +285,7 @@
 
       <!-- IMAGE -->
       <div class="w-full rounded-[18px] overflow-hidden order-1 lg:order-2 px-2 md:px-0">
-        <img src="{{ asset('aiae-frontend/Images/about.png') }}" class="w-full h-auto lg:h-[400px] object-contain lg:object-cover" />
+        <img src="{{ asset('aiae-frontend/Images/about.png') }}" class="w-full h-auto lg:h-[500px] object-cover" />
       </div>
 
     </div>
@@ -314,7 +314,7 @@
               {{ __('+18 ANS D’EXPERTISE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré<br> dans <strong class="text-white">plus de 15 ans de practice terrain</strong> :<br> conception, dimensionnement, réalisation et<br> supervision d’ouvrages complexes.') !!}
+              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré dans <strong class="text-white">plus de 15 ans de practice terrain</strong> : conception, dimensionnement, réalisation et supervision d’ouvrages complexes.') !!}
             </p>
           </div>
 
@@ -330,7 +330,7 @@
               {{ __('UN MODÈLE INTÉGRÉ UNIQUE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Construction, énergie, sécurité, préfabrication<br> <strong class="text-white">quatre divisions complémentaires sous une seule<br> enseigne,</strong> sans équivalent en Afrique de l’Ouest.') !!}
+              {!! __('Construction, énergie, sécurité, préfabrication <strong class="text-white">quatre divisions complémentaires sous une seule enseigne,</strong> sans équivalent en Afrique de l’Ouest.') !!}
             </p>
           </div>
 
@@ -344,7 +344,7 @@
               {{ __('RIGUEUR TECHNIQUE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux<br> de standing normalisés, devis détaillés</strong> ligne<br> par ligne. <strong class="text-white">Chaque franc est justifié.</strong>') !!}
+              {!! __('Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux de standing normalisés, devis détaillés</strong> ligne par ligne. <strong class="text-white">Chaque franc est justifié.</strong>') !!}
             </p>
           </div>
 
@@ -358,7 +358,7 @@
               {{ __('ENGAGEMENT CONTRACTUEL') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Délais, coûts et qualité inscrits au contrat.<br> <strong class="text-white">Pénalités de retard.</strong> Garantie décennale.<br> <strong class="text-white">Contrat signable devant notaire.</strong>') !!}
+              {!! __('Délais, coûts et qualité inscrits au contrat. <strong class="text-white">Pénalités de retard.</strong> Garantie décennale. <strong class="text-white">Contrat signable devant notaire.</strong>') !!}
             </p>
           </div>
 
@@ -378,7 +378,7 @@
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[18px] whitespace-nowrap md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">{!! __('« Offrir à chaque client particulier, entreprise ou institution un partenaire unique<br class="hidden md:block"> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br class="hidden md:block"> avec des engagements tenus et une transparence totale. »') !!}</p>
+      <p class="text-[14px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">{!! __('«   particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}</p>
 
     </div>
   </section>
@@ -398,7 +398,7 @@
 
           <!-- TITRE -->
           <h2 class="text-[40px] md:text-[46px] font-bold text-[#0b4a2b] leading-[1.2]">
-            {!! __('Ce qui nous<br>anime :') !!}
+            {!! __('Ce qui nous anime :') !!}
           </h2>
 
           <!-- 02 -->
@@ -409,7 +409,7 @@
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Respecter') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                {!! __('<strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong><br> inscrits au contrat.') !!}
+                {!! __('<strong class="text-gray-700 font-heavy">Délais, budgets, qualité</strong> inscrits au contrat.') !!}
               </p>
             </div>
           </div>
@@ -422,7 +422,7 @@
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Innover') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                {!! __('Énergie solaire, sécurité haute performance,<br> <strong class="text-gray-700 font-heavy">préfabrication écologique.</strong>') !!}
+                {!! __('Énergie solaire, sécurité haute performance, <strong class="text-gray-700 font-heavy">préfabrication écologique.</strong>') !!}
               </p>
             </div>
           </div>
@@ -440,7 +440,7 @@
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Simplifier') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                {!! __('<strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong><br> au lieu de cinq ou six.') !!}
+                {!! __('<strong class="text-gray-700 font-heavy">Un seul interlocuteur</strong> au lieu de cinq ou six.') !!}
               </p>
             </div>
           </div>
@@ -453,7 +453,7 @@
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Démocratiser') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                {!! __('Du Standard au Prestige,<br> <strong class="text-gray-700 font-heavy">chaque client mérite un travail bien fait.</strong>') !!}
+                {!! __('Du Standard au Prestige, <strong class="text-gray-700 font-heavy">chaque client mérite un travail bien fait.</strong>') !!}
               </p>
             </div>
           </div>
@@ -466,7 +466,7 @@
             <div>
               <h3 class="font-bold text-[#0b4a2b] text-[24px]">{{ __('Durer') }}</h3>
               <p class="text-gray-600 text-[18px] sm:text-[20px] md:text-2xl">
-                {!! __('Solidité, durabilité,<br> <strong class="text-gray-700 font-heavy">garantie décennale.</strong>') !!}
+                {!! __('Solidité, durabilité, <strong class="text-gray-700 font-heavy">garantie décennale.</strong>') !!}
               </p>
             </div>
           </div>
@@ -552,7 +552,7 @@
               {{ __('ÉNERGIE') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('Solutions <strong class="font-heavy text-gray-800">d’autonomie<br> énergétique</strong> pour vos installations.<br> Solaire C&I, systèmes hybrides, sites<br> isolés.') !!}
+              {!! __('Solutions <strong class="font-heavy text-gray-800">d’autonomie énergétique</strong> pour vos installations. Solaire C&I, systèmes hybrides, sites isolés.') !!}
             </p>
           </div>
           <div>
@@ -581,7 +581,7 @@
               {{ __('SÉCURITÉ') }}
             </h3>
             <p class="text-gray-700 leading-relaxed text-[18px] md:text-[26px]">
-              {!! __('<strong class="font-heavy text-gray-800">Protection haute performance</strong> pour<br> vos biens et vos personnes. Chambres fortes<br> EN 1143-1, safe rooms, armureries, contrôle<br> d’accès.') !!}
+              {!! __('<strong class="font-heavy text-gray-800">Protection haute performance</strong> pour vos biens et vos personnes. Chambres fortes EN 1143-1, safe rooms, armureries, contrôle d’accès.') !!}
             </p>
           </div>
           <div>
@@ -636,7 +636,7 @@
 
           <!-- TITRE -->
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">
-            Les personnes derrière AIAE
+            {{ __('Les personnes derrière AIAE') }}
           </h2>
 
           <div class="grid md:grid-cols-2 gap-6 md:gap-10">
@@ -644,47 +644,36 @@
             <!-- CARD 1 : Technique -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
               <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
-                Direction Technique<br>et Stratégique
+                {!! __('Direction Technique<br>et Stratégique') !!}
               </div>
               <div class="bg-white p-5 text-[18px] text-gray-700 flex-1 leading-[1.6]">
-                <strong class="text-gray-700 font-heavy">Spécialiste en génie civil avec plus de 18 ans d’expérience</strong> en
-                conception et dimensionnement de <strong class="text-gray-700 font-heavy">structures complexes</strong>.
-                <strong class="text-gray-700 font-heavy">Enseignant-chercheur</strong> dans plusieurs disciplines du génie civil
-                (ouvrages d’art, structures de chaussées, modélisation aux éléments finis).
-                <strong class="text-gray-700 font-heavy">Formation complémentaire en administration des entreprises.</strong>
-                Fondateur d’AIAE.
+                {!! __('<strong class="text-gray-700 font-heavy">Spécialiste en génie civil avec plus de 18 ans d’expérience</strong> en conception et dimensionnement de <strong class="text-gray-700 font-heavy">structures complexes</strong>. <strong class="text-gray-700 font-heavy">Enseignant-chercheur</strong> dans plusieurs disciplines du génie civil (ouvrages d’art, structures de chaussées, modélisation aux éléments finis). <strong class="text-gray-700 font-heavy">Formation complémentaire en administration des entreprises.</strong> Fondateur d’AIAE.') !!}
               </div>
             </div>
 
             <!-- CARD 3 : Générale (Top Right) -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
               <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
-                Direction Générale<br><span class="hidden md:inline">&nbsp;</span>
+                {!! __('Direction Générale<br><span class="hidden md:inline">&nbsp;</span>') !!}
               </div>
               <div class="bg-white p-4 lg:p-5 text-[16px] xl:text-[18px] text-gray-700 flex-1">
-                En charge de la gestion opérationnelle quotidienne, de la<br class="hidden md:block"> coordination des projets et des relations
-                clients.
-                <strong class="text-gray-700 font-heavy">Expérience en<br class="hidden md:block"> gestion de projets BTP et coordination multi-lots.</strong>
+                {!! __('En charge de la gestion opérationnelle quotidienne, de la<br class="hidden md:block"> coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en<br class="hidden md:block"> gestion de projets BTP et coordination multi-lots.</strong>') !!}
               </div>
             </div>
 
             <!-- CARD 2 : Administrative (Bottom Left) -->
             <div class="rounded-3xl overflow-hidden flex flex-col shadow-md h-full min-h-[200px] md:min-h-[300px]">
               <div class="bg-[#2f376f] text-white p-4 lg:p-5 text-[20px] lg:text-[24px] font-bold">
-                Direction Administrative<br>et Juridique
+                {!! __('Direction Administrative<br>et Juridique') !!}
               </div>
               <div class="bg-white p-5 text-[18px] text-gray-700 flex-1 ">
-                <strong class="font-heavy text-gray-700">Représentante légale</strong> de l’entreprise. En charge de la conformité réglementaire,
-                des contrats et de la gestion administrative.
+                {!! __('<strong class="font-heavy text-gray-700">Représentante légale</strong> de l’entreprise. En charge de la conformité réglementaire, des contrats et de la gestion administrative.') !!}
               </div>
             </div>
 
             <!-- TEXTE (Bottom Right) -->
             <div class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              Notre équipe s’appuie<br class="hidden md:block"> également sur <strong class="text-white font-heavy">un réseau de<br class="hidden md:block"> partenaires techniques
-                qualifiés</strong><br class="hidden md:block">
-              (architectes, géotechniciens,<br class="hidden md:block"> topographes, bureaux de<br class="hidden md:block"> contrôle)
-              <strong class="text-white font-heavy">mobilisés selon les<br class="hidden md:block"> besoins de chaque projet.</strong>
+              {!! __('Notre équipe s’appuie<br class="hidden md:block"> également sur <strong class="text-white font-heavy">un réseau de<br class="hidden md:block"> partenaires techniques qualifiés</strong><br class="hidden md:block"> (architectes, géotechniciens,<br class="hidden md:block"> topographes, bureaux de<br class="hidden md:block"> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br class="hidden md:block"> besoins de chaque projet.</strong>') !!}
             </div>
 
           </div>
@@ -708,22 +697,51 @@
         <div class="text-white lg:ml-20 max-w-xl text-left">
 
           <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
-            Nos Valeurs
+            {{ __('Nos Valeurs') }}
           </h2>
 
           <p class="text-[18px] md:text-xl leading-relaxed text-white font-light">
-            Ces valeurs constituent l’ADN d’AIAE. Elles<br class="hidden md:block">
-            ne sont pas négociables, quelles que soient<br class="hidden md:block">
-            les circonstances.
+            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br class="hidden md:block"> ne sont pas négociables, quelles que soient<br class="hidden md:block"> les circonstances.') !!}
           </p>
 
         </div>
 
         <!-- DROITE : BLOC VALEURS -->
         <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-
-          <img src="{{ asset('aiae-frontend/Images/valeurs.png') }}" alt="Valeurs AIAE" class="w-[350px] sm:w-[420px] max-w-full drop-shadow-2xl">
-
+          <div class="relative w-[350px] sm:w-[500px] max-w-full">
+            <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE" class="w-full h-auto drop-shadow-2xl">
+            
+            <!-- Text Overlays -->
+            <div class="absolute inset-0 pointer-events-none flex items-center px-[22%] sm:px-[25%]">
+              <div class="flex flex-col gap-0.5 sm:gap-2 md:gap-3 text-white font-heavy text-left leading-tight">
+                <!-- Item 1 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('La Qualité Est Primordiale') !!}</span>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
+                </div>
+                <!-- Item 3 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
+                </div>
+                <!-- Item 4 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Respect Des Équipes') !!}</span>
+                </div>
+                <!-- Item 5 -->
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
+                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                  <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -752,12 +770,11 @@
 
             <div>
               <h3 class="text-secondary font-bold text-[27px] mb-2">
-                LA QUALITÉ EST<br> PRIMORDIALE
+                {!! __('LA QUALITÉ EST<br> PRIMORDIALE') !!}
               </h3>
 
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                Nous ne construisons pas pour aujourd’hui,
-                <strong class="font-heavy">nous construisons pour des générations.</strong>
+                {!! __('Nous ne construisons pas pour aujourd’hui, <strong class="font-heavy">nous construisons pour des générations.</strong>') !!}
               </p>
             </div>
 
@@ -774,12 +791,11 @@
 
             <div>
               <h3 class="text-secondary font-bold text-[27px] mb-2">
-                LA PAROLE DONNÉE EST<br> SACRÉE
+                {!! __('LA PAROLE DONNÉE EST<br> SACRÉE') !!}
               </h3>
 
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                <strong class="font-heavy">Un engagement pris est un engagement tenu.</strong>
-                Sans exception.
+                {!! __('<strong class="font-heavy">Un engagement pris est un engagement tenu.</strong> Sans exception.') !!}
               </p>
             </div>
 
@@ -796,11 +812,11 @@
 
             <div>
               <h3 class="text-secondary font-bold text-[27px] mb-2">
-                HONNÊTETÉ ENVERS<br> LES CLIENTS
+                {!! __('HONNÊTETÉ ENVERS<br> LES CLIENTS') !!}
               </h3>
 
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                <strong class="font-heavy">Un client bien informé</strong> est un client satisfait.
+                {!! __('<strong class="font-heavy">Un client bien informé</strong> est un client satisfait.') !!}
               </p>
             </div>
 
@@ -817,11 +833,11 @@
 
             <div>
               <h3 class="text-secondary font-bold text-[27px] mb-2">
-                RESPECT DES ÉQUIPES
+                {{ __('RESPECT DES ÉQUIPES') }}
               </h3>
 
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                La qualité dépend du <strong class="font-heavy">respect accordé à ceux qui réalisent.</strong>
+                {!! __('La qualité dépend du <strong class="font-heavy">respect accordé à ceux qui réalisent.</strong>') !!}
               </p>
             </div>
 
@@ -838,12 +854,11 @@
 
             <div>
               <h3 class="text-secondary font-bold text-[27px] mb-2">
-                RESPECT DES DÉLAIS<br> ET DES COÛTS
+                {!! __('RESPECT DES DÉLAIS<br> ET DES COÛTS') !!}
               </h3>
 
               <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed">
-                <strong class="font-heavy">Un projet en retard ou hors budget est un échec</strong>,
-                même s’il est techniquement parfait.
+                {!! __('<strong class="font-heavy">Un projet en retard ou hors budget est un échec</strong>, même s’il est techniquement parfait.') !!}
               </p>
             </div>
 
@@ -860,31 +875,30 @@
     <section class="bg-[#e5e5e5] py-10 relative z-20">
       <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
         <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">
-          Prêt À Construire ?
+          {{ __('Prêt À Construire ?') }}
         </h2>
 
         <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
-          Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block">
-          gratuit et sans engagement.
+          {!! __('Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block"> gratuit et sans engagement.') !!}
         </p>
         <div class="flex flex-col md:flex-row justify-center">
           <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
-            DEMANDER UN DEVIS GRATUIT
+            {{ __('DEMANDER UN DEVIS GRATUIT') }}
            <span class="block text-sm font-light text-white">
-              Réponse sous 48h
+              {{ __('Réponse sous 48h') }}
             </span>
           </a>
            <a onclick="openRdvModal('physique')"  class="bg-primary text-white px-10 py-5 text-center font-heavy">
-            PRENDRE RENDEZ-VOUS
+            {{ __('PRENDRE RENDEZ-VOUS') }}
             <span class="block text-sm font-light text-white">
-              En personne ou en visio
+              {{ __('En personne ou en visio') }}
             </span>
           </a>
         </div>
       </div>
     </section>
     
-   <!-- ================= RÉSEAUX SOCIAUX ================= -->
+ <!-- ================= RÉSEAUX SOCIAUX ================= -->
   <section class="w-full">
     <!-- BARRE VERTE -->
     <div class="bg-[#0b4a2b] text-white py-6">
@@ -906,21 +920,25 @@
             <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
           </a>
 
+          <!-- YouTube -->
+          <a href="#" aria-label="YouTube">
+            <img src="{{ asset('aiae-frontend/Images/YoutubeLogo.svg') }}" alt="YouTube" class="h-16 w-16" />
+          </a>
         </div>
 
         <!-- TEXTE DROIT -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            Suivez nous, <strong class="font-heavy text-gray-300">Abonnez vous</strong> &
-            <strong class="font-heavy text-gray-300">Likez nos post</strong>
+            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong> {{ __('&') }}
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
           </p>
         </div>
       </div>
     </div>
 
     <!-- BARRE CLAIRE -->
-    <div class="bg-[#f5f5f5] py-6">
+    <div class="bg-[#e6e6e6] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
         <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
@@ -931,15 +949,15 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy text-primary">Écrivez-nous</strong> pour toutes<br />
-            <strong class="font-heavy text-primary">informations</strong> supplémentaires
+            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
       </div>
     </div>
   </section>
 
-   <!-- ================= FOOTER ================= -->
+  <!-- ================= FOOTER ================= -->
   <footer class="bg-[#e6e6e6] pt-20">
 
     <div class="max-w-7xl mx-auto px-6">
@@ -953,8 +971,7 @@
 
           <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg whitespace-nowrap">
             <strong class="font-heavy">AIAE : Afrika Infrastructures And</strong><br>
-            <strong class="font-heavy">Equipements.</strong> De La Conception<br>
-            À La Réalisation.
+            <strong class="font-heavy">Equipements.</strong> {!! __('De La Conception<br>À La Réalisation.') !!}
           </p>
 
         </div>
@@ -963,15 +980,15 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Nos divisions
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li>Construction</li>
-            <li>Énergie</li>
-            <li>Sécurité</li>
-            <li>Préfabrication</li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Construction') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Énergie') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Préfabrication') }}</a></li>
 
           </ul>
         </div>
@@ -981,12 +998,12 @@
         <div>
 
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Contact
+            {{ __('Contact') }}
           </h3>
 
            <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
-            <li>Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo</li>
+            <li>{{ __('Quartier Kléme Zanguéra Rue Agoe Nyive - Lomé Togo') }}</li>
             <li>+228 90 03 54 16</li>
             <li>contact@aiae.services</li>
 
@@ -999,32 +1016,32 @@
         <div>
 
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            Accéder à
+            {{ __('Accéder à') }}
           </h3>
 
            <ul class="space-y-2 text-gray-600 text-[20px] font-light">
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
-                Demander un devis
+              <a href="{{ route('contact') }}" class="hover:text-darkBlue transition">
+                {{ __('Demander un devis') }}
               </a>
             </li>
 
             <li>
-              <a onclick="openRdvModal('physique')" class="hover:text-darkBlue transition">
-                Prendre rendez-vous
+              <a href="javascript:void(0)" onclick="openRdvModal('physique')" class="hover:text-darkBlue transition cursor-pointer">
+                {{ __('Prendre rendez-vous') }}
               </a>
             </li>
 
             <li>
-              <a href="#" class="hover:text-darkBlue transition">
-                FAQ
+              <a href="{{ route('faq') }}" class="hover:text-darkBlue transition">
+                {{ __('FAQ') }}
               </a>
             </li>
 
             <li>
-              <a href="{{ route('mentions-legales') }}" class="hover:text-primary transition">
-                Mentions Légales
+              <a href="{{ route('mentions-legales') }}" class="hover:text-darkBlue transition">
+                {{ __('Mentions légales') }}
               </a>
             </li>
 
@@ -1040,7 +1057,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.
+      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
