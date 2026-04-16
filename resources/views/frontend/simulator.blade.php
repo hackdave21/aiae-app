@@ -10,18 +10,18 @@
     <div class="max-w-6xl mx-auto px-6 text-center">
 
       <h1 class="text-4xl md:text-5xl font-bold mb-3">
-        Simulateur d'Estimation
+        {{ __('Simulateur d\'Estimation') }}
       </h1>
 
       <p class="text-sm sm:text-base opacity-80 mb-10 tracking-wide break-words font-light">
-        AFRIKA INFRASTRUCTURE AND EQUIPEMENTS
+        {{ __('AFRIKA INFRASTRUCTURE AND EQUIPEMENTS') }}
       </p>
 
       <!-- CARD -->
       <div class="relative max-w-5xl mx-auto bg-[#8c93a9]/60 backdrop-blur-md rounded-[40px] p-6 md:p-8">
 
         <div class="absolute -top-4 left-6 bg-white text-black px-5 py-1.5 rounded-full text-[18px]">
-          Sélectionnez votre secteur
+          {{ __('Sélectionnez votre secteur') }}
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -32,8 +32,8 @@
 
             <img src="{{ asset('aiae-frontend/Images/resid.png') }}" alt="Résidentiel" class="h-12 w-auto mb-4 object-contain">
 
-            <h3 class="text-[28px] font-heavy">Résidentiel</h3>
-            <p class="text-[18px] text-gray-500 font-light">Villas, immeubles</p>
+            <h3 class="text-[28px] font-heavy">{{ __('Résidentiel') }}</h3>
+            <p class="text-[18px] text-gray-500 font-light">{{ __('Villas, immeubles') }}</p>
 
           </a>
 
@@ -43,8 +43,8 @@
 
             <img src="{{ asset('aiae-frontend/Images/tert.png') }}" alt="Tertiaire" class="h-12 w-auto mb-4 object-contain">
 
-            <h3 class="text-[28px] font-heavy">Tertiaire</h3>
-            <p class="text-[18px] text-gray-500 font-light">Bureaux, hôtels</p>
+            <h3 class="text-[28px] font-heavy">{{ __('Tertiaire') }}</h3>
+            <p class="text-[18px] text-gray-500 font-light">{{ __('Bureaux, hôtels') }}</p>
 
           </a>
 
@@ -54,8 +54,8 @@
 
             <img src="{{ asset('aiae-frontend/Images/indus.png') }}" alt="Industriel" class="h-12 w-auto mb-4 object-contain">
 
-            <h3 class="text-[28px] font-heavy">Industriel</h3>
-            <p class="text-[18px] text-gray-500 font-light">Usines, entrepôts</p>
+            <h3 class="text-[28px] font-heavy">{{ __('Industriel') }}</h3>
+            <p class="text-[18px] text-gray-500 font-light">{{ __('Usines, entrepôts') }}</p>
 
           </a>
 
@@ -65,8 +65,8 @@
 
             <img src="{{ asset('aiae-frontend/Images/agri.png') }}" alt="Agricole" class="h-12 w-auto mb-4 object-contain">
 
-            <h3 class="text-[28px] font-heavy">Agricole</h3>
-            <p class="text-[18px] text-gray-500 font-light">Élevage, stockage</p>
+            <h3 class="text-[28px] font-heavy">{{ __('Agricole') }}</h3>
+            <p class="text-[18px] text-gray-500 font-light">{{ __('Élevage, stockage') }}</p>
 
           </a>
 
@@ -78,7 +78,7 @@
 
         <a href="{{ route('energie.calculator') }}"
           class="bg-[#f78b0c] hover:bg-orange-600 transition text-white text-xl sm:text-2xl font-heavy px-6 sm:px-8 py-4 rounded-full flex items-center justify-center gap-3 w-full sm:w-auto">
-          Calculateur Énergie
+          {{ __('Calculateur Énergie') }}
 
           <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="" class="flex-shrink-0 w-10 h-10 object-contain">
 

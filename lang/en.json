@@ -328,7 +328,19 @@
     "RENDEZ-VOUS SUR PLACE": "IN-PERSON APPOINTMENT",
     "Visitez notre siège à Lomé pour discuter de votre projet.": "Visit our headquarters in Lomé to discuss your project.",
     "RENDEZ-VOUS EN LIGNE": "ONLINE APPOINTMENT",
-    "Pour la diaspora ou contraintes de temps, <span class=\"font-light\">nous<br> proposons des visioconférences.</span>": "For the diaspora or time constraints, <span class=\"font-light\">we<br> offer video conferences.</span>"
+    "Pour la diaspora ou contraintes de temps, <span class=\"font-light\">nous<br> proposons des visioconférences.</span>": "For the diaspora or time constraints, <span class=\"font-light\">we<br> offer video conferences.</span>",
 
+    "Simulateur d'Estimation": "Estimation Simulator",
+    "AFRIKA INFRASTRUCTURE AND EQUIPEMENTS": "AFRIKA INFRASTRUCTURE AND EQUIPMENTS",
+    "Sélectionnez votre secteur": "Select your sector",
+    "Résidentiel": "Residential",
+    "Villas, immeubles": "Villas, buildings",
+    "Tertiaire": "Tertiary",
+    "Bureaux, hôtels": "Offices, hotels",
+    "Industriel": "Industrial",
+    "Usines, entrepôts": "Factories, warehouses",
+    "Agricole": "Agricultural",
+    "Élevage, stockage": "Livestock, storage",
+    "Calculateur Énergie": "Energy Calculator"
 
 }
