@@ -314,39 +314,37 @@
   @include('frontend.partials.navbar')
 
   <!-- ================= HERO DIASPORA ================= -->
-  <section class="pt-24 md:pt-32 pb-5 bg-[#e6e6e6]">
+  <section class="pt-20 md:pt-24 pb-5 bg-[#e6e6e6]">
 
     <div class="max-w-[99%] mx-auto px-2">
 
       <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
 
         <!-- IMAGE -->
-        <img src="{{ asset('aiae-frontend/Images/etranger.png') }}" class="w-full h-[600px] sm:h-[500px] md:h-[400px] object-cover">
+        <img src="{{ asset('aiae-frontend/Images/etranger.png') }}" class="w-full h-[650px] sm:h-[550px] md:h-[400px] object-cover">
 
         <!-- OVERLAY -->
         <div class="absolute inset-0 bg-black/70"></div>
 
         <!-- CONTENU -->
-        <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-20 text-white">
+        <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-24 text-white">
 
-          <h1 class="leading-[0.85] mb-4 md:mb-8">
-            <span class="block text-[30px] sm:text-[40px] md:text-[85px] font-light tracking-tight">
-              CONSTRUIRE AU TOGO
+          <h2 class="leading-[0.85] mb-4 md:mb-8 uppercase">
+            <span class="block text-[20px] sm:text-[25px] md:text-[45px] tracking-tight">
+              <span class="font-light">{{ __('CONSTRUIRE AU TOGO') }}</span>
+              <span class="font-heavy">{{ __('DEPUIS') }}</span>
             </span>
-            <span class="block text-[32px] sm:text-[45px] md:text-[115px] font-bold tracking-tighter">
-              DEPUIS L'ÉTRANGER
+            <span class="block text-[25px] sm:text-[25px] md:text-[55px] tracking-tighter">
+              <span class="font-heavy">{{ __('L\'ÉTRANGER') }}</span><span class="font-light">{{ __(', C\'EST POSSIBLE.') }}</span>
             </span>
-          </h1>
+          </h2>
 
           <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
             <p class="mb-4 whitespace-normal md:whitespace-nowrap">
-              <strong class="text-white font-heavy">Et c'est serein avec AIAE.</strong>
+              <strong class="text-white font-heavy"> {{ __("Et c'est serein avec AIAE.") }}</strong>
             </p>
             <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
-              Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br>
-              Vous rêvez de <strong class="text-white font-heavy">construire votre maison, votre résidence secondaire</strong><br>
-              ou un <strong class="text-white font-heavy">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br>
-              chaque étape, <strong class="text-white font-heavy">de la première visioconférence à la remise de vos clés.</strong>
+              {!! __("Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br> Vous rêvez de <strong class=\"text-white font-heavy\">construire votre maison, votre résidence secondaire</strong><br> ou un <strong class=\"text-white font-heavy\">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br> chaque étape, <strong class=\"text-white font-heavy\">de la première visioconférence à la remise de vos clés.</strong>") !!}
             </p>
           </div>
 
@@ -354,12 +352,12 @@
           <div class="hidden md:flex absolute bottom-6 right-6 flex-col gap-4">
             <a href="{{ route('contact') }}"
               class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex flex-col items-center text-center transition-all hover:scale-105 shadow-xl font-bold">
-              <p class="text-[17px] tracking-wide font-light whitespace-nowrap">Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span></p>
+              <p class="text-[17px] tracking-wide font-light whitespace-nowrap"> {!! __('Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span>') !!}</p>
             </a>
 
             <a href="{{ route('contact') }}"
               class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex items-center justify-between gap-4 transition-all hover:scale-105 shadow-xl min-w-[280px] font-bold">
-              <p class="text-[17px] text-left font-light leading-tight tracking-wide whitespace-nowrap">Prendre rendez-vous maintenant</p>
+              <p class="text-[17px] text-left font-light leading-tight tracking-wide whitespace-nowrap">{{ __('Prendre rendez-vous maintenant') }}</p>
               <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-6 h-6 object-contain" />
             </a>
           </div>
@@ -368,11 +366,11 @@
           <div class="md:hidden flex flex-col gap-3 mt-8">
             <a href="{{ route('contact') }}"
               class="bg-primary text-white px-4 py-3 rounded-full flex flex-col items-center text-center font-bold shadow-lg">
-              <p class="text-[14px] tracking-wide font-light">Prendre rdv en visio</p>
+              <p class="text-[14px] tracking-wide font-light"> {!! __('Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span>') !!}</p>
             </a>
             <a href="{{ route('contact') }}"
               class="bg-primary text-white px-4 py-3 rounded-full flex items-center justify-center gap-3 font-bold shadow-lg">
-              <p class="text-[14px] font-light">Prendre rendez-vous maintenant</p>
+              <p class="text-[14px] font-light"> {!! __('Prendre rendez-vous maintenant') !!}</p>
               <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-5 h-5 object-contain" />
             </a>
           </div>
@@ -391,22 +389,25 @@
     <div class="max-w-[1000px] mx-auto px-6 text-center">
 
       <!-- TITRE STYLE DIVISION -->
-      <h2 class="leading-[0.9] uppercase">
+      <h2 class="uppercase leading-[1.0]">
 
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">
-          ON SAIT CE QUI
+        <!-- Ligne 1 -->
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] text-[#121a44] whitespace-nowrap">
+          {{ __('ON SAIT CE QUI VOUS') }}
         </span>
 
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">
-          VOUS INQUIÈTE
+        <!-- Ligne 2 -->
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] whitespace-nowrap">
+          <span class="text-[#121a44]">{{ __('INQUIÈTE.') }}</span> <span class="text-primary">{{ __('VOICI NOS') }}</span>
+        </span>
+
+        <!-- Ligne 3 -->
+        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[75px] text-primary whitespace-nowrap">
+          {{ __('RÉPONSES.') }}
         </span>
 
       </h2>
-
-      <!-- TEXTE -->
-      <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
-        CONSTRUIRE AU TOGO DEPUIS L'ÉTRANGER : <strong class="font-heavy text-black">VOICI NOS RÉPONSES</strong>
-      </p>
+     
 
     </div>
 
