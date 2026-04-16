@@ -378,7 +378,7 @@
       </h2>
 
       <!-- TEXTE -->
-      <p class="text-[14px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95">{!! __('«   particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}</p>
+      <p class="text-[14px] md:text-[22px] lg:text-[30px] leading-[1.6] font-light opacity-95 whitespace-nowrap">{!! __('« Offre à chaque client particulier, entreprise ou institution un partenaire unique<br> capable de concevoir, construire, équiper en énergie et sécuriser ses infrastructures,<br> avec des engagements tenus et une transparence totale. »') !!}</p>
 
     </div>
   </section>
