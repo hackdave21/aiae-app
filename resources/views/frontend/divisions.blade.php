@@ -316,25 +316,18 @@
 
           <h1 class="leading-[0.85] mb-4 md:mb-8">
             <span class="block text-[32px] sm:text-[42px] md:text-[85px] font-light tracking-tight">
-              DIVISION
+              {{ __('DIVISION') }}
             </span>
             <span class="block text-[35px] sm:text-[48px] md:text-[115px] font-bold tracking-tighter">
-              CONSTRUCTION
+              {{ __('CONSTRUCTION') }}
             </span>
           </h1>
 
           <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
-            <p class="mb-4 whitespace-normal md:whitespace-nowrap">Concevoir et réaliser des infrastructures durables, c’est la raison d’être
-              d’AIAE.
-              <strong class="text-white font-heavy">Nous prenons en<br> charge l’intégralité de vos projets de
-                construction, de la première esquisse à la remise des clés.</strong>
+            <p class="mb-4 whitespace-normal md:whitespace-nowrap">  {!! __('Concevoir et réaliser des infrastructures durables, c’est la raison d’être d’AIAE. <strong class="text-white font-heavy">Nous prenons en<br> charge l’intégralité de vos projets de construction, de la première esquisse à la remise des clés.</strong>') !!}
             </p>
             <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
-              <strong class="text-white font-heavy">Forte de plus de 18 ans d’expérience en génie civil,</strong> AIAE
-              dispose de
-              compétences rares au Togo<br>
-              pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des
-              <strong class="text-white font-heavy">ouvrages d’art complexes.</strong>
+              {!! __('<strong class="text-white font-heavy">Forte de plus de 18 ans d’expérience en génie civil,</strong> AIAE dispose de compétences rares au Togo<br> pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des <strong class="text-white font-heavy">ouvrages d’art complexes.</strong>') !!}
             </p>
           </div>
 
@@ -343,7 +336,7 @@
         <!-- BADGE -->
         <div
           class="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-primary/60  text-white px-4 md:px-6 py-3 md:py-4 rounded-[12px] text-[14px] sm:text-[16px] md:text-[20px] max-w-[220px] sm:max-w-[260px] md:max-w-[300px] whitespace-normal md:whitespace-nowrap">
-          Fondée en 2025, <strong class="text-white font-heavy">ancrée<br>dans 18 ans d’expertise.</strong>
+          {!! __('Fondée en 2025, <strong class="text-white font-heavy">ancrée<br>dans 18 ans d’expertise.</strong>') !!}
         </div>
 
       </div>
@@ -361,20 +354,18 @@
       <h2 class="leading-[0.9] uppercase">
 
         <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">
-          CE QUE NOUS
+          {!! __('CE QUE NOUS') !!}
         </span>
 
         <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">
-          CONSTRUISONS
+          {!! __('CONSTRUISONS') !!}
         </span>
 
       </h2>
 
       <!-- TEXTE -->
       <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
-        <strong class="font-heavy text-black">CATÉGORIES :</strong>
-        RÉSIDENTIEL, TERTIAIRE, INDUSTRIEL,<br>
-        AGRICOLE, RÉHABILITATION ET EXTENSION
+        {!! __('<strong class="font-heavy text-black">CATÉGORIES :</strong> RÉSIDENTIEL, TERTIAIRE, INDUSTRIEL,<br> AGRICOLE, RÉHABILITATION ET EXTENSION') !!}
       </p>
 
     </div>
