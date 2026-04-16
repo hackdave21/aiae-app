@@ -397,7 +397,7 @@
               </svg>
             </div>
 
-            <input type="tel" id="phoneInput" placeholder="XX XX XX XX" required
+            <input type="tel" id="phoneInput" placeholder="90 03 54 16" required
               class="bg-transparent pl-4 w-full outline-none text-gray-700 placeholder-gray-400">
             <input type="hidden" name="phone" id="fullPhone">
           </div>
@@ -719,7 +719,7 @@
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
           <p class="text-2xl md:text-3xl text-left">
-            +228 <span class="font-bold">XX XX XX XX</span>
+            +228 <span class="font-bold">90 03 54 16</span>
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">

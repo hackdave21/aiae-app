@@ -1033,7 +1033,7 @@
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
           <p class="text-2xl md:text-3xl text-left">
-            +228 <span class="font-bold">XX XX XX XX</span>
+            +228 <span class="font-bold">90 03 54 16</span>
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
