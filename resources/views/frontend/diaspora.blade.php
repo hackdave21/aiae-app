@@ -425,15 +425,13 @@
               01
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Mon argent sera-t-il bien utilisé ?
+              {{ __('Mon argent sera-t-il bien utilisé ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Chaque franc est tracé. Vous recevez un devis ligne par ligne basé sur notre Bordereau des Prix Unitaires
-          (BPU). Le paiement se fait par étapes, uniquement sur constat d’avancement validé par photos et vidéos.
-          Aucun paiement intégral n’est demandé avant le démarrage.
+             {!! __('Chaque franc est tracé. Vous recevez un devis ligne par ligne basé sur notre Bordereau des Prix Unitaires (BPU). Le paiement se fait par étapes, uniquement sur constat d’avancement validé par photos et vidéos. Aucun paiement intégral n’est demandé avant le démarrage.') !!}
         </div>
       </details>
 
@@ -445,15 +443,13 @@
               02
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Comment suivre mon chantier à 10 000 km ?
+              {{ __('Comment suivre mon chantier à 10 000 km ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Rapports photos et vidéos hebdomadaires envoyés par WhatsApp ou email. Visioconférences de suivi
-          bimensuelles adaptées à votre fuseau horaire (soirées et week-ends disponibles). Un chef de projet dédié,
-          joignable par téléphone et WhatsApp.
+          {!! __('Rapports photos et vidéos hebdomadaires envoyés par WhatsApp ou email. Visioconférences de suivi bimensuelles adaptées à votre fuseau horaire (soirées et week-ends disponibles). Un chef de projet dédié, joignable par téléphone et WhatsApp.') !!}
         </div>
       </details>
 
@@ -465,15 +461,13 @@
               03
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Comment payer en toute sécurité depuis l’étranger ?
+              {{ __('Comment payer en toute sécurité depuis l’étranger ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Virement international vers un compte bancaire togolais vérifié, au nom de l’entreprise AIAE SARL.
-          Échéancier de paiement clair défini au contrat. Aucun paiement en espèces demandé. Reçu émis pour chaque
-          versement.
+          {!! __('Virement international vers un compte bancaire togolais vérifié, au nom de l’entreprise AIAE SARL. Échéancier de paiement clair défini au contrat. Aucun paiement en espèces demandé. Reçu émis pour chaque versement.') !!}
         </div>
       </details>
 
@@ -485,14 +479,13 @@
               04
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Et les démarches administratives au Togo ?
+              {{ __('Et les démarches administratives au Togo ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Nous gérons tout pour vous : permis de construire, raccordements (eau, électricité, télécom), formalités
-          foncières si nécessaire. Vous n’avez rien à gérer sur place.
+          {!! __('Nous gérons tout pour vous : permis de construire, raccordements (eau, électricité, télécom), formalités foncières si nécessaire. Vous n’avez rien à gérer sur place.') !!}
         </div>
       </details>
 
@@ -504,15 +497,13 @@
               05
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Quelle garantie ai-je que le travail sera bien fait ?
+              {{ __('Quelle garantie ai-je que le travail sera bien fait ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat
-          détaillé avec spécifications techniques, signable devant notaire au Togo pour une sécurité juridique
-          maximale. Références vérifiables fournies sur demande lors d’un rendez-vous.
+          {!! __('Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat détaillé avec spécifications techniques, signable devant notaire au Togo pour une sécurité juridique maximale. Références vérifiables fournies sur demande lors d’un rendez-vous.') !!}
         </div>
       </details>
 
@@ -524,15 +515,13 @@
               06
             </span>
             <p class="font-heavy text-3xl text-darkBlue">
-              Je n’ai pas encore de terrain, pouvez-vous m’aider ?
+              {{ __('Je n’ai pas encore de terrain, pouvez-vous m’aider ?') }}
             </p>
           </div>
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          Nous pouvons vous conseiller sur le choix du terrain en fonction de votre projet (zone, type de sol,
-          accessibilité). Nous ne sommes pas agent immobilier, mais notre expertise technique vous évitera les
-          mauvaises surprises.
+          {!! __('Nous pouvons vous conseiller sur le choix du terrain en fonction de votre projet (zone, type de sol, accessibilité). Nous ne sommes pas agent immobilier, mais notre expertise technique vous évitera les mauvaises surprises.') !!}
         </div>
       </details>
 
@@ -544,12 +533,12 @@
     <!-- TITRE -->
     <div class="text-center">
       <h2 class="text-[40px] md:text-[55px] font-heavy uppercase mb-4 tracking-tight">
-        <span class="text-white">VOTRE</span>
-        <span class="text-secondary">PARCOURS</span>
-        <span class="text-white">AVEC AIAE</span>
+        <span class="text-white">{!! __('VOTRE') !!}</span>
+        <span class="text-secondary">{!! __('PARCOURS') !!}</span>
+        <span class="text-white">{!! __('AVEC AIAE') !!}</span>
       </h2>
       <p class="text-white text-[18px] md:text-[26px] font-light opacity-90 italic">
-        De votre <strong class="font-heavy text-white">premier appel</strong> à la <strong class="font-heavy text-white">remise des clés</strong>
+         {!! __('De votre <strong class="font-heavy text-white">premier appel</strong> à la <strong class="font-heavy text-white">remise des clés</strong>') !!}
       </p>
     </div>
   </section>
@@ -571,12 +560,10 @@
             01</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              PREMIER CONTACT <br>
-              VISIOCONFÉRENCE GRATUITE
+              {!! __('PREMIER CONTACT <br> VISIOCONFÉRENCE GRATUITE') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              <strong class="font-heavy">Échange en visioconférence adapté à votre fuseau horaire</strong>. Nous écoutons votre projet, vos
-              besoins, votre budget. <strong class="font-heavy">Gratuit et sans engagement</strong>. Durée : 30 à 45 minutes.
+              {!! __('<strong class="font-heavy">Échange en visioconférence adapté à votre fuseau horaire</strong>. Nous écoutons votre projet, vos besoins, votre budget. <strong class="font-heavy">Gratuit et sans engagement</strong>. Durée : 30 à 45 minutes.') !!}
             </p>
           </div>
         </div>
@@ -588,12 +575,10 @@
             02</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              ÉTUDE ET DEVIS À DISTANCE
+              {!! __('ÉTUDE ET DEVIS À DISTANCE') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              Nous réalisons les études préliminaires : faisabilité technique, esquisse architecturale, devis détaillé
-              basé sur le BPU avec décomposition par postes. <strong class="font-heavy">Tout est transmis par email pour votre
-                validation</strong>. Délai : 2 à 4 semaines.
+              {!! __('Nous réalisons les études préliminaires : faisabilité technique, esquisse architecturale, devis détaillé basé sur le BPU avec décomposition par postes. <strong class="font-heavy">Tout est transmis par email pour votre validation</strong>. Délai : 2 à 4 semaines.') !!}
             </p>
           </div>
         </div>
@@ -605,15 +590,10 @@
             03</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              CONTRAT + ÉCHÉANCIER <br>
-              DE PAIEMENT
+            {!! __('CONTRAT + ÉCHÉANCIER <br> DE PAIEMENT') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              Contrat détaillé envoyé par email. <strong class="font-heavy">Deux options de signature</strong> : signature électronique à
-              distance ou signature devant notaire au Togo pour une sécurité juridique maximale (un mandataire peut
-              signer en votre nom si vous ne pouvez pas vous déplacer). <strong class="font-heavy">Échéancier de paiement clair</strong>,
-              lié à des jalons d'avancement <strong class="font-heavy">vérifiables</strong> (fondations terminées, dalle coulée, toiture
-              posée, etc.). Premier versement pour démarrage du chantier.
+             {!! __('Contrat détaillé envoyé par email. <strong class="font-heavy">Deux options de signature</strong> : signature électronique à distance ou signature devant notaire au Togo pour une sécurité juridique maximale (un mandataire peut signer en votre nom si vous ne pouvez pas vous déplacer). <strong class="font-heavy">Échéancier de paiement clair</strong>, lié à des jalons d\'avancement <strong class="font-heavy">vérifiables</strong> (fondations terminées, dalle coulée, toiture posée, etc.). Premier versement pour démarrage du chantier.') !!}
             </p>
           </div>
         </div>
@@ -625,13 +605,10 @@
             04</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              CONSTRUCTION + SUIVI <br>
-              EN TEMPS RÉEL
+                {!! __('CONSTRUCTION + SUIVI <br> EN TEMPS RÉEL') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              Pendant toute la durée du chantier : <strong class="font-heavy">rapports photos et vidéos hebdomadaires</strong>, visioconférences de suivi
-              bimensuelles, alertes immédiates en cas de décision à prendre. Votre chef de projet est <strong class="font-heavy">joignable par
-              téléphone et WhatsApp</strong>.
+              {!! __('Pendant toute la durée du chantier : <strong class="font-heavy">rapports photos et vidéos hebdomadaires</strong>, visioconférences de suivi bimensuelles, alertes immédiates en cas de décision à prendre. Votre chef de projet est <strong class="font-heavy">joignable par téléphone et WhatsApp</strong>.') !!}
             </p>
           </div>
         </div>
@@ -643,12 +620,10 @@
             05</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              RÉCEPTION ET REMISE DES CLÉS
+              {!! __('RÉCEPTION ET REMISE DES CLÉS') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              <strong class="font-heavy">Procès-verbal de réception</strong> établi lors de votre visite au Togo ou par visioconférence détaillée. Réserves
-              notées et corrigées. <strong class="font-heavy">Remise des clés et de la documentation technique complète</strong> (plans d’exécution, PV,
-              garanties).
+              {!! __('<strong class="font-heavy">Procès-verbal de réception</strong> établi lors de votre visite au Togo ou par visioconférence détaillée. Réserves notées et corrigées. <strong class="font-heavy">Remise des clés et de la documentation technique complète</strong> (plans d’exécution, PV, garanties).') !!}
             </p>
           </div>
         </div>
@@ -660,11 +635,10 @@
             06</div>
           <div class="">
             <h3 class="text-[18px] text-primary md:text-[22px] font-bold uppercase mb-3 leading-tight tracking-wide">
-              SUIVI POST-LIVRAISON
+              {!! __('SUIVI POST-LIVRAISON') !!}
             </h3>
             <p class="text-[#4a4a4a] text-[20px] md:text-[22px] leading-relaxed ">
-              <strong class="font-heavy">Garantie de parfait achèvement pendant 1 an</strong> : tout défaut constaté est réparé gratuitement. <strong class="font-heavy">Garantie
-              décennale sur la structure</strong>. Votre interlocuteur AIAE reste disponible après la livraison.
+              {!! __('<strong class="font-heavy">Garantie de parfait achèvement pendant 1 an</strong> : tout défaut constaté est réparé gratuitement. <strong class="font-heavy">Garantie décennale sur la structure</strong>. Votre interlocuteur AIAE reste disponible après la livraison.') !!}
             </p>
           </div>
         </div>
