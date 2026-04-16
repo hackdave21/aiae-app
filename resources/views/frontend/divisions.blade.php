@@ -326,13 +326,13 @@
           <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
             <p class="mb-4 whitespace-normal md:whitespace-nowrap">Concevoir et réaliser des infrastructures durables, c’est la raison d’être
               d’AIAE.
-              <strong class="text-white font-heavy">Nous prenons en<br class="hidden md:block"> charge l’intégralité de vos projets de
+              <strong class="text-white font-heavy">Nous prenons en<br> charge l’intégralité de vos projets de
                 construction, de la première esquisse à la remise des clés.</strong>
             </p>
             <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
               <strong class="text-white font-heavy">Forte de plus de 18 ans d’expérience en génie civil,</strong> AIAE
               dispose de
-              compétences rares au Togo<br class="hidden md:block">
+              compétences rares au Togo<br>
               pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des
               <strong class="text-white font-heavy">ouvrages d’art complexes.</strong>
             </p>
@@ -343,7 +343,7 @@
         <!-- BADGE -->
         <div
           class="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-primary/60  text-white px-4 md:px-6 py-3 md:py-4 rounded-[12px] text-[14px] sm:text-[16px] md:text-[20px] max-w-[220px] sm:max-w-[260px] md:max-w-[300px] whitespace-normal md:whitespace-nowrap">
-          Fondée en 2025, <strong class="text-white font-heavy">ancrée<br class="hidden md:block">dans 18 ans d’expertise.</strong>
+          Fondée en 2025, <strong class="text-white font-heavy">ancrée<br>dans 18 ans d’expertise.</strong>
         </div>
 
       </div>
@@ -373,7 +373,7 @@
       <!-- TEXTE -->
       <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
         <strong class="font-heavy text-black">CATÉGORIES :</strong>
-        RÉSIDENTIEL, TERTIAIRE, INDUSTRIEL,<br class="hidden md:block">
+        RÉSIDENTIEL, TERTIAIRE, INDUSTRIEL,<br>
         AGRICOLE, RÉHABILITATION ET EXTENSION
       </p>
 
@@ -397,8 +397,8 @@
               RÉSIDENTIEL
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Villas individuelles, immeubles<br class="hidden md:block">d’habitation, duplex, résidences<br class="hidden md:block">gardées. <strong
-                class="text-[#333] font-heavy">Du standing Standard au<br class="hidden md:block">Prestige, nous adaptons chaque projet<br class="hidden md:block">à
+              Villas individuelles, immeubles<br>d’habitation, duplex, résidences<br>gardées. <strong
+                class="text-[#333] font-heavy">Du standing Standard au<br>Prestige, nous adaptons chaque projet<br>à
                 votre budget
                 et vos exigences.</strong>
             </p>
@@ -431,8 +431,8 @@
               TERTIAIRE
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Bureaux, commerces, hôtels, cliniques<br class="hidden md:block">et établissements recevant du public.<br class="hidden md:block"><strong
-                class="text-[#333] font-heavy">Conception fonctionnelle optimisée<br class="hidden md:block">pour votre activité.</strong>
+              Bureaux, commerces, hôtels, cliniques<br>et établissements recevant du public.<br><strong
+                class="text-[#333] font-heavy">Conception fonctionnelle optimisée<br>pour votre activité.</strong>
             </p>
           </div>
         </div>
@@ -460,9 +460,9 @@
               INDUSTRIEL
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Entrepôts, usines, ateliers de<br class="hidden md:block">production. <strong
-                class="text-[#333] font-heavy">Structures<br class="hidden md:block">optimisées pour la
-                logistique<br class="hidden md:block">et la production.</strong>
+              Entrepôts, usines, ateliers de<br>production. <strong
+                class="text-[#333] font-heavy">Structures<br>optimisées pour la
+                logistique<br>et la production.</strong>
             </p>
           </div>
         </div>
@@ -489,10 +489,10 @@
               AGRICOLE
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Infrastructures agricoles et d'élevage<br class="hidden md:block">adaptées aux conditions tropicales. AIAE<br class="hidden md:block">conçoit des
-              bâtiments fonctionnels,<br class="hidden md:block">durables et conformes aux normes<br class="hidden md:block">sanitaires en vigueur. <strong
-                class="text-[#333] font-heavy">Solutions intégrées<br class="hidden md:block">avec notre Division Énergie pour
-                des<br class="hidden md:block">exploitations
+              Infrastructures agricoles et d'élevage<br>adaptées aux conditions tropicales. AIAE<br>conçoit des
+              bâtiments fonctionnels,<br>durables et conformes aux normes<br>sanitaires en vigueur. <strong
+                class="text-[#333] font-heavy">Solutions intégrées<br>avec notre Division Énergie pour
+                des<br>exploitations
                 autonomes.</strong>
             </p>
           </div>
@@ -523,8 +523,8 @@
               abattoirs aux normes</li>
           </ul>
           <p class="text-[#333] font-light italic text-[16px] sm:text-[18px] md:text-[24px] leading-relaxed md:ml-6 mt-6 md:mt-4 max-w-[800px] whitespace-normal text-left">
-            Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br class="hidden md:block">éclairage, froid) pour
-            des exploitations autonomes en énergie, particulièrement en zones<br class="hidden md:block">rurales non raccordées.
+            Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br>éclairage, froid) pour
+            des exploitations autonomes en énergie, particulièrement en zones<br>rurales non raccordées.
           </p>
         </div>
       </div>
@@ -542,8 +542,8 @@
               RÉHABILITATION ET EXTENSION
             </h3>
             <p class="text-[#4a4a4a] text-[18px] sm:text-[20px] md:text-[24px] leading-relaxed">
-              Vous disposez d’un bâtiment existant<br class="hidden md:block">à remettre en état ou à agrandir ?<br class="hidden md:block"><strong
-                class="text-[#333] font-heavy">Nous réalisons des diagnostics structurels<br class="hidden md:block">et proposons des solutions
+              Vous disposez d’un bâtiment existant<br>à remettre en état ou à agrandir ?<br><strong
+                class="text-[#333] font-heavy">Nous réalisons des diagnostics structurels<br>et proposons des solutions
                 adaptées.</strong>
             </p>
           </div>
@@ -572,14 +572,14 @@
       <div class="flex items-center justify-start md:justify-center gap-4 md:gap-8 mb-6 md:mb-10">
         <span class="text-[80px] md:text-[140px] font-heavy leading-none text-secondary shrink-0">04</span>
         <h2 class="text-white font-heavy text-[32px] sm:text-[45px] md:text-[65px] leading-[1.05] text-left">
-          Niveaux De Qualité<br class="hidden md:block">Pour Votre Projet
+          Niveaux De Qualité<br>Pour Votre Projet
         </h2>
       </div>
 
       <!-- PARAGRAPHE -->
       <p class="text-white text-[16px] sm:text-[20px] md:text-[28px] leading-relaxed text-left md:text-center">
-        <span class="font-light">AIAE propose quatre niveaux de standing pour la construction résidentielle.</span><br class="hidden md:block">
-        Chaque niveau définit des caractéristiques techniques minimales garanties<br class="hidden md:block">
+        <span class="font-light">AIAE propose quatre niveaux de standing pour la construction résidentielle.</span><br>
+        Chaque niveau définit des caractéristiques techniques minimales garanties<br>
         : matériaux, dimensions, équipements, finitions.
       </p>
 
@@ -791,8 +791,8 @@
       <h2 class="text-[35px] md:text-[50px] font-heavy mb-6">Des Compétences Rares Au Togo</h2>
       <p class="text-[20px] md:text-[22px] leading-relaxed max-w-[850px] mx-auto">
         Au-delà du bâtiment, <strong class="text-white font-heavy">AIAE dispose d'une expertise de haut niveau en
-          ouvrages d'art<br class="hidden md:inline"> et
-          structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br class="hidden md:inline"> d'expérience en
+          ouvrages d'art<br> et
+          structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br> d'expérience en
         calcul des structures et béton précontraint.
       </p>
     </div>
@@ -810,8 +810,8 @@
             01</div>
           <div>
             <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">PONTS
-              ET<br class="hidden md:block"> PASSERELLES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">en béton armé ou<br class="hidden md:block"> précontraint</p>
+              ET<br> PASSERELLES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">en béton armé ou<br> précontraint</p>
           </div>
         </div>
 
@@ -822,8 +822,8 @@
             02</div>
           <div>
             <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">MURS
-              DE<br class="hidden md:block"> SOUTÈNEMENT</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">parois moulées,<br class="hidden md:block"> gabions, terre armée</p>
+              DE<br> SOUTÈNEMENT</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">parois moulées,<br> gabions, terre armée</p>
           </div>
         </div>
 
@@ -834,8 +834,8 @@
             03</div>
           <div>
             <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              BÉTON<br class="hidden md:block"> PRÉCONTRAINT</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">portiques grandes portées,<br class="hidden md:block"> structures spéciales</p>
+              BÉTON<br> PRÉCONTRAINT</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">portiques grandes portées,<br> structures spéciales</p>
           </div>
         </div>
 
@@ -846,8 +846,8 @@
             04</div>
           <div>
             <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              OUVRAGES<br class="hidden md:block"> HYDRAULIQUES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">châteaux d'eau,<br class="hidden md:block"> réservoirs, stations</p>
+              OUVRAGES<br> HYDRAULIQUES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">châteaux d'eau,<br> réservoirs, stations</p>
           </div>
         </div>
 
@@ -858,16 +858,16 @@
             05</div>
           <div>
             <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              STRUCTURES<br class="hidden md:block"> SPÉCIALES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">tribunes, halls<br class="hidden md:block"> industriels, coupoles</p>
+              STRUCTURES<br> SPÉCIALES</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">tribunes, halls<br> industriels, coupoles</p>
           </div>
         </div>
 
         <!-- ITEM 6 (Text Box) -->
         <div class="flex items-center pt-2">
           <div class="text-primary text-[18px] xl:text-[25px] italic leading-snug">
-            Cette expertise permet également de<br class="hidden md:block"> répondre aux <strong class="font-heavy text-primary">appels
-              d'offres publics<br class="hidden md:block"> pour les infrastructures de transport<br class="hidden md:block"> et les équipements collectifs.</strong>
+            Cette expertise permet également de<br> répondre aux <strong class="font-heavy text-primary">appels
+              d'offres publics<br> pour les infrastructures de transport<br> et les équipements collectifs.</strong>
           </div>
         </div>
 
@@ -881,7 +881,7 @@
       <h2 class="text-[50px] md:text-[60px] font-heavy mb-6">Votre Projet En <span
           class="text-secondary text-[50px] md:text-[60px]">06</span> Étapes</h2>
       <p class="text-[22px] md:text-[27px] leading-relaxed max-w-[850px] mx-auto font-light">
-        De la première prise de contact à la remise des clés, <strong class="text-white">chaque étape est<br class="hidden md:inline"> définie,
+        De la première prise de contact à la remise des clés, <strong class="text-white">chaque étape est<br> définie,
           planifiée et suivie</strong>. Vous savez toujours où en est votre projet.
       </p>
     </div>
@@ -1007,7 +1007,7 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              DEVIS GRATUIT<br class="hidden md:block"> DÉTAILLÉ</h3>
+              DEVIS GRATUIT<br> DÉTAILLÉ</h3>
             <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Basé sur notre Bordereau des Prix Unitaires (BPU).
               <strong class="text-gray-800 font-heavy">Chaque ligne de votre devis est justifiée.</strong>
             </p>
@@ -1021,7 +1021,7 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              PLANNING<br class="hidden md:block"> CONTRACTUEL</h3>
+              PLANNING<br> CONTRACTUEL</h3>
             <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Les délais sont inscrits au contrat. <strong
                 class="text-gray-800 font-heavy">Pénalités en cas de retard de notre fait.</strong></p>
           </div>
@@ -1034,7 +1034,7 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              GARANTIE<br class="hidden md:block"> DÉCENNALE</h3>
+              GARANTIE<br> DÉCENNALE</h3>
             <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Solidité de l'ouvrage <strong
                 class="text-gray-800 font-heavy">garantie 10 ans</strong>, conformément à la loi.</p>
           </div>
@@ -1063,7 +1063,7 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              TRANSPARENCE<br class="hidden md:block"> TOTALE</h3>
+              TRANSPARENCE<br> TOTALE</h3>
             <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">Aucun coût
                 caché.</strong> Facturation par étapes selon l'avancement.</p>
           </div>
@@ -1097,7 +1097,7 @@
           <span>Estimez Le Coût De Votre Projet En 2 Minutes</span>
         </h3>
         <p class="text-white border-none md:mx-auto text-[18px] md:text-[20px] font-medium max-w-[800px] mb-8">
-          Notre simulateur en ligne vous donne une estimation instantanée selon votre type de<br class="hidden md:inline"> projet, votre standing
+          Notre simulateur en ligne vous donne une estimation instantanée selon votre type de<br> projet, votre standing
           et votre localisation.
         </p>
         <div class="flex md:justify-center justify-start mt-8">
@@ -1118,7 +1118,7 @@
       </h2>
 
       <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
-        Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block">
+        Vous avez un projet ? Parlons-en. Premier échange<br>
         gratuit et sans engagement.
       </p>
       <div class="flex flex-col md:flex-row justify-center">

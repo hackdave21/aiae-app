@@ -269,15 +269,15 @@
 
           <!-- TEXTE -->
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br class="hidden xl:block"> souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br class="hidden xl:block"> architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br class="hidden xl:block"> cohérence ni de respect des engagements.</strong>') !!}
+            {!! __('AIAE est née d’une observation simple : <strong >en Afrique de l’Ouest, le client qui<br> souhaite construire doit coordonner lui-même une multitude d’intervenants</strong><br> architecte, bureau d’études, maçon, électricien, plombier <strong>sans garantie de<br> cohérence ni de respect des engagements.</strong>') !!}
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br class="hidden xl:block"> d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br class="hidden xl:block"> entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br class="hidden xl:block"> <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br class="hidden xl:block"> réalisation.</strong>') !!}
+            {!! __('Fort de <strong>plus de 18 années d’expérience en génie civil</strong>, d’un parcours<br> d’<strong>enseignant-chercheur</strong> et d’une solide <strong>formation en administration des<br> entreprises, le fondateur d’AIAE a décidé de proposer</strong> un modèle différent :<br> <strong>une entreprise qui maîtrise l’intégralité de la chaîne, de la conception à la<br> réalisation.</strong>') !!}
           </p>
 
           <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 font-heavy">
-            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br class="hidden xl:block"> Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br class="hidden xl:block"> sécurité et de préfabrication.</strong>') !!}
+            {!! __('<strong>Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en<br> Afrique de l’Ouest pour les <strong>solutions intégrées de construction, d’énergie, de<br> sécurité et de préfabrication.</strong>') !!}
           </p>
         </div>
 
@@ -657,7 +657,7 @@
                 {!! __('Direction Générale<br><span class="hidden md:inline">&nbsp;</span>') !!}
               </div>
               <div class="bg-white p-4 lg:p-5 text-[16px] xl:text-[18px] text-gray-700 flex-1">
-                {!! __('En charge de la gestion opérationnelle quotidienne, de la<br class="hidden md:block"> coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en<br class="hidden md:block"> gestion de projets BTP et coordination multi-lots.</strong>') !!}
+                {!! __('En charge de la gestion opérationnelle quotidienne, de la<br> coordination des projets et des relations clients. <strong class="text-gray-700 font-heavy">Expérience en<br> gestion de projets BTP et coordination multi-lots.</strong>') !!}
               </div>
             </div>
 
@@ -673,7 +673,7 @@
 
             <!-- TEXTE (Bottom Right) -->
             <div class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              {!! __('Notre équipe s’appuie<br class="hidden md:block"> également sur <strong class="text-white font-heavy">un réseau de<br class="hidden md:block"> partenaires techniques qualifiés</strong><br class="hidden md:block"> (architectes, géotechniciens,<br class="hidden md:block"> topographes, bureaux de<br class="hidden md:block"> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br class="hidden md:block"> besoins de chaque projet.</strong>') !!}
+              {!! __('Notre équipe s’appuie<br> également sur <strong class="text-white font-heavy">un réseau de<br> partenaires techniques qualifiés</strong><br> (architectes, géotechniciens,<br> topographes, bureaux de<br> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br> besoins de chaque projet.</strong>') !!}
             </div>
 
           </div>
@@ -701,7 +701,7 @@
           </h2>
 
           <p class="text-[18px] md:text-xl leading-relaxed text-white font-light">
-            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br class="hidden md:block"> ne sont pas négociables, quelles que soient<br class="hidden md:block"> les circonstances.') !!}
+            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
           </p>
 
         </div>
@@ -879,7 +879,7 @@
         </h2>
 
         <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
-          {!! __('Vous avez un projet ? Parlons-en. Premier échange<br class="hidden md:block"> gratuit et sans engagement.') !!}
+          {!! __('Vous avez un projet ? Parlons-en. Premier échange<br> gratuit et sans engagement.') !!}
         </p>
         <div class="flex flex-col md:flex-row justify-center">
           <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">

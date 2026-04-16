@@ -343,9 +343,9 @@
               <strong class="text-white font-heavy">Et c'est serein avec AIAE.</strong>
             </p>
             <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
-              Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br class="hidden md:block">
-              Vous rêvez de <strong class="text-white font-heavy">construire votre maison, votre résidence secondaire</strong><br class="hidden md:block">
-              ou un <strong class="text-white font-heavy">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br class="hidden md:block">
+              Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br>
+              Vous rêvez de <strong class="text-white font-heavy">construire votre maison, votre résidence secondaire</strong><br>
+              ou un <strong class="text-white font-heavy">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br>
               chaque étape, <strong class="text-white font-heavy">de la première visioconférence à la remise de vos clés.</strong>
             </p>
           </div>
@@ -817,7 +817,7 @@
         Pourquoi Nous Faire Confiance
       </h2>
       <p class="text-white text-[18px] md:text-[26px] font-light max-w-4xl mx-auto leading-relaxed">
-        Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br class="hidden md:block">
+        Vous ne nous connaissez pas encore. C’est normal. <strong class="text-white">Voici des éléments <br>
         concrets et vérifiables qui fondent notre engagement :</strong>
       </p>
     </div>
@@ -957,11 +957,11 @@
     <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
 
       <h2 class="text-black text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
-        Prêt À Lancer Votre Projet <br class="hidden md:block">
+        Prêt À Lancer Votre Projet <br>
         Depuis L’étranger ?
       </h2>
       <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px] max-w-[700px] md:mx-auto">
-        Prenez 30 minutes pour un premier échange gratuit et sans<br class="hidden md:block">
+        Prenez 30 minutes pour un premier échange gratuit et sans<br>
         engagement. Nous nous adaptons à votre fuseau horaire.
       </p>
 

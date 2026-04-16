@@ -1060,10 +1060,10 @@
     <div class="max-w-[1100px] mx-auto text-left md:text-center px-6">
 
       <h2 class="text-[#1d1d1b] text-4xl md:text-[55px] font-heavy mb-6 leading-tight">
-        Vous ne trouvez pas la réponse à<br class="hidden md:block"> votre question ?
+        Vous ne trouvez pas la réponse à<br> votre question ?
       </h2>
       <p class="text-gray-600 leading-relaxed mb-10 text-[16px] md:text-[27px] max-w-[800px] md:mx-auto">
-        Notre équipe est à votre écoute. Contactez-nous<br class="hidden md:block"> directement ou demandez un devis
+        Notre équipe est à votre écoute. Contactez-nous<br> directement ou demandez un devis
         gratuit.
       </p>
 

@@ -140,9 +140,9 @@
 
         <!-- TEXTE -->
         <p class="text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed mb-4 sm:mb-8 max-w-xl">
-          <span class="whitespace-normal sm:whitespace-nowrap font-medium">{{ __('Construction, énergie solaire, sécurité haute performance et préfabrication industrielle :') }}</span><br class="hidden sm:block" />
+          <span class="whitespace-normal sm:whitespace-nowrap font-medium">{{ __('Construction, énergie solaire, sécurité haute performance et préfabrication industrielle :') }}</span><br>
           {!! __('AIAE réunit toutes les compétences pour <span class="font-medium">mener votre projet de A à Z.</span>') !!}
-          <br class="hidden sm:block" /><br class="hidden sm:block" />
+          <br><br>
           <span class="font-medium">
             {{ __('Un interlocuteur unique, des engagements tenus.') }}
           </span>
@@ -576,7 +576,7 @@
           </h3>
 
           <p class="text-gray-800 leading-relaxed text-[16px] md:text-[22px] font-book">
-            {!! __('<span class="font-heavy text-gray-900">Notre cœur de métier.</span> Nous concevons et<br class="hidden md:block"> réalisons des <span class="font-heavy text-gray-900">infrastructures durables</span> : villas<br class="hidden md:block"> résidentielles, bâtiments commerciaux, ouvrages<br class="hidden md:block"> d’art et infrastructures techniques. <span class="font-heavy text-primary">Conception<br class="hidden md:block"> architecturale et structurelle.</span> <span class="font-heavy text-gray-900">Construction tous<br class="hidden md:block"> standings (Standard à Prestige). Ouvrages<br class="hidden md:block"> d’art</span> <span class="font-heavy text-primary">(ponts, murs de soutènement, etc.)</span>.<br class="hidden md:block"> <span class="font-heavy text-primary">Réhabilitation et extension</span> <span class="font-heavy text-gray-900">de bâtiments<br class="hidden md:block"> existants.</span>') !!}
+            {!! __('<span class="font-heavy text-gray-900">Notre cœur de métier.</span> Nous concevons et<br> réalisons des <span class="font-heavy text-gray-900">infrastructures durables</span> : villas<br> résidentielles, bâtiments commerciaux, ouvrages<br> d’art et infrastructures techniques. <span class="font-heavy text-primary">Conception<br> architecturale et structurelle.</span> <span class="font-heavy text-gray-900">Construction tous<br> standings (Standard à Prestige). Ouvrages<br> d’art</span> <span class="font-heavy text-primary">(ponts, murs de soutènement, etc.)</span>.<br> <span class="font-heavy text-primary">Réhabilitation et extension</span> <span class="font-heavy text-gray-900">de bâtiments<br> existants.</span>') !!}
           </p>
 
           <p class="text-primary mt-5 text-[18px] md:text-[22px] font-book">
@@ -600,7 +600,7 @@
           </h3>
 
           <p class="text-gray-800 leading-relaxed text-[16px] md:text-[22px] font-book">
-            {!! __('Solutions <span class="font-heavy text-gray-900">d’autonomie énergétique</span> pour vos<br class="hidden md:block"> installations. Nous dimensionnons et installons des<br class="hidden md:block"> <span class="font-heavy text-gray-900">systèmes solaires adaptés aux besoins des entreprises<br class="hidden md:block"> et exploitations agricoles</span>. <span class="font-heavy text-secondary">Solaire C&I</span> (commercial et<br class="hidden md:block"> industriel) pour entreprises et exploitations. <span class="font-heavy text-secondary">Systèmes<br class="hidden md:block"> hybrides</span> avec stockage par batteries. Solutions pour<br class="hidden md:block"> <span class="font-heavy text-secondary">sites isolés</span> ou <span class="font-heavy text-secondary">sans raccordement</span>. <span class="font-heavy text-secondary">Maintenance et<br class="hidden md:block"> optimisation</span> des installations') !!}
+            {!! __('Solutions <span class="font-heavy text-gray-900">d’autonomie énergétique</span> pour vos<br> installations. Nous dimensionnons et installons des<br> <span class="font-heavy text-gray-900">systèmes solaires adaptés aux besoins des entreprises<br> et exploitations agricoles</span>. <span class="font-heavy text-secondary">Solaire C&I</span> (commercial et<br> industriel) pour entreprises et exploitations. <span class="font-heavy text-secondary">Systèmes<br> hybrides</span> avec stockage par batteries. Solutions pour<br> <span class="font-heavy text-secondary">sites isolés</span> ou <span class="font-heavy text-secondary">sans raccordement</span>. <span class="font-heavy text-secondary">Maintenance et<br> optimisation</span> des installations') !!}
           </p>
 
           <p class="mt-5 text-gray-600 text-[18px] md:text-2xl font-book">
@@ -627,7 +627,7 @@
           </h3>
 
           <p class="text-gray-800 leading-relaxed text-[16px] md:text-[22px] font-book">
-            {!! __('<span class="font-heavy text-gray-900">Protection haute performance</span> pour vos biens et vos<br class="hidden md:block"> personnes. Nous concevons et installons <span class="font-heavy text-gray-900">des solutions<br class="hidden md:block"> de sécurité physique</span> répondant aux <span class="font-heavy text-gray-900">normes<br class="hidden md:block"> européennes (EN 1143-1)</span>. <span class="font-heavy text-primary">Chambres fortes</span> et <span class="font-heavy text-primary">coffres<br class="hidden md:block"> certifiés</span> (banques, entreprises). <span class="font-heavy text-primary">Safe rooms</span>, <span class="font-heavy text-primary">salles de<br class="hidden md:block"> repli sécurisées</span> pour particuliers ou dirigeants.<br class="hidden md:block"> <span class="font-heavy text-primary">Armureries</span> et <span class="font-heavy text-primary">locaux de stockage sensible.</span> Systèmes<br class="hidden md:block"> de <span class="font-heavy text-primary">contrôle d’accès</span>') !!}
+            {!! __('<span class="font-heavy text-gray-900">Protection haute performance</span> pour vos biens et vos<br> personnes. Nous concevons et installons <span class="font-heavy text-gray-900">des solutions<br> de sécurité physique</span> répondant aux <span class="font-heavy text-gray-900">normes<br> européennes (EN 1143-1)</span>. <span class="font-heavy text-primary">Chambres fortes</span> et <span class="font-heavy text-primary">coffres<br> certifiés</span> (banques, entreprises). <span class="font-heavy text-primary">Safe rooms</span>, <span class="font-heavy text-primary">salles de<br> repli sécurisées</span> pour particuliers ou dirigeants.<br> <span class="font-heavy text-primary">Armureries</span> et <span class="font-heavy text-primary">locaux de stockage sensible.</span> Systèmes<br> de <span class="font-heavy text-primary">contrôle d’accès</span>') !!}
           </p>
 
           <p class="mt-5 text-primary text-[18px] md:text-2xl font-book">
@@ -650,7 +650,7 @@
           </h3>
 
           <p class="text-gray-800 leading-relaxed text-[16px] md:text-[22px] font-book">
-            {!! __('Production industrielle d’éléments de construction pour<br class="hidden md:block"> <span class="font-heavy text-gray-900">des chantiers plus rapides, plus économiques<br class="hidden md:block"> (-15 à -25% sur les coûts)</span> et de <span class="font-heavy text-gray-900">meilleure qualité.</span> <span class="font-heavy text-secondary">BTC</span><br class="hidden md:block"> (briques de terre compressée), <span class="font-heavy text-secondary">matériau écologique</span><br class="hidden md:block"> local. Éléments en <span class="font-heavy text-secondary">béton précontraint</span> (portées longues,<br class="hidden md:block"> résistance accrue). <span class="font-heavy text-secondary">Nervures</span> et <span class="font-heavy text-secondary">poutrelles</span> pour<br class="hidden md:block"> planchers. Éléments pour <span class="font-heavy text-secondary">ponts</span> et <span class="font-heavy text-secondary">ouvrages d’art</span>') !!}
+            {!! __('Production industrielle d’éléments de construction pour<br> <span class="font-heavy text-gray-900">des chantiers plus rapides, plus économiques<br> (-15 à -25% sur les coûts)</span> et de <span class="font-heavy text-gray-900">meilleure qualité.</span> <span class="font-heavy text-secondary">BTC</span><br> (briques de terre compressée), <span class="font-heavy text-secondary">matériau écologique</span><br> local. Éléments en <span class="font-heavy text-secondary">béton précontraint</span> (portées longues,<br> résistance accrue). <span class="font-heavy text-secondary">Nervures</span> et <span class="font-heavy text-secondary">poutrelles</span> pour<br> planchers. Éléments pour <span class="font-heavy text-secondary">ponts</span> et <span class="font-heavy text-secondary">ouvrages d’art</span>') !!}
           </p>
 
           <p class="mt-5 text-secondary text-[18px] md:text-2xl font-book">
@@ -772,7 +772,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Fini la coordination entre architecte, bureau<br class="hidden xl:block"> d’études, constructeur et installateurs. <span class="font-heavy">AIAE<br class="hidden xl:block"> prend en charge l’intégralité de votre projet</span>,<br class="hidden xl:block"> de la première esquisse à la remise des clés.') !!}
+              {!! __('Fini la coordination entre architecte, bureau<br> d’études, constructeur et installateurs. <span class="font-heavy">AIAE<br> prend en charge l’intégralité de votre projet</span>,<br> de la première esquisse à la remise des clés.') !!}
             </p>
           </div>
 
@@ -793,7 +793,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Forte de plus de 18 ans d’expérience en génie<br class="hidden xl:block"> civil</span>, AIAE dispose de <span class="font-heavy">compétences rares pour<br class="hidden xl:block"> traiter des projets complexes</span> : ouvrages d’art,<br class="hidden xl:block"> béton précontraint, structures spéciales.') !!}
+              {!! __('<span class="font-heavy">Forte de plus de 18 ans d’expérience en génie<br> civil</span>, AIAE dispose de <span class="font-heavy">compétences rares pour<br> traiter des projets complexes</span> : ouvrages d’art,<br> béton précontraint, structures spéciales.') !!}
             </p>
           </div>
 
@@ -814,7 +814,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Dans un secteur où la parole ne vaut souvent<br class="hidden xl:block"> rien, <span class="font-heavy">nous faisons de la fiabilité notre marque<br class="hidden xl:block"> de fabrique.</span> Délais respectés, budgets<br class="hidden xl:block"> maîtrisés, qualité garantie.') !!}
+              {!! __('Dans un secteur où la parole ne vaut souvent<br> rien, <span class="font-heavy">nous faisons de la fiabilité notre marque<br> de fabrique.</span> Délais respectés, budgets<br> maîtrisés, qualité garantie.') !!}
             </p>
           </div>
 
@@ -835,7 +835,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Devis détaillés basés sur notre Bordereau<br class="hidden xl:block"> des Prix Unitaires (BPU)</span>, suivi de chantier<br class="hidden xl:block"> accessible, facturation claire. <span class="font-heavy">Vous savez<br class="hidden xl:block"> exactement ce que vous payez et pourquoi.</span>') !!}
+              {!! __('<span class="font-heavy">Devis détaillés basés sur notre Bordereau<br> des Prix Unitaires (BPU)</span>, suivi de chantier<br> accessible, facturation claire. <span class="font-heavy">Vous savez<br> exactement ce que vous payez et pourquoi.</span>') !!}
             </p>
           </div>
 
@@ -856,7 +856,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Construction + Énergie + Sécurité : <span class="font-heavy">nous<br class="hidden xl:block"> pouvons livrer un bâtiment autonome en<br class="hidden xl:block"> énergie et sécurisé dès la conception.</span> Une<br class="hidden xl:block"> combinaison rare sur le marché togolais.') !!}
+              {!! __('Construction + Énergie + Sécurité : <span class="font-heavy">nous<br> pouvons livrer un bâtiment autonome en<br> énergie et sécurisé dès la conception.</span> Une<br> combinaison rare sur le marché togolais.') !!}
             </p>
           </div>
 
@@ -980,7 +980,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Vous recevez un <span class="font-heavy">devis ligne par<br class="hidden xl:block"> ligne, basé sur notre BPU</span>. Pas de<br class="hidden xl:block"> mauvaises surprises.') !!}
+              {!! __('Vous recevez un <span class="font-heavy">devis ligne par<br> ligne, basé sur notre BPU</span>. Pas de<br> mauvaises surprises.') !!}
             </p>
           </div>
 
@@ -1001,7 +1001,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Les délais sont inscrits au contrat. <span class="font-heavy">En<br class="hidden xl:block"> cas de retard de notre fait, des<br class="hidden xl:block"> pénalités s’appliquent.</span>') !!}
+              {!! __('Les délais sont inscrits au contrat. <span class="font-heavy">En<br> cas de retard de notre fait, des<br> pénalités s’appliquent.</span>') !!}
             </p>
           </div>
 
@@ -1022,7 +1022,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Conformément à la loi, <span class="font-heavy">nous<br class="hidden xl:block"> garantissons la solidité de<br class="hidden xl:block"> l’ouvrage pendant 10 ans.</span>') !!}
+              {!! __('Conformément à la loi, <span class="font-heavy">nous<br> garantissons la solidité de<br> l’ouvrage pendant 10 ans.</span>') !!}
             </p>
           </div>
 
@@ -1043,7 +1043,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Notre responsabilité</span> civile<br class="hidden xl:block"> professionnelle <span class="font-heavy">couvre les<br class="hidden xl:block"> dommages éventuels sur chantier.</span>') !!}
+              {!! __('<span class="font-heavy">Notre responsabilité</span> civile<br> professionnelle <span class="font-heavy">couvre les<br> dommages éventuels sur chantier.</span>') !!}
             </p>
           </div>
 
@@ -1064,7 +1064,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Vous payez au fur et à mesure de<br class="hidden xl:block"> l’avancement</span>, selon un échéancier<br class="hidden xl:block"> défini ensemble.') !!}
+              {!! __('<span class="font-heavy">Vous payez au fur et à mesure de<br> l’avancement</span>, selon un échéancier<br> défini ensemble.') !!}
             </p>
           </div>
 
@@ -1085,7 +1085,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Tous nos projets sont traités avec<br class="hidden xl:block"> discrétion. <span class="font-heavy">Secret professionnel<br class="hidden xl:block"> contractualisé.</span>') !!}
+              {!! __('Tous nos projets sont traités avec<br> discrétion. <span class="font-heavy">Secret professionnel<br> contractualisé.</span>') !!}
             </p>
           </div>
 
@@ -1106,7 +1106,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Nous pouvons vous orienter dans<br class="hidden xl:block"> vos démarches de crédit</span> auprès des<br class="hidden xl:block"> banques partenaires.') !!}
+              {!! __('<span class="font-heavy">Nous pouvons vous orienter dans<br> vos démarches de crédit</span> auprès des<br> banques partenaires.') !!}
             </p>
           </div>
 
@@ -1155,7 +1155,7 @@
           </h2>
 
           <p class="text-[18px] md:text-xl leading-relaxed opacity-95 font-light">
-            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br class="hidden md:block"> ne sont pas négociables, quelles que soient<br class="hidden md:block"> les circonstances.') !!}
+            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
           </p>
 
         </div>
@@ -1225,7 +1225,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Nous ne construisons pas pour<br class="hidden xl:block"> aujourd’hui, <span class="font-heavy">nous construisons<br class="hidden xl:block"> pour des générations.</span>') !!}
+              {!! __('Nous ne construisons pas pour<br> aujourd’hui, <span class="font-heavy">nous construisons<br> pour des générations.</span>') !!}
             </p>
           </div>
 
@@ -1246,7 +1246,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Un engagement pris est un<br class="hidden xl:block"> engagement tenu.</span> Sans<br class="hidden xl:block"> exception.') !!}
+              {!! __('<span class="font-heavy">Un engagement pris est un<br> engagement tenu.</span> Sans<br> exception.') !!}
             </p>
           </div>
 
@@ -1267,7 +1267,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Un <span class="font-heavy">client bien informé</span> est<br class="hidden xl:block"> un client satisfait.') !!}
+              {!! __('Un <span class="font-heavy">client bien informé</span> est<br> un client satisfait.') !!}
             </p>
           </div>
 
@@ -1288,7 +1288,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('La qualité dépend du <span class="font-heavy">respect<br class="hidden xl:block"> accordé à ceux qui réalisent.</span>') !!}
+              {!! __('La qualité dépend du <span class="font-heavy">respect<br> accordé à ceux qui réalisent.</span>') !!}
             </p>
           </div>
 
@@ -1309,7 +1309,7 @@
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('<span class="font-heavy">Un projet en retard ou hors<br class="hidden xl:block"> budget est un échec</span>, même<br class="hidden xl:block"> s’il est techniquement parfait.') !!}
+              {!! __('<span class="font-heavy">Un projet en retard ou hors<br> budget est un échec</span>, même<br> s’il est techniquement parfait.') !!}
             </p>
           </div>
 
@@ -1353,7 +1353,7 @@
 
         <!-- TITRE -->
         <h2 class="text-[35px] text-white sm:text-5xl md:text-6xl lg:text-[60px] font-heavy leading-tight mb-4">
-          {{ __('Vous vivez à l\'étranger ?') }}
+          {{ __('Vous vivez à l’étranger ?') }}
         </h2>
 
         <p class="text-white/90 mb-8 lg:mb-12 text-[18px] lg:text-[24px]">
@@ -1374,7 +1374,7 @@
               </h3>
 
               <p class="text-gray-700 text-[16px] xl:text-[20px]">
-                {!! __('Un chef de projet dédié qui parle votre<br class="hidden xl:block"> langue et comprend vos contraintes de<br class="hidden xl:block"> décalage horaire.') !!}
+                {!! __('Un chef de projet dédié qui parle votre<br> langue et comprend vos contraintes de<br> décalage horaire.') !!}
               </p>
             </div>
           </div>
@@ -1390,7 +1390,7 @@
               </h3>
 
               <p class="text-gray-700 text-[16px] xl:text-[20px]">
-                {!! __('Rapports photos et vidéos réguliers,<br class="hidden xl:block"> visioconférences de suivi, accès à<br class="hidden xl:block"> l’avancement du chantier.') !!}
+                {!! __('Rapports photos et vidéos réguliers,<br> visioconférences de suivi, accès à<br> l’avancement du chantier.') !!}
               </p>
             </div>
           </div>
@@ -1406,7 +1406,7 @@
               </h3>
 
               <p class="text-gray-700 text-[16px] xl:text-[20px]">
-                {!! __('Virements internationaux vers un<br class="hidden xl:block"> compte bancaire togolais vérifié.<br class="hidden xl:block"> Échéancier clair.') !!}
+                {!! __('Virements internationaux vers un<br> compte bancaire togolais vérifié.<br> Échéancier clair.') !!}
               </p>
             </div>
           </div>
@@ -1422,7 +1422,7 @@
               </h3>
 
               <p class="text-gray-700 text-[16px] xl:text-[20px]">
-                {!! __('Nous gérons les démarches<br class="hidden xl:block"> administratives locales (permis,<br class="hidden xl:block"> raccordements) pour vous.') !!}
+                {!! __('Nous gérons les démarches<br> administratives locales (permis,<br> raccordements) pour vous.') !!}
               </p>
             </div>
           </div>
@@ -1448,7 +1448,7 @@
           <div class="flex flex-col justify-center text-white px-6">
 
             <p class="text-[20px] lg:text-[30px] leading-relaxed mb-6 font-book">
-              {!! __('<strong class="font-heavy">Appelez-nous</strong> ou <strong class="font-heavy">prenez<br class="hidden lg:block"> rendez-vous en visio</strong> nous<br class="hidden lg:block"> nous adaptons à votre<br class="hidden lg:block"> fuseau horaire.') !!}
+              {!! __('<strong class="font-heavy">Appelez-nous</strong> ou <strong class="font-heavy">prenez<br> rendez-vous en visio</strong> nous<br> nous adaptons à votre<br> fuseau horaire.') !!}
             </p>
 
            <!-- BOUTONS -->
@@ -1758,7 +1758,7 @@
 
       <!-- TEXTE -->
       <p class="text-black leading-relaxed mb-10 text-[18px] md:text-[24px] font-light">
-        {!! __('Vous êtes un particulier souhaitant construire votre résidence ? Une entreprise<br class="hidden md:block"> cherchant l’autonomie énergétique ? Une institution nécessitant des infrastructures<br class="hidden md:block"> sécurisées ? Nos équipes sont à votre écoute.') !!}
+        {!! __('Vous êtes un particulier souhaitant construire votre résidence ? Une entreprise<br> cherchant l’autonomie énergétique ? Une institution nécessitant des infrastructures<br> sécurisées ? Nos équipes sont à votre écoute.') !!}
       </p>
 
       <!-- BOUTONS -->

@@ -542,8 +542,8 @@
             </svg>
           </div>
           <p class="text-[20px] md:text-[22px] text-black font-heavy leading-snug">
-            J'accepte que mes données soient traitées par AIAE SARL<br class="hidden md:block">
-            dans le cadre de ma demande (voir politique de<br class="hidden md:block">
+            J'accepte que mes données soient traitées par AIAE SARL<br>
+            dans le cadre de ma demande (voir politique de<br>
             confidentialité).
           </p>
         </div>
