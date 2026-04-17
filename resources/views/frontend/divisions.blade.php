@@ -709,12 +709,9 @@
   <!-- ================= DES COMPÉTENCES RARES ================= -->
   <section class="bg-primary py-10 text-left md:text-center text-white">
     <div class="max-w-[1000px] mx-auto px-6">
-      <h2 class="text-[35px] md:text-[50px] font-heavy mb-6">Des Compétences Rares Au Togo</h2>
+      <h2 class="text-[35px] md:text-[50px] font-heavy mb-6">{{ __('Des Compétences Rares Au Togo') }}</h2>
       <p class="text-[20px] md:text-[22px] leading-relaxed max-w-[850px] mx-auto">
-        Au-delà du bâtiment, <strong class="text-white font-heavy">AIAE dispose d'une expertise de haut niveau en
-          ouvrages d'art<br> et
-          structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br> d'expérience en
-        calcul des structures et béton précontraint.
+        {!! __("Au-delà du bâtiment, <strong class=\"text-white font-heavy\">AIAE dispose d'une expertise de haut niveau en ouvrages d'art<br> et structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br> d'expérience en calcul des structures et béton précontraint.") !!}
       </p>
     </div>
   </section>
@@ -730,9 +727,8 @@
             class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
             01</div>
           <div>
-            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">PONTS
-              ET<br> PASSERELLES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">en béton armé ou<br> précontraint</p>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide"> {!! __('PONTS ET<br> PASSERELLES') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"> {!! __('en béton armé ou<br> précontraint') !!}</p>
           </div>
         </div>
 
@@ -742,9 +738,8 @@
             class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
             02</div>
           <div>
-            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">MURS
-              DE<br> SOUTÈNEMENT</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">parois moulées,<br> gabions, terre armée</p>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide"> {!! __('MURS DE<br> SOUTÈNEMENT') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"> {!! __('parois moulées,<br> gabions, terre armée') !!}</p>
           </div>
         </div>
 
@@ -754,9 +749,8 @@
             class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
             03</div>
           <div>
-            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              BÉTON<br> PRÉCONTRAINT</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">portiques grandes portées,<br> structures spéciales</p>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide"> {!! __('BÉTON<br> PRÉCONTRAINT') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"> {!! __('portiques grandes portées,<br> structures spéciales') !!}</p>
           </div>
         </div>
 
@@ -766,9 +760,8 @@
             class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
             04</div>
           <div>
-            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              OUVRAGES<br> HYDRAULIQUES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">châteaux d'eau,<br> réservoirs, stations</p>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide"> {!! __('OUVRAGES<br> HYDRAULIQUES') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"> {!! __('châteaux d\'eau,<br> réservoirs, stations') !!}</p>
           </div>
         </div>
 
@@ -778,17 +771,15 @@
             class="bg-primary text-white flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center font-bold text-[30px]">
             05</div>
           <div>
-            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              STRUCTURES<br> SPÉCIALES</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">tribunes, halls<br> industriels, coupoles</p>
+            <h3 class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide"> {!! __('STRUCTURES<br> SPÉCIALES') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"> {!! __('tribunes, halls<br> industriels, coupoles') !!}</p>
           </div>
         </div>
 
         <!-- ITEM 6 (Text Box) -->
         <div class="flex items-center pt-2">
-          <div class="text-primary text-[18px] xl:text-[25px] italic leading-snug">
-            Cette expertise permet également de<br> répondre aux <strong class="font-heavy text-primary">appels
-              d'offres publics<br> pour les infrastructures de transport<br> et les équipements collectifs.</strong>
+          <div class="text-primary text-[18px] xl:text-[25px] italic leading-snug whitespace-nowrap">
+              {!! __("Cette expertise permet également de<br> répondre aux <strong class=\"font-heavy text-primary\">appels d'offres publics<br> pour les infrastructures de transport<br> et les équipements collectifs.</strong>") !!}
           </div>
         </div>
 
@@ -799,11 +790,9 @@
   <!-- ================= 06 ÉTAPES HERO ================= -->
   <section class="bg-darkBlue py-5 text-left md:text-center text-white">
     <div class="max-w-[1000px] mx-auto px-6">
-      <h2 class="text-[50px] md:text-[60px] font-heavy mb-6">Votre Projet En <span
-          class="text-secondary text-[50px] md:text-[60px]">06</span> Étapes</h2>
+      <h2 class="text-[50px] md:text-[60px] font-heavy mb-6">{!! __('Votre Projet En <span class="text-secondary text-[50px] md:text-[60px]">06</span> Étapes') !!}</h2>
       <p class="text-[22px] md:text-[27px] leading-relaxed max-w-[850px] mx-auto font-light">
-        De la première prise de contact à la remise des clés, <strong class="text-white">chaque étape est<br> définie,
-          planifiée et suivie</strong>. Vous savez toujours où en est votre projet.
+        {!! __('De la première prise de contact à la remise des clés, <strong class="text-white">chaque étape est<br> définie, planifiée et suivie</strong>. Vous savez toujours où en est votre projet.') !!}
       </p>
     </div>
   </section>
@@ -820,21 +809,21 @@
         <button id="toggleStepsDetails"
           class="col-span-2 lg:flex-none flex items-center justify-center gap-3 px-6 py-4 bg-secondary text-white transition-colors hover:bg-secondary/90">
           <img src="{{ asset('aiae-frontend/Images/plus.png') }}" alt="" id="steps-icon" class="w-8 h-8 transition-transform duration-300">
-          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">Plus de détails</span>
+          <span class="text-[14px] md:text-[16px] font-heavy tracking-wide">{{ __('Plus de détails') }}</span>
         </button>
 
         <!-- Headers style standardized -->
         <div
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide">
-          ÉTAPES
+          {{ __('ÉTAPES') }}
         </div>
         <div
           class="flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide">
-          DURÉE
+          {{ __('DURÉE') }}
         </div>
         <div
           class="col-span-2 lg:flex-1 py-4 bg-[#0f1740] text-white font-heavy text-[15px] md:text-[25px] flex items-center justify-center uppercase tracking-wide border-t lg:border-t-0 border-white/10">
-          DESCRIPTION
+          {{ __('DESCRIPTION') }}
         </div>
       </div>
 
@@ -843,8 +832,7 @@
 
         <!-- En-tête panneau -->
         <div class="bg-[#111d4a] rounded-t-[20px] px-8 py-6">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">Détail du parcours
-            client</h2>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-heavy mb-8 text-white">{{ __('Détail du parcours client') }}</h2>
         </div>
 
         <!-- Contenu panneau -->
@@ -852,54 +840,50 @@
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">01. Études préliminaires</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 2-4 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('01. Études préliminaires') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 2-4 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Visite terrain, analyse des besoins, faisabilité technique, esquisse architecturale, estimation
-                budgétaire préliminaire.
+                {{ __('Visite terrain, analyse des besoins, faisabilité technique, esquisse architecturale, estimation budgétaire préliminaire.') }}
               </p>
             </div>
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">02. Études techniques</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 3-6 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('02. Études techniques') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 3-6 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Plans architecturaux définitifs, calculs de structure, devis détaillé basé sur le BPU, planning
-                contractuel, obtention du permis de construire.
+                {{ __('Plans architecturaux définitifs, calculs de structure, devis détaillé basé sur le BPU, planning contractuel, obtention du permis de construire.') }}
               </p>
             </div>
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">03. Préparation chantier</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 1-2 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('03. Préparation chantier') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 1-2 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Installation de chantier, approvisionnement matériaux, mobilisation des équipes, implantation de
-                l’ouvrage.
+                {{ __('Installation de chantier, approvisionnement matériaux, mobilisation des équipes, implantation de l’ouvrage.') }}
               </p>
             </div>
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">04. Gros œuvre</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 8-16 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('04. Gros œuvre') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 8-16 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Fondations, structure (poteaux, poutres, dalles), maçonnerie, charpente et couverture. Rapports
-                d’avancement réguliers.
+                {{ __('Fondations, structure (poteaux, poutres, dalles), maçonnerie, charpente et couverture. Rapports d’avancement réguliers.') }}
               </p>
             </div>
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">05. Second œuvre</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 6-12 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('05. Second œuvre') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 6-12 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Électricité, plomberie, menuiseries, enduits, revêtements de sol, peinture, équipements sanitaires.
+                {{ __('Électricité, plomberie, menuiseries, enduits, revêtements de sol, peinture, équipements sanitaires.') }}
               </p>
             </div>
 
             <div class="bg-white rounded-[15px] p-6 shadow-lg">
-              <h4 class="text-darkBlue text-[30px] font-bold mb-2">06. Finitions & Réception</h4>
-              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">Durée : 2-4 sem.</p>
+              <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('06. Finitions & Réception') }}</h4>
+              <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 2-4 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                Aménagements extérieurs, réserves, procès-verbal de réception, remise des clés, documentation technique.
+                {{ __('Aménagements extérieurs, réserves, procès-verbal de réception, remise des clés, documentation technique.') }}
               </p>
             </div>
 
@@ -912,7 +896,7 @@
   <!-- ================= ENGAGEMENTS HERO ================= -->
   <section class="bg-primary py-8 text-center text-white">
     <div class="max-w-[1000px] mx-auto px-6">
-      <h2 class="text-[50px] md:text-[60px] font-heavy">Nos Engagements Construction</h2>
+      <h2 class="text-[50px] md:text-[60px] font-heavy">{{ __('Nos Engagements Construction') }}</h2>
     </div>
   </section>
 
@@ -928,9 +912,9 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              DEVIS GRATUIT<br> DÉTAILLÉ</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Basé sur notre Bordereau des Prix Unitaires (BPU).
-              <strong class="text-gray-800 font-heavy">Chaque ligne de votre devis est justifiée.</strong>
+              {!! __('DEVIS GRATUIT<br> DÉTAILLÉ') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">{{ __('Basé sur notre Bordereau des Prix Unitaires (BPU).') }}
+              <strong class="text-gray-800 font-heavy">{{ __('Chaque ligne de votre devis est justifiée.') }}</strong>
             </p>
           </div>
         </div>
@@ -942,9 +926,9 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              PLANNING<br> CONTRACTUEL</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Les délais sont inscrits au contrat. <strong
-                class="text-gray-800 font-heavy">Pénalités en cas de retard de notre fait.</strong></p>
+              {!! __('PLANNING<br> CONTRACTUEL') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">{{ __('Les délais sont inscrits au contrat.') }} <strong
+                class="text-gray-800 font-heavy">{{ __('Pénalités en cas de retard de notre fait.') }}</strong></p>
           </div>
         </div>
         <!-- ITEM 3 -->
@@ -955,9 +939,9 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              GARANTIE<br> DÉCENNALE</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">Solidité de l'ouvrage <strong
-                class="text-gray-800 font-heavy">garantie 10 ans</strong>, conformément à la loi.</p>
+              {!! __('GARANTIE<br> DÉCENNALE') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">{{ __('Solidité de l\'ouvrage') }} <strong
+                class="text-gray-800 font-heavy">{{ __('garantie 10 ans') }}</strong>{{ __(', conformément à la loi.') }}</p>
           </div>
         </div>
         <!-- ITEM 4 -->
@@ -968,12 +952,10 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              SUIVI RÉGULIER
+              {{ __('SUIVI RÉGULIER') }}
             </h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">Rapports
-                hebdomadaires</strong> avec photos/vidéos. <strong
-                class="text-gray-800 font-heavy">Visioconférences</strong> pour
-              les clients à distance.</p>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">{{ __('Rapports hebdomadaires') }}</strong>{{ __(' avec photos/vidéos. ') }}<strong
+                class="text-gray-800 font-heavy">{{ __('Visioconférences') }}</strong>{{ __(' pour les clients à distance.') }}</p>
           </div>
         </div>
         <!-- ITEM 5 -->
@@ -984,9 +966,8 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              TRANSPARENCE<br> TOTALE</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">Aucun coût
-                caché.</strong> Facturation par étapes selon l'avancement.</p>
+              {!! __('TRANSPARENCE<br> TOTALE') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong class="text-gray-800 font-heavy">{{ __('Aucun coût caché.') }}</strong>{{ __(' Facturation par étapes selon l\'avancement.') }}</p>
           </div>
         </div>
         <!-- ITEM 6 -->
@@ -997,11 +978,10 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              CONFIDENTIALITÉ
+              {{ __('CONFIDENTIALITÉ') }}
             </h3>
             <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed"><strong
-                class="text-gray-800 font-heavy">Secret professionnel
-                contractualisé</strong> sur tous nos projets.</p>
+                class="text-gray-800 font-heavy">{{ __('Secret professionnel contractualisé') }}</strong>{{ __(' sur tous nos projets.') }}</p>
           </div>
         </div>
       </div>
@@ -1015,16 +995,15 @@
         <h3
           class="text-white text-[25px] md:text-[30px] font-heavy mb-8 flex flex-row items-center md:justify-center justify-start gap-4">
           <img src="{{ asset('aiae-frontend/Images/etage.png') }}" alt="" class="h-8 md:h-12 object-contain shrink-0">
-          <span>Estimez Le Coût De Votre Projet En 2 Minutes</span>
+          <span>{{ __('Estimez Le Coût De Votre Projet En 2 Minutes') }}</span>
         </h3>
         <p class="text-white border-none md:mx-auto text-[18px] md:text-[20px] font-medium max-w-[800px] mb-8">
-          Notre simulateur en ligne vous donne une estimation instantanée selon votre type de<br> projet, votre standing
-          et votre localisation.
+          {!! __('Notre simulateur en ligne vous donne une estimation instantanée selon votre type de<br> projet, votre standing et votre localisation.') !!}
         </p>
         <div class="flex md:justify-center justify-start mt-8">
           <a href="{{ route('simulator.v1') }}" class="inline-block text-center w-full max-w-[550px] bg-secondary text-white font-heavy text-[23px] md:text-[27px] py-5 rounded-[20px]
          shadow-lg hover:bg-[#b05d04] transition-colors tracking-wider">
-            Accéder au simulateur
+            {{ __('Accéder au simulateur') }}
           </a>
         </div>
       </div>
@@ -1035,24 +1014,23 @@
   <section class="bg-[#e5e5e5] py-10">
     <div class="max-w-[900px] mx-auto text-left md:text-center px-6">
       <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">
-        Prêt À Construire ?
+        {{ __('Prêt À Construire ?') }}
       </h2>
 
       <p class="text-[16px] md:text-[24px] text-black leading-relaxed mb-10 font-light">
-        Vous avez un projet ? Parlons-en. Premier échange<br>
-        gratuit et sans engagement.
+        {!! __('Vous avez un projet ? Parlons-en. Premier échange<br> gratuit et sans engagement.') !!}
       </p>
       <div class="flex flex-col md:flex-row justify-center">
          <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
-          DEMANDER UN DEVIS GRATUIT
+          {{ __('DEMANDER UN DEVIS GRATUIT') }}
            <span class="block text-sm font-light text-white">
-            Réponse sous 48h
+            {{ __('Réponse sous 48h') }}
           </span>
         </a>
         <a onclick="openRdvModal('physique')"  class="bg-primary text-white px-10 py-5 text-center font-heavy">
-          PRENDRE RENDEZ-VOUS
+          {{ __('PRENDRE RENDEZ-VOUS') }}
           <span class="block text-sm font-light text-white">
-            En personne ou en visio
+            {{ __('En personne ou en visio') }}
           </span>
         </a>
       </div>
