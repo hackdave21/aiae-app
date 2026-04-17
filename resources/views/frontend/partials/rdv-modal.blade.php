@@ -15,8 +15,8 @@
       <button onclick="closeRdvModal()" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors">
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <h3 class="text-white text-2xl font-heavy">Prendre Rendez-vous</h3>
-      <p class="text-white/70 text-sm mt-1">Choisissez la modalité qui vous convient</p>
+      <h3 class="text-white text-2xl font-heavy">{{ __('Prendre Rendez-vous') }}</h3>
+      <p class="text-white/70 text-sm mt-1">{{ __('Choisissez la modalité qui vous convient') }}</p>
     </div>
 
     {{-- Body --}}
@@ -25,7 +25,7 @@
 
       {{-- Type de RDV --}}
       <div>
-        <label class="block text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Type de rendez-vous</label>
+        <label class="block text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">{{ __('Type de rendez-vous') }}</label>
         <div class="grid grid-cols-2 gap-3">
           <label class="rdv-type-option group">
             <input type="radio" name="rdv_type" value="physique" class="hidden peer" checked>
@@ -35,7 +35,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
               </div>
-              <div class="font-bold text-[#162064] text-sm">Au siège</div>
+              <div class="font-bold text-[#162064] text-sm">{{ __('Au siège') }}</div>
               <div class="text-[10px] text-gray-400 mt-1">Lomé, Togo</div>
             </div>
           </label>
@@ -47,8 +47,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
               </div>
-              <div class="font-bold text-[#162064] text-sm">Par appel</div>
-              <div class="text-[10px] text-gray-400 mt-1">Téléphone / Visio</div>
+              <div class="font-bold text-[#162064] text-sm">{{ __('Par appel') }}</div>
+              <div class="text-[10px] text-gray-400 mt-1">{{ __('Téléphone / Visio') }}</div>
             </div>
           </label>
         </div>
@@ -56,19 +56,19 @@
 
       {{-- Message --}}
       <div>
-        <label class="block text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Message <span class="text-gray-300 normal-case font-normal">(facultatif)</span></label>
-        <textarea name="rdv_message" rows="3" placeholder="Décrivez brièvement l'objet de votre rendez-vous..."
+        <label class="block text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">{{ __('Message') }} <span class="text-gray-300 normal-case font-normal">{{ __('(facultatif)') }}</span></label>
+        <textarea name="rdv_message" rows="3" placeholder="{{ __('Décrivez brièvement l\'objet de votre rendez-vous...') }}"
           class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-[#FF8400] resize-none transition-colors"></textarea>
       </div>
 
       {{-- Submit --}}
       <button type="submit" id="rdvSubmitBtn"
         class="w-full bg-[#111736] text-white py-4 rounded-xl font-bold text-base tracking-wide hover:bg-[#FF8400] transition-all duration-300 cursor-pointer">
-        ENVOYER MA DEMANDE
+        {{ __('ENVOYER MA DEMANDE') }}
       </button>
 
       <p class="text-center text-[11px] text-gray-400">
-        Notre équipe vous recontactera sous 24 à 48h pour confirmer votre rendez-vous.
+        {{ __('Notre équipe vous recontactera sous 24 à 48h pour confirmer votre rendez-vous.') }}
       </p>
     </form>
   </div>

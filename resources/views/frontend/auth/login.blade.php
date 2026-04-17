@@ -1,6 +1,6 @@
 @extends('layouts.frontend', ['hideHeaderFooter' => true])
 
-@section('title', 'Connexion - AIAE')
+@section('title', __('Connexion - AIAE'))
 
 @section('styles')
 <style>
@@ -31,8 +31,8 @@
     <div class="max-w-md w-full bg-white rounded-3xl p-8 sm:p-12 auth-card my-10">
         <div class="text-center mb-10">
             <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL.png') }}" alt="AIAE Logo" class="h-16 mx-auto mb-6">
-            <h1 class="text-3xl font-bold text-[#162064] mb-2 font-FuturaStdMedium">Heureux de vous revoir</h1>
-            <p class="text-gray-500">Connectez-vous pour accéder à vos simulations</p>
+            <h1 class="text-3xl font-bold text-[#162064] mb-2 font-FuturaStdMedium">{{ __('Heureux de vous revoir') }}</h1>
+            <p class="text-gray-500">{{ __('Connectez-vous pour accéder à vos simulations') }}</p>
             
             @if(session('success'))
                 <div class="mt-6 p-4 bg-green-50 text-green-700 rounded-xl text-sm font-medium border border-green-100">
@@ -49,11 +49,11 @@
         <form action="{{ route('login.submit') }}" method="POST" class="space-y-6">
             @csrf
             <div>
-                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Adresse Email</label>
+                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">{{ __('Adresse Email') }}</label>
                 <input type="email" name="email" id="email" 
                     value="{{ old('email') }}"
                     class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:border-[#162064] focus:ring-2 focus:ring-[#162064]/20 outline-none transition-all"
-                    placeholder="votre@email.com" required>
+                    placeholder="{{ __('votre@email.com') }}" required>
                 @error('email')
                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                 @enderror
@@ -73,18 +73,18 @@
 
             <div class="flex items-center">
                 <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-[#162064] border-gray-300 rounded focus:ring-[#162064]">
-                <label for="remember" class="ml-2 text-sm text-gray-600">Se souvenir de moi</label>
+                <label for="remember" class="ml-2 text-sm text-gray-600">{{ __('Se souvenir de moi') }}</label>
             </div>
 
             <button type="submit" class="w-full py-4 rounded-xl btn-auth font-bold uppercase tracking-wider">
-                Se Connecter
+                {{ __('Se Connecter') }}
             </button>
         </form>
 
         <div class="mt-8 text-center">
             <p class="text-gray-500 text-sm">
-                Vous n'avez pas encore de compte ? 
-                <a href="{{ route('register') }}" class="font-bold text-[#162064] hover:text-[#ff8400] transition-colors">Inscrivez-vous</a>
+                {{ __("Vous n'avez pas encore de compte ?") }} 
+                <a href="{{ route('register') }}" class="font-bold text-[#162064] hover:text-[#ff8400] transition-colors">{{ __('Inscrivez-vous') }}</a>
             </p>
         </div>
     </div>
