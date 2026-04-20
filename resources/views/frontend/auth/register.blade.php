@@ -82,6 +82,7 @@
                             </svg>
                         </button>
                     </div>
+                    <div id="password-feedback" class="mt-2 text-xs sm:text-sm font-medium transition-all duration-200 hidden"></div>
                 </div>
                 <div>
                     <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 mb-2">{{ __('Confirmation') }}</label>
@@ -131,6 +132,37 @@
             input.type = 'password';
             icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
         }
+    }
+
+    // Password Validation Logic
+    const passwordInput = document.getElementById('password');
+    const feedback = document.getElementById('password-feedback');
+
+    if (passwordInput && feedback) {
+        passwordInput.addEventListener('input', function() {
+            const value = this.value;
+            if (value === '') {
+                feedback.classList.add('hidden');
+                return;
+            }
+            
+            feedback.classList.remove('hidden');
+
+            const rules = [
+                { label: "{{ __('8 caractères') }}", regex: /.{8,}/ },
+                { label: "{{ __('une majuscule') }}", regex: /[A-Z]/ },
+                { label: "{{ __('un chiffre') }}", regex: /[0-9]/ },
+                { label: "{{ __('une minuscule') }}", regex: /[a-z]/ }
+            ];
+
+            const missing = rules.filter(r => !r.regex.test(value)).map(r => r.label);
+
+            if (missing.length === 0) {
+                feedback.innerHTML = '<span class="flex items-center gap-1 text-green-600">✓ {{ __("Mot de passe valide") }}</span>';
+            } else {
+                feedback.innerHTML = '<span class="text-red-500">{{ __("Il manque :") }} ' + missing.join(', ') + '</span>';
+            }
+        });
     }
 </script>
 @endsection

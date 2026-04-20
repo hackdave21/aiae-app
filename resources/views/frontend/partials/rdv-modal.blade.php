@@ -117,14 +117,14 @@
       // User is NOT logged in — redirect to login/register
       if (typeof Swal !== 'undefined') {
         Swal.fire({
-          title: 'Connexion requise',
-          text: 'Vous devez être connecté pour prendre un rendez-vous.',
+          title: '{{ __("Connexion requise") }}',
+          text: '{{ __("Vous devez être connecté pour prendre un rendez-vous.") }}',
           icon: 'info',
           showCancelButton: true,
           confirmButtonColor: '#162064',
           cancelButtonColor: '#FF8400',
-          confirmButtonText: 'Se connecter',
-          cancelButtonText: 'S\'inscrire'
+          confirmButtonText: '{{ __("Se connecter") }}',
+          cancelButtonText: '{{ __("S\'inscrire") }}'
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = '{{ route("login") }}';
@@ -133,7 +133,7 @@
           }
         });
       } else {
-        if (confirm('Vous devez être connecté pour prendre un rendez-vous. Voulez-vous vous connecter ?')) {
+        if (confirm('{{ __("Vous devez être connecté pour prendre un rendez-vous. Voulez-vous vous connecter ?") }}')) {
           window.location.href = '{{ route("login") }}';
         }
       }
@@ -164,7 +164,7 @@
         const submitBtn = document.getElementById('rdvSubmitBtn');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
-        submitBtn.textContent = 'ENVOI EN COURS...';
+        submitBtn.textContent = '{{ __("ENVOI EN COURS...") }}';
         submitBtn.style.opacity = '0.7';
 
         const formData = new FormData(this);
@@ -185,7 +185,7 @@
             closeRdvModal();
             if (typeof Swal !== 'undefined') {
               Swal.fire({
-                title: 'Demande envoyée !',
+                title: '{{ __("Demande envoyée !") }}',
                 text: result.message,
                 icon: 'success',
                 confirmButtonColor: '#162064',
@@ -201,7 +201,7 @@
         } catch (error) {
           if (typeof Swal !== 'undefined') {
             Swal.fire({
-              title: 'Oups...',
+              title: '{{ __("Oups...") }}',
               text: error.message,
               icon: 'error',
               confirmButtonColor: '#FF8400'

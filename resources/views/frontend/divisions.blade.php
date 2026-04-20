@@ -299,7 +299,7 @@
   @include('frontend.partials.navbar')
 
   <!-- ================= HERO DIVISION ================= -->
-  <section class="pt-24 md:pt-32 pb-5 bg-[#e6e6e6]">
+  <section class="pt-12 md:pt-16 pb-5 bg-[#e6e6e6]">
 
     <div class="max-w-[99%] mx-auto px-2">
 

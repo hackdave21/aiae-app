@@ -201,10 +201,6 @@
             {{ __('Agricole') }}
           </button>
         </div>
-
-        <button onclick="window.location.href='{{ route('energie.calculator') }}'" class="w-full sm:w-auto sm:ml-auto px-4 py-2 bg-secondary text-white rounded-lg text-xs sm:text-sm">
-          {{ __('Calculateur Énergies') }}
-        </button>
       </div>
 
       <!-- Formulaire -->
@@ -271,6 +267,7 @@
             </button>
           </div>
         </div>
+
 
         <!-- BOUTON FINAL -->
         <button
