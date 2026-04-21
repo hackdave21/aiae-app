@@ -691,55 +691,60 @@
 
     <div class="max-w-[1200px] mx-auto px-8 lg:px-[100px]">
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-left">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center text-center lg:text-left">
 
         <!-- GAUCHE : TEXTE -->
         <div class="text-white lg:ml-20 max-w-xl text-left">
 
-          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8">
+          <h2 class="text-[40px] sm:text-5xl md:text-6xl lg:text-[80px] font-heavy leading-tight mb-4 lg:mb-8 whitespace-nowrap">
             {{ __('Nos Valeurs') }}
           </h2>
 
-          <p class="text-[18px] md:text-xl leading-relaxed text-white font-light">
-            {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
-          </p>
+         <p class="text-[14px] min-[400px]:text-[16px] sm:text-[18px] md:text-xl leading-relaxed opacity-95 font-light whitespace-nowrap">
+    {!! __('Ces valeurs constituent l’ADN d’AIAE. Elles<br> ne sont pas négociables, quelles que soient<br> les circonstances.') !!}
+</p>
 
         </div>
 
-        <!-- DROITE : BLOC VALEURS -->
+       <!-- DROITE : BLOC VALEURS -->
         <div class="relative lg:mr-20 flex justify-center lg:justify-end">
-          <div class="relative w-[350px] sm:w-[500px] max-w-full">
+          <div class="relative w-[350px] sm:w-[420px] max-w-full">
             <img src="{{ asset('aiae-frontend/Images/Nos valeurs.png') }}" alt="Valeurs AIAE" class="w-full h-auto drop-shadow-2xl">
             
             <!-- Text Overlays -->
-            <div class="absolute inset-0 pointer-events-none flex items-center px-[22%] sm:px-[25%]">
-              <div class="flex flex-col gap-0.5 sm:gap-2 md:gap-3 text-white font-heavy text-left leading-tight">
+            <!-- CORRECTION ICI : pl-[22%] (au lieu de 12%) pour repousser le texte vers la droite à l'intérieur du cadre -->
+            <div class="absolute inset-0 pointer-events-none flex flex-col justify-evenly py-[14%] pl-[22%] pr-[12%]">
+              
                 <!-- Item 1 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Qualité Est Primordiale') !!}</span>
                 </div>
+
                 <!-- Item 2 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('La Parole Donnée Est Sacrée') !!}</span>
                 </div>
+
                 <!-- Item 3 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Honnêteté Envers Les Clients') !!}</span>
                 </div>
+
                 <!-- Item 4 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Équipes') !!}</span>
                 </div>
+
                 <!-- Item 5 -->
-                <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[11px] md:text-[13px] lg:text-[15px]">
-                  <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shrink-0"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] min-[400px]:text-[12px] sm:text-[13.5px] lg:text-[15px] text-white font-heavy text-left whitespace-nowrap">
+                  <span class="w-1.5 h-1.5 bg-white rounded-full shrink-0"></span>
                   <span>{!! __('Respect Des Délais Et Des Coûts') !!}</span>
                 </div>
-              </div>
+                
             </div>
           </div>
         </div>
@@ -749,6 +754,7 @@
     </div>
 
   </section>
+
 
   <div class="relative">
     <!-- SHAPE -->

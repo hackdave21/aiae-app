@@ -313,66 +313,66 @@
 <body class="font-futura bg-gray-100 overflow-x-hidden">
   @include('frontend.partials.navbar')
 
+
   <!-- ================= HERO DIASPORA ================= -->
-  <section class="pt-20 md:pt-24 pb-5 bg-[#e6e6e6]">
+<section class="pt-20 md:pt-24 pb-5 bg-[#e6e6e6]">
 
-    <div class="max-w-[99%] mx-auto px-2">
+  <div class="max-w-[99%] mx-auto px-2">
 
-      <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
+    <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
 
-        <!-- IMAGE -->
-        <img src="{{ asset('aiae-frontend/Images/etranger.png') }}" class="w-full h-[650px] sm:h-[550px] md:h-[400px] object-cover">
+      <!-- IMAGE -->
+      <img src="{{ asset('aiae-frontend/Images/etranger.png') }}"
+           class="w-full h-auto min-h-[320px] sm:min-h-[360px] md:h-[320px] lg:h-[360px] object-cover">
 
-        <!-- OVERLAY -->
-        <div class="absolute inset-0 bg-black/70"></div>
+      <!-- OVERLAY -->
+      <div class="absolute inset-0 bg-black/70"></div>
 
-        <!-- CONTENU -->
-        <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-24 text-white">
+      <!-- CONTENU PRINCIPAL -->
+      <div class="absolute inset-0 flex flex-col justify-center p-4 sm:p-6 md:p-8 lg:p-12 text-white">
 
-          <h2 class="leading-[0.85] mb-4 md:mb-8 uppercase">
-            <span class="block text-[20px] sm:text-[25px] md:text-[45px] tracking-tight">
-              <span class="font-light">{{ __('CONSTRUIRE AU TOGO') }}</span>
-              <span class="font-heavy">{{ __('DEPUIS') }}</span>
-            </span>
-            <span class="block text-[25px] sm:text-[25px] md:text-[55px] tracking-tighter">
-              <span class="font-heavy">{{ __('L\'ÉTRANGER') }}</span><span class="font-light">{{ __(', C\'EST POSSIBLE.') }}</span>
-            </span>
-          </h2>
+        <!-- TITRE -->
+        <h2 class="leading-tight mb-2 uppercase">
+          <span class="block text-[18px] sm:text-[26px] md:text-[36px] lg:text-[45px] tracking-tight">
+            <span class="font-light">{{ __('CONSTRUIRE AU TOGO') }}</span>
+            <span class="font-heavy"> {{ __('DEPUIS') }}</span>
+          </span>
+          <span class="block text-[22px] sm:text-[30px] md:text-[44px] lg:text-[55px] tracking-tighter">
+            <span class="font-heavy">{{ __('L\'ÉTRANGER') }}</span><span class="font-light">{{ __(', C\'EST POSSIBLE.') }}</span>
+          </span>
+        </h2>
 
-          <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
-            <p class="mb-4 whitespace-normal md:whitespace-nowrap">
-              <strong class="text-white font-heavy"> {{ __("Et c'est serein avec AIAE.") }}</strong>
+        <!-- LIGNE TEXTE + BOUTONS CÔTE À CÔTE -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 md:gap-6">
+
+          <!-- TEXTE -->
+          <div class="text-[11px] sm:text-[14px] md:text-[15px] lg:text-[17px] leading-[1.5]">
+            <p class="mb-1.5">
+              <strong class="text-white font-heavy">{{ __("Et c'est serein avec AIAE.") }}</strong>
             </p>
-            <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
-              {!! __("Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br> Vous rêvez de <strong class=\"text-white font-heavy\">construire votre maison, votre résidence secondaire</strong><br> ou un <strong class=\"text-white font-heavy\">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br> chaque étape, <strong class=\"text-white font-heavy\">de la première visioconférence à la remise de vos clés.</strong>") !!}
+            <p class="mt-1.5">
+              {!! __("Vous vivez en France, au Canada, aux États-Unis, en Allemagne ou ailleurs ?<br class=\"hidden md:inline\"> Vous rêvez de <strong class=\"text-white font-heavy\">construire votre maison, votre résidence secondaire</strong><br class=\"hidden md:inline\"> ou un <strong class=\"text-white font-heavy\">investissement locatif au Togo ?</strong> AIAE vous accompagne à<br class=\"hidden md:inline\"> chaque étape, <strong class=\"text-white font-heavy\">de la première visioconférence à la remise de vos clés.</strong>") !!}
             </p>
           </div>
 
-          <!-- BOUTONS (Positionnés en bas à droite sur desktop) -->
-          <div class="hidden md:flex absolute bottom-6 right-6 flex-col gap-4">
+          <!-- BOUTONS -->
+          <div class="flex flex-col gap-2 md:shrink-0">
+
             <a href="{{ route('contact') }}"
-              class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex flex-col items-center text-center transition-all hover:scale-105 shadow-xl font-bold">
-              <p class="text-[17px] tracking-wide font-light whitespace-nowrap"> {!! __('Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span>') !!}</p>
+              class="bg-primary hover:bg-[#043b24] text-white px-5 md:px-7 py-2 md:py-2.5 rounded-full flex items-center justify-center text-center transition-all hover:scale-105 shadow-xl font-bold">
+              <p class="text-[11px] sm:text-[13px] md:text-[14px] tracking-wide font-light whitespace-nowrap">
+                {!! __('Prendre rdv en visio <span class="text-[10px] font-light opacity-80">(fuseau adapté)</span>') !!}
+              </p>
             </a>
 
             <a href="{{ route('contact') }}"
-              class="bg-primary hover:bg-[#043b24] text-white px-8 py-3 rounded-full flex items-center justify-between gap-4 transition-all hover:scale-105 shadow-xl min-w-[280px] font-bold">
-              <p class="text-[17px] text-left font-light leading-tight tracking-wide whitespace-nowrap">{{ __('Prendre rendez-vous maintenant') }}</p>
-              <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-6 h-6 object-contain" />
+              class="bg-primary hover:bg-[#043b24] text-white px-5 md:px-7 py-2 md:py-2.5 rounded-full flex items-center justify-center gap-3 transition-all hover:scale-105 shadow-xl font-bold">
+              <p class="text-[11px] sm:text-[13px] md:text-[14px] font-light leading-tight tracking-wide whitespace-nowrap text-center">
+                {{ __('Prendre rendez-vous maintenant') }}
+              </p>
+              <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-4 h-4 md:w-5 md:h-5 object-contain shrink-0" />
             </a>
-          </div>
 
-          <!-- BOUTONS MOBILE (Inclus dans le flux vertical sur mobile) -->
-          <div class="md:hidden flex flex-col gap-3 mt-8">
-            <a href="{{ route('contact') }}"
-              class="bg-primary text-white px-4 py-3 rounded-full flex flex-col items-center text-center font-bold shadow-lg">
-              <p class="text-[14px] tracking-wide font-light"> {!! __('Prendre rdv en visio <span class="text-[12px] font-light opacity-80">(fuseau adapté)</span>') !!}</p>
-            </a>
-            <a href="{{ route('contact') }}"
-              class="bg-primary text-white px-4 py-3 rounded-full flex items-center justify-center gap-3 font-bold shadow-lg">
-              <p class="text-[14px] font-light"> {!! __('Prendre rendez-vous maintenant') !!}</p>
-              <img src="{{ asset('aiae-frontend/Images/envoiblanc.png') }}" alt="icon" class="w-5 h-5 object-contain" />
-            </a>
           </div>
 
         </div>
@@ -381,7 +381,9 @@
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
   <!-- ================= CE QUE NOUS CONSTRUISONS (FAQ HEADER) ================= -->
   <section class="bg-[#e6e6e6] py-5">

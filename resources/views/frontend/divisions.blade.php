@@ -298,52 +298,60 @@
 <body class="font-futura bg-gray-100 overflow-x-hidden">
   @include('frontend.partials.navbar')
 
-  <!-- ================= HERO DIVISION ================= -->
-  <section class="pt-12 md:pt-16 pb-5 bg-[#e6e6e6]">
+    <!-- ================= HERO DIVISION ================= -->
+<section class="pt-20 md:pt-24 pb-5 bg-[#e6e6e6]">
 
-    <div class="max-w-[99%] mx-auto px-2">
+  <div class="max-w-[99%] mx-auto px-2">
 
-      <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
+    <div class="relative rounded-[25px] overflow-hidden shadow-3xl">
 
-        <!-- IMAGE -->
-        <img src="{{ asset('aiae-frontend/Images/division.png') }}" class="w-full h-[450px] sm:h-[400px] md:h-[400px] object-cover">
+      <!-- IMAGE -->
+      <img src="{{ asset('aiae-frontend/Images/division.png') }}"
+           class="w-full h-auto min-h-[320px] sm:min-h-[360px] md:h-[320px] lg:h-[360px] object-cover">
 
-        <!-- OVERLAY -->
-        <div class="absolute inset-0 bg-black/70"></div>
+      <!-- OVERLAY -->
+      <div class="absolute inset-0 bg-black/70"></div>
 
-        <!-- CONTENU -->
-        <div class="absolute inset-0 flex flex-col justify-center p-10 md:p-20 text-white">
+      <!-- CONTENU PRINCIPAL -->
+      <div class="absolute inset-0 flex flex-col justify-center p-4 sm:p-6 md:p-8 lg:p-12 text-white">
 
-          <h1 class="leading-[0.85] mb-4 md:mb-8">
-            <span class="block text-[32px] sm:text-[42px] md:text-[85px] font-light tracking-tight">
-              {{ __('DIVISION') }}
-            </span>
-            <span class="block text-[35px] sm:text-[48px] md:text-[115px] font-bold tracking-tighter">
-              {{ __('CONSTRUCTION') }}
-            </span>
-          </h1>
+        <!-- TITRE -->
+        <h1 class="leading-tight mb-2">
+          <span class="block text-[22px] sm:text-[32px] md:text-[55px] lg:text-[75px] font-light tracking-tight">
+            {{ __('DIVISION') }}
+          </span>
+          <span class="block text-[28px] sm:text-[40px] md:text-[65px] lg:text-[90px] font-bold tracking-tighter leading-none">
+            {{ __('CONSTRUCTION') }}
+          </span>
+        </h1>
 
-          <div class="max-w-[1000px] text-[15px] sm:text-[18px] md:text-[22px] leading-[1.4]">
-            <p class="mb-4 whitespace-normal md:whitespace-nowrap">  {!! __('Concevoir et réaliser des infrastructures durables, c’est la raison d’être d’AIAE. <strong class="text-white font-heavy">Nous prenons en<br> charge l’intégralité de vos projets de construction, de la première esquisse à la remise des clés.</strong>') !!}
+        <!-- TEXTE + BADGE CÔTE À CÔTE -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 md:gap-6">
+
+          <!-- TEXTE -->
+          <div class="text-[11px] sm:text-[13px] md:text-[14px] lg:text-[16px] leading-[1.5]">
+            <p class="mb-1.5">
+              {!! __('Concevoir et réaliser des infrastructures durables, c’est la raison d’être d’AIAE. <strong class="text-white font-heavy">Nous prenons en charge l\'intégralité de vos projets de construction, de la première esquisse à la remise des clés.</strong>') !!}
             </p>
-            <p class="mt-4 md:mt-6 whitespace-normal md:whitespace-nowrap">
-              {!! __('<strong class="text-white font-heavy">Forte de plus de 18 ans d’expérience en génie civil,</strong> AIAE dispose de compétences rares au Togo<br> pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des <strong class="text-white font-heavy">ouvrages d’art complexes.</strong>') !!}
+            <p class="mt-1.5">
+              {!! __('<strong class="text-white font-heavy">Forte de plus de 18 ans d\'expérience en génie civil,</strong> AIAE dispose de compétences rares au Togo pour traiter aussi bien des <strong class="text-white font-heavy">villas résidentielles</strong> que des <strong class="text-white font-heavy">ouvrages d\'art complexes.</strong>') !!}
             </p>
           </div>
 
-        </div>
+          <!-- BADGE -->
+          <div class="md:shrink-0 bg-primary/80 text-white px-4 py-3 rounded-[12px] text-[11px] sm:text-[13px] md:text-[14px] lg:text-[16px] leading-[1.4] text-center md:text-left max-w-full md:max-w-[220px] lg:max-w-[260px]">
+            {!! __('Fondée en 2025, <strong class="text-white font-heavy">ancrée dans 18 ans d\'expertise.</strong>') !!}
+          </div>
 
-        <!-- BADGE -->
-        <div
-          class="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-primary/60  text-white px-4 md:px-6 py-3 md:py-4 rounded-[12px] text-[14px] sm:text-[16px] md:text-[20px] max-w-[220px] sm:max-w-[260px] md:max-w-[300px] whitespace-normal md:whitespace-nowrap">
-          {!! __('Fondée en 2025, <strong class="text-white font-heavy">ancrée<br>dans 18 ans d’expertise.</strong>') !!}
         </div>
 
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
   <!-- ================= CE QUE NOUS CONSTRUISONS ================= -->
   <section class="bg-[#e6e6e6] py-5">
@@ -351,17 +359,17 @@
     <div class="max-w-[900px] mx-auto px-6 text-center">
 
       <!-- TITRE -->
-      <h2 class="leading-[0.9] uppercase">
+     <h2 class="leading-[0.9] uppercase">
 
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-[#121a44]">
-          {!! __('CE QUE NOUS') !!}
-        </span>
+  <span class="block text-[28px] sm:text-[40px] md:text-[75px] lg:text-[90px] font-bold text-[#121a44]">
+    {!! __('CE QUE NOUS') !!}
+  </span>
 
-        <span class="block text-[32px] sm:text-[45px] font-bold md:text-[95px] text-primary">
-          {!! __('CONSTRUISONS') !!}
-        </span>
+  <span class="block text-[28px] sm:text-[40px] md:text-[75px] lg:text-[90px] font-bold text-primary">
+    {!! __('CONSTRUISONS') !!}
+  </span>
 
-      </h2>
+</h2>
 
       <!-- TEXTE -->
       <p class="mt-6 text-[15px] sm:text-[18px] md:text-[20px] text-black uppercase tracking-[1px] leading-[1.7]">
