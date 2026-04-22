@@ -329,7 +329,7 @@
               <div class="absolute inset-0 flex flex-col justify-center pl-[13%] pr-[30%] text-white">
                 <h4 class="font-extrabold text-[12px] min-[400px]:text-[14px] sm:text-[18px] md:text-[22px] mb-[2px] leading-none drop-shadow-sm">{{ __('EXPERTISE :') }}</h4>
                 <p class="font-book text-gray-200 text-[10px] min-[400px]:text-[12px] sm:text-[14px] md:text-[18px] leading-[1.2] drop-shadow-sm">
-                  {!! __('+15 ans d\'expertise<br>en génie civil') !!}
+                  {!! __('+18 ans d\'expertise<br>en génie civil') !!}
                 </p>
               </div>
             </div>
@@ -392,94 +392,92 @@
     </div>
   </section>
 
-  <!-- ================= SECTION CIBLES ================= -->
-  <section class="relative pt-16 bg-[#f2f2f2] overflow-hidden">
-    <!-- forme décorative -->
-    <div class="absolute -top-32 -left-32 w-[720px] h-[720px] bg-gray-200 rounded-full opacity-70"></div>
+    <!-- ================= SECTION CIBLES ================= -->
+<section class="relative pt-16 pb-10 bg-[#f2f2f2] overflow-hidden">
+  <div class="absolute -top-32 -left-32 w-[720px] h-[720px] bg-gray-200 rounded-full opacity-70"></div>
 
-    <div class="relative max-w-[1200px] mx-auto px-6">
-      <!-- Titre -->
-      <h2 class="text-darkBlue font-extrabold text-2xl md:text-3xl mb-8">
-        {{ __('À QUI S\'ADRESSE AIAE ?') }}
-      </h2>
+  <div class="relative max-w-[1200px] mx-auto px-6">
+    <h2 class="text-darkBlue font-extrabold text-2xl md:text-3xl mb-8">
+      {{ __('À QUI S\'ADRESSE AIAE ?') }}
+    </h2>
 
-      <!-- GRID -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl">
-        
-        <!-- PARTICULIERS -->
-        <div class="relative group h-64 sm:h-[350px] md:h-[450px] overflow-hidden">
-          <img src="{{ asset('aiae-frontend/Images/nParticuliers.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Particuliers & Familles" />
-          <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 flex items-end justify-between z-10 w-full overflow-hidden gap-2">
-            <div class="flex-shrink pr-2">
-              <h3 class="text-white font-heavy text-[4vw] min-[400px]:text-[22px] sm:text-[28px] md:text-[36px] uppercase leading-none mb-1 sm:mb-2 drop-shadow-lg truncate ...">
-                {{ __('PARTICULIERS & FAMILLES') }}
-              </h3>
-              <p class="text-white font-book text-[2.5vw] min-[400px]:text-[12px] sm:text-[15px] md:text-[18px] leading-tight drop-shadow-md">
-                {{ __('Vous souhaitez construire votre résidence au Togo avec un partenaire fiable.') }}
-              </p>
-            </div>
-            <a href="{{ route('contact') }}" class="bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[7px] sm:text-[8px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full border border-white/50 transition-all uppercase tracking-wider shrink-0 mr-2 sm:mr-4 hover:scale-105 drop-shadow-lg">
-              {{ __('CONTACTEZ-NOUS') }}
-            </a>
+    <div class="grid grid-cols-1 sm:grid-cols-2 rounded-2xl overflow-hidden shadow-2xl">
+
+      <!-- PARTICULIERS -->
+      <div class="relative group h-64 sm:h-[350px] md:h-[450px]">
+        <img src="{{ asset('aiae-frontend/Images/nParticuliers.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Particuliers & Familles" />
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-5 md:p-7 flex items-end justify-between z-10 gap-2">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-white font-heavy text-[14px] sm:text-[20px] md:text-[28px] uppercase leading-tight mb-1 drop-shadow-lg">
+              {{ __('PARTICULIERS & FAMILLES') }}
+            </h3>
+            <p class="text-white font-book text-[10px] sm:text-[12px] md:text-[15px] leading-tight drop-shadow-md">
+              {{ __('Vous souhaitez construire votre résidence au Togo avec un partenaire fiable.') }}
+            </p>
           </div>
-        </div>
-
-        <!-- DIASPORA -->
-        <div class="relative group h-64 sm:h-[350px] md:h-[450px] overflow-hidden">
-          <img src="{{ asset('aiae-frontend/Images/nDiaspora.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Diaspora Togolaise" />
-          <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 flex items-end justify-between z-10 w-full overflow-hidden gap-2">
-            <div class="flex-shrink pr-2">
-              <h3 class="text-white font-heavy text-[4vw] min-[400px]:text-[22px] sm:text-[28px] md:text-[36px] uppercase leading-none mb-1 sm:mb-2 drop-shadow-lg truncate ...">
-                {{ __('DIASPORA TOGOLAISE') }}
-              </h3>
-              <p class="text-white font-book text-[2.5vw] min-[400px]:text-[12px] sm:text-[15px] md:text-[18px] leading-tight drop-shadow-md">
-                {{ __('Vous vivez à l\'étranger et voulez construire à distance en toute confiance.') }}
-              </p>
-            </div>
-            <a href="{{ route('contact') }}" class="bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[7px] sm:text-[8px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full border border-white/50 transition-all uppercase tracking-wider shrink-0 mr-2 sm:mr-4 hover:scale-105 drop-shadow-lg">
-              {{ __('CONTACTEZ-NOUS') }}
-            </a>
-          </div>
-        </div>
-
-        <!-- ENTREPRISES -->
-        <div class="relative group h-64 sm:h-[350px] md:h-[450px] overflow-hidden">
-          <img src="{{ asset('aiae-frontend/Images/nEntreprises.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Entreprises & PME" />
-          <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 flex items-end justify-between z-10 w-full overflow-hidden gap-2">
-            <div class="flex-shrink pr-2">
-              <h3 class="text-white font-heavy text-[4vw] min-[400px]:text-[22px] sm:text-[28px] md:text-[36px] uppercase leading-none mb-1 sm:mb-2 drop-shadow-lg truncate ...">
-                {{ __('ENTREPRISES & PME') }}
-              </h3>
-              <p class="text-white font-book text-[2.5vw] min-[400px]:text-[12px] sm:text-[15px] md:text-[18px] leading-tight drop-shadow-md">
-                {{ __('Vous cherchez l\'autonomie énergétique ou des locaux professionnels.') }}
-              </p>
-            </div>
-            <a href="{{ route('contact') }}" class="bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[7px] sm:text-[8px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full border border-white/50 transition-all uppercase tracking-wider shrink-0 mb-1 hover:scale-105 drop-shadow-lg">
-              {{ __('CONTACTEZ-NOUS') }}
-            </a>
-          </div>
-        </div>
-
-        <!-- INSTITUTIONS -->
-        <div class="relative group h-64 sm:h-[350px] md:h-[450px] overflow-hidden">
-          <img src="{{ asset('aiae-frontend/Images/nInstitutions.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Institutions & Administrations" />
-          <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8 flex items-end justify-between z-10 w-full overflow-hidden gap-2">
-            <div class="flex-shrink pr-2">
-              <h3 class="text-white font-heavy text-[4vw] min-[400px]:text-[22px] sm:text-[28px] md:text-[36px] uppercase leading-none mb-1 sm:mb-2 drop-shadow-lg">
-                {!! __('INSTITUTIONS &<br>ADMINISTRATIONS') !!}
-              </h3>
-              <p class="text-white font-book text-[2.5vw] min-[400px]:text-[12px] sm:text-[15px] md:text-[18px] leading-tight drop-shadow-md">
-                {{ __('Vous avez besoin d\'infrastructures sécurisées aux normes internationales.') }}
-              </p>
-            </div>
-            <a href="{{ route('contact') }}" class="bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[7px] sm:text-[8px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-full border border-white/50 transition-all uppercase tracking-wider shrink-0 mb-1 hover:scale-105 drop-shadow-lg">
-              {{ __('CONTACTEZ-NOUS') }}
-            </a>
-          </div>
+          <a href="{{ route('contact') }}" class="shrink-0 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[8px] sm:text-[9px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/50 transition-all uppercase tracking-wide hover:scale-105 drop-shadow-lg whitespace-nowrap">
+            {{ __('CONTACTEZ-NOUS') }}
+          </a>
         </div>
       </div>
+
+      <!-- DIASPORA -->
+      <div class="relative group h-64 sm:h-[350px] md:h-[450px]">
+        <img src="{{ asset('aiae-frontend/Images/nDiaspora.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Diaspora Togolaise" />
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-5 md:p-7 flex items-end justify-between z-10 gap-2">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-white font-heavy text-[14px] sm:text-[20px] md:text-[28px] uppercase leading-tight mb-1 drop-shadow-lg">
+              {{ __('DIASPORA TOGOLAISE') }}
+            </h3>
+            <p class="text-white font-book text-[10px] sm:text-[12px] md:text-[15px] leading-tight drop-shadow-md">
+              {{ __('Vous vivez à l\'étranger et voulez construire à distance en toute confiance.') }}
+            </p>
+          </div>
+          <a href="{{ route('contact') }}" class="shrink-0 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[8px] sm:text-[9px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/50 transition-all uppercase tracking-wide hover:scale-105 drop-shadow-lg whitespace-nowrap">
+            {{ __('CONTACTEZ-NOUS') }}
+          </a>
+        </div>
+      </div>
+
+      <!-- ENTREPRISES -->
+      <div class="relative group h-64 sm:h-[350px] md:h-[450px]">
+        <img src="{{ asset('aiae-frontend/Images/nEntreprises.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Entreprises & PME" />
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-5 md:p-7 flex items-end justify-between z-10 gap-2">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-white font-heavy text-[14px] sm:text-[20px] md:text-[28px] uppercase leading-tight mb-1 drop-shadow-lg">
+              {{ __('ENTREPRISES & PME') }}
+            </h3>
+            <p class="text-white font-book text-[10px] sm:text-[12px] md:text-[15px] leading-tight drop-shadow-md">
+              {{ __('Vous cherchez l\'autonomie énergétique ou des locaux professionnels.') }}
+            </p>
+          </div>
+          <a href="{{ route('contact') }}" class="shrink-0 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[8px] sm:text-[9px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/50 transition-all uppercase tracking-wide hover:scale-105 drop-shadow-lg whitespace-nowrap">
+            {{ __('CONTACTEZ-NOUS') }}
+          </a>
+        </div>
+      </div>
+
+      <!-- INSTITUTIONS -->
+      <div class="relative group h-64 sm:h-[350px] md:h-[450px]">
+        <img src="{{ asset('aiae-frontend/Images/nInstitutions.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Institutions & Administrations" />
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-5 md:p-7 flex items-end justify-between z-10 gap-2">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-white font-heavy text-[14px] sm:text-[20px] md:text-[28px] uppercase leading-tight mb-1 drop-shadow-lg">
+              {!! __('INSTITUTIONS &<br>ADMINISTRATIONS') !!}
+            </h3>
+            <p class="text-white font-book text-[10px] sm:text-[12px] md:text-[15px] leading-tight drop-shadow-md">
+              {{ __('Vous avez besoin d\'infrastructures sécurisées aux normes internationales.') }}
+            </p>
+          </div>
+          <a href="{{ route('contact') }}" class="shrink-0 bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white text-[8px] sm:text-[9px] md:text-[10px] font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/50 transition-all uppercase tracking-wide hover:scale-105 drop-shadow-lg whitespace-nowrap">
+            {{ __('CONTACTEZ-NOUS') }}
+          </a>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ================= SECTION NOS DIVISIONS ================= -->
   <section class="relative pt-4 md:pt-24 pb-20 md:pb-36 bg-[#f3f3f3] overflow-hidden">
