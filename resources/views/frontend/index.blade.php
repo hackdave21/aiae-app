@@ -860,42 +860,42 @@
               shadow-[8px_8px_30px_rgba(0,0,0,0.5)]
               px-6 sm:px-10 pt-6 sm:pt-8 pb-8 sm:pb-10">
 
-    <!-- Deux colonnes fixes -->
-    <div class="flex gap-6 sm:gap-10 text-white font-heavy">
+    <!-- Deux colonnes avec Grid pour meilleur contrôle -->
+    <div class="grid grid-cols-1 min-[450px]:grid-cols-2 gap-x-6 gap-y-3 sm:gap-x-10 sm:gap-y-4 text-white font-heavy">
 
       <!-- Colonne 1 -->
-      <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+      <div class="flex flex-col gap-3 sm:gap-4">
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
           <span>{{ __('Devis Gratuit Détaillé') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
           <span>{{ __('Planning Contractuel') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
-          <span>{{ __('Garantie Décennale') }}</span>
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
+          <span class="leading-tight">{{ __('Garantie Décennale') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
-          <span>{{ __('Assurance RC Pro') }}</span>
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
+          <span class="leading-tight">{{ __('Assurance RC Pro') }}</span>
         </div>
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
-          <span>{{ __('Paiement Par Étapes') }}</span>
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
+          <span class="leading-tight">{{ __('Paiement Par Étapes') }}</span>
         </div>
       </div>
 
       <!-- Colonne 2 -->
-      <div class="flex flex-col gap-3 sm:gap-4 shrink-0">
-        <div class="flex items-center gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+      <div class="flex flex-col gap-3 sm:gap-4">
+        <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
           <span>{{ __('Confidentialité') }}</span>
         </div>
         <div class="flex items-start gap-2 text-[12px] sm:text-[14px] md:text-[15px]">
-          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1"></span>
-          <span class="leading-snug max-w-[90px] sm:max-w-[130px]">
+          <span class="w-2 h-2 bg-white rounded-full shrink-0 mt-1.5"></span>
+          <span class="leading-tight">
             {{ __('Accompagnement Financement') }}
           </span>
         </div>
@@ -1705,7 +1705,7 @@
     <div class="max-w-[1400px] mx-auto text-left md:text-center px-6">
 
       <!-- TITRE -->
-      <h2 class="text-black text-4xl md:text-[65px] lg:text-[70px] font-heavy mb-8">
+      <h2 class="text-black text-4xl md:text-[50px] lg:text-[70px] font-heavy mb-8 leading-[1.1] text-balance">
         {{ __('Prêt À Concrétiser Votre Projet ?') }}
       </h2>
 
