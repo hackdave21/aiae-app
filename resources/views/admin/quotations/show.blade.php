@@ -94,12 +94,7 @@
                                 </form>
                             @endif
 
-                            <form action="{{ route('admin.quotations.send', $quotation) }}" method="POST" class="d-grid">
-                                @csrf
-                                <button type="submit" class="btn btn-info">
-                                    <i class="feather-mail me-2"></i>Envoyer par e-mail
-                                </button>
-                            </form>
+
                             
                             @if($quotation->pdf_path)
                                 <a href="{{ asset('storage/' . $quotation->pdf_path) }}" class="btn btn-primary" target="_blank">
