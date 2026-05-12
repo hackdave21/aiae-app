@@ -259,11 +259,11 @@
     <div class="max-w-[1450px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
       <!-- TEXTE -->
-      <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0">
+      <div class="flex flex-col justify-center order-2 lg:order-1 px-2 md:px-6 min-w-0 lg:pr-8">
 
         <div class="mt-4">
           <!-- TITRE -->
-          <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[30px] leading-[1.05] mb-8 break-words">
+          <h2 class="text-darkBlue font-bold text-[22px] sm:text-[26px] md:text-[26px] lg:text-[30px] xl:text-[34px] leading-[1.1] mb-8 break-words">
             {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
           </h2>
 
