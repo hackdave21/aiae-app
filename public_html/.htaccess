@@ -1,0 +1,103 @@
+# ──────────────────────────────────────────────────────────────────
+# public_html/.htaccess — Apache (cPanel / afrique.host)
+# Configuration pour Laravel servi depuis public_html/
+# ──────────────────────────────────────────────────────────────────
+
+Options -Indexes -MultiViews
+ServerSignature Off
+
+# ──────────────────────────────────────────────────────────────────
+# 1. Compression GZIP
+# ──────────────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml
+    AddOutputFilterByType DEFLATE text/css application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
+</IfModule>
+
+# ──────────────────────────────────────────────────────────────────
+# 2. Cache navigateur pour les assets statiques
+# ──────────────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Images
+    ExpiresByType image/jpeg    "access plus 1 year"
+    ExpiresByType image/png     "access plus 1 year"
+    ExpiresByType image/gif     "access plus 1 year"
+    ExpiresByType image/webp    "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon  "access plus 1 year"
+
+    # Fonts
+    ExpiresByType font/ttf      "access plus 1 year"
+    ExpiresByType font/otf      "access plus 1 year"
+    ExpiresByType font/woff     "access plus 1 year"
+    ExpiresByType font/woff2    "access plus 1 year"
+
+    # CSS & JS (Vite génère des noms avec hash → 1 an)
+    ExpiresByType text/css                "access plus 1 year"
+    ExpiresByType application/javascript  "access plus 1 year"
+
+    # HTML (ne pas cacher)
+    ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+# ──────────────────────────────────────────────────────────────────
+# 3. En-têtes de sécurité
+# ──────────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Cache immutable pour les assets Vite (hash dans le nom de fichier)
+    <FilesMatch "\.(css|js|woff2?|ttf|otf|eot|svg|png|jpg|jpeg|gif|webp|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
+# ──────────────────────────────────────────────────────────────────
+# 4. Force HTTPS — COMMENTÉ (SSL pas encore actif)
+#    Décommenter une fois le certificat SSL propagé
+# ──────────────────────────────────────────────────────────────────
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ──────────────────────────────────────────────────────────────────
+# 5. Réécriture des URLs (Laravel front controller)
+# ──────────────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Servir directement les fichiers statiques existants
+    # (images, fonts, etc. dans public_html/)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Rediriger /build/* vers les assets compilés par Vite
+    # (via le symlink public_html/build → aiae-app/public/build)
+    RewriteCond %{REQUEST_URI} ^/build/
+    RewriteRule ^ - [L]
+
+    # Tout le reste → index.php (bootstrap Laravel)
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# ──────────────────────────────────────────────────────────────────
+# 6. Bloquer l'accès aux fichiers sensibles
+# ──────────────────────────────────────────────────────────────────
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(log|sh|sql|bak|lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

@@ -1,0 +1,106 @@
+name: 🚀 Déploiement Production — AIAE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Déployer sur cPanel (afrique.host)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # --------------------------------------------------------
+      # 1. Checkout du code (nécessaire pour valider le push)
+      # --------------------------------------------------------
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------------
+      # 2. Connexion SSH + déploiement
+      # --------------------------------------------------------
+      - name: 🔌 Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 🌐 Ajouter le host SSH aux known_hosts
+        run: |
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      # --------------------------------------------------------
+      # 3. Passer en mode maintenance
+      # --------------------------------------------------------
+      - name: 🔒 Maintenance ON
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && php artisan down --message='Mise à jour en cours...' --retry=60 || true"
+
+      # --------------------------------------------------------
+      # 4. Git pull
+      # --------------------------------------------------------
+      - name: ⬇️ Git pull origin main
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && git pull origin main"
+
+      # --------------------------------------------------------
+      # 5. Composer install (sans dépendances dev)
+      # --------------------------------------------------------
+      - name: 🎵 Composer install
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && composer install --no-dev --optimize-autoloader --no-interaction"
+
+      # --------------------------------------------------------
+      # 6. Build assets Vite (CSS + JS)
+      # --------------------------------------------------------
+      - name: 🏗️ npm ci && npm run build
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && npm ci && npm run build"
+
+      # --------------------------------------------------------
+      # 7. Migrations
+      # --------------------------------------------------------
+      - name: 🗄️ Migrations
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && php artisan migrate --force"
+
+      # --------------------------------------------------------
+      # 8. Caches Laravel
+      # --------------------------------------------------------
+      - name: ⚡ Caches Laravel
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && \
+             php artisan config:cache && \
+             php artisan route:cache && \
+             php artisan view:cache && \
+             php artisan optimize"
+
+      # --------------------------------------------------------
+      # 9. Sortie du mode maintenance
+      # --------------------------------------------------------
+      - name: 🔓 Maintenance OFF
+        if: always()
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && php artisan up"
+
+      # --------------------------------------------------------
+      # 10. Health check HTTP
+      # --------------------------------------------------------
+      - name: 🩺 Health check
+        run: |
+          sleep 5
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" "${{ secrets.APP_URL }}")
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Health check échoué — statut HTTP: $STATUS"
+            exit 1
+          fi
+          echo "✅ Application en ligne et répond 200"
