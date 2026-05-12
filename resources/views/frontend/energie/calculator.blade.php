@@ -130,6 +130,7 @@ $calcTranslations = [
         zones: @json($zones)
     };
     window.SIMULATOR_URL = "{{ route('simulator.index') }}";
+    window.CONTACT_URL = "{{ route('contact') }}";
 
     window.AIAE_TRANSLATIONS = @json($calcTranslations);
     window.AIAE_USER = {
@@ -291,94 +292,8 @@ $calcTranslations = [
       return token ? token.getAttribute('content') : '';
     };
 
-    const handleQuoteRequest = async () => {
-      const authEmail = window.AIAE_USER?.email || '';
-      const authName = window.AIAE_USER?.name || '';
-
-      const { value: formValues } = await window.Swal.fire({
-        title: t('Demande de devis formel'),
-        html: `
-          <div class="text-left space-y-4">
-            <p class="text-sm text-gray-500 mb-4">${t('Laissez-nous vos coordonnées pour recevoir votre devis détaillé basé sur cette configuration solaire.')}</p>
-            <input id="swal-name" class="swal2-input !mt-0 !w-[100%] !max-w-[100%]" placeholder="${t('Nom Complet *')}" value="${authName}" ${authName ? 'disabled' : ''}>
-            <input id="swal-email" type="email" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="${t('Email *')}" value="${authEmail}" ${authEmail ? 'disabled' : ''}>
-            <input id="swal-phone" type="tel" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="${t('Téléphone *')}">
-            <input id="swal-location" class="swal2-input !w-[100%] !max-w-[100%]" placeholder="${t('Ville du projet (ex: Lomé)')}">
-          </div>
-        `,
-        focusConfirm: false,
-        showCancelButton: true,
-        confirmButtonText: t('Envoyer ma demande'),
-        cancelButtonText: t('Annuler'),
-        confirmButtonColor: 'var(--orange)',
-        preConfirm: () => {
-          const name = document.getElementById('swal-name').value;
-          const email = document.getElementById('swal-email').value;
-          const phone = document.getElementById('swal-phone').value;
-          const location = document.getElementById('swal-location').value;
-          
-          if (!name || !email || !phone) {
-            window.Swal.showValidationMessage(t('Veuillez remplir les champs obligatoires') + ' (*)');
-            return false;
-          }
-          return { full_name: name, email: email, phone: phone, location: location };
-        }
-      });
-
-      if (formValues) {
-        // Préparation du résumé du projet ("project_description")
-        const detailsInv = monInventaire.map(e => `- ${e.qty}x ${e.label} (${e.h}h/j)`).join('\n');
-        
-        const summary = t('DEMANDE DE DEVIS - SYSTÈME SOLAIRE AIAE') + `\n\n` + 
-        t('Configuration :') + `\n` +
-        `- ` + t('Mode :') + ` ${mode}\n` +
-        `- ` + t('Consommation estimée :') + ` ${resultats.consoKwhJ.toFixed(1)} kWh/jour\n` +
-        `- ` + t('Panneaux recommandés :') + ` ${resultats.panneauxKwc} kWc\n` +
-        `- ` + t('Batteries recommandées :') + ` ${resultats.batteriesKwh} kWh\n` +
-        `- ` + t('Puissance Onduleur :') + ` ${resultats.puissanceOnduleur} kVA\n\n` +
-        t('Inventaire :') + `\n${detailsInv}`;
-
-        window.Swal.fire({ title: t('Génération en cours...'), allowOutsideClick: false });
-        window.Swal.showLoading();
-
-        try {
-          const formData = new FormData();
-          formData.append('full_name', formValues.full_name);
-          formData.append('email', formValues.email);
-          formData.append('phone', formValues.phone);
-          formData.append('location', formValues.location);
-          formData.append('project_type', 'Energie Solaire');
-          formData.append('project_description', summary);
-          formData.append('budget', resultats.coutMin.toString());
-
-          const res = await fetch('{{ route("quotation.request") }}', {
-            method: 'POST',
-            headers: {
-              'X-CSRF-TOKEN': fetchCsrfToken()
-            },
-            body: formData
-          });
-
-          const data = await res.json();
-          if (data.success) {
-            window.Swal.fire({
-              icon: 'success',
-              title: t('Demande envoyée !'),
-              text: data.message,
-              confirmButtonColor: 'var(--bleu)'
-            });
-          } else {
-            throw new Error(data.message || t("Erreur lors de l'envoi"));
-          }
-        } catch (err) {
-          window.Swal.fire({
-            icon: 'error',
-            title: t('Oups...'),
-            text: err.message,
-            confirmButtonColor: 'var(--orange)'
-          });
-        }
-      }
+    const handleQuoteRequest = () => {
+      window.location.href = window.CONTACT_URL;
     };
 
     return (
