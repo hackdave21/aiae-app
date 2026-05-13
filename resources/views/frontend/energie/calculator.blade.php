@@ -10,7 +10,7 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
+   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -131,7 +131,7 @@ $calcTranslations = [
     };
     window.SIMULATOR_URL = "{{ route('simulator.index') }}";
     window.CONTACT_URL = "{{ route('contact') }}";
-    window.AIAE_LOGO_URL = "{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}";
+    window.AIAE_LOGO_URL = "{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}";
 
     window.AIAE_TRANSLATIONS = @json($calcTranslations);
     window.AIAE_USER = {
