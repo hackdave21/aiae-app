@@ -216,7 +216,7 @@
           <h2 class="legal-title text-2xl">4. Propriété intellectuelle</h2>
           <div class="text-gray-600 font-light space-y-4">
             <p>
-              L'ensemble du contenu du site <strong class="text-primary">www.aiae.tg</strong> (textes, images,
+              L'ensemble du contenu du site <strong class="text-primary">aiae.services</strong> (textes, images,
               graphismes, logo, icônes, vidéos, sons, logiciels, bases de données, algorithmes du simulateur) est la
               propriété exclusive de AIAE SARL ou de ses partenaires et est protégé par les lois togolaises et
               internationales relatives à la propriété intellectuelle, notamment l'Accord de Bangui révisé (OAPI).
