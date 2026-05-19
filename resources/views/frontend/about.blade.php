@@ -365,6 +365,25 @@
             </p>
           </div>
 
+          <!-- CARD 5 -->
+          <div class="bg-[#0f5a34] rounded-[16px] p-6 text-white hover-lift 
+            flex flex-col items-center text-center md:col-span-2 md:w-1/2 mx-auto">
+            <div class="mb-4 flex justify-center">
+              <div class="w-14 h-14 rounded-full border-2 border-[#00ff9c] flex items-center justify-center">
+                <!-- Lock Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#00ff9c" class="w-7 h-7">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="font-black text-[24px] uppercase mb-2">
+              {{ __('CONFIDENTIALITÉ TOTALE') }}
+            </h3>
+            <p class="text-[18px] font-light leading-[1.6] opacity-90">
+              {!! __('Clause de non-divulgation contractuelle sur chaque projet.') !!}
+            </p>
+          </div>
+
         </div>
       </div>
 
