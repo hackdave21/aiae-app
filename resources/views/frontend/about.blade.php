@@ -263,8 +263,8 @@
       <div class="mt-4">
 
         <!-- TITRE -->
-        <h2 class="text-darkBlue font-bold text-[16px] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-tight mb-8">
-          {{ __('QUI SOMMES-NOUS ?') }}
+        <h2 class="text-darkBlue font-bold text-[16px] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-tight mb-8 whitespace-nowrap">
+          {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
         </h2>
 
         <!-- PARAGRAPHE 1 -->
