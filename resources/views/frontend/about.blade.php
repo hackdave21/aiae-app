@@ -263,23 +263,18 @@
       <div class="mt-4">
 
         <!-- TITRE -->
-        <h2 class="text-darkBlue font-bold text-[16px] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-tight mb-8 whitespace-nowrap">
-          {{ __('UNE EXPERTISE NÉE D\'UN CONSTAT') }}
+        <h2 class="text-darkBlue font-bold text-[16px] min-[400px]:text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-tight mb-8">
+          {{ __('QUI SOMMES-NOUS ?') }}
         </h2>
 
         <!-- PARAGRAPHE 1 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('AIAE est née d\'une observation simple : <strong class="font-heavy">en Afrique de l\'Ouest, le client qui souhaite construire doit coordonner lui-même une multitude d\'intervenants</strong> architecte, bureau d\'études, maçon, électricien, plombier <strong class="font-heavy">sans garantie de cohérence ni de respect des engagements.</strong>') !!}
+        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 text-justify">
+          {!! __('AIAE SARL (Afrika Infrastructures And Equipements) est une entreprise togolaise spécialisée dans la conception et la réalisation d\'infrastructures de qualité. Basée à Lomé, notre société intervient sur l\'ensemble du territoire national avec une ambition claire : devenir le partenaire de référence pour les projets d\'infrastructure stratégique en Afrique de l\'Ouest.') !!}
         </p>
 
         <!-- PARAGRAPHE 2 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('Fort de <strong class="font-heavy">plus de 18 années d\'expérience en génie civil</strong>, d\'un parcours d\'<strong class="font-heavy">enseignant-chercheur</strong> et d\'une solide <strong class="font-heavy">formation en administration des entreprises, le fondateur d\'AIAE a décidé de proposer</strong> un modèle différent : <strong class="font-heavy">une entreprise qui maîtrise l\'intégralité de la chaîne, de la conception à la réalisation.</strong>') !!}
-        </p>
-
-        <!-- PARAGRAPHE 3 -->
-        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4">
-          {!! __('<strong class="font-heavy">Basée à Lomé</strong>, AIAE SARL porte une ambition claire : devenir la référence en Afrique de l\'Ouest pour les <strong class="font-heavy">solutions intégrées de construction, d\'énergie, de sécurité et de préfabrication.</strong>') !!}
+        <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 text-justify">
+          {!! __('Notre direction technique est assurée par un Docteur Ingénieur en génie civil, spécialisé dans les structures complexes et les technologies du béton précontraint, avec plus de 18 ans d\'expérience terrain. Cette expertise de haut niveau garantit une maîtrise complète de la chaîne conception-réalisation, la capacité à traiter des projets techniquement exigeants et un dialogue de haut niveau avec vos services d\'ingénierie, dans le strict respect des normes internationales.') !!}
         </p>
 
       </div>
