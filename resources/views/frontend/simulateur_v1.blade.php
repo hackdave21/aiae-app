@@ -431,15 +431,18 @@ const App=()=>{
   const[hspEtage,setHspEtage]=useState(2.8);
   const [nbChambres,setNbChambres]=useState(qs.nb_beds ? parseInt(qs.nb_beds) : 3);
   const[espacesHotel,setEspacesHotel]=useState(qs.espaces_communs === "1" ? ['accueil'] : []);
+  const SPECIFIQUES = libConfig.SPECIFIQUE || [];
+
   const [hauteurLibre,setHauteurLibre]=useState(8);
-  const [pontRoulant,setPontRoulant]=useState(false);
-  const[pontCap,setPontCap]=useState(5);
+  const [pontRoulant,setPontRoulant]=useState(hasOpt('pont_roulant_5t') || hasOpt('pont_roulant_10t'));
+  const [pontCap,setPontCap]=useState(hasOpt('pont_roulant_10t') ? 10 : 5);
   const [groupeFroid,setGroupeFroid]=useState('');
   const [effectif,setEffectif]=useState(100);
-  const [irrigation,setIrrigation]=useState('');
+  const initIrrigation = hasOpt('irrigation_goutte_a_goutte') ? 'goutte' : (hasOpt('irrigation_aspersion') ? 'aspersion' : '');
+  const [irrigation,setIrrigation]=useState(initIrrigation);
   const [surfExploit,setSurfExploit]=useState(5);
   const[nbAsc,setNbAsc]=useState(0);
-  const [nbQuais,setNbQuais]=useState(2);
+  const [nbQuais,setNbQuais]=useState(hasOpt('quai_chargement') ? 2 : 0);
 
   // Options mapping Logic
   const hasOpt = (key) => qs.options && qs.options.includes(key);
@@ -501,12 +504,11 @@ const App=()=>{
 
   const prixM2=useMemo(()=>{
     if(secteur==='residentiel')return(STANDINGS_PRIX[standing]||500000)*(typeData?.maj||1);
-    if(typeBat==='hotel')return HOTELS_PRIX[catHotel]||625000;
     if(secteur==='industriel'){
       let base=typeData?.prix||250000;
       if(hauteurLibre>10)base*=1.12;
       if(pontRoulant)base*=1.15;
-      if(typeBat==='frigo')base*=1.25;
+      if(typeBat==='chambre_froide')base*=1.25;
       return Math.round(base);
     }
     return typeData?.prix||450000;
@@ -519,7 +521,7 @@ const App=()=>{
     const motifs=[];
     if(niveaux>4||hauteurTotale>15){cat='B2';geoOblig=true;motifs.push('>R+4');}
     else if(niveaux>2||hauteurTotale>8){cat='A2';geoOblig=true;motifs.push('R+3 ou >8m');}
-    if(['hotel','commerce','clinique'].includes(typeBat)){geoOblig=true;motifs.push('ERP');}
+    if(['commerce','clinique'].includes(typeBat) || typeBat?.startsWith('hotel_')){geoOblig=true;motifs.push('ERP');}
     if(sol==='argileux'||sol==='hydromorphe'){geoOblig=true;motifs.push('Sol risque');}
     if(ssSol>0){geoOblig=true;motifs.push('Sous-sol');}
     return{cat,geoOblig,motifs,mission:geoOblig?(cat==='B2'?'G2 PRO':'G2 AVP'):'G1'};
@@ -529,7 +531,7 @@ const App=()=>{
   const duree=useMemo(()=>{
     let d=6;
     if(secteur==='residentiel')d=typeBat==='villa'?8:14+(niveaux-2)*1.5;
-    else if(secteur==='tertiaire')d=typeBat==='hotel'?18+(niveaux-3)*2:12+(niveaux-2)*1.5;
+    else if(secteur==='tertiaire')d=typeBat?.startsWith('hotel_')?18+(niveaux-3)*2:12+(niveaux-2)*1.5;
     else if(secteur==='industriel')d=surfaceBatie>3000?14:surfaceBatie>1500?10:7;
     else if(secteur==='agricole')d=5;
     if(ssSol>0)d+=ssSol*2.5;
@@ -549,7 +551,7 @@ const App=()=>{
     let surfClim=surfaceBatie*(secteur==='industriel'?0.15:secteur==='agricole'?0.10:0.70);
     if(surfClim>0)details.push({label:t('Climatisation'),icon:'Snowflake',kw:Math.round(surfClim*0.10*10)/10,prio:5});
     // Hôtel
-    if(typeBat==='hotel'){
+    if(typeBat?.startsWith('hotel_')){
       details.push({label:t('Eau chaude'),icon:'ShowerHead',kw:Math.round(nbChambres*0.3*10)/10,prio:4});
       if(espacesHotel.includes('restaurant'))details.push({label:t('Cuisine pro'),icon:'CookingPot',kw:15,prio:6});
       if(espacesHotel.includes('spa'))details.push({label:t('Spa'),icon:'Flower2',kw:12,prio:7});
@@ -558,7 +560,7 @@ const App=()=>{
     // Équipements
     if(nbAsc>0)details.push({label:t('Ascenseurs'),icon:'ArrowUpSquare',kw:Math.round(nbAsc*12*0.15*10)/10,prio:9});
     if(pontRoulant)details.push({label:t('Pont roulant'),icon:'Construction',kw:Math.round((pontCap<=5?15:pontCap<=10?25:40)*0.2*10)/10,prio:10});
-    if(typeBat==='frigo'||groupeFroid)details.push({label:t('Groupe froid'),icon:'Snowflake',kw:Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10,prio:3});
+    if(typeBat==='chambre_froide'||groupeFroid)details.push({label:t('Groupe froid'),icon:'Snowflake',kw:Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10,prio:3});
     // Sécurité
     if(alarme)details.push({label:t('Alarme'),icon:'Bell',kw:0.5,prio:11});
     if(video)details.push({label:t('Vidéo'),icon:'Video',kw:video==='16+'?1.5:0.8,prio:3});
@@ -665,10 +667,26 @@ const App=()=>{
     // Équipements
     let equip=0;
     if(nbAsc>0)equip+=nbAsc*(niveaux<=5?28000000:35000000);
-    if(nbQuais>0&&secteur==='industriel')equip+=nbQuais*8500000;
-    if(pontRoulant)equip+=pontCap<=5?28000000:pontCap<=10?48000000:78000000;
+    
+    if(nbQuais>0&&secteur==='industriel') {
+      const optQuai = SPECIFIQUES.find(o => o.id === 'quai_chargement');
+      equip += nbQuais * (optQuai ? optQuai.prix : 3500000);
+    }
+    
+    if(pontRoulant) {
+      const pRoulantId = pontCap <= 5 ? 'pont_roulant_5t' : 'pont_roulant_10t';
+      const optPont = SPECIFIQUES.find(o => o.id === pRoulantId);
+      equip += optPont ? optPont.prix : (pontCap<=5?15000000:25000000);
+    }
+    
     if(groupeFroid)equip+=surfaceBatie*(groupeFroid==='negatif'?95000:55000);
-    if(irrigation==='goutte')equip+=surfExploit*1800000;
+    
+    if(irrigation) {
+      const irrId = irrigation === 'goutte' ? 'irrigation_goutte_a_goutte' : 'irrigation_aspersion';
+      const optIrr = EXTERIEUR_OPTS.find(o => o.id === irrId);
+      equip += surfExploit * (optIrr ? optIrr.prix : (irrigation === 'goutte' ? 1500000 : 2500000));
+    }
+
     if(equip>0)add('7',t('Équipements spécifiques'),t('Ascenseurs, quais, pont, froid'),equip);
     // Énergie
     const kitSol = SOLAIRES.find(k => k.id === solaire);
@@ -934,7 +952,7 @@ const App=()=>{
                 </div>
               </div>
             )}
-            {typeBat==='hotel'&&(
+            {typeBat?.startsWith('hotel_')&&(
               <div className="card p-5 mb-6">
                 <h3 className="font-semibold text-gray-700 mb-4">{t('Classification hôtelière')}</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -1057,7 +1075,7 @@ const App=()=>{
                 </div>
               </div>
             </div>
-            {typeBat==='hotel'&&(
+            {typeBat?.startsWith('hotel_')&&(
               <div className="card p-5 mt-6">
                 <h3 className="font-semibold text-gray-700 mb-4">{t('Configuration hôtel')}</h3>
                 <div className="grid grid-cols-2 gap-4 mb-4">
@@ -1088,7 +1106,7 @@ const App=()=>{
                   </label>
                   {pontRoulant&&<InputNum value={pontCap} onChange={setPontCap} min={1} max={50} unit="T" label={t('Capacité')}/>}
                 </div>
-                {(typeBat==='frigo'||typeBat==='entrepot')&&(
+                {(typeBat==='chambre_froide'||typeBat==='entrepot')&&(
                   <div className="mt-4">
                     <label className="text-sm text-gray-600">{t('Groupe froid')}</label>
                     <div className="flex gap-2 mt-2">

@@ -70,9 +70,9 @@ class SimulatorController extends Controller
                 // Mapping icônes types
                 $icons = [
                     'villa' => 'Home', 'immeuble' => 'Building2', 'residence' => 'Building',
-                    'bureaux' => 'Briefcase', 'commerce' => 'Store', 'hotel' => 'Hotel', 'clinique' => 'Hospital',
-                    'entrepot' => 'Box', 'usine' => 'Factory', 'atelier' => 'Wrench', 'frigo' => 'Snowflake',
-                    'hangar' => 'Warehouse', 'elevage_bovins' => 'Beef', 'elevage_volailles' => 'Bird', 'serres' => 'Sprout', 'stockage' => 'Wheat'
+                    'bureaux' => 'Briefcase', 'commerce' => 'Store', 'hotel_1' => 'Hotel', 'hotel_2' => 'Hotel', 'hotel_3' => 'Hotel', 'hotel_4' => 'Hotel', 'hotel_5' => 'Hotel', 'clinique' => 'Hospital',
+                    'entrepot' => 'Box', 'usine' => 'Factory', 'atelier' => 'Wrench', 'chambre_froide' => 'Snowflake',
+                    'hangar' => 'Warehouse', 'hangar_agricole' => 'Warehouse', 'elevage_bovins' => 'Beef', 'poulailler' => 'Bird', 'serre' => 'Sprout', 'silo' => 'Wheat'
                 ];
                 return [
                     'id' => $t->code,
@@ -117,6 +117,10 @@ class SimulatorController extends Controller
             return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min];
         })->values();
 
+        $specifique = $options->where('categorie', 'specifique')->map(function ($o) {
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'unite' => $o->unite];
+        })->values();
+
         $simulatorData = [
             'SECTEURS' => $secteurs,
             'ZONES' => $zones,
@@ -127,7 +131,8 @@ class SimulatorController extends Controller
             'GROUPES' => $groupes,
             'SECURITE' => $securite,
             'EXTERIEUR' => $exterieur,
-            'DOMOTIQUE' => $domotique
+            'DOMOTIQUE' => $domotique,
+            'SPECIFIQUE' => $specifique
         ];
 
         $quickStartConfig = [
@@ -260,17 +265,22 @@ class SimulatorController extends Controller
             'residence' => 'Résidence de standing',
             'bureaux' => 'Bureaux', 
             'commerce' => 'Commerce', 
-            'hotel' => 'Hôtel', 
+            'hotel_1' => 'Hôtel 1 étoile', 
+            'hotel_2' => 'Hôtel 2 étoiles', 
+            'hotel_3' => 'Hôtel 3 étoiles', 
+            'hotel_4' => 'Hôtel 4 étoiles', 
+            'hotel_5' => 'Hôtel 5 étoiles', 
             'clinique' => 'Clinique',
             'entrepot' => 'Entrepôt', 
             'usine' => 'Usine', 
             'atelier' => 'Atelier', 
-            'frigo' => 'Chambre froide',
+            'chambre_froide' => 'Chambre froide',
             'hangar' => 'Hangar', 
             'elevage_bovins' => 'Élevage bovins', 
-            'elevage_volailles' => 'Élevage volailles', 
-            'serres' => 'Serres', 
-            'stockage' => 'Silos Agricoles',
+            'poulailler' => 'Poulailler', 
+            'serre' => 'Serres', 
+            'silo' => 'Silos Agricoles',
+            'hangar_agricole' => 'Hangar agricole',
             'culture_vivriere' => 'Culture vivrière',
             'transformation' => 'Unité de transformation'
         ];
