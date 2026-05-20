@@ -303,6 +303,46 @@ $simTranslations =[
 const {useState,useMemo}=React;
 const t = (key) => window.AIAE_SIM_TRANSLATIONS ? (window.AIAE_SIM_TRANSLATIONS[key] || key) : key;
 
+const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>(
+  <div className="flex flex-col">
+    {label&&<label className="text-xs text-gray-500 mb-1">{label}</label>}
+    <div className="input-num">
+      <button onClick={()=>{
+        const current = parseFloat(value) || 0;
+        const next = Math.max(min, current - step);
+        onChange(Math.round(next * 100) / 100);
+      }}>−</button>
+      <div className="flex-1 flex items-center justify-center min-w-[70px]">
+        <input 
+          type="number"
+          value={value}
+          min={min}
+          max={max}
+          step="any"
+          onChange={(e) => {
+            const val = e.target.value;
+            onChange(val === '' ? '' : parseFloat(val));
+          }}
+          onBlur={() => {
+            let val = parseFloat(value);
+            if (isNaN(val)) val = min;
+            const rounded = Math.round(val * 100) / 100;
+            onChange(Math.min(max, Math.max(min, rounded)));
+          }}
+          className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
+          style={{ fontFamily: 'JetBrains Mono, monospace' }}
+        />
+        {unit&&<span className="text-xs text-gray-500 mr-2">{unit}</span>}
+      </div>
+      <button onClick={()=>{
+        const current = parseFloat(value) || 0;
+        const next = Math.min(max, current + step);
+        onChange(Math.round(next * 100) / 100);
+      }}>+</button>
+    </div>
+  </div>
+);
+
 const App=()=>{
   const VERSION='8.1';
   
@@ -811,38 +851,6 @@ const App=()=>{
         setIsSaving(false);
     }
   };
-
-  // COMPOSANTS UI
-  const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>(
-    <div className="flex flex-col">
-      {label&&<label className="text-xs text-gray-500 mb-1">{label}</label>}
-      <div className="input-num">
-        <button onClick={()=>onChange(Math.max(min, (parseFloat(value) || 0) - step))}>−</button>
-        <div className="flex-1 flex items-center justify-center min-w-[70px]">
-          <input 
-            type="number"
-            value={value}
-            min={min}
-            max={max}
-            step="any"
-            onChange={(e) => {
-              const val = e.target.value;
-              onChange(val === '' ? '' : parseFloat(val));
-            }}
-            onBlur={() => {
-              let val = parseFloat(value);
-              if (isNaN(val)) val = min;
-              onChange(Math.min(max, Math.max(min, val)));
-            }}
-            className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          />
-          {unit&&<span className="text-xs text-gray-500 mr-2">{unit}</span>}
-        </div>
-        <button onClick={()=>onChange(Math.min(max, (parseFloat(value) || 0) + step))}>+</button>
-      </div>
-    </div>
-  );
 
   const Header=()=>(
     <header className="bg-white border-b sticky top-0 z-50 no-print">
