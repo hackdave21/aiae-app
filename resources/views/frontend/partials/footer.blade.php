@@ -65,7 +65,7 @@
         <!-- LOGO + DESCRIPTION -->
         <div>
 
-          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-64 pb-5" alt="AIAE Logo">
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO_AIAE_FINAL_-_Copie.png') }}" class="w-64 pb-5" alt="AIAE Logo">
 
           <p class="text-[#1a1f4d] text-[22px] leading-relaxed max-w-md">
             <strong>AIAE : Afrika Infrastructures And Equipments.</strong>

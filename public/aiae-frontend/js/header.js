@@ -72,7 +72,7 @@
 <header id="navBar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-[28px] overflow-visible transition-all duration-300">\
   <nav class="flex items-center justify-between px-4 sm:px-6 py-3">\
     <a href="index.html">\
-      <img src="Images/logos/LOGO AIAE BLANC.png" alt="AIAE" class="aiae-header-logo" />\
+      <img src="Images/logos/LOGO_AIAE_BLANC.png" alt="AIAE" class="aiae-header-logo" />\
     </a>\
     <ul class="hidden lg:flex items-center gap-2 text-sm font-medium">\
       ' + buildDesktopLinks() + '\
@@ -107,7 +107,7 @@
 <header id="navBar" class="fixed top-0 left-0 w-full z-50 ' + config.bg + '">\
   <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">\
     <a href="index.html">\
-      <img src="Images/logos/LOGO AIAE BLANC.png" alt="AIAE" class="aiae-header-logo" />\
+      <img src="Images/logos/LOGO_AIAE_BLANC.png" alt="AIAE" class="aiae-header-logo" />\
     </a>\
     <ul class="hidden lg:flex items-center gap-2 text-sm font-medium">\
       ' + buildDesktopLinks() + '\

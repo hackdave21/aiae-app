@@ -30,7 +30,7 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-50 bg-auth-pattern">
     <div class="max-w-xl w-full bg-white rounded-3xl p-8 sm:p-12 auth-card my-10">
         <div class="text-center mb-10">
-            <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL.png') }}" alt="AIAE Logo" class="h-16 mx-auto mb-6">
+            <img src="{{ asset('aiae-frontend/Images/logos/LOGO_AIAE_FINAL.png') }}" alt="AIAE Logo" class="h-16 mx-auto mb-6">
             <h1 class="text-3xl font-bold text-[#162064] mb-2 font-FuturaStdMedium">{{ __('Créer un compte') }}</h1>
             <p class="text-gray-500">{{ __('Rejoignez AIAE pour sauvegarder vos estimations') }}</p>
         </div>

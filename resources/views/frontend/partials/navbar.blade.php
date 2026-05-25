@@ -56,7 +56,7 @@
 >
     <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         <a href="{{ route('home') }}">
-            <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE BLANC.png') }}" alt="AIAE" class="aiae-header-logo h-12 md:h-16 w-auto object-contain" />
+            <img src="{{ asset('aiae-frontend/Images/logos/LOGO_AIAE_BLANC.png') }}" alt="AIAE" class="aiae-header-logo h-12 md:h-16 w-auto object-contain" />
         </a>
 
         <ul class="hidden lg:flex items-center gap-2 text-sm font-medium">

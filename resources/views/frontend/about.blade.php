@@ -1006,7 +1006,7 @@
         <!-- LOGO + DESCRIPTION -->
         <div>
 
-          <img src="{{ asset('aiae-frontend/Images/logos/LOGO AIAE FINAL - Copie.png') }}" class="w-80 pb-5"
+          <img src="{{ asset('aiae-frontend/Images/logos/LOGO_AIAE_FINAL_-_Copie.png') }}" class="w-80 pb-5"
             alt="AIAE Logo">
 
           <p class="text-black font-light text-[18px] md:text-[27px] leading-relaxed max-w-lg">
