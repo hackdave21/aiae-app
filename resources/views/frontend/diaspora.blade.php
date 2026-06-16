@@ -505,7 +505,7 @@
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-darkBlue pt-6">
-          {!! __('Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat détaillé avec spécifications techniques, signable devant notaire au Togo pour une sécurité juridique maximale. Références vérifiables fournies sur demande lors d’un rendez-vous.') !!}
+          {!! __('Garantie décennale contractuelle sur la structure (10 ans). Garantie de parfait achèvement (1 an). Contrat détaillé avec spécifications techniques, signable devant notaire au Togo pour une sécurité juridique maximale. ') !!}
         </div>
       </details>
 
