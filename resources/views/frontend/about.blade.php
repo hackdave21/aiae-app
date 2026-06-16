@@ -317,7 +317,7 @@
               {{ __('+18 ANS D’EXPERTISE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré dans <strong class="text-white">plus de 15 ans de practice terrain</strong> : conception, dimensionnement, réalisation et supervision d’ouvrages complexes.') !!}
+              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré dans <strong class="text-white">plus de 15 ans de pratique terrain</strong> : conception, dimensionnement, réalisation et supervision d’ouvrages complexes.') !!}
             </p>
           </div>
 
@@ -347,7 +347,7 @@
               {{ __('RIGUEUR TECHNIQUE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Bordereaux des Prix Unitaires <strong class="text-white">(BPU), 4 niveaux de standing normalisés, devis détaillés</strong> ligne par ligne. <strong class="text-white">Chaque franc est justifié.</strong>') !!}
+              {!! __('Des Bordereaux des Prix Unitaires (BPU) structurés, des niveaux de prestations adaptés aux besoins de chaque projet, et des devis exhaustifs détaillant l\'ensemble des travaux, équipements, matériaux, installations et services. Chaque montant est justifié par une ventilation claire des coûts, assurant transparence, traçabilité et maîtrise financière sur l\'ensemble de nos domaines d\'intervention, de la conception à la réalisation.') !!}
             </p>
           </div>
 

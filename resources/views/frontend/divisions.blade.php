@@ -402,7 +402,7 @@
         </div>
         <div class="flex justify-start">
           <ul class="list-disc pl-6 text-[#4a4a4a] text-[18px] md:text-[24px] space-y-2 marker:text-gray-500 marker:text-[20px] text-left">
-            <li>{!! __('<strong class="text-[#333]  font-heavy">Villas de 80 à 600 m²</strong> : tous standings (Standard, Confort, Premium, Prestige)') !!}</li>
+            <li>{!! __('<strong class="text-[#333]  font-heavy">Villas de 80 à 600 m²</strong> : tous standings (Standard, Confort, Premium, Prestige et plus)') !!}</li>
             <li>{!! __('<strong class="text-[#333] font-heavy">Immeubles d’habitation</strong> : R+2 à R+5 (Confort à Premium)') !!}</li>
             <li>{!! __('<strong class="text-[#333] font-heavy">Duplex</strong> : 150 à 400 m² (Confort à Prestige)') !!}</li>
             <li>{!! __('<strong class="text-[#333] font-heavy">Résidences gardées</strong> : ensembles sécurisés (Confort à Prestige)') !!}</li>
@@ -492,7 +492,7 @@
             <li>{!! __('<strong class="text-[#333] font-heavy">Transformation</strong> : Huileries, décortiqueries, unités de séchage, abattoirs aux normes') !!}</li>
           </ul>
           <p class="text-[#333] font-light italic text-[16px] sm:text-[18px] md:text-[24px] leading-relaxed md:ml-6 mt-6 md:mt-4 max-w-[800px] whitespace-normal text-left">
-            {!! __('Nos ouvrages agricoles peuvent être couplés à des installations solaires (pompage,<br>éclairage, froid) pour des exploitations autonomes en énergie, particulièrement en zones<br>rurales non raccordées.') !!}
+            {!! __('Tous nos ouvrages peuvent être couplés à des installations énergétiques (Groupes électrogènes, champs photovoltaïque, biogaz) pour des exploitations autonomes en énergie, particulièrement en zones rurales non raccordées.') !!}
           </p>
         </div>
       </div>
