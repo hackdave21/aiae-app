@@ -8,10 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
    <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <style>
@@ -288,7 +285,7 @@ $simTranslations =[
     'Piscine plage immergée 8x4m' => __('Piscine plage immergée 8x4m'),
 ];
 @endphp
-<div id="root"></div>
+<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">Chargement du simulateur...</div></div>
 <script>
     window.INITIAL_SECTEUR = "{{ $secteur ?? '' }}";
     window.SAVE_ROUTE = "{{ route('simulator.save') }}";
@@ -1503,5 +1500,8 @@ const App=()=>{
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 @endverbatim
 </script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
