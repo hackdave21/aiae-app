@@ -78,7 +78,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            {{ __('Nos divisions') }}
+            {{ __('Division construction') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[16px]">

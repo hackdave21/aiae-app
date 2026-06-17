@@ -1127,7 +1127,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Nos divisions') }}
+            {{ __('Division construction') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

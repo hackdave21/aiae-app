@@ -317,7 +317,7 @@
               {{ __('+18 ANS D’EXPERTISE') }}
             </h3>
             <p class="text-[18px] font-light leading-[1.6] opacity-90">
-              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré dans <strong class="text-white">plus de 15 ans de pratique terrain</strong> : conception, dimensionnement, réalisation et supervision d’ouvrages complexes.') !!}
+              {!! __('Notre savoir-faire en <strong class="text-white">génie civil</strong> est ancré dans <strong class="text-white">plus de 18 ans de pratique terrain</strong> : conception, dimensionnement, réalisation et supervision d’ouvrages complexes.') !!}
             </p>
           </div>
 
@@ -1020,7 +1020,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Nos divisions') }}
+            {{ __('Division construction') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

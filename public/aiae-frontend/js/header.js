@@ -35,7 +35,7 @@
   const MENU_ITEMS = [
     { label: "Accueil",       href: "index.html",     key: "index"     },
     { label: "À propos",      href: "about.html",     key: "about"     },
-    { label: "Nos Divisions", href: "division.html",  key: "division"  },
+    { label: "Division construction", href: "division.html",  key: "division"  },
     { label: "Simulateurs",   href: "simulator.html", key: "simulator" },
     { label: "Diaspora",      href: "diaspora.html",  key: "diaspora"  },
     { label: "FAQ",           href: "faq.html",       key: "faq"       },
