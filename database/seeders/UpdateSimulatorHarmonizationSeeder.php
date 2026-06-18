@@ -69,6 +69,15 @@ class UpdateSimulatorHarmonizationSeeder extends Seeder
             // Communs (s'assurer de l'existence/prix)
             ['code' => 'controle_acces_simple', 'categorie' => 'securite', 'designation' => 'Contrôle d\'accès simple (1 porte)', 'prix_min' => 650000, 'unite' => 'Forf.'],
             ['code' => 'controle_acces_complet', 'categorie' => 'securite', 'designation' => 'Contrôle d\'accès complet (4 portes)', 'prix_min' => 2500000, 'unite' => 'Forf.'],
+
+            // Ascenseurs
+            ['code' => 'ascenseur_5n', 'categorie' => 'specifique', 'designation' => 'Ascenseur ≤5 niveaux', 'prix_min' => 28000000, 'prix_max' => 35000000, 'unite' => 'U'],
+            ['code' => 'ascenseur_10n', 'categorie' => 'specifique', 'designation' => 'Ascenseur 6-10 niveaux', 'prix_min' => 35000000, 'prix_max' => 45000000, 'unite' => 'U'],
+
+            // Parking
+            ['code' => 'parking_ext', 'categorie' => 'exterieur', 'designation' => 'Parking extérieur', 'prix_min' => 420000, 'prix_max' => 600000, 'unite' => 'U'],
+            ['code' => 'parking_couvert', 'categorie' => 'exterieur', 'designation' => 'Parking couvert', 'prix_min' => 1350000, 'prix_max' => 1800000, 'unite' => 'U'],
+            ['code' => 'parking_souterrain', 'categorie' => 'exterieur', 'designation' => 'Parking souterrain', 'prix_min' => 3800000, 'prix_max' => 5000000, 'unite' => 'U'],
         ];
 
         foreach ($newOptions as $opt) {
@@ -78,7 +87,7 @@ class UpdateSimulatorHarmonizationSeeder extends Seeder
                     'categorie' => $opt['categorie'],
                     'designation' => $opt['designation'],
                     'prix_min' => $opt['prix_min'],
-                    'prix_max' => $opt['prix_min'], // Ajout du prix_max obligatoire
+                    'prix_max' => $opt['prix_max'] ?? $opt['prix_min'],
                     'unite' => $opt['unite'],
                     'actif' => true
                 ]

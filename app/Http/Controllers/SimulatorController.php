@@ -60,6 +60,7 @@ class SimulatorController extends Controller
                 'prix' => $st->prix_m2_min,
                 'emprise' => ($st->emprise_max / 100),
                 'hsp' => $st->hsp,
+                'marge' => $st->marge ?? 0.20,
                 'desc' => $st->description ?? "Qualité " . $st->name,
                 'icon' => $st->code === 'prestige' ? 'Crown' : ($st->code === 'premium' ? 'Gem' : ($st->code === 'confort' ? 'Armchair' : 'Home'))
             ]];
@@ -93,6 +94,7 @@ class SimulatorController extends Controller
                 'id' => $o->code,
                 'kw' => (int) filter_var($valStr, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
+                'prix_max' => $o->prix_max,
                 'designation' => $o->designation
             ];
         })->values();
@@ -103,24 +105,29 @@ class SimulatorController extends Controller
                 'id' => $o->code,
                 'kva' => (int) filter_var($valStr, FILTER_SANITIZE_NUMBER_INT),
                 'prix' => $o->prix_min,
+                'prix_max' => $o->prix_max,
                 'designation' => $o->designation
             ];
         })->values();
 
         $securite = $options->where('categorie', 'securite')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min];
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
         })->values();
 
         $exterieur = $options->where('categorie', 'exterieur')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'unite' => $o->unite];
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max, 'unite' => $o->unite];
         })->values();
 
         $domotique = $options->where('categorie', 'domotique')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min];
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
+        })->values();
+
+        $secondOeuvre = $options->where('categorie', 'second_oeuvre')->map(function ($o) {
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
         })->values();
 
         $specifique = $options->where('categorie', 'specifique')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'unite' => $o->unite];
+            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max, 'unite' => $o->unite];
         })->values();
 
         $simulatorData = [
@@ -134,7 +141,16 @@ class SimulatorController extends Controller
             'SECURITE' => $securite,
             'EXTERIEUR' => $exterieur,
             'DOMOTIQUE' => $domotique,
-            'SPECIFIQUE' => $specifique
+            'SECONDE_OEUVRE' => $secondOeuvre,
+            'SPECIFIQUE' => $specifique,
+            'PARAMS' => [
+                'sous_sol_prix' => 85000,
+                'vrd_base_prix' => 8500,
+                'forage_prix_m' => 95000,
+                'forage_fixe' => 1200000,
+                'cloture_prix_bas' => 88000,
+                'cloture_prix_haut' => 135000,
+            ]
         ];
 
         $quickStartConfig = [

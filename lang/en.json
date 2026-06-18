@@ -1041,5 +1041,14 @@
     "Clause de non-divulgation contractuelle sur chaque projet.": "Contractual non-disclosure agreement on every project.",
     "Retour à l'accueil": "Back to Home",
     "Des Bordereaux des Prix Unitaires (BPU) structurés, des niveaux de prestations adaptés aux besoins de chaque projet, et des devis exhaustifs détaillant l'ensemble des travaux, équipements, matériaux, installations et services. Chaque montant est justifié par une ventilation claire des coûts, assurant transparence, traçabilité et maîtrise financière sur l'ensemble de nos domaines d'intervention, de la conception à la réalisation.": "Structured Unit Price Schedules (BPU), levels of service tailored to the needs of each project, and comprehensive quotes detailing all works, equipment, materials, installations and services. Each amount is justified by a clear breakdown of costs, ensuring transparency, traceability and financial control across all our areas of activity, from design to completion.",
-    "Tous nos ouvrages peuvent être couplés à des installations énergétiques (Groupes électrogènes, champs photovoltaïque, biogaz) pour des exploitations autonomes en énergie, particulièrement en zones rurales non raccordées.": "All our structures can be combined with energy systems (Generators, photovoltaic arrays, biogas) for energy-independent operations, particularly in unconnected rural areas."
+    "Tous nos ouvrages peuvent être couplés à des installations énergétiques (Groupes électrogènes, champs photovoltaïque, biogaz) pour des exploitations autonomes en énergie, particulièrement en zones rurales non raccordées.": "All our structures can be combined with energy systems (Generators, photovoltaic arrays, biogas) for energy-independent operations, particularly in unconnected rural areas.",
+    "Min": "Min",
+    "Max": "Max",
+    "Estimation basse": "Low estimate",
+    "Estimation haute": "High estimate",
+    "Volets roulants": "Roller shutters",
+    "Citerne eau de pluie": "Rainwater tank",
+    "Aménagement paysager": "Landscaping",
+    "Éclairage, stores, chauffage connectés": "Lighting, blinds, connected heating",
+    "PVC manuel, alu motorisé ou connecté": "Manual PVC, motorized or connected aluminum"
 }

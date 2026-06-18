@@ -418,10 +418,12 @@ const App=()=>{
   const STANDINGS_PRIX = {};
   const STANDINGS_HSP = {};
   const STANDINGS_EMPRISE = {};
+  const STANDINGS_MARGE = {};
   Object.entries(STANDINGS).forEach(([k,v]) => {
     STANDINGS_PRIX[k] = v.prix || 500000;
     STANDINGS_HSP[k] = v.hsp || 2.80;
     STANDINGS_EMPRISE[k] = v.emprise || 0.35;
+    STANDINGS_MARGE[k] = v.marge || 0.20;
   });
 
   const TYPES = libConfig.TYPES || {
@@ -463,6 +465,7 @@ const App=()=>{
   const SECURITE_OPTS = libConfig.SECURITE ||[];
   const EXTERIEUR_OPTS = libConfig.EXTERIEUR ||[];
   const DOMOTIQUE_OPTS = libConfig.DOMOTIQUE ||[];
+  const SECONDE_OEUVRE_OPTS = libConfig.SECONDE_OEUVRE || [];
 
   // ÉTAT
   const qs = window.QUICK_START || {};
@@ -492,6 +495,7 @@ const App=()=>{
   const [nbChambres,setNbChambres]=useState(qs.nb_beds ? parseInt(qs.nb_beds) : 3);
   const[espacesHotel,setEspacesHotel]=useState(qs.espaces_communs === "1" ? ['accueil'] : []);
   const SPECIFIQUES = libConfig.SPECIFIQUE || [];
+  const SIMULATOR_PARAMS = libConfig.PARAMS || {sous_sol_prix:85000, vrd_base_prix:8500, forage_prix_m:95000, forage_fixe:1200000, cloture_prix_bas:88000, cloture_prix_haut:135000};
 
   // Options mapping Logic
   const hasOpt = (key) => qs.options && qs.options.includes(key);
@@ -522,6 +526,13 @@ const App=()=>{
   const [forageProf,setForageProf]=useState(30);
   const [parkType,setParkType]=useState('');
   const [parkPlaces,setParkPlaces]=useState(0);
+
+  // V5 nouvelles catégories
+  const [domotique,setDomotique]=useState('');
+  const [volet,setVolet]=useState('');
+  const [citerne,setCiterne]=useState('');
+  const [paysager,setPaysager]=useState('');
+
   const [isSaving,setIsSaving]=useState(false);
 
   // CALCULS
@@ -754,102 +765,195 @@ const App=()=>{
     return props;
   },[besoins]);
 
-  // ESTIMATION
+  // ESTIMATION V5 — Min/Max natif par poste + marges graduées
   const estimation=useMemo(()=>{
     if(!surfaceBatie||!sol)return null;
     const postes=[];
-    let total=0;
-    const add=(code,nom,detail,montant)=>{postes.push({code,nom,detail,montant});total+=montant;};
+    let total=0, totalMin=0, totalMax=0;
+    const marge = STANDINGS_MARGE[standing] || 0.20;
+    const add=(code,nom,detail,montant,montantMin,montantMax)=>{
+      const min = montantMin ?? Math.round(montant * 0.90);
+      const max = montantMax ?? Math.round(montant * (1 + marge));
+      postes.push({code,nom,detail,montant,montantMin:min,montantMax:max});
+      total+=montant; totalMin+=min; totalMax+=max;
+    };
 
     // Foncier
-    let foncier=0;
+    let foncier=0, foncierMin=0, foncierMax=0;
     if(terrainDispo!=='oui'){
       foncier=surface*zoneData.foncier;
-      postes.push({code:'0',nom:t('Acquisition foncière'),detail:`${Math.round(surface)} m²`,montant:foncier});
+      foncierMin=Math.round(foncier*0.90);
+      foncierMax=Math.round(foncier*1.10);
+      postes.push({code:'0',nom:t('Acquisition foncière'),detail:`${Math.round(surface)} m²`,montant:foncier,montantMin:foncierMin,montantMax:foncierMax});
     }
     // Études 8%
-    add('1',t('Études et honoraires'),t('Architecture, structure, géotechnique'),surfaceBatie*prixM2*coefTotal*0.08);
+    const baseEtudes = surfaceBatie*prixM2*coefTotal*0.08;
+    add('1',t('Études et honoraires'),t('Architecture, structure, géotechnique'),baseEtudes);
     // Fondations
     let fond=surface*emprise*(solData?.prixFond||45000);
     if(secteur==='industriel')fond*=1.3;
-    if(ssSol>0)fond+=ssSol*surface*emprise*85000;
+    if(ssSol>0)fond+=ssSol*surface*emprise*SIMULATOR_PARAMS.sous_sol_prix;
     add('2',t('Terrassements et fondations'),t(solData?.fondation||'À définir'),fond);
-    // Gros œuvre 38%
-    add('3',t('Gros œuvre'),t('Structure, maçonnerie, planchers'),surfaceBatie*prixM2*coefTotal*0.38);
-    // Second œuvre 25%
-    add('4',t('Second œuvre'),t('Menuiseries, cloisons, plâtrerie'),surfaceBatie*prixM2*coefTotal*0.25);
-    // Lots techniques 18%
-    add('5',t('Lots techniques'),t('Électricité, plomberie, CVC'),surfaceBatie*prixM2*coefTotal*0.18);
-    // Finitions 11%
-    add('6',t('Finitions'),t('Revêtements, peinture, sanitaires'),surfaceBatie*prixM2*coefTotal*0.11);
-    // Équipements
-    let equip=0;
-    if(nbAsc>0)equip+=nbAsc*(niveaux<=5?28000000:35000000);
     
+    // Gros œuvre 38% — avec marge du standing
+    const baseGo = surfaceBatie*prixM2*coefTotal*0.38;
+    add('3',t('Gros œuvre'),t('Structure, maçonnerie, planchers'),baseGo, baseGo, Math.round(baseGo*(1+marge)));
+    // Second œuvre 25%
+    const baseSo = surfaceBatie*prixM2*coefTotal*0.25;
+    add('4',t('Second œuvre'),t('Menuiseries, cloisons, plâtrerie'),baseSo, baseSo, Math.round(baseSo*(1+marge)));
+    // Lots techniques 18%
+    const baseLt = surfaceBatie*prixM2*coefTotal*0.18;
+    add('5',t('Lots techniques'),t('Électricité, plomberie, CVC'),baseLt, baseLt, Math.round(baseLt*(1+marge)));
+    // Finitions 11%
+    const baseFn = surfaceBatie*prixM2*coefTotal*0.11;
+    add('6',t('Finitions'),t('Revêtements, peinture, sanitaires'),baseFn, baseFn, Math.round(baseFn*(1+marge)));
+    
+    // Équipements spécifiques (poste 7) — avec prix_min/prix_max
+    let equip=0, equipMin=0, equipMax=0;
+    if(nbAsc>0){
+      const ascId = niveaux<=5 ? 'ascenseur_5n' : 'ascenseur_10n';
+      const optAsc = SPECIFIQUES.find(o => o.id === ascId);
+      const ascPrix = optAsc ? optAsc.prix : 28000000;
+      const ascMax = optAsc?.prix_max || Math.round(ascPrix*1.25);
+      equip+=nbAsc*ascPrix; equipMin+=nbAsc*ascPrix; equipMax+=nbAsc*ascMax;
+    }
     if(nbQuais>0&&secteur==='industriel') {
       const optQuai = SPECIFIQUES.find(o => o.id === 'quai_chargement');
-      equip += nbQuais * (optQuai ? optQuai.prix : 3500000);
+      const qPrix = optQuai ? optQuai.prix : 3500000;
+      const qMax = optQuai?.prix_max || Math.round(qPrix*1.15);
+      equip += nbQuais * qPrix;
+      equipMin += nbQuais * qPrix;
+      equipMax += nbQuais * qMax;
     }
-    
     if(pontRoulant) {
       const pRoulantId = pontCap <= 5 ? 'pont_roulant_5t' : 'pont_roulant_10t';
       const optPont = SPECIFIQUES.find(o => o.id === pRoulantId);
-      equip += optPont ? optPont.prix : (pontCap<=5?15000000:25000000);
+      const pPrix = optPont ? optPont.prix : (pontCap<=5?15000000:25000000);
+      const pMax = optPont?.prix_max || Math.round(pPrix*1.15);
+      equip += pPrix;
+      equipMin += pPrix;
+      equipMax += pMax;
     }
-    
-    if(groupeFroid)equip+=surfaceBatie*(groupeFroid==='negatif'?95000:55000);
-    
+    if(groupeFroid){
+      const fPrix = surfaceBatie*(groupeFroid==='negatif'?95000:55000);
+      equip+=fPrix; equipMin+=fPrix; equipMax+=Math.round(fPrix*1.15);
+    }
     if(irrigation) {
       const irrId = irrigation === 'goutte' ? 'irrigation_goutte_a_goutte' : 'irrigation_aspersion';
       const optIrr = EXTERIEUR_OPTS.find(o => o.id === irrId);
-      equip += surfExploit * (optIrr ? optIrr.prix : (irrigation === 'goutte' ? 1500000 : 2500000));
+      const iPrix = surfExploit * (optIrr ? optIrr.prix : (irrigation === 'goutte' ? 1500000 : 2500000));
+      const iMax = optIrr?.prix_max ? surfExploit * optIrr.prix_max : Math.round(iPrix*1.15);
+      equip += iPrix; equipMin += iPrix; equipMax += iMax;
     }
+    if(equip>0)add('7',t('Équipements spécifiques'),t('Ascenseurs, quais, pont, froid'),equip,equipMin,equipMax);
 
-    if(equip>0)add('7',t('Équipements spécifiques'),t('Ascenseurs, quais, pont, froid'),equip);
-    // Énergie
+    // Énergie (poste 8)
     const kitSol = SOLAIRES.find(k => k.id === solaire);
     const grpKva = GROUPES.find(g => g.id === groupe);
-    const energie = (kitSol?.prix || 0) + (grpKva?.prix || 0);
-    if (energie > 0) add('8', t('Énergie'), `${kitSol ? kitSol.kw + ' kWc' : ''}${grpKva ? ' + ' + grpKva.kva + ' kVA' : ''}`.trim(), energie);
+    const enerPrix = (kitSol?.prix || 0) + (grpKva?.prix || 0);
+    const enerMax = (kitSol?.prix_max||kitSol?.prix||0) + (grpKva?.prix_max||grpKva?.prix||0);
+    if (enerPrix > 0) add('8', t('Énergie'), `${kitSol ? kitSol.kw + ' kWc' : ''}${grpKva ? ' + ' + grpKva.kva + ' kVA' : ''}`.trim(), enerPrix, enerPrix, enerMax);
 
-    // Sécurité
-    let secu = 0;
+    // Sécurité (poste 9)
+    let secu = 0, secuMin = 0, secuMax = 0;
     const optAlarme = SECURITE_OPTS.find(o => o.id === alarme);
     const optVideo = SECURITE_OPTS.find(o => o.id === video);
     const optAcces = SECURITE_OPTS.find(o => o.id === acces);
-    
-    if (optAlarme) secu += optAlarme.prix + (nbZones * 125000); // Zone sup toujours fixe ou à dynamiser plus tard
-    if (optVideo) secu += optVideo.prix;
-    if (optAcces) secu += optAcces.prix + (nbPortes * 320000);
-    
-    if (secu > 0) add('9', t('Sécurité'), t('Alarme, vidéo, contrôle accès'), secu);
+    if (optAlarme){ 
+      secu += optAlarme.prix + (nbZones * 125000);
+      secuMin += optAlarme.prix + (nbZones * 125000);
+      secuMax += (optAlarme.prix_max||optAlarme.prix) + (nbZones * 125000);
+    }
+    if (optVideo){ 
+      secu += optVideo.prix;
+      secuMin += optVideo.prix;
+      secuMax += (optVideo.prix_max||optVideo.prix);
+    }
+    if (optAcces){ 
+      secu += optAcces.prix + (nbPortes * 320000);
+      secuMin += optAcces.prix + (nbPortes * 320000);
+      secuMax += (optAcces.prix_max||optAcces.prix) + (nbPortes * 320000);
+    }
+    if (secu > 0) add('9', t('Sécurité'), t('Alarme, vidéo, contrôle accès'), secu, secuMin, secuMax);
 
-    // VRD
-    let vrd = surface * 8500;
+    // VRD (poste 10)
+    let vrd = surface * SIMULATOR_PARAMS.vrd_base_prix, vrdMin = surface * SIMULATOR_PARAMS.vrd_base_prix, vrdMax = surface * SIMULATOR_PARAMS.vrd_base_prix;
     const optPortail = EXTERIEUR_OPTS.find(o => o.id === portail);
     const optPiscine = EXTERIEUR_OPTS.find(o => o.id === piscine);
-    const optForage = EXTERIEUR_OPTS.find(o => o.id.includes('forage')); // On prend le premier forage trouvé ou on affine
+    const optCiterne = EXTERIEUR_OPTS.find(o => o.id === citerne);
+    const optPaysager = EXTERIEUR_OPTS.find(o => o.id === paysager);
+    if (cloture){ 
+      const clotPrix = perimetre * (clotureH <= 2 ? SIMULATOR_PARAMS.cloture_prix_bas : SIMULATOR_PARAMS.cloture_prix_haut);
+      vrd += clotPrix; vrdMin += clotPrix; vrdMax += clotPrix;
+    }
+    if (optPortail){ 
+      vrd += optPortail.prix;
+      vrdMin += optPortail.prix;
+      vrdMax += (optPortail.prix_max||optPortail.prix);
+    }
+    if (optPiscine){ 
+      vrd += optPiscine.prix;
+      vrdMin += optPiscine.prix;
+      vrdMax += (optPiscine.prix_max||optPiscine.prix);
+    }
+    if (optCiterne){ 
+      vrd += optCiterne.prix;
+      vrdMin += optCiterne.prix;
+      vrdMax += (optCiterne.prix_max||optCiterne.prix);
+    }
+    if (optPaysager){ 
+      vrd += optPaysager.prix;
+      vrdMin += optPaysager.prix;
+      vrdMax += (optPaysager.prix_max||optPaysager.prix);
+    }
+    if (forage){
+      const forageId = forageProf <= 30 ? 'forage_30m' : forageProf <= 60 ? 'forage_60m' : 'forage_60m';
+      const optForage = EXTERIEUR_OPTS.find(o => o.id === forageId);
+      const fPrix = optForage ? optForage.prix : (forageProf * SIMULATOR_PARAMS.forage_prix_m) + SIMULATOR_PARAMS.forage_fixe;
+      const fMax = optForage?.prix_max || Math.round(fPrix*1.15);
+      vrd += fPrix; vrdMin += fPrix; vrdMax += fMax;
+    }
+    if (parkPlaces > 0){
+      const pkId = parkType === 'souterrain' ? 'parking_souterrain' : parkType === 'couvert' ? 'parking_couvert' : 'parking_ext';
+      const optPk = EXTERIEUR_OPTS.find(o => o.id === pkId);
+      const pkPrix = parkPlaces * (optPk ? optPk.prix : 420000);
+      const pkMax = parkPlaces * (optPk?.prix_max || Math.round(pkPrix/parkPlaces*1.2));
+      vrd += pkPrix; vrdMin += pkPrix; vrdMax += pkMax;
+    }
+    // Domotique (intégré au poste 10)
+    const optDomotique = DOMOTIQUE_OPTS.find(o => o.id === domotique);
+    if (optDomotique){
+      vrd += optDomotique.prix;
+      vrdMin += optDomotique.prix;
+      vrdMax += (optDomotique.prix_max||optDomotique.prix);
+    }
+    // Volets roulants (intégré au poste 10)
+    const optVolet = SECONDE_OEUVRE_OPTS.find(o => o.id === volet);
+    if (optVolet){
+      vrd += optVolet.prix;
+      vrdMin += optVolet.prix;
+      vrdMax += (optVolet.prix_max||optVolet.prix);
+    }
+    add('10', t('VRD et aménagements'), t('Clôture, portail, piscine, parking'), vrd, vrdMin, vrdMax);
 
-    if (cloture) vrd += perimetre * (clotureH <= 2 ? 88000 : 135000);
-    if (optPortail) vrd += optPortail.prix;
-    if (optPiscine) vrd += optPiscine.prix;
-    if (forage) vrd += (forageProf * 95000) + 1200000;
-    if (parkPlaces > 0) vrd += parkPlaces * (parkType === 'souterrain' ? 3800000 : parkType === 'couvert' ? 1350000 : 420000);
-    
-    add('10', t('VRD et aménagements'), t('Clôture, portail, piscine, parking'), vrd);
-
-    // Aléas 5%
-    add('11', t('Provisions aléas'), t('5% recommandé'), total * 0.05);
+    // Aléas 5% (min/max basés sur min/max totaux avant aléas)
+    const avantAleas = total; const avantAleasMin = totalMin; const avantAleasMax = totalMax;
+    add('11', t('Provisions aléas'), t('5% recommandé'), avantAleas*0.05, Math.round(avantAleasMin*0.05), Math.round(avantAleasMax*0.05));
 
     return{
-      postes,foncier,total,
+      postes,foncier,
+      total:Math.round(total),
+      totalMin:Math.round(foncierMin+totalMin),
+      totalMax:Math.round(foncierMax+totalMax),
       min:Math.round((foncier+total)*0.90),
-      max:Math.round((foncier+total)*1.15),
-      prixM2Hors:Math.round(total/surfaceBatie)
+      max:Math.round((foncier+total)*(1+marge)),
+      prixM2Hors:Math.round(total/surfaceBatie),
+      marge
     };
   },[surfaceBatie,surface,emprise,prixM2,coefTotal,solData,zoneData,terrainDispo,sol,secteur,ssSol,niveaux,
      nbAsc,nbQuais,pontRoulant,pontCap,groupeFroid,irrigation,surfExploit,solaire,groupe,
-     alarme,nbZones,video,acces,nbPortes,cloture,clotureH,perimetre,portail,piscine,forage,forageProf,parkPlaces,parkType]);
+     alarme,nbZones,video,acces,nbPortes,cloture,clotureH,perimetre,portail,piscine,forage,forageProf,
+     parkPlaces,parkType,standing,domotique,volet,citerne,paysager]);
 
   // UTILITAIRES
   const fmt=n=>new Intl.NumberFormat('fr-FR').format(Math.round(n||0));
@@ -863,6 +967,7 @@ const App=()=>{
     setEffectif(100);setIrrigation('');setNbAsc(0);setSolaire('');setGroupe('');
     setAlarme('');setVideo('');setAcces('');
     setCloture(false);setPortail('');setPiscine('');setForage(false);setParkPlaces(0);
+    setDomotique('');setVolet('');setCiterne('');setPaysager('');
     setEtape(1);setPage('accueil');
   };
 
@@ -1335,6 +1440,53 @@ const App=()=>{
                 </div>
               </div>
             </div>
+
+            {/* DOMOTIQUE */}
+            {DOMOTIQUE_OPTS.length>0&&<div className="card p-5 mt-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Domotique')}</h3>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setDomotique('')} className={`px-3 py-1.5 rounded text-sm ${!domotique?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
+                {DOMOTIQUE_OPTS.map(d=>(
+                  <button key={d.id} onClick={()=>setDomotique(d.id)} className={`px-3 py-1.5 rounded text-sm ${domotique===d.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(d.name||'')}</button>
+                ))}
+              </div>
+              {domotique&&<p className="text-xs text-gray-500 mt-2">{t('Éclairage, stores, chauffage connectés')}</p>}
+            </div>}
+
+            {/* SECOND ŒUVRE — Volets roulants */}
+            {SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')).length>0&&<div className="card p-5 mt-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Volets roulants')}</h3>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setVolet('')} className={`px-3 py-1.5 rounded text-sm ${!volet?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
+                {SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')).map(v=>(
+                  <button key={v.id} onClick={()=>setVolet(v.id)} className={`px-3 py-1.5 rounded text-sm ${volet===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(v.name||'')}</button>
+                ))}
+              </div>
+              {volet&&<p className="text-xs text-gray-500 mt-2">{t('PVC manuel, alu motorisé ou connecté')}</p>}
+            </div>}
+
+            {/* CITERNE EAU DE PLUIE */}
+            {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).length>0&&<div className="card p-5 mt-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Citerne eau de pluie')}</h3>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setCiterne('')} className={`px-3 py-1.5 rounded text-sm ${!citerne?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
+                {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).map(c=>(
+                  <button key={c.id} onClick={()=>setCiterne(c.id)} className={`px-3 py-1.5 rounded text-sm ${citerne===c.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(c.name||'')}</button>
+                ))}
+              </div>
+            </div>}
+
+            {/* AMÉNAGEMENT PAYSAGER */}
+            {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).length>0&&<div className="card p-5 mt-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Aménagement paysager')}</h3>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setPaysager('')} className={`px-3 py-1.5 rounded text-sm ${!paysager?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
+                {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).map(p=>(
+                  <button key={p.id} onClick={()=>setPaysager(p.id)} className={`px-3 py-1.5 rounded text-sm ${paysager===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(p.name||'')}</button>
+                ))}
+              </div>
+            </div>}
+
             <Nav/>
           </div>
         )}
@@ -1455,9 +1607,9 @@ const App=()=>{
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
-                  <thead><tr className="border-b"><th className="text-left py-2 px-2">{t('Code')}</th><th className="text-left py-2">{t('Poste')}</th><th className="text-left py-2">{t('Détail')}</th><th className="text-right py-2 px-2">{t('Montant')}</th></tr></thead>
+                  <thead><tr className="border-b"><th className="text-left py-2 px-2">{t('Code')}</th><th className="text-left py-2">{t('Poste')}</th><th className="text-left py-2">{t('Détail')}</th><th className="text-right py-2 px-2">{t('Min')}</th><th className="text-right py-2 px-2">{t('Max')}</th><th className="text-right py-2 px-2">{t('Montant')}</th></tr></thead>
                   <tbody>
-                    {estimation.postes.map((p,i)=>(<tr key={i} className="border-b border-gray-100"><td className="py-2 px-2 text-gray-400 mono">{p.code}</td><td className="py-2 font-medium">{p.nom}</td><td className="py-2 text-gray-500 text-xs">{p.detail}</td><td className="py-2 px-2 text-right mono font-semibold">{fmtM(p.montant)}</td></tr>))}
+                    {estimation.postes.map((p,i)=>(<tr key={i} className="border-b border-gray-100"><td className="py-2 px-2 text-gray-400 mono">{p.code}</td><td className="py-2 font-medium">{p.nom}</td><td className="py-2 text-gray-500 text-xs">{p.detail}</td><td className="py-2 px-2 text-right mono text-green-600">{fmtM(p.montantMin)}</td><td className="py-2 px-2 text-right mono text-orange-600">{fmtM(p.montantMax)}</td><td className="py-2 px-2 text-right mono font-semibold">{fmtM(p.montant)}</td></tr>))}
                   </tbody>
                 </table>
               </div>
@@ -1469,8 +1621,8 @@ const App=()=>{
                 <div className="text-white/70 text-sm mb-2">{t('Estimation totale projet')}</div>
                 <div className="text-4xl md:text-5xl font-bold text-white mono mb-4">{fmtM(estimation.foncier+estimation.total)} FCFA</div>
                 <div className="flex justify-center gap-8 text-white/80 text-sm">
-                  <div><div className="text-xs">{t('Fourchette basse (-10%)')}</div><div className="font-semibold mono">{fmtM(estimation.min)} F</div></div>
-                  <div><div className="text-xs">{t('Fourchette haute (+15%)')}</div><div className="font-semibold mono">{fmtM(estimation.max)} F</div></div>
+                  <div><div className="text-xs">{t('Estimation basse')}</div><div className="font-semibold mono">{fmtM(estimation.totalMin)} F</div></div>
+                  <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtM(estimation.totalMax)} F</div></div>
                 </div>
                 <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
               </div>
