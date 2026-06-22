@@ -9,6 +9,22 @@
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
+  <meta name="description" content="@yield('meta_description', __('AIAE : Construction, énergie solaire, sécurité et préfabrication au Togo. De la conception à la réalisation, un partenaire unique pour vos projets d\'infrastructure.'))">
+
+  <meta property="og:title" content="@yield('og_title', __('AIAE - Afrika Infrastructures And Equipements'))">
+  <meta property="og:description" content="@yield('og_description', __('AIAE : Construction, énergie solaire, sécurité et préfabrication au Togo. De la conception à la réalisation.'))">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:type" content="@yield('og_type', 'website')">
+  <meta property="og:image" content="@yield('og_image', asset('aiae-frontend/Images/logos/LOGO_AIAE_FINAL_-_Copie.png'))">
+  <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <meta property="og:site_name" content="AIAE">
+
+  <link rel="alternate" hreflang="fr" href="{{ url()->current() }}?lang=fr">
+  <link rel="alternate" hreflang="en" href="{{ url()->current() }}?lang=en">
+  <link rel="alternate" hreflang="x-default" href="{{ url('/') }}">
+
+  @include('frontend.partials.schema-org')
+
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -126,6 +142,7 @@
   </script>
   @yield('scripts')
   @include('frontend.partials.rdv-modal')
+  @include('frontend.partials.cookie-consent')
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

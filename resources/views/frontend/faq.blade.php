@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ __('Foire Aux Questions - AIAE') }}</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -1029,12 +1031,12 @@
 
           <!-- Instagram -->
           <a href="#" aria-label="Instagram">
-            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
           <a href="#" aria-label="Facebook">
-            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
@@ -1058,7 +1060,7 @@
     <div class="bg-[#e6e6e6] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
-        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="WhatsApp" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
           <p class="text-2xl md:text-3xl text-left">
@@ -1066,7 +1068,7 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('Écrivez-nous') }}</strong> {{ __('pour toutes') }}<br />
             <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
@@ -1174,7 +1176,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
@@ -1258,6 +1260,7 @@
     }
   </script>
   @include('frontend.partials.rdv-modal')
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

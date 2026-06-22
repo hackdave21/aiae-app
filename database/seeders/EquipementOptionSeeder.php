@@ -15,7 +15,7 @@ class EquipementOptionSeeder extends Seeder
         $options = [
             // Solaire (Mapping included)
             ['code' => 'solaire_3kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 3 kWc', 'prix_min' => 4500000, 'prix_max' => 5500000, 'puissance' => '3 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['standard' => 'opt', 'confort' => 'opt']],
-            ['code' => 'solaire_5kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 5 kWc', 'prix_min' => 7500000, 'prix_max' => 9500000, 'puissance' => '5 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'recom', 'premium' => 'opt']],
+            ['code' => 'solaire_5kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 5 kWc', 'prix_min' => 4500000, 'prix_max' => 6500000, 'puissance' => '5 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['confort' => 'recom', 'premium' => 'opt']],
             ['code' => 'solaire_10kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 10 kWc', 'prix_min' => 14000000, 'prix_max' => 18000000, 'puissance' => '10 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['premium' => 'recom', 'prestige' => 'opt']],
             ['code' => 'solaire_15kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 15 kWc', 'prix_min' => 20000000, 'prix_max' => 26000000, 'puissance' => '15 kWc', 'unite' => 'Forf.', 'mapping_standings' => ['prestige' => 'preselect']],
             ['code' => 'solaire_20kwc', 'categorie' => 'solaire', 'designation' => 'Kit solaire hybride 20 kWc', 'prix_min' => 26000000, 'prix_max' => 33000000, 'puissance' => '20 kWc', 'unite' => 'Forf.'],

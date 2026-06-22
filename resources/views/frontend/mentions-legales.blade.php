@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mentions Légales - AIAE</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -159,7 +161,7 @@
           <h2 class="legal-title text-2xl">1. Éditeur du site</h2>
           <div class="space-y-6 text-gray-600 leading-relaxed font-light">
             <p>
-              <strong class="text-darkBlue font-bold">Raison sociale :</strong> Afrika Infrastructures And Equipment
+              <strong class="text-darkBlue font-bold">Raison sociale :</strong> Afrika Infrastructures And Equipements
               (AIAE SARL)
             </p>
             <p>
@@ -392,13 +394,14 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
   </footer>
 
   @include('frontend.partials.rdv-modal')
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

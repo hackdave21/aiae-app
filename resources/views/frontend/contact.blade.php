@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact - AIAE</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -371,14 +373,14 @@
         <!-- Nom complet -->
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Nom complet') }} <span class="text-red-500">*</span></label>
-          <input type="text" name="full_name" required placeholder="{{ __('Votre nom complet') }}"
+          <input type="text" name="full_name" aria-label="{{ __('Nom complet') }}" required placeholder="{{ __('Votre nom complet') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
         <!-- Adresse e-mail -->
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Adresse e-mail') }} <span class="text-red-500">*</span></label>
-          <input type="email" name="email" required placeholder="{{ __('nomprenom@gmail.com') }}"
+          <input type="email" name="email" aria-label="{{ __('Adresse e-mail') }}" required placeholder="{{ __('nomprenom@gmail.com') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-3 outline-none focus:border-secondary text-gray-700 placeholder-gray-400">
         </div>
 
@@ -397,7 +399,7 @@
               </svg>
             </div>
 
-            <input type="tel" id="phoneInput" placeholder="90 03 54 16" required
+            <input type="tel" id="phoneInput" aria-label="{{ __('Téléphone') }}" placeholder="90 03 54 16" required
               class="bg-transparent pl-4 w-full outline-none text-gray-700 placeholder-gray-400">
             <input type="hidden" name="phone" id="fullPhone">
           </div>
@@ -405,7 +407,7 @@
           <!-- Country Dropdown -->
           <div id="countryDropdown" class="country-dropdown">
             <div class="p-2 sticky top-0 bg-white border-b">
-              <input type="text" id="countrySearch" placeholder="{{ __('Rechercher un pays...') }}" 
+              <input type="text" id="countrySearch" aria-label="{{ __('Rechercher un pays...') }}" placeholder="{{ __('Rechercher un pays...') }}" 
                 class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:border-secondary">
             </div>
             <div id="countryList">
@@ -418,7 +420,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Pays de résidence') }}</label>
           <div class="relative">
-            <select id="countryResidenceSelect" name="country_residence"
+            <select id="countryResidenceSelect" name="country_residence" aria-label="{{ __('Pays de résidence') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>{{ __('Sélectionnez votre pays de résidence') }}</option>
             </select>
@@ -433,7 +435,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Type de projet') }}</label>
           <div class="relative">
-            <select id="projectTypeSelect" name="project_type"
+            <select id="projectTypeSelect" name="project_type" aria-label="{{ __('Type de projet') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>{{ __('Sélectionnez le type de projet') }}</option>
               <option value="residentiel">{{ __('Résidentiel (Villas, immeubles)') }}</option>
@@ -452,7 +454,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Sélectionnez un délai') }}</label>
           <div class="relative">
-            <select name="delay"
+            <select name="delay" aria-label="{{ __('Sélectionnez un délai') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>{{ __('Quel délai souhaitez vous pour finaliser votre projet ? Sélectionnez.') }}
               </option>
@@ -470,7 +472,7 @@
         <!-- Votre projet -->
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Votre projet') }} <span class="text-red-500">*</span></label>
-          <textarea rows="4" name="project_description" required placeholder="{{ __('Décrivez brièvement votre projet...') }}"
+          <textarea rows="4" name="project_description" aria-label="{{ __('Votre projet') }}" required placeholder="{{ __('Décrivez brièvement votre projet...') }}"
             class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 resize-none"></textarea>
         </div>
 
@@ -478,7 +480,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Localisation du projet') }}</label>
           <div class="relative">
-            <input type="text" name="location" placeholder="{{ __('Quel est le lieu de votre projet ?') }}"
+            <input type="text" name="location" aria-label="{{ __('Localisation du projet') }}" placeholder="{{ __('Quel est le lieu de votre projet ?') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
@@ -487,7 +489,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Budget estimé') }}</label>
           <div class="relative">
-            <input type="text" name="budget" placeholder="{{ __('Quel budget envisagez-vous ?') }}"
+            <input type="text" name="budget" aria-label="{{ __('Budget estimé') }}" placeholder="{{ __('Quel budget envisagez-vous ?') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-700 placeholder-gray-400 pr-12">
           </div>
         </div>
@@ -496,7 +498,7 @@
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Comment avez-vous connu AIAE ?') }}</label>
           <div class="relative">
-            <select name="source_discovery"
+            <select name="source_discovery" aria-label="{{ __('Comment avez-vous connu AIAE ?') }}"
               class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
               <option value="" disabled selected>{{ __('Par quel moyen avez vous entendu parler de nous ? Sélectionnez.') }}
               </option>
@@ -515,7 +517,7 @@
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Pièce jointe') }}</label>
           <div
             class="relative flex items-center justify-between border border-gray-400 rounded-xl px-5 py-4 bg-transparent cursor-pointer hover:border-secondary focus-within:border-secondary transition-colors overflow-hidden">
-            <input type="file" name="attachment" id="file_upload" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+            <input type="file" name="attachment" id="file_upload" aria-label="{{ __('Pièce jointe') }}" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
             <span id="file_name_display" class="text-gray-400 pointer-events-none">
               {{ __('Ajoutez vos plans, photos terrain ou croquis (PDF, JPG, PNG).') }} <span
                 class="italic text-gray-300">{{ __('Facultatif') }}</span>
@@ -534,7 +536,7 @@
         <div class="flex items-start gap-4 mt-8 pb-6">
           <div
             class="relative flex items-center justify-center shrink-0 w-[24px] h-[24px] rounded bg-white border-2 border-[#3a3939] overflow-hidden mt-1 cursor-pointer">
-            <input type="checkbox" class="absolute inset-0 opacity-0 cursor-pointer peer" checked>
+            <input type="checkbox" aria-label="{{ __('Acceptation des données') }}" class="absolute inset-0 opacity-0 cursor-pointer peer" checked>
             <svg class="w-4 h-4 text-[#3a3939] opacity-0 peer-checked:opacity-100 pointer-events-none" fill="none"
               stroke="currentColor" stroke-width="4" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
@@ -564,7 +566,7 @@
 
       <!-- Badge Titre -->
       <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-[#FF8400] text-white px-10 py-2 rounded-xl text-[22px] md:text-[26px] font-heavy border-2 border-primary z-10 text-center uppercase tracking-wider mb-2">
+        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-secondary text-white px-10 py-2 rounded-xl text-[22px] md:text-[26px] font-heavy border-2 border-primary z-10 text-center uppercase tracking-wider mb-2">
         {{ __('Nos Coordonnées') }}
       </div>
 
@@ -686,12 +688,12 @@
 
           <!-- Instagram -->
           <a href="#" aria-label="Instagram">
-            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
           <a href="#" aria-label="Facebook">
-            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
@@ -715,7 +717,7 @@
     <div class="bg-[#e6e6e6] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
-        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="WhatsApp" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
           <p class="text-2xl md:text-3xl text-left">
@@ -723,7 +725,7 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('Écrivez-nous') }}</strong> {{ __('pour toutes') }}<br />
             <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
@@ -831,7 +833,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
@@ -1134,6 +1136,7 @@
   @include('frontend.partials.rdv-modal')
   <!-- SweatAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

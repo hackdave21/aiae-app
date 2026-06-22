@@ -41,10 +41,10 @@ class ReferenceDataSeeder extends Seeder
 
         // 2.3 Standings Résidentiels
         foreach ([
-            'standard' => ['name' => 'Standard', 'prix_m2_min' => 180000, 'prix_m2_max' => 250000, 'marge' => 0.17, 'emprise_max' => 40, 'hsp' => 3.0, 'terrain_min' => 300, 'niveaux_max' => 1],
-            'confort' => ['name' => 'Confort', 'prix_m2_min' => 280000, 'prix_m2_max' => 380000, 'marge' => 0.20, 'emprise_max' => 35, 'hsp' => 3.0, 'terrain_min' => 450, 'niveaux_max' => 2],
-            'premium' => ['name' => 'Premium', 'prix_m2_min' => 420000, 'prix_m2_max' => 550000, 'marge' => 0.23, 'emprise_max' => 30, 'hsp' => 3.2, 'terrain_min' => 600, 'niveaux_max' => 3],
-            'prestige' => ['name' => 'Prestige', 'prix_m2_min' => 600000, 'prix_m2_max' => 900000, 'marge' => 0.27, 'emprise_max' => 25, 'hsp' => 3.5, 'terrain_min' => 1000, 'niveaux_max' => 5],
+            'standard' => ['name' => 'Standard', 'description' => 'Fonctionnel et durable — Idéal premier investissement', 'prix_m2_min' => 180000, 'prix_m2_max' => 250000, 'marge' => 0.17, 'emprise_max' => 50, 'hsp' => 2.60, 'terrain_min' => 200, 'niveaux_max' => 1],
+            'confort' => ['name' => 'Confort', 'description' => 'Qualité supérieure — Notre cœur de gamme', 'prix_m2_min' => 280000, 'prix_m2_max' => 380000, 'marge' => 0.20, 'emprise_max' => 40, 'hsp' => 2.80, 'terrain_min' => 400, 'niveaux_max' => 1],
+            'premium' => ['name' => 'Premium', 'description' => 'Haut de gamme — Piscine incluse, personnalisation poussée', 'prix_m2_min' => 420000, 'prix_m2_max' => 550000, 'marge' => 0.23, 'emprise_max' => 35, 'hsp' => 3.00, 'terrain_min' => 500, 'niveaux_max' => 2],
+            'prestige' => ['name' => 'Prestige', 'description' => 'Luxe sur mesure — Matériaux d\'exception, domotique complète', 'prix_m2_min' => 600000, 'prix_m2_max' => 900000, 'marge' => 0.27, 'emprise_max' => 30, 'hsp' => 3.20, 'terrain_min' => 800, 'niveaux_max' => 2],
         ] as $code => $data) {
             Standing::updateOrCreate(['code' => $code], $data);
         }

@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AIAE</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -126,7 +128,7 @@
   <!-- ================= HERO ================= -->
   <section class="relative px-1 sm:px-1 pt-1">
     <div class="relative max-w-[1600px] mx-auto rounded-[15px] overflow-hidden shadow-2xl">
-      <img id="heroImage" src="{{ asset('aiae-frontend/Images/home.png') }}" class="w-full h-[75vh] md:h-[90vh] object-cover" />
+      <img id="heroImage" src="{{ asset('aiae-frontend/Images/home.png') }}" alt="AIAE - Construction, énergie, sécurité, préfabrication" class="w-full h-[75vh] md:h-[90vh] object-cover" />
 
       <!-- overlay -->
       <div class="absolute inset-0 bg-black/40"></div>
@@ -316,7 +318,7 @@
             </button>
 
             <p class="mt-8 text-darkBlue font-light text-[17px]">
-              {{ __('Cliquez') }} <a href="{{ route('simulator.v1') }}" class="font-heavy underline text-darkBlue hover:opacity-80 transition-opacity">{{ __('Simulation') }}</a> {{ __('& simulez votre projet en 2 minutes !') }}
+              {{ __('Cliquez sur') }} <a href="{{ route('simulator.v1') }}" class="font-heavy underline text-darkBlue hover:opacity-80 transition-opacity">{{ __('Simulation') }}</a> {{ __('et simulez votre projet en 2 minutes !') }}
             </p>
           </div>
 
@@ -1532,7 +1534,7 @@
             </span>
 
             <p class="font-heavy text-2xl text-darkBlue">
-              {{ __('Je vive à l’étranger, comment suivre mon chantier ?') }}
+              {{ __('Je vis à l’étranger, comment suivre mon chantier ?') }}
             </p>
 
           </div>
@@ -1793,7 +1795,7 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('Écrivez-nous') }}</strong> {{ __('pour toutes') }}<br />
             <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
@@ -1901,7 +1903,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
@@ -2199,6 +2201,7 @@
   </script>
   @include('frontend.partials.rdv-modal')
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

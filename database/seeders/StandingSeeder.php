@@ -16,6 +16,7 @@ class StandingSeeder extends Seeder
             [
                 'name' => 'Standard',
                 'code' => 'standard',
+                'description' => 'Fonctionnel et durable — Idéal premier investissement',
                 'prix_m2_min' => 180000,
                 'prix_m2_max' => 250000,
                 'emprise_max' => 50,
@@ -27,6 +28,7 @@ class StandingSeeder extends Seeder
             [
                 'name' => 'Confort',
                 'code' => 'confort',
+                'description' => 'Qualité supérieure — Notre cœur de gamme',
                 'prix_m2_min' => 280000,
                 'prix_m2_max' => 380000,
                 'emprise_max' => 40,
@@ -38,6 +40,7 @@ class StandingSeeder extends Seeder
             [
                 'name' => 'Premium',
                 'code' => 'premium',
+                'description' => 'Haut de gamme — Piscine incluse, personnalisation poussée',
                 'prix_m2_min' => 420000,
                 'prix_m2_max' => 550000,
                 'emprise_max' => 35,
@@ -49,6 +52,7 @@ class StandingSeeder extends Seeder
             [
                 'name' => 'Prestige',
                 'code' => 'prestige',
+                'description' => 'Luxe sur mesure — Matériaux d\'exception, domotique complète',
                 'prix_m2_min' => 600000,
                 'prix_m2_max' => 900000,
                 'emprise_max' => 30,

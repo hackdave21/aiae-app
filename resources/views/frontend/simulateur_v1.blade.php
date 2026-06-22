@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ __('Simulateur AIAE - Estimation Construction') }}</title>
+  <title>{{ __('Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction') }}</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -57,7 +59,7 @@
 <body>
 @php
 $simTranslations =[
-    'Simulateur AIAE - Estimation Construction' => __('Simulateur AIAE - Estimation Construction'),
+    'Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction' => __('Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction'),
     'Simulateur d\'Estimation' => __('Simulateur d\'Estimation'),
     'Sélectionnez votre secteur' => __('Sélectionnez votre secteur'),
     'Résidentiel' => __('Résidentiel'),
@@ -99,7 +101,7 @@ $simTranslations =[
     'Type de sol' => __('Type de sol'),
     'Portance:' => __('Portance:'),
     'Sol à risque' => __('Sol à risque'),
-    'Étude géotechnique G2 obligatoire.' => __('Étude géotechnique G2 obligatoire.'),
+    'Étude géotechnique G2 AVP fortement recommandée.' => __('Étude géotechnique G2 AVP fortement recommandée.'),
     'Coefficient total:' => __('Coefficient total:'),
     'Configuration du bâtiment' => __('Configuration du bâtiment'),
     'Niveaux' => __('Niveaux'),
@@ -216,10 +218,20 @@ $simTranslations =[
     'Provisions aléas' => __('Provisions aléas'),
     '5% recommandé' => __('5% recommandé'),
     'Référentiel Décembre 2025' => __('Référentiel Décembre 2025'),
-    'Économique et fonctionnel' => __('Économique et fonctionnel'),
-    'Qualité-prix optimal' => __('Qualité-prix optimal'),
-    'Excellence et personnalisation' => __('Excellence et personnalisation'),
-    'Luxe sans compromis' => __('Luxe sans compromis'),
+    'Matériaux standards, agglos pleins, chaînages verticaux conformes DTU' => __('Matériaux standards, agglos pleins, chaînages verticaux conformes DTU'),
+    'Matériaux de qualité, poteaux/chaînages renforcés, isolation thermique naturelle' => __('Matériaux de qualité, poteaux/chaînages renforcés, isolation thermique naturelle'),
+    'Matériaux haut de gamme, structure optimisée, performances thermiques supérieures' => __('Matériaux haut de gamme, structure optimisée, performances thermiques supérieures'),
+    'Matériaux nobles, structure personnalisée, prestations exclusives sur mesure' => __('Matériaux nobles, structure personnalisée, prestations exclusives sur mesure'),
+    'Les standings déterminent la qualité des matériaux, finitions et équipements inclus.' => __('Les standings déterminent la qualité des matériaux, finitions et équipements inclus.'),
+    'La zone influence le coût foncier et le coefficient géographique.' => __('La zone influence le coût foncier et le coefficient géographique.'),
+    'Le type de sol détermine le coefficient géotechnique et le type de fondations.' => __('Le type de sol détermine le coefficient géotechnique et le type de fondations.'),
+    'Le nombre de niveaux influence la catégorie du bâtiment et les études géotechniques requises.' => __('Le nombre de niveaux influence la catégorie du bâtiment et les études géotechniques requises.'),
+    'Emprise inférieure au minimum recommandé' => __('Emprise inférieure au minimum recommandé'),
+    'Emprise supérieure au maximum autorisé' => __('Emprise supérieure au maximum autorisé'),
+    'Estimation temps réel' => __('Estimation temps réel'),
+    'HSP Sous-sol' => __('HSP Sous-sol'),
+    'Min' => __('Min'),
+    'Max' => __('Max'),
     'Standard' => __('Standard'),
     'Confort' => __('Confort'),
     'Premium' => __('Premium'),
@@ -285,7 +297,7 @@ $simTranslations =[
     'Piscine plage immergée 8x4m' => __('Piscine plage immergée 8x4m'),
 ];
 @endphp
-<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">Chargement du simulateur...</div></div>
+<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">{{ __('Chargement du simulateur...') }}</div></div>
 <script>
     window.INITIAL_SECTEUR = "{{ $secteur ?? '' }}";
     window.SAVE_ROUTE = "{{ route('simulator.save') }}";
@@ -354,6 +366,24 @@ const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
   );
 };
 
+const InfoIcon=({text,id=''})=>{
+  const [show,setShow]=React.useState(false);
+  const ref=React.useRef(null);
+  React.useEffect(()=>{
+    const h=()=>setShow(false);
+    document.addEventListener('click',h);
+    return ()=>document.removeEventListener('click',h);
+  },[]);
+  return <span className="relative inline-flex items-center ml-1" ref={ref}>
+    <span className="cursor-help inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-200 text-gray-500 text-xs font-bold hover:bg-[#0E1540] hover:text-white transition-colors"
+      onClick={(e)=>{e.stopPropagation();setShow(!show);}}
+      onMouseEnter={()=>setShow(true)}
+      onMouseLeave={()=>setShow(false)}
+    >?</span>
+    {show&&<div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg whitespace-nowrap z-50 pointer-events-none" style={{maxWidth:'280px',whiteSpace:'normal'}}>{text}</div>}
+  </span>;
+};
+
 const App=()=>{
   const VERSION='8.1';
   
@@ -410,21 +440,98 @@ const App=()=>{
 
   // STANDINGS ET PRIX SYNCHRONISÉS
   const STANDINGS = libConfig.STANDINGS || {
-    standard:{name:t('Standard'),desc:t('Économique et fonctionnel'),icon:'Home'},
-    confort:{name:t('Confort'),desc:t('Qualité-prix optimal'),icon:'Armchair'},
-    premium:{name:t('Premium'),desc:t('Excellence et personnalisation'),icon:'Gem'},
-    prestige:{name:t('Prestige'),desc:t('Luxe sans compromis'),icon:'Crown'}
+    standard:{name:t('Standard'),desc:t('Fonctionnel et durable — Idéal premier investissement'),icon:'Home',prix:180000,prix_max:250000},
+    confort:{name:t('Confort'),desc:t('Qualité supérieure — Notre cœur de gamme'),icon:'Armchair',prix:280000,prix_max:380000},
+    premium:{name:t('Premium'),desc:t('Haut de gamme — Piscine incluse, personnalisation poussée'),icon:'Gem',prix:420000,prix_max:550000},
+    prestige:{name:t('Prestige'),desc:t('Luxe sur mesure — Matériaux d\'exception, domotique complète'),icon:'Crown',prix:600000,prix_max:900000}
   };
   const STANDINGS_PRIX = {};
+  const STANDINGS_PRIX_MAX = {};
   const STANDINGS_HSP = {};
   const STANDINGS_EMPRISE = {};
+  const STANDINGS_EMPRISE_REC = {};
+  const STANDINGS_EMPRISE_MIN = {};
   const STANDINGS_MARGE = {};
+  const STANDINGS_HSP_RDC = {};
+  const STANDINGS_HSP_ETAGE = {};
+  const STANDINGS_HSP_SOL = {};
   Object.entries(STANDINGS).forEach(([k,v]) => {
     STANDINGS_PRIX[k] = v.prix || 500000;
+    STANDINGS_PRIX_MAX[k] = v.prix_max || v.prix || 500000;
     STANDINGS_HSP[k] = v.hsp || 2.80;
     STANDINGS_EMPRISE[k] = v.emprise || 0.35;
+    STANDINGS_EMPRISE_REC[k] = v.emprise_recommandee || 0.35;
+    STANDINGS_EMPRISE_MIN[k] = v.emprise_min || 0.25;
     STANDINGS_MARGE[k] = v.marge || 0.20;
+    STANDINGS_HSP_RDC[k] = v.hsp_rdc || 3.0;
+    STANDINGS_HSP_ETAGE[k] = v.hsp_etage || 2.8;
+    STANDINGS_HSP_SOL[k] = v.hsp_soussol || 2.5;
   });
+  const EUR_RATE = 655.957;
+  const STANDINGS_N2 = {
+    standard:{
+      title: t('STANDARD — 180 000 à 250 000 FCFA/m² (≈ 275 à 380 €/m²)'),
+      desc: t('Un logement fonctionnel, solide et durable à prix maîtrisé. Idéal pour un premier investissement, un projet locatif ou une résidence principale économique.'),
+      includes: [
+        t('Structure béton armé aux normes internationales (fondations, murs porteurs, planchers béton)'),
+        t('Menuiseries aluminium, vitrage simple'),
+        t('Sols carrelés, plafonds en lambris PVC'),
+        t('Installation électrique complète aux normes, prête pour l\'ajout futur de climatisation'),
+        t('Enduit et peinture intérieure et extérieure'),
+        t('Hauteur sous plafond : 2,60 m')
+      ],
+      options: t('climatisation, clôture, piscine, groupe électrogène, installation solaire'),
+      footer: t('Plain-pied ou R+1 · Terrain minimum : 200 m²')
+    },
+    confort:{
+      title: t('CONFORT — 280 000 à 380 000 FCFA/m² (≈ 425 à 580 €/m²)'),
+      desc: t('Notre cœur de gamme. Des finitions soignées, des espaces généreux et des équipements complets pour un quotidien agréable. Le meilleur rapport qualité-prix.'),
+      includes: [
+        t('Structure renforcée (murs porteurs de 20 cm, planchers béton armé)'),
+        t('Menuiseries aluminium laqué coloris au choix, double vitrage dans les zones exposées au bruit'),
+        t('Carrelage grand format 60×60 cm, faux-plafonds en plâtre, peinture lessivable'),
+        t('Climatisation dans toutes les pièces principales'),
+        t('Cuisine aménagée (plan de travail granit, meubles, évier double bac)'),
+        t('Isolation sous toiture, chauffe-eau solaire'),
+        t('Hauteur sous plafond : 2,80 m')
+      ],
+      options: t('piscine, domotique, clôture, groupe électrogène, installation solaire'),
+      footer: t('Plain-pied ou R+1 · Terrain minimum : 400 m²')
+    },
+    premium:{
+      title: t('PREMIUM — 420 000 à 550 000 FCFA/m² (≈ 640 à 840 €/m²)'),
+      desc: t('Des prestations haut de gamme avec une personnalisation poussée. Piscine et garage inclus, volets roulants motorisés et maison partiellement connectée.'),
+      includes: [
+        t('Structure haute performance, étude de sol recommandée'),
+        t('Menuiseries aluminium haut de gamme, double vitrage intégral (isolation acoustique + protection UV)'),
+        t('Parquet dans les chambres, carrelage haut de gamme 80×80 cm dans les séjours'),
+        t('Piscine carrelée 8×4 m avec pool house'),
+        t('Volets roulants motorisés, pilotage centralisé de l\'éclairage et de la climatisation'),
+        t('Climatisation performante, éclairage architectural'),
+        t('Suite parentale avec douche italienne et baignoire'),
+        t('Hauteur sous plafond : 3,00 m')
+      ],
+      options: t('—'),
+      footer: t('Jusqu\'à R+2 · Terrain minimum : 500 m²')
+    },
+    prestige:{
+      title: t('PRESTIGE — 600 000 à 900 000 FCFA/m² (≈ 915 à 1 370 €/m²)'),
+      desc: t('L\'excellence sans compromis. Villa d\'architecte avec matériaux d\'exception, maison entièrement connectée et équipements de luxe. Chaque projet Prestige est unique.'),
+      includes: [
+        t('Structure sur mesure pour grandes portées et volumes exceptionnels, étude de sol obligatoire'),
+        t('Menuiseries importées sur mesure, double ou triple vitrage'),
+        t('Sols en marbre, travertin ou parquet massif importé'),
+        t('Piscine à débordement 12×5 m avec éclairage subaquatique et pool house aménagé'),
+        t('Maison entièrement connectée : éclairage, volets, climatisation, sécurité, son multi-pièces'),
+        t('Salle de bain type spa (baignoire balnéo, douche pluie XXL)'),
+        t('Groupe électrogène intégré avec basculement automatique'),
+        t('Récupération eaux de pluie, option solaire photovoltaïque'),
+        t('Hauteur sous plafond : 3,20 à 3,50 m')
+      ],
+      options: t('—'),
+      footer: t('Jusqu\'à R+2 avec ascenseur · Terrain minimum : 800 m²')
+    }
+  };
 
   const TYPES = libConfig.TYPES || {
     residentiel:[
@@ -477,6 +584,7 @@ const App=()=>{
   const [secteur,setSecteur]=useState(initSecteur);
   const[typeBat,setTypeBat]=useState('');
   const [standing,setStanding]=useState(qs.standing || 'confort');
+  const [showN2,setShowN2]=useState(null);
   const [catHotel,setCatHotel]=useState('3s');
   const[forme,setForme]=useState('rect');
   
@@ -490,8 +598,9 @@ const App=()=>{
   const[sol,setSol]=useState('');
   const [niveaux,setNiveaux]=useState(1);
   const [ssSol,setSsSol]=useState(0);
-  const[hspRdc,setHspRdc]=useState(3.0);
-  const[hspEtage,setHspEtage]=useState(2.8);
+  const[hspRdc,setHspRdc]=useState(STANDINGS_HSP_RDC[standing]||3.0);
+  const[hspEtage,setHspEtage]=useState(STANDINGS_HSP_ETAGE[standing]||2.8);
+  const[hspSoussol,setHspSoussol]=useState(STANDINGS_HSP_SOL[standing]||2.5);
   const [nbChambres,setNbChambres]=useState(qs.nb_beds ? parseInt(qs.nb_beds) : 3);
   const[espacesHotel,setEspacesHotel]=useState(qs.espaces_communs === "1" ? ['accueil'] : []);
   const SPECIFIQUES = libConfig.SPECIFIQUE || [];
@@ -535,6 +644,13 @@ const App=()=>{
 
   const [isSaving,setIsSaving]=useState(false);
 
+  // Pré-remplissage HSP selon standing
+  React.useEffect(() => {
+    setHspRdc(STANDINGS_HSP_RDC[standing]||3.0);
+    setHspEtage(STANDINGS_HSP_ETAGE[standing]||2.8);
+    setHspSoussol(STANDINGS_HSP_SOL[standing]||2.5);
+  }, [standing]);
+
   // CALCULS
   const surface=useMemo(()=>{
     if(forme==='carre')return dimA*dimA;
@@ -553,12 +669,36 @@ const App=()=>{
   const solData=SOLS[sol];
   const coefTotal=(zoneData?.coef||1)*(solData?.coef||1.15);
 
-  const emprise=useMemo(()=>{
-    if(secteur==='residentiel')return STANDINGS_EMPRISE[standing]||0.35;
+  // Emprise : plage recommandée 25-65% selon standing/secteur + alertes
+  const empriseRec=useMemo(()=>{
+    if(secteur==='residentiel')return STANDINGS_EMPRISE_REC[standing]||0.35;
+    if(secteur==='industriel')return 0.45;
+    if(secteur==='agricole')return 0.35;
+    return 0.35;
+  },[secteur,standing]);
+
+  const empriseMin=useMemo(()=>{
+    if(secteur==='residentiel')return STANDINGS_EMPRISE_MIN[standing]||0.25;
+    if(secteur==='industriel')return 0.35;
+    if(secteur==='agricole')return 0.25;
+    return 0.25;
+  },[secteur,standing]);
+
+  const empriseMax=useMemo(()=>{
+    if(secteur==='residentiel')return STANDINGS_EMPRISE[standing]||0.45;
     if(secteur==='industriel')return 0.65;
     if(secteur==='agricole')return 0.50;
-    return 0.40;
+    return 0.45;
   },[secteur,standing]);
+
+  const [emprise, setEmprise]=useState(empriseRec);
+  React.useEffect(() => { setEmprise(empriseRec); }, [empriseRec]);
+
+  const alerteEmprise=useMemo(()=>{
+    if(emprise<empriseMin) return {type:'alert',msg:t('Emprise inférieure au minimum recommandé')};
+    if(emprise>empriseMax) return {type:'warn',msg:t('Emprise supérieure au maximum autorisé')};
+    return null;
+  },[emprise,empriseMin,empriseMax]);
 
   const surfaceBatie=useMemo(()=>{
     if(secteur==='agricole'&&typeBat?.startsWith('elevage_')){
@@ -569,9 +709,9 @@ const App=()=>{
   },[surface,emprise,niveaux,ssSol,secteur,typeBat,effectif,typeData]);
 
   const hauteurTotale=useMemo(()=>{
-    const h=hspRdc+0.30+(niveaux>1?(niveaux-1)*(hspEtage+0.25):0);
+    const h=hspRdc+0.30+(niveaux>1?(niveaux-1)*(hspEtage+0.25):0)+(ssSol>0?ssSol*(hspSoussol+0.25):0);
     return Math.round(h*10)/10+(secteur==='industriel'?1.5:2.5);
-  },[hspRdc,hspEtage,niveaux,secteur]);
+  },[hspRdc,hspEtage,hspSoussol,niveaux,ssSol,secteur]);
 
   const prixM2=useMemo(()=>{
     if(secteur==='residentiel')return(STANDINGS_PRIX[standing]||500000)*(typeData?.maj||1);
@@ -585,17 +725,45 @@ const App=()=>{
     return typeData?.prix||450000;
   },[secteur,typeBat,standing,typeData,catHotel,hauteurLibre,pontRoulant]);
 
-  // Catégorie
+  // Catégorie - Matrice géotechnique V5.1 (7 cas)
   const categorie=useMemo(()=>{
     let cat='A1';
     let geoOblig=false;
+    let mission='G1';
     const motifs=[];
-    if(niveaux>4||hauteurTotale>15){cat='B2';geoOblig=true;motifs.push('>R+4');}
-    else if(niveaux>2||hauteurTotale>8){cat='A2';geoOblig=true;motifs.push('R+3 ou >8m');}
-    if(['commerce','clinique'].includes(typeBat) || typeBat?.startsWith('hotel_')){geoOblig=true;motifs.push('ERP');}
-    if(sol==='argileux'||sol==='hydromorphe'){geoOblig=true;motifs.push('Sol risque');}
-    if(ssSol>0){geoOblig=true;motifs.push('Sous-sol');}
-    return{cat,geoOblig,motifs,mission:geoOblig?(cat==='B2'?'G2 PRO':'G2 AVP'):'G1'};
+    // Catégorie bâtiment
+    if(niveaux>4||hauteurTotale>15){cat='B2';motifs.push('>R+4');}
+    else if(niveaux>2||hauteurTotale>8){cat='A2';motifs.push('R+3 ou >8m');}
+    if(['commerce','clinique'].includes(typeBat) || typeBat?.startsWith('hotel_')){motifs.push('ERP');}
+    if(ssSol>0){motifs.push('Sous-sol');}
+
+    // Matrice géotechnique (sol × niveaux) - 7 cas
+    const bonsSols = ['ferralitique','ferrugineux','laterite','rocheux'];
+    const solsMoyens = ['sableux','inconnu'];
+    const solsRisque = ['argileux','hydromorphe'];
+
+    if(sol){
+      if(bonsSols.includes(sol)){
+        if(niveaux<=2){mission='G1';}
+        else if(niveaux<=4){mission='G2 AVP';geoOblig=true;motifs.push('G2 AVP');}
+        else{mission='G2 PRO';geoOblig=true;motifs.push('G2 PRO');}
+      } else if(solsMoyens.includes(sol)){
+        if(niveaux<=1){mission='G1';}
+        else{mission='G2 AVP';geoOblig=true;motifs.push('G2 AVP');}
+      } else if(solsRisque.includes(sol)){
+        mission='G2 AVP';geoOblig=true;motifs.push('G2 AVP');
+        if(niveaux>=2||sol==='hydromorphe'){mission='G2 PRO';motifs.push('G2 PRO');}
+      }
+      if(ssSol>0 && !geoOblig){geoOblig=true;mission='G2 AVP';motifs.push('G2 AVP (ss-sol)');}
+      else if(ssSol>1){mission='G2 PRO';motifs.push('G2 PRO');}
+    }
+
+    // Cas 7 : ERP + R+2 systématiquement G2 AVP
+    if((['commerce','clinique'].includes(typeBat) || typeBat?.startsWith('hotel_')) && niveaux>=2){
+      if(mission==='G1'){mission='G2 AVP';geoOblig=true;motifs.push('G2 AVP ERP');}
+    }
+
+    return{cat,geoOblig,motifs,mission};
   },[niveaux,hauteurTotale,typeBat,sol,ssSol]);
 
   // Durée
@@ -940,7 +1108,7 @@ const App=()=>{
     const avantAleas = total; const avantAleasMin = totalMin; const avantAleasMax = totalMax;
     add('11', t('Provisions aléas'), t('5% recommandé'), avantAleas*0.05, Math.round(avantAleasMin*0.05), Math.round(avantAleasMax*0.05));
 
-    return{
+    const estData = {
       postes,foncier,
       total:Math.round(total),
       totalMin:Math.round(foncierMin+totalMin),
@@ -948,8 +1116,14 @@ const App=()=>{
       min:Math.round((foncier+total)*0.90),
       max:Math.round((foncier+total)*(1+marge)),
       prixM2Hors:Math.round(total/surfaceBatie),
-      marge
+      marge,
+      secteur, typeBat, standing, zone, sol, niveaux, ssSol,
+      dimensions:{surface,surfaceBatie,hauteurTotale},
+      besoins:besoins.total,
+      duree, categorie:categorie.cat
     };
+    window.SIM_DATA = estData;
+    return estData;
   },[surfaceBatie,surface,emprise,prixM2,coefTotal,solData,zoneData,terrainDispo,sol,secteur,ssSol,niveaux,
      nbAsc,nbQuais,pontRoulant,pontCap,groupeFroid,irrigation,surfExploit,solaire,groupe,
      alarme,nbZones,video,acces,nbPortes,cloture,clotureH,perimetre,portail,piscine,forage,forageProf,
@@ -963,6 +1137,7 @@ const App=()=>{
     setSecteur('');setTypeBat('');setStanding('confort');setCatHotel('3s');
     setForme('rect');setDimA(30);setDimB(20);setTerrainDispo('oui');
     setZone('zone1');setSol('');setNiveaux(1);setSsSol(0);
+    setHspSoussol(STANDINGS_HSP_SOL['confort']||2.5);
     setNbChambres(30);setEspacesHotel([]);setHauteurLibre(8);setPontRoulant(false);setGroupeFroid('');
     setEffectif(100);setIrrigation('');setNbAsc(0);setSolaire('');setGroupe('');
     setAlarme('');setVideo('');setAcces('');
@@ -980,6 +1155,7 @@ const App=()=>{
 
     const data = {
         secteur, typeBat, standing, zone, sol, niveaux, ssSol,
+        hspRdc, hspEtage, hspSoussol, emprise,
         dimensions: { surface, surfaceBatie, hauteurTotale },
         besoins: besoins.total, 
         solaire, groupe,
@@ -1123,7 +1299,7 @@ const App=()=>{
               ))}
             </div>
           </div>
-          <div className="text-center mt-12 text-blue-300 text-xs">© 2025 AIAE SARL • Quartier Kléme Zanguéra, Lomé, Togo</div>
+          <div className="text-center mt-12 text-blue-300 text-xs">© 2025 AIAE (Afrika Infrastructures And Equipements) • Quartier Kléme Zanguéra, Lomé, Togo</div>
         </div>
       </div>
     );
@@ -1133,6 +1309,21 @@ const App=()=>{
   return(
     <div className="min-h-screen bg-gray-50">
       <Header/>
+      {/* Encart estimation temps réel */}
+      {etape>=3&&estimation&&<div className="fixed right-4 top-24 z-40 no-print w-64 card p-4 shadow-xl hidden lg:block" style={{maxHeight:'calc(100vh - 120px)',overflowY:'auto'}}>
+        <div className="text-xs text-gray-500 mb-1">{t('Estimation temps réel')}</div>
+        <div className="text-2xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtM(estimation.foncier+estimation.total)} F</div>
+        <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <span>{t('Min')} {fmtM(estimation.totalMin)}</span>
+          <span>{t('Max')} {fmtM(estimation.totalMax)}</span>
+        </div>
+        <div className="mt-2 pt-2 border-t border-gray-100 text-xs text-gray-500">
+          <div className="flex justify-between"><span>{t('Surface')}</span><span className="mono">{fmt(surfaceBatie)} m²</span></div>
+          <div className="flex justify-between"><span>{t('Niveaux')}</span><span>R+{Math.max(0,niveaux-1)}{ssSol>0?'+'+ssSol+'ss':''}</span></div>
+          <div className="flex justify-between"><span>{t('Prix/m²')}</span><span className="mono">{fmtM(estimation.prixM2Hors)}</span></div>
+          {sol&&<div className="flex justify-between"><span>Coef</span><span className="mono">×{coefTotal.toFixed(2)}</span></div>}
+        </div>
+      </div>}
       <main className="max-w-5xl mx-auto px-4 py-6">
         
         {/* ÉTAPE 1: TYPE - SANS PRIX */}
@@ -1157,16 +1348,27 @@ const App=()=>{
             </div>
             {secteur==='residentiel'&&typeBat&&(
               <div className="card p-5 mb-6">
-                <h3 className="font-semibold text-gray-700 mb-4">{t('Niveau de standing')}</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">{t('Niveau de standing')}<InfoIcon text={t('Les standings déterminent la qualité des matériaux, finitions et équipements inclus.')}/></h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {Object.entries(STANDINGS).map(([id,d])=>(
-                    <button key={id} onClick={()=>setStanding(id)} className={`option-btn ${standing===id?'selected':''}`}>
-                      <div className={`mb-3 p-2 rounded-lg w-fit ${standing===id?'bg-white/20':'bg-gray-50'}`}>
-                        <Icon name={d.icon} size={24} />
-                      </div>
-                      <div className="font-semibold text-gray-800">{t(d.name)}</div>
-                      <div className="text-xs text-gray-500 mt-1">{t(d.desc)}</div>
-                    </button>
+                    <div key={id} className={`relative option-btn ${standing===id?'selected':''}`}>
+                      <button onClick={()=>setStanding(id)} className="w-full text-left">
+                        <div className={`mb-3 p-2 rounded-lg w-fit ${standing===id?'bg-white/20':'bg-gray-50'}`}>
+                          <Icon name={d.icon} size={24} />
+                        </div>
+                        <div className="font-semibold text-gray-800">{t(d.name)}</div>
+                        <div className="text-xs text-gray-500 mt-1 leading-relaxed">
+                          {t(d.desc)}
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1 mono">
+                          {fmt(STANDINGS_PRIX[id]||d.prix)} à {fmt(STANDINGS_PRIX_MAX[id]||d.prix_max)} FCFA/m²
+                          <span className="text-gray-300"> (≈ {Math.round((STANDINGS_PRIX[id]||d.prix)/EUR_RATE)} à {Math.round((STANDINGS_PRIX_MAX[id]||d.prix_max)/EUR_RATE)} €/m²)</span>
+                        </div>
+                      </button>
+                      <button onClick={(e)=>{e.stopPropagation();setShowN2(id);}} className="text-xs text-[#CC6A00] hover:text-[#0E1540] transition-colors mt-2 px-1 underline underline-offset-2">
+                        {t('En savoir plus')}
+                      </button>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -1228,7 +1430,7 @@ const App=()=>{
               </div>
             </div>
             <div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Zone géographique')}</h3>
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Zone géographique')}<InfoIcon text={t('La zone influence le coût foncier et le coefficient géographique.')}/></h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {Object.entries(ZONES).map(([id,z])=>(
                   <button key={id} onClick={()=>setZone(id)} className={`option-btn ${zone===id?'selected':''}`}>
@@ -1239,7 +1441,7 @@ const App=()=>{
               </div>
             </div>
             <div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Type de sol')}</h3>
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Type de sol')}<InfoIcon text={t('Le type de sol détermine le coefficient géotechnique et le type de fondations.')}/></h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {Object.entries(SOLS).map(([id,s])=>(
                   <button key={id} onClick={()=>setSol(id)} className={`option-btn ${sol===id?'selected':''} ${s.risque==='élevé'||s.risque==='très élevé'?'border-orange-300':''}`}>
@@ -1253,7 +1455,7 @@ const App=()=>{
                   </button>
                 ))}
               </div>
-              {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 obligatoire.')}</p></div>}
+              {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 AVP fortement recommandée.')}</p></div>}
             </div>
             <Nav canContinue={!!sol}/>
           </div>
@@ -1265,7 +1467,7 @@ const App=()=>{
             <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Configuration du bâtiment')}</h2></div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card p-5">
-                <h3 className="font-semibold text-gray-700 mb-4">{t('Niveaux')}</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">{t('Niveaux')}<InfoIcon text={t('Le nombre de niveaux influence la catégorie du bâtiment et les études géotechniques requises.')}/></h3>
                 <div className="grid grid-cols-2 gap-4">
                   <InputNum value={niveaux} onChange={setNiveaux} min={1} max={typeData?.max||10} label={t('Niveaux hors sol')}/>
                   <InputNum value={ssSol} onChange={setSsSol} min={0} max={3} label={t('Sous-sols')}/>
@@ -1273,12 +1475,22 @@ const App=()=>{
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <InputNum value={hspRdc} onChange={setHspRdc} min={2.4} max={6} step={0.1} unit="m" label={t('HSP RDC')}/>
                   <InputNum value={hspEtage} onChange={setHspEtage} min={2.4} max={4} step={0.1} unit="m" label={t('HSP Étages')}/>
+                  {ssSol>0&&<InputNum value={hspSoussol} onChange={setHspSoussol} min={2.2} max={3.5} step={0.1} unit="m" label={t('HSP Sous-sol')}/>}
                 </div>
               </div>
               <div className="card p-5">
                 <h3 className="font-semibold text-gray-700 mb-4">{t('Synthèse technique')}</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between"><span className="text-gray-500">{t('Emprise au sol')}</span><span className="mono font-semibold">{fmt(surface*emprise)} m² ({Math.round(emprise*100)}%)</span></div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-500">{t('Emprise au sol')}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-400">{Math.round(empriseMin*100)}%</span>
+                      <input type="range" min={Math.round(empriseMin*100)} max={Math.round(empriseMax*100)} value={Math.round(emprise*100)} onChange={e=>setEmprise(e.target.value/100)} className="w-24 h-1.5 accent-[#0E1540]" />
+                      <span className="text-xs text-gray-400">{Math.round(empriseMax*100)}%</span>
+                      <span className="mono font-semibold w-12 text-right">{Math.round(emprise*100)}%</span>
+                    </div>
+                  </div>
+                  {alerteEmprise&&<div className={`${alerteEmprise.type==='alert'?'alert-box':'warn-box'} text-xs py-1 px-2`}>{alerteEmprise.msg}</div>}
                   <div className="flex justify-between"><span className="text-gray-500">{t('Surface plancher')}</span><span className="mono font-semibold">{fmt(surfaceBatie)} m²</span></div>
                   <div className="flex justify-between"><span className="text-gray-500">{t('Hauteur totale')}</span><span className="mono font-semibold">{Number(hauteurTotale || 0).toFixed(1)} m</span></div>
                 </div>
@@ -1499,10 +1711,26 @@ const App=()=>{
                 <h2 className="text-xl font-bold text-gray-800">{t('Récapitulatif et estimation')}</h2>
                 <p className="text-gray-500 text-sm">{t('Besoins énergétiques - Propositions - Estimation')}</p>
               </div>
-              <button onClick={()=>window.print()} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
-                <Icon name="Printer" size={18} />
-                {t('Imprimer')}
-              </button>
+              <div className="flex gap-2">
+                <button onClick={()=>{
+                  const w = window.open('', '_blank');
+                  if(w){
+                    w.document.write(`<html><head><title>${t('Génération PDF...')}</title></head><body>${t('Chargement...')}</body></html>`);
+                    fetch(window.SAVE_ROUTE.replace('/save','/pdf'), {
+                      method:'POST',
+                      headers:{'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').content,'Accept':'text/html'},
+                      body:JSON.stringify(window.SIM_DATA||{})
+                    }).then(r=>r.text()).then(html=>{w.document.write(html);w.document.close();}).catch(()=>w.close());
+                  }
+                }} className="flex items-center gap-2 px-4 py-2 bg-[#05482C] text-white rounded-lg hover:brightness-110">
+                  <Icon name="FileText" size={18} />
+                  PDF
+                </button>
+                <button onClick={()=>window.print()} className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+                  <Icon name="Printer" size={18} />
+                  {t('Imprimer')}
+                </button>
+              </div>
             </div>
 
             {/* Synthèse */}
@@ -1642,9 +1870,45 @@ const App=()=>{
 
       </main>
       <footer className="text-center py-6 text-gray-400 text-xs no-print">
-        © 2025 AIAE SARL • Afrika Infrastructure, Automation & Energy • Quartier Kléme Zanguéra, Lomé, Togo<br/>
+        © 2025 AIAE (Afrika Infrastructures And Equipements) • contact@aiae.services • Quartier Kléme Zanguéra, Lomé, Togo<br/>
         {t('Simulateur v')}{VERSION} • {t('Référentiel Décembre 2025')}
       </footer>
+
+      {/* MODALE NIVEAU 2 — En savoir plus */}
+      {showN2&&STANDINGS_N2[showN2]&&(
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" style={{background:'rgba(0,0,0,0.6)'}} onClick={()=>setShowN2(null)}>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" onClick={e=>e.stopPropagation()}>
+            <div className="sticky top-0 bg-white rounded-t-2xl flex items-center justify-between p-5 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <Icon name={STANDINGS[showN2]?.icon||'Home'} size={24} className="text-[#0E1540]" />
+                <h3 className="text-lg font-bold text-gray-800">{STANDINGS[showN2]?.name}</h3>
+              </div>
+              <button onClick={()=>setShowN2(null)} className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <div className="p-5">
+              <p className="text-sm text-gray-500 mb-1">{STANDINGS_N2[showN2].title}</p>
+              <p className="text-gray-700 leading-relaxed mb-4">{STANDINGS_N2[showN2].desc}</p>
+              <div className="bg-gray-50 rounded-xl p-4 mb-4">
+                <p className="font-semibold text-gray-800 text-sm mb-2">{t('Ce que vous obtenez :')}</p>
+                <ul className="space-y-2">
+                  {STANDINGS_N2[showN2].includes.map((item,i)=>(
+                    <li key={i} className="text-sm text-gray-700 flex gap-2">
+                      <span className="text-[#0E1540] shrink-0 mt-0.5">-</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {STANDINGS_N2[showN2].options!==t('—')&&(
+                <p className="text-sm text-gray-500 mb-2"><span className="font-medium">{t('En option :')}</span> {STANDINGS_N2[showN2].options}</p>
+              )}
+              <p className="text-sm text-gray-400 italic">{STANDINGS_N2[showN2].footer}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -1655,5 +1919,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('frontend.partials.cookie-consent')
 </body>
 </html>

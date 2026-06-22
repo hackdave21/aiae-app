@@ -1,10 +1,12 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>À propos - AIAE</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -274,7 +276,7 @@
 
         <!-- PARAGRAPHE 2 -->
         <p class="text-[#555] text-[16px] xl:text-[18px] leading-[1.6] mb-4 text-justify">
-          {!! __('Notre direction technique est assurée par un <strong class="font-heavy">Docteur Ingénieur en génie civil</strong>, spécialisé dans les structures complexes et les technologies du béton précontraint, avec <strong class="font-heavy">plus de 18 ans d\'expérience terrain</strong>. Cette expertise de haut niveau garantit une <strong class="font-heavy">maîtrise complète de la chaîne conception-réalisation</strong>, la capacité à traiter des projets techniquement exigeants et un dialogue de haut niveau avec vos services d\'ingénierie, dans le <strong class="font-heavy">strict respect des normes internationales</strong>.') !!}
+          {!! __('Notre direction technique est assurée par un <strong class="font-heavy">Expert en génie civil</strong>, spécialisé dans les structures complexes et les technologies du béton précontraint, avec <strong class="font-heavy">plus de 18 ans d\'expérience terrain</strong>. Cette expertise de haut niveau garantit une <strong class="font-heavy">maîtrise complète de la chaîne conception-réalisation</strong>, la capacité à traiter des projets techniquement exigeants et un dialogue de haut niveau avec vos services d\'ingénierie, dans le <strong class="font-heavy">strict respect des normes internationales</strong>.') !!}
         </p>
 
       </div>
@@ -302,7 +304,7 @@
 
         <!-- TITRE -->
         <h2 class="text-white text-center font-bold text-[12px] sm:text-[20px] md:text-[30px] leading-[1.05] mb-10">
-          {{ __('UNE EXPERTISE NÉE D’UN CONSTAT') }}
+          {{ __('NOTRE APPROCHE') }}
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
@@ -704,11 +706,7 @@
               </div>
             </div>
 
-            <!-- TEXTE (Bottom Right) -->
-            <div
-              class="text-white text-[18px] md:text-[24px] leading-[1.8] self-center flex-1 max-w-[420px] md:pl-4 text-center md:text-left mt-6 md:mt-0">
-              {!! __('Notre équipe s’appuie<br> également sur <strong class="text-white font-heavy">un réseau de<br> partenaires techniques qualifiés</strong><br> (architectes, géotechniciens,<br> topographes, bureaux de<br> contrôle) <strong class="text-white font-heavy">mobilisés selon les<br> besoins de chaque projet.</strong>') !!}
-            </div>
+          </div>
 
           </div>
 
@@ -948,12 +946,12 @@
 
           <!-- Instagram -->
           <a href="#" aria-label="Instagram">
-            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
           <a href="#" aria-label="Facebook">
-            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
@@ -979,7 +977,7 @@
       <div
         class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
-        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt=""
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="WhatsApp"
           class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
@@ -988,7 +986,7 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('Écrivez-nous') }}</strong> {{ __('pour toutes') }}<br />
             <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
@@ -1100,7 +1098,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
@@ -1159,6 +1157,7 @@
     });
   </script>
   @include('frontend.partials.rdv-modal')
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

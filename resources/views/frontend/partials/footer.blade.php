@@ -41,14 +41,14 @@
     <div class="bg-[#f4f5f7] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-4 text-[#0b4a2b]">
         <!-- WhatsApp Icon -->
-        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-12 w-12" />
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="WhatsApp" class="h-12 w-12" />
 
         <p class="text-3xl">
           +228 <span class="font-bold">90 03 54 16</span>
         </p>
 
         <p class="text-sm">
-          <span class="font-extrabold">{{ __('Écrivez nous') }}</span> {{ __('pour toutes') }}<br />
+          <span class="font-extrabold">{{ __('Écrivez-nous') }}</span> {{ __('pour toutes') }}<br />
           <span class="font-extrabold">{{ __('informations') }}</span> {{ __('supplémentaires') }}
         </p>
       </div>
@@ -68,7 +68,7 @@
           <img src="{{ asset('aiae-frontend/Images/logos/LOGO_AIAE_FINAL_-_Copie.png') }}" class="w-64 pb-5" alt="AIAE Logo">
 
           <p class="text-[#1a1f4d] text-[22px] leading-relaxed max-w-md">
-            <strong>AIAE : Afrika Infrastructures And Equipments.</strong>
+            <strong>AIAE : Afrika Infrastructures And Equipements.</strong>
             {{ __('De la conception à la réalisation.') }}
           </p>
 
@@ -155,7 +155,7 @@
 
     <div class="bg-[#1a1f4d] text-white text-center mt-20 py-2 text-sm">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 

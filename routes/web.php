@@ -60,6 +60,7 @@ Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('logout'
 Route::get('/simulator', [SimulatorController::class, 'index'])->name('simulator.index');
 Route::get('/simulator/v1', [SimulatorController::class, 'simulatorV1'])->name('simulator.v1');
 Route::get('/simulator/results', [SimulatorController::class, 'results'])->name('simulator.results');
+Route::post('/simulator/pdf', [SimulatorController::class, 'pdf'])->name('simulator.pdf');
 Route::post('/quotation-request', [\App\Http\Controllers\QuotationRequestController::class, 'store'])->name('quotation.request');
 Route::post('/appointment-request', [\App\Http\Controllers\AppointmentRequestController::class, 'store'])->name('appointment.request')->middleware('auth');
 

@@ -58,8 +58,14 @@ class SimulatorController extends Controller
             return [$st->code => [
                 'name' => $st->name,
                 'prix' => $st->prix_m2_min,
+                'prix_max' => $st->prix_m2_max,
                 'emprise' => ($st->emprise_max / 100),
+                'emprise_recommandee' => $st->emprise_recommandee ?? 0.35,
+                'emprise_min' => $st->emprise_min ?? 0.25,
                 'hsp' => $st->hsp,
+                'hsp_rdc' => $st->hsp_rdc ?? 3.0,
+                'hsp_etage' => $st->hsp_etage ?? 2.8,
+                'hsp_soussol' => $st->hsp_soussol ?? 2.5,
                 'marge' => $st->marge ?? 0.20,
                 'desc' => $st->description ?? "Qualité " . $st->name,
                 'icon' => $st->code === 'prestige' ? 'Crown' : ($st->code === 'premium' ? 'Gem' : ($st->code === 'confort' ? 'Armchair' : 'Home'))
@@ -333,5 +339,12 @@ class SimulatorController extends Controller
 
         // Logic to process and display simulation results
         return view('frontend.simulation-results');
+    }
+
+    public function pdf(Request $request)
+    {
+        $config = $request->all();
+        $ref = 'SIM-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(6));
+        return view('frontend.simulation_pdf', compact('config', 'ref'));
     }
 }

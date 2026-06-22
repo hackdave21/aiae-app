@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Division construction - AIAE</title>
+  @include('frontend.partials.head-seo')
+  @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
   <link rel="stylesheet" href="{{ asset('aiae-frontend/css/responsive.css') }}">
 
@@ -607,18 +609,74 @@
               <div class="bg-darkBlue px-6 py-5 text-white">
                 <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">STANDARD</span> : <span>Conception<br>économique et fonctionnelle</span>') !!}</h4>
               </div>
-              <div class="p-6 text-gray-800 text-[18px] flex-1">
-                <p class="mb-5 leading-relaxed">
+              <div class="p-6 text-gray-800 flex-1">
+                <p class="mb-4 leading-relaxed text-[16px]">
                   {!! __('Le standing Standard offre un logement <strong class="font-heavy">fonctionnel et durable à prix optimisé</strong>. Idéal pour un premier investissement immobilier ou un projet locatif.') !!}
                 </p>
-                <ul class="space-y-2 list-disc pl-5">
-                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Parpaings 15 cm, dalles 16+4, enduit lissé, peinture économique') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium anodisé standard, simple vitrage') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage 40x40 cm standard') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Gamme économique, robinetterie chrome') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Installation standard, tableau 1 rangée') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Cuisine</strong> : Plan de travail carrelé, meubles basiques') !!}</li>
-                </ul>
+                <div class="space-y-3 text-[15px]">
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Fondations : semelles isolées sous poteaux ou filantes sous murs porteurs, en béton armé (C20/25, acier HA FeE500), profondeur 0,80-1,00 m selon étude de sol') !!}</li>
+                      <li>{!! __('Murs porteurs : agglos creux de 15 cm avec chaînages horizontaux et verticaux') !!}</li>
+                      <li>{!! __('Cloisons intérieures : agglos creux de 10 cm') !!}</li>
+                      <li>{!! __('Planchers : hourdis 16+4 cm (portées ≤ 4 m) ou 20+5 cm (portées > 4 m)') !!}</li>
+                      <li>{!! __('Hauteur sous plafond : 2,60 m') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Toiture</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Charpente bois traité (anti-termites)') !!}</li>
+                      <li>{!! __('Couverture tôles bac aluminium 7/10ème') !!}</li>
+                      <li>{!! __('Gouttières PVC avec descentes') !!}</li>
+                      <li>{!! __('Sous-face en lambris PVC') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Menuiseries</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Extérieures : aluminium anodisé standard, vitrage simple clair') !!}</li>
+                      <li>{!! __('Intérieures : portes isoplane sur huisserie métallique') !!}</li>
+                      <li>{!! __('Grilles de défense en fer forgé (fenêtres RDC)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Revêtements et finitions</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Sols : carrelage grès cérame 40×40 cm (séjour, cuisine), grès émaillé (SDB)') !!}</li>
+                      <li>{!! __('Murs intérieurs : enduit ciment lissé, peinture acrylique 2 couches') !!}</li>
+                      <li>{!! __('Murs extérieurs : enduit ciment taloché, peinture façade') !!}</li>
+                      <li>{!! __('Plafonds : lambris PVC') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Électricité</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Installation encastrée conforme NF C 15-100') !!}</li>
+                      <li>{!! __('Tableau de répartition 1 rangée avec disjoncteur différentiel 30 mA') !!}</li>
+                      <li>{!! __('Prises et interrupteurs gamme économique') !!}</li>
+                      <li>{!! __('Pré-câblage climatisation chambres') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Plomberie et sanitaires</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Alimentation : tubes PPR (polypropylène)') !!}</li>
+                      <li>{!! __('Évacuation : PVC série assainissement') !!}</li>
+                      <li>{!! __('Sanitaires porcelaine vitrifiée gamme économique, robinetterie chrome') !!}</li>
+                      <li>{!! __('Production eau chaude : non incluse (option)') !!}</li>
+                      <li>{!! __('Assainissement : fosse septique 3 000 L + puisard (ou raccordement réseau si disponible)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Conception bioclimatique</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Ventilation traversante favorisée par le plan architectural') !!}</li>
+                      <li>{!! __('Débords de toiture ≥ 60 cm (protection solaire des façades)') !!}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -628,18 +686,92 @@
               <div class="bg-darkBlue px-6 py-5 text-white">
                 <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">CONFORT</span> : <span>Équilibre<br>qualité-prix optimal</span>') !!}</h4>
               </div>
-              <div class="p-6 text-gray-800 text-[18px] flex-1">
-                <p class="mb-5 leading-relaxed">
-                  {!! __('Le standing Confort constitue le <strong class="font-heavy">meilleur rapport qualité-prix</strong>.<br>Finitions soignées, espaces généreux, équipements complets.') !!}
+              <div class="p-6 text-gray-800 flex-1">
+                <p class="mb-4 leading-relaxed text-[16px]">
+                  {!! __('Le standing Confort constitue le <strong class="font-heavy">meilleur rapport qualité-prix</strong>. Finitions soignées, espaces généreux, équipements complets. Notre cœur de gamme.') !!}
                 </p>
-                <ul class="space-y-2 list-disc pl-5">
-                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Parpaings 20 cm, dalles 20+5, enduit gratté, peinture qualité') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium laqué, double vitrage zones exposées') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage grès cérame 60x60') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Gamme design, robinetterie qualité, eau chaude') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Tableau 2 rangées, prises RJ45, pré-câblage domotique') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Cuisine</strong> : Plan granit/quartz, meubles MDF stratifié') !!}</li>
-                </ul>
+                <div class="space-y-3 text-[15px]">
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Fondations : semelles filantes renforcées en béton armé (C25/30, acier HA FeE500) avec longrines de liaison') !!}</li>
+                      <li>{!! __('Murs porteurs : agglos de 20 cm avec chaînages horizontaux à chaque niveau de plancher et verticaux aux angles') !!}</li>
+                      <li>{!! __('Cloisons intérieures : agglos de 10 ou 15 cm selon fonction') !!}</li>
+                      <li>{!! __('Planchers : hourdis 20+5 cm (standard), dalles pleines pour porte-à-faux') !!}</li>
+                      <li>{!! __('Hauteur sous plafond : 2,80 m') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Toiture</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Charpente bois traité ou charpente métallique légère') !!}</li>
+                      <li>{!! __('Couverture tôles bac aluminium thermo-laquées (coloris au choix)') !!}</li>
+                      <li>{!! __('Gouttières aluminium laqué avec descentes') !!}</li>
+                      <li>{!! __('Isolation thermique sous toiture par lame d\'air ventilée entre couverture et faux-plafond BA13') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Menuiseries</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Extérieures : aluminium laqué (coloris au choix), double vitrage dans les zones exposées au bruit (façade sur rue, proximité voie principale)') !!}</li>
+                      <li>{!! __('Intérieures : portes pleines MDF stratifié, quincaillerie qualité') !!}</li>
+                      <li>{!! __('Baies coulissantes aluminium pour les ouvertures principales') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Revêtements et finitions</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Sols : carrelage grès cérame rectifié 60×60 cm (séjour, cuisine), faïence murale SDB hauteur 2 m') !!}</li>
+                      <li>{!! __('Murs intérieurs : enduit gratté, peinture acrylique lessivable') !!}</li>
+                      <li>{!! __('Murs extérieurs : enduit décoratif (gratté ou taloché fin), peinture siloxane haute durabilité') !!}</li>
+                      <li>{!! __('Plafonds : faux-plafond BA13 sur ossature métallique (séjour, chambres), lambris PVC (SDB)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Électricité</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Installation complète conforme NF C 15-100') !!}</li>
+                      <li>{!! __('Tableau de répartition 2 rangées avec protection différentielle 30 mA par circuit') !!}</li>
+                      <li>{!! __('Prises RJ45 (réseau informatique) dans le séjour et le bureau') !!}</li>
+                      <li>{!! __('Pré-câblage domotique (gaines supplémentaires pour évolution future)') !!}</li>
+                      <li>{!! __('Éclairage : spots encastrés séjour, appliques chambres') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Plomberie et sanitaires</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Alimentation : tubes multicouche (plus durable que PPR)') !!}</li>
+                      <li>{!! __('Évacuation : PVC série assainissement, siphons de sol SDB') !!}</li>
+                      <li>{!! __('Sanitaires design (cuvette suspendue, vasque à poser), robinetterie qualité') !!}</li>
+                      <li>{!! __('Production eau chaude : chauffe-eau solaire thermosiphon ou électrique') !!}</li>
+                      <li>{!! __('Assainissement : fosse septique 4 000 L améliorée + champ d\'épandage') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Climatisation</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Split mural dans toutes les pièces principales (chambres + séjour)') !!}</li>
+                      <li>{!! __('Option multi-split ou gainable possible') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Cuisine</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Plan de travail granit ou quartz reconstitué') !!}</li>
+                      <li>{!! __('Meubles bas et hauts MDF stratifié') !!}</li>
+                      <li>{!! __('Évier inox double bac, mitigeur') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Conception bioclimatique</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Ventilation traversante systématique') !!}</li>
+                      <li>{!! __('Débords de toiture ≥ 80 cm') !!}</li>
+                      <li>{!! __('Isolation sous toiture par lame d\'air ventilée (≥ 20 cm) + faux-plafond BA13') !!}</li>
+                      <li>{!! __('Brasseurs d\'air au plafond dans les espaces de vie (complément à la climatisation)') !!}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -649,18 +781,95 @@
               <div class="bg-darkBlue px-6 py-5 text-white">
                 <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">PREMIUM</span> : <span>Excellence et<br>personnalisation</span>') !!}</h4>
               </div>
-              <div class="p-6 text-gray-800 text-[18px] flex-1">
-                <p class="mb-5 leading-relaxed">
+              <div class="p-6 text-gray-800 flex-1">
+                <p class="mb-4 leading-relaxed text-[16px]">
                   {!! __('Le standing Premium offre des prestations <strong class="font-heavy">haut de gamme avec personnalisation poussée</strong>. Piscine incluse, garage 2 véhicules, bureau et salle multimédia.') !!}
                 </p>
-                <ul class="space-y-2 list-disc pl-5">
-                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Béton banché ou agglos 20 cm, isolation thermique, enduit décoratif') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Aluminium à rupture thermique, double vitrage intégral') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Carrelage rectifié haut de gamme, parquet chambres') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Baignoire + douche suite, double vasque, robinetterie design') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Domotique partielle, éclairage architectural, parafoudre') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Piscine</strong> : 8x4 m minimum, local technique, pool house 20-25 m²') !!}</li>
-                </ul>
+                <div class="space-y-3 text-[15px]">
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Fondations : semelles filantes ou radier partiel en béton armé (C25/30 à C30/37, acier HA FeE500) selon étude géotechnique G2 AVP recommandée') !!}</li>
+                      <li>{!! __('Murs porteurs : agglos de 20 cm avec poteaux BA 25×25 cm et chaînages horizontaux à chaque niveau de plancher') !!}</li>
+                      <li>{!! __('Isolation thermique des murs : doublage intérieur polystyrène + placo (chambres climatisées)') !!}</li>
+                      <li>{!! __('Planchers : hourdis 20+5 ou dalles pleines BA (portées > 5 m, porte-à-faux terrasses)') !!}</li>
+                      <li>{!! __('Hauteur sous plafond : 3,00 m') !!}</li>
+                      <li>{!! __('Possibilité R+2 (étude structure obligatoire)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Toiture</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Charpente métallique (portées longues) ou bois exotique traité') !!}</li>
+                      <li>{!! __('Couverture tuiles béton ou tôles bac aluminium thermo-laquées avec isolation sous toiture (polystyrène expansé 40 mm)') !!}</li>
+                      <li>{!! __('Gouttières aluminium laqué') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Menuiseries</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Extérieures : profilés aluminium haut de gamme, double vitrage intégral (performance acoustique et réduction UV)') !!}</li>
+                      <li>{!! __('Baies vitrées coulissantes grand format (ouverture sur terrasse/piscine)') !!}</li>
+                      <li>{!! __('Volets roulants aluminium motorisés') !!}</li>
+                      <li>{!! __('Intérieures : portes bois massif (iroko ou similaire), quincaillerie design') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Revêtements et finitions</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Sols : carrelage rectifié haut de gamme 80×80 cm (séjour), parquet massif ou contrecollé (chambres)') !!}</li>
+                      <li>{!! __('Murs : enduit décoratif avec effets (stucco, tadelakt), peinture premium') !!}</li>
+                      <li>{!! __('Plafonds : faux-plafond BA13 avec spots LED encastrés et éclairage architectural (corniches lumineuses)') !!}</li>
+                      <li>{!! __('Façades : enduit fin avec modénatures architecturales') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Électricité</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Installation complète conforme NF C 15-100, conception selon plan d\'éclairage architectural') !!}</li>
+                      <li>{!! __('Tableau de répartition 3 rangées, parafoudre, protection différentielle sélective') !!}</li>
+                      <li>{!! __('Domotique partielle : éclairage, volets roulants, climatisation (pilotage centralisé ou par application)') !!}</li>
+                      <li>{!! __('Prises RJ45 dans toutes les pièces, réseau Ethernet catégorie 6') !!}</li>
+                      <li>{!! __('Éclairage architectural : spots, bandeaux LED, appliques design') !!}</li>
+                      <li>{!! __('Pré-câblage alarme et vidéosurveillance') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Plomberie et sanitaires</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Alimentation : tubes multicouche, nourrice de distribution') !!}</li>
+                      <li>{!! __('Suite parentale : baignoire îlot + douche italienne, double vasque, robinetterie design') !!}</li>
+                      <li>{!! __('SDB secondaires : douche italienne, vasque design') !!}</li>
+                      <li>{!! __('Production eau chaude : chauffe-eau thermodynamique ou solaire') !!}</li>
+                      <li>{!! __('WC suspendus avec bâti-support dans toutes les SDB') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Piscine</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Bassin béton armé carrelé 8×4 m minimum') !!}</li>
+                      <li>{!! __('Local technique (filtration, pompe, traitement)') !!}</li>
+                      <li>{!! __('Pool house 20-25 m² (bar, vestiaire, douche extérieure)') !!}</li>
+                      <li>{!! __('Plage minérale ou bois composite') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Climatisation</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Système gainable ou multi-split inverter haute performance') !!}</li>
+                      <li>{!! __('Régulation par zone') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Conception bioclimatique</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Étude d\'orientation solaire à la conception') !!}</li>
+                      <li>{!! __('Isolation toiture + murs climatisés') !!}</li>
+                      <li>{!! __('Pergolas et brise-soleil architecturaux') !!}</li>
+                      <li>{!! __('Ventilation mécanique complémentaire (VMC) dans les SDB intérieures') !!}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -670,19 +879,96 @@
               <div class="bg-darkBlue px-6 py-5 text-white">
                 <h4 class="text-[30px] leading-snug">{!! __('<span class="font-heavy">PRESTIGE</span> : <span>Luxe et<br>exclusivité sans compromis</span>') !!}</h4>
               </div>
-              <div class="p-6 text-gray-800 text-[18px] flex-1">
-                <p class="mb-5 leading-relaxed">
-                  {!! __('Le standing Prestige représente l\'<strong class="font-heavy">excellence absolue</strong>. Villa d\'architecte avec des matériaux d\'exception, domotique complète et équipements de luxe.') !!}
+              <div class="p-6 text-gray-800 flex-1">
+                <p class="mb-4 leading-relaxed text-[16px]">
+                  {!! __('Le standing Prestige représente l\'<strong class="font-heavy">excellence absolue</strong>. Villa d\'architecte avec des matériaux d\'exception, domotique complète et équipements de luxe. Chaque projet est unique.') !!}
                 </p>
-                <ul class="space-y-2 list-disc pl-5">
-                  <li>{!! __('<strong class="font-heavy">Matériaux</strong> : Béton architectonique, pierre naturelle, isolation haute performance') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Menuiseries</strong> : Sur mesure importées, triple vitrage, motorisées') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sols</strong> : Marbre, travertin ou parquet massif importé') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sanitaires</strong> : Marques designer, robinetterie prestige, spa privatif') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Électricité</strong> : Domotique complète (KNX/Loxone), groupe électrogène intégré') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Piscine</strong> : 12x5 m à débordement, chauffée, pool house bar') !!}</li>
-                  <li>{!! __('<strong class="font-heavy">Sécurité</strong> : Vidéosurveillance 16 caméras, alarme périmétrique, safe room optionnelle (Division Sécurité).') !!}</li>
-                </ul>
+                <div class="space-y-3 text-[15px]">
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Fondations : radier général ou fondations profondes en béton armé (C30/37, acier HA FeE500) selon étude géotechnique G2 PRO obligatoire') !!}</li>
+                      <li>{!! __('Structure : poteaux-poutres BA surdimensionnés, murs agglos 20 cm + doublage isolation') !!}</li>
+                      <li>{!! __('Béton architectonique pour éléments de façade apparents') !!}</li>
+                      <li>{!! __('Planchers : dalles pleines BA (portées libres, flexibilité architecturale) ou hourdis 25+5') !!}</li>
+                      <li>{!! __('Hauteur sous plafond : 3,20 à 3,50 m') !!}</li>
+                      <li>{!! __('Possibilité R+2 avec ascenseur') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Toiture</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Charpente métallique ou bois lamellé-collé pour portées exceptionnelles') !!}</li>
+                      <li>{!! __('Couverture tuiles terre cuite ou ardoise selon style architectural') !!}</li>
+                      <li>{!! __('Isolation haute performance (laine minérale 100 mm ou mousse polyuréthane projetée selon disponibilité locale)') !!}</li>
+                      <li>{!! __('Toiture-terrasse végétalisée possible') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Menuiseries</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Extérieures : menuiseries sur mesure importées, double ou triple vitrage selon exposition (performance acoustique supérieure, filtration UV > 95 %)') !!}</li>
+                      <li>{!! __('Portes d\'entrée monumentales sur mesure (bois massif, acier, ou mixte)') !!}</li>
+                      <li>{!! __('Volets roulants intégrés motorisés et connectés') !!}</li>
+                      <li>{!! __('Intérieures : portes sur mesure bois massif exotique, pivotantes ou coulissantes grand format') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Revêtements et finitions</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Sols : marbre, travertin ou parquet massif importé') !!}</li>
+                      <li>{!! __('Murs : finitions artisanales (tadelakt, béton ciré, pierre de parement), peinture prestige') !!}</li>
+                      <li>{!! __('Plafonds : faux-plafonds design multi-niveaux avec éclairage architectural intégré') !!}</li>
+                      <li>{!! __('Escalier monumental (si R+1/R+2) en béton habillé pierre ou bois') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Électricité et domotique</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Conception par bureau d\'études spécialisé') !!}</li>
+                      <li>{!! __('Domotique complète (système centralisé sur protocole standard ouvert) : éclairage, volets, climatisation, sécurité, audio multi-room') !!}</li>
+                      <li>{!! __('Groupe électrogène intégré avec commutation automatique') !!}</li>
+                      <li>{!! __('Onduleur et protection parafoudre renforcée') !!}</li>
+                      <li>{!! __('Éclairage architectural complet (intérieur + extérieur + piscine)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Plomberie et sanitaires</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Marques design/luxe (Grohe, Hansgrohe, Duravit ou équivalent)') !!}</li>
+                      <li>{!! __('Suite parentale : SDB type spa (baignoire balnéo, douche pluie XXL, hammam possible)') !!}</li>
+                      <li>{!! __('Robinetterie thermostatique encastrée') !!}</li>
+                      <li>{!! __('Système de traitement d\'eau (adoucisseur, filtration)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Piscine</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Bassin béton armé 12×5 m à débordement (ou forme libre selon architecture)') !!}</li>
+                      <li>{!! __('Chauffage piscine (pompe à chaleur)') !!}</li>
+                      <li>{!! __('Éclairage subaquatique LED couleur') !!}</li>
+                      <li>{!! __('Pool house aménagé (bar, cuisine d\'été, vestiaires)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Sécurité (Division Sécurité AIAE — optionnel)</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Vidéosurveillance 16 caméras HD avec enregistrement NVR') !!}</li>
+                      <li>{!! __('Alarme périmétrique volumétrique connectée') !!}</li>
+                      <li>{!! __('Contrôle d\'accès biométrique (entrée principale + garage)') !!}</li>
+                      <li>{!! __('Safe room optionnelle (sur devis — Division Sécurité)') !!}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-heavy text-darkBlue text-[16px]">Conception bioclimatique</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
+                      <li>{!! __('Étude bioclimatique complète à la conception (orientation, vents dominants, masques solaires)') !!}</li>
+                      <li>{!! __('Isolation haute performance (toiture, murs, vitrages)') !!}</li>
+                      <li>{!! __('Récupération eaux de pluie (citerne 20 m³) pour arrosage et WC') !!}</li>
+                      <li>{!! __('Option installation solaire photovoltaïque intégrée (Division Énergie)') !!}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1059,12 +1345,12 @@
 
           <!-- Instagram -->
           <a href="#" aria-label="Instagram">
-            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
           <a href="#" aria-label="Facebook">
-            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
@@ -1088,7 +1374,7 @@
     <div class="bg-[#e6e6e6] py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 md:gap-8 text-[#0b4a2b] text-center md:text-left">
         <!-- WhatsApp Icon -->
-        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
+        <img src="{{ asset('aiae-frontend/Images/WhatsappLogo.svg') }}" alt="WhatsApp" class="h-10 w-10 md:h-12 md:w-12 shrink-0" />
 
         <div class="flex flex-col md:flex-row items-start md:items-center md:gap-8">
           <p class="text-2xl md:text-3xl text-left">
@@ -1096,7 +1382,7 @@
           </p>
 
           <p class="text-xs md:text-sm font-book text-left">
-            <strong class="font-heavy">{{ __('Écrivez nous') }}</strong> {{ __('pour toutes') }}<br />
+            <strong class="font-heavy">{{ __('Écrivez-nous') }}</strong> {{ __('pour toutes') }}<br />
             <strong class="font-heavy">{{ __('informations') }}</strong> {{ __('supplémentaires') }}
           </p>
         </div>
@@ -1204,7 +1490,7 @@
     <!-- COPYRIGHT -->
     <div class="bg-darkBlue text-white text-center mt-20 py-3 text-lg font-medium">
 
-      {{ __('Copyright — © 2025-2026 AIAE SARL. Tous Droits Réservés.') }}
+      {{ __('Copyright — ©') }} {{ date('Y') }} {{ __('AIAE SARL. Tous Droits Réservés.') }}
 
     </div>
 
@@ -1287,6 +1573,7 @@
     }
   </script>
   @include('frontend.partials.rdv-modal')
+  @include('frontend.partials.cookie-consent')
 </body>
 
 </html>

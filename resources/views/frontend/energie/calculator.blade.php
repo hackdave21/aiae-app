@@ -41,7 +41,7 @@
 </head>
 <body>
 
-<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">Chargement du simulateur...</div></div>
+<div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">{{ __('Chargement du simulateur...') }}</div></div>
 
 <?php
 $calcTranslations = [
@@ -124,6 +124,12 @@ $calcTranslations = [
     'Climatiseur 1,5 CV' => __('Climatiseur 1,5 CV'),
     'Réfrigérateur' => __('Réfrigérateur'),
     'Climatiseur split 1,5 CV' => __('Climatiseur split 1,5 CV'),
+    'Zone géographique' => __('Zone géographique'),
+    'Ensoleillement:' => __('Ensoleillement:'),
+    'Installation grande puissance' => __('Installation grande puissance'),
+    'Votre projet dépasse 50 kWc. Pour les installations de cette envergure, nous vous invitons à nous contacter directement pour un devis personnalisé.' => __('Votre projet dépasse 50 kWc. Pour les installations de cette envergure, nous vous invitons à nous contacter directement pour un devis personnalisé.'),
+    'Nous contacter' => __('Nous contacter'),
+    'Triphasé' => __('Triphasé'),
 ];
 ?>
 <script>
@@ -170,7 +176,6 @@ $calcTranslations = [
   
   const REFERENTIEL = {
     prixKwhReseau: 140,
-    ensoleillement: config.zones?.[0]?.hsp_heures || 4.8, 
     perteSysteme: 0.25,
     ratioBatterie: 1.5,
     prixInstallationWc: 1200,
@@ -207,59 +212,56 @@ $calcTranslations = [
 
   const App = () => {
     // État principal
-    const [mode, setMode] = useState('facture'); // 'facture' ou 'equipements'
+    const [mode, setMode] = useState('facture');
     const [factureMensuelle, setFactureMensuelle] = useState(50000);
+    const [zoneIndex, setZoneIndex] = useState(0);
     const [monInventaire, setMonInventaire] = useState([
       { ...REFERENTIEL.equipements[0], qty: 1 }, // Défaut: 1 Clim
       { ...REFERENTIEL.equipements[3], qty: 1 }, // Défaut: 1 Frigo
       { ...REFERENTIEL.equipements[6], qty: 1 }, // Défaut: Lumières
     ]);
 
+    const ensoleillement = config.zones?.[zoneIndex]?.hsp_heures || 4.8;
+
     // --- MOTEUR DE CALCUL ---
     const resultats = useMemo(() => {
       let consoJournaliereWh = 0;
-      let puissanceCreteW = 0; // Puissance instantanée max nécessaire
+      let puissanceCreteW = 0;
 
       if (mode === 'facture') {
-        // Méthode 1: Rétro-ingénierie depuis la facture
         const kwhMois = factureMensuelle / REFERENTIEL.prixKwhReseau;
         consoJournaliereWh = (kwhMois * 1000) / 30;
-        // Estimation de la pointe (empirique : on estime que 20% des appareils tournent en même temps au max, ou ratio fixe)
-        puissanceCreteW = consoJournaliereWh / 4; // Ratio approximatif pour dimensionner l'onduleur
+        puissanceCreteW = consoJournaliereWh / 4;
       } else {
-        // Méthode 2: Somme des équipements
         monInventaire.forEach(item => {
           consoJournaliereWh += item.puis * item.qty * item.h;
-          // On considère un facteur de simultanéité de 70% pour la pointe
           puissanceCreteW += item.puis * item.qty * 0.7;
         });
       }
 
-      // Dimensionnement Solaire (Panneaux)
-      // Formule : Besoin / (Ensoleillement * (1 - Pertes))
-      const besoinPanneauxWc = consoJournaliereWh / (REFERENTIEL.ensoleillement * (1 - REFERENTIEL.perteSysteme));
-      
-      // Dimensionnement Batteries (Stockage)
-      // On vise à couvrir 50% de la conso la nuit + réserve de sécurité
+      const besoinPanneauxWc = consoJournaliereWh / (ensoleillement * (1 - REFERENTIEL.perteSysteme));
+
       const besoinBatterieWh = (consoJournaliereWh * 0.5) * REFERENTIEL.ratioBatterie;
 
-      // Estimation Prix
-      // Prix dégressif selon la taille
+      const overLimit = besoinPanneauxWc > 50000;
+
       let coutEstime = besoinPanneauxWc * REFERENTIEL.prixInstallationWc;
-      // Ajout part fixe (tableau, câblage de base)
       coutEstime += 500000;
-      // Ajout coût batterie (lithium estimé à 250F/Wh)
       coutEstime += besoinBatterieWh * 250;
+
+      const puissanceCreteWtotal = overLimit ? 0 : puissanceCreteW;
+      const onduleurKva = Math.max(Math.ceil((puissanceCreteWtotal * 1.2) / 1000), Math.ceil(besoinPanneauxWc / 1000));
 
       return {
         consoKwhJ: consoJournaliereWh / 1000,
-        puissanceOnduleur: Math.ceil((puissanceCreteW * 1.2) / 1000), // +20% marge sécu
-        panneauxKwc: (besoinPanneauxWc / 1000).toFixed(1),
-        batteriesKwh: (besoinBatterieWh / 1000).toFixed(1),
-        coutMin: Math.round(coutEstime * 0.9),
-        coutMax: Math.round(coutEstime * 1.15)
+        puissanceOnduleur: onduleurKva,
+        panneauxKwc: overLimit ? 0 : (besoinPanneauxWc / 1000).toFixed(1),
+        batteriesKwh: overLimit ? 0 : (besoinBatterieWh / 1000).toFixed(1),
+        coutMin: overLimit ? 0 : Math.round(coutEstime * 0.9),
+        coutMax: overLimit ? 0 : Math.round(coutEstime * 1.15),
+        overLimit
       };
-    }, [mode, factureMensuelle, monInventaire]);
+    }, [mode, factureMensuelle, monInventaire, zoneIndex, ensoleillement]);
 
     // --- GESTIONNAIRES D'ÉVÉNEMENTS ---
     const ajouterEquipement = (id) => {
@@ -315,6 +317,24 @@ $calcTranslations = [
             <Icon name="ArrowLeft" size={16} /> {t('Retour')}
           </a>
         </header>
+
+        {/* SÉLECTEUR ZONE GÉOGRAPHIQUE */}
+        {config.zones?.length > 0 && (
+          <div className="card px-6 py-4 mb-6 flex items-center gap-4 no-print">
+            <Icon name="MapPin" size={18} className="text-gray-400" />
+            <label className="text-sm font-semibold text-gray-700 whitespace-nowrap">{t('Zone géographique')}</label>
+            <select
+              value={zoneIndex}
+              onChange={(e) => setZoneIndex(Number(e.target.value))}
+              className="input-field max-w-xs text-sm"
+            >
+              {config.zones.map((z, i) => (
+                <option key={z.zone_code || i} value={i}>{z.zone_nom} ({z.hsp_heures} h/j)</option>
+              ))}
+            </select>
+            <span className="text-xs text-gray-400">{t('Ensoleillement:')} {ensoleillement} h/j</span>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-12 gap-8">
           
@@ -446,6 +466,20 @@ $calcTranslations = [
           <div className="lg:col-span-5">
             <div className="sticky top-6 space-y-4">
               
+              {resultats.overLimit ? (
+                <div className="card p-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Zap" size={32} className="text-orange-500" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{t('Installation grande puissance')}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-6">
+                    {t('Votre projet dépasse 50 kWc. Pour les installations de cette envergure, nous vous invitons à nous contacter directement pour un devis personnalisé.')}
+                  </p>
+                  <a href={window.CONTACT_URL} className="btn-primary inline-block px-8 py-3 rounded-xl font-bold uppercase tracking-wide shadow-lg shadow-orange-200">
+                    {t('Nous contacter')}
+                  </a>
+                </div>
+              ) : (<>
               {/* CARTE RÉSULTAT TECHNIQUE */}
               <div className="card p-6" style={{background: 'var(--bleu)', color: 'white'}}>
                 <h3 className="text-orange-400 text-sm font-bold uppercase tracking-wider mb-6">{t('Configuration Recommandée')}</h3>
@@ -476,7 +510,7 @@ $calcTranslations = [
                         <div className="font-bold text-lg">{resultats.puissanceOnduleur} kVA</div>
                       </div>
                     </div>
-                    <div className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full border border-blue-500/30 uppercase font-bold">{t('Monophasé')}</div>
+                    <div className="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full border border-blue-500/30 uppercase font-bold">{resultats.puissanceOnduleur > 12 ? t('Triphasé') : t('Monophasé')}</div>
                   </div>
 
                   {/* Batteries */}
@@ -501,7 +535,7 @@ $calcTranslations = [
                 <p className="text-xs text-gray-500 mb-4">{t('Inclut : Matériel, Pose, Protection et Mise en service.')}</p>
                 
                 <div className="text-center py-4 bg-gray-50 rounded-lg mb-4">
-                  <div className="text-3xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtM((resultats.coutMin + resultats.coutMax)/2)} F</div>
+                  <div className="text-3xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtM((resultats.coutMin + resultats.coutMax)/2)} FCFA</div>
                   <div className="text-xs text-gray-400 mt-1">{t('Fourchette :')} {fmtM(resultats.coutMin)} - {fmtM(resultats.coutMax)} FCFA</div>
                 </div>
 
@@ -519,6 +553,7 @@ $calcTranslations = [
               <div className="text-xs text-gray-400 text-center leading-relaxed">
                 {t('Cette simulation est indicative et non contractuelle.')}
               </div>
+              </>)}
 
             </div>
           </div>
@@ -533,5 +568,6 @@ $calcTranslations = [
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('frontend.partials.cookie-consent')
 </body>
 </html>
