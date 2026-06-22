@@ -1612,6 +1612,7 @@
   </script>
   @include('frontend.partials.rdv-modal')
   @include('frontend.partials.cookie-consent')
+  @include('frontend.partials.whatsapp-button')
 </body>
 
 </html>

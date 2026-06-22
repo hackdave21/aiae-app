@@ -1137,6 +1137,7 @@
   <!-- SweatAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   @include('frontend.partials.cookie-consent')
+  @include('frontend.partials.whatsapp-button')
 </body>
 
 </html>
