@@ -6,22 +6,22 @@
         <!-- ICÔNES -->
         <div class="flex items-center gap-6">
           <!-- TikTok -->
-          <a href="#" aria-label="TikTok">
+          <a href="https://www.tiktok.com/@aiae_officiel" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
             <img src="{{ asset('aiae-frontend/Images/TiktokLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
           </a>
 
           <!-- Instagram -->
-          <a href="#" aria-label="Instagram">
+          <a href="https://www.instagram.com/aiae_officiel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
-          <a href="#" aria-label="Facebook">
+          <a href="https://web.facebook.com/AIAE.Togo" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
-          <a href="#" aria-label="YouTube">
+          <a href="https://www.youtube.com/@AIAE_Togo" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <img src="{{ asset('aiae-frontend/Images/YoutubeLogo.svg') }}" alt="YouTube" class="h-16 w-16" />
           </a>
         </div>
@@ -30,8 +30,8 @@
         <div class="flex flex-col items-start">
           <p class="text-4xl font-bold">@Afrika_AIAE</p>
           <p class="text-sm opacity-80">
-            {{ __('Suivez nous,') }} <span class="font-bold">{{ __('Abonnez vous') }}</span> {{ __('&') }}
-            <span class="font-bold">{{ __('Likez nos post') }}</span>
+            {{ __('Suivez-nous,') }} <span class="font-bold">{{ __('Abonnez-vous') }}</span> {{ __('&') }}
+            <span class="font-bold">{{ __('Likez nos publications') }}</span>
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[22px] font-semibold mb-6 text-[#1a1f4d]">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[16px]">

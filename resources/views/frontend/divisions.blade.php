@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Division construction - AIAE</title>
+  <title>Nos divisions - AIAE</title>
   @include('frontend.partials.head-seo')
   @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
@@ -1187,6 +1187,44 @@
     </div>
   </section>
 
+  <!-- ================= NORMES ET RÉFÉRENTIELS (I3) ================= -->
+  <section class="bg-[#f3f3f3] py-16">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <div class="bg-white rounded-[20px] p-10 md:p-14 shadow-lg">
+        <h2 class="text-darkBlue text-[35px] md:text-[45px] font-heavy mb-8 text-center">{{ __('Normes Et Référentiels') }}</h2>
+        <div class="grid md:grid-cols-2 gap-8 text-gray-700 text-[16px] md:text-[18px] leading-relaxed">
+          <div class="space-y-4">
+            <h3 class="text-primary font-bold text-xl mb-2">{{ __('Eurocodes Structurels') }}</h3>
+            <p>{{ __('Tous nos calculs de structures sont conformes aux Eurocodes EN 1990 à EN 1999 (Eurocodes 0 à 9), garantissant la sécurité et la durabilité des ouvrages selon les standards européens.') }}</p>
+            <ul class="list-disc list-inside space-y-1 text-gray-600">
+              <li><strong>EN 1990</strong> — {{ __('Bases de calcul des structures') }}</li>
+              <li><strong>EN 1991</strong> — {{ __('Actions sur les structures') }}</li>
+              <li><strong>EN 1992</strong> — {{ __('Calcul des structures en béton') }}</li>
+              <li><strong>EN 1993</strong> — {{ __('Calcul des structures en acier') }}</li>
+              <li><strong>EN 1997</strong> — {{ __('Calcul géotechnique') }}</li>
+              <li><strong>EN 1998</strong> — {{ __('Calcul parasismique') }}</li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-primary font-bold text-xl mb-2">{{ __('Fascicules 61 à 74 — CCTG') }}</h3>
+            <p>{{ __('Nos études de voirie et réseaux divers (VRD) suivent les prescriptions des Fascicules 61 à 74 du Cahier des Clauses Techniques Générales (CCTG), applicables aux marchés publics et privés en Afrique.') }}</p>
+            <ul class="list-disc list-inside space-y-1 text-gray-600">
+              <li><strong>Fasc. 61</strong> — {{ __('Terrassements généraux') }}</li>
+              <li><strong>Fasc. 62</strong> — {{ __('Chaussées et voiries') }}</li>
+              <li><strong>Fasc. 64</strong> — {{ __('Assainissement et drainage') }}</li>
+              <li><strong>Fasc. 65</strong> — {{ __('Alimentation en eau potable') }}</li>
+              <li><strong>Fasc. 69</strong> — {{ __('Ouvrages d\'assainissement') }}</li>
+              <li><strong>Fasc. 74</strong> — {{ __('Installations électriques') }}</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-8 text-center text-gray-500 text-sm">
+          {{ __('Nos ingénieurs appliquent systématiquement ces référentiels pour garantir la conformité et la qualité de chaque projet.') }}
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= ENGAGEMENTS HERO ================= -->
   <section class="bg-primary py-8 text-center text-white">
     <div class="max-w-[1000px] mx-auto px-6">
@@ -1315,7 +1353,7 @@
         {!! __('Vous avez un projet ? Parlons-en. Premier échange<br> gratuit et sans engagement.') !!}
       </p>
       <div class="flex flex-col md:flex-row justify-center">
-         <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+         <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
           {{ __('DEMANDER UN DEVIS GRATUIT') }}
            <span class="block text-sm font-light text-white">
             {{ __('Réponse sous 48h') }}
@@ -1363,8 +1401,8 @@
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong> {{ __('&') }}
-            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
+            {{ __('Suivez-nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez-vous') }}</strong> {{ __('&') }}
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos publications') }}</strong>
           </p>
         </div>
       </div>
@@ -1413,7 +1451,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

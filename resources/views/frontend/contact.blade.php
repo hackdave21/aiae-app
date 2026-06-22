@@ -706,8 +706,8 @@
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong> {{ __('&') }}
-            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
+            {{ __('Suivez-nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez-vous') }}</strong> {{ __('&') }}
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos publications') }}</strong>
           </p>
         </div>
       </div>
@@ -756,7 +756,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

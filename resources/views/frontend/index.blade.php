@@ -534,7 +534,7 @@
           </p>
 
           <p class="text-primary mt-5 text-[18px] md:text-[22px] font-book">
-            {!! __('À partir de <span class="font-black text-lg md:text-xl">330 000 FCFA/m²</span>') !!}
+            {!! __('À partir de <span class="font-black text-lg md:text-xl">180 000 FCFA/m²</span> (Standard) à <span class="font-black text-lg md:text-xl">900 000 FCFA/m²</span> (Prestige)') !!}
           </p>
 
         </div>
@@ -1487,7 +1487,7 @@
         </summary>
 
         <div class="px-16 pb-6 text-darkBlue font-book text-xl">
-          {!! __('Le coût dépend du standing et de la surface. À titre indicatif, nos prix démarrent à <strong>330 000 FCFA/m²</strong> pour un standing Standard et peuvent atteindre <strong>1 200 000 FCFA/m²</strong> pour du Prestige. Demandez un devis personnalisé gratuit pour une estimation précise.') !!}
+          {!! __('Le coût dépend du standing et de la surface. À titre indicatif, nos prix vont de <strong>180 000 FCFA/m²</strong> (Standard) à <strong>900 000 FCFA/m²</strong> (Prestige). Demandez un devis personnalisé gratuit pour une estimation précise.') !!}
         </div>
 
       </details>
@@ -1776,8 +1776,8 @@
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong> {{ __('&') }}
-            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
+            {{ __('Suivez-nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez-vous') }}</strong> {{ __('&') }}
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos publications') }}</strong>
           </p>
         </div>
       </div>
@@ -1826,7 +1826,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

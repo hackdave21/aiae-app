@@ -158,7 +158,7 @@
       <!-- SECTION 1: MENTIONS LÉGALES -->
       <div id="mentions" class="legal-section-anchor">
         <div class="legal-card">
-          <h2 class="legal-title text-2xl">1. Éditeur du site</h2>
+          <h2 class="legal-title text-2xl">1.1 Éditeur du site</h2>
           <div class="space-y-6 text-gray-600 leading-relaxed font-light">
             <p>
               <strong class="text-darkBlue font-bold">Raison sociale :</strong> Afrika Infrastructures And Equipements
@@ -180,8 +180,7 @@
             </p>
             <p>
               <strong class="text-darkBlue font-bold">Représentant légal :</strong> Mme METILABE Tchable, Gérante<br>
-              <strong class="text-darkBlue font-bold">Directeur de la publication :</strong> M. AMEGAN Kokou Alexandre,
-              Directeur Général
+              <strong class="text-darkBlue font-bold">Directeur de la publication :</strong> Mme METILABE Tchable, Gérante
             </p>
             <div class="pt-4 border-t border-gray-100 flex flex-col md:flex-row gap-6">
               <p><strong class="text-darkBlue font-bold">Téléphone :</strong> +228 90 03 54 16</p>
@@ -191,7 +190,7 @@
         </div>
 
       <div class="legal-card">
-  <h2 class="legal-title text-2xl">2. Hébergeur</h2>
+  <h2 class="legal-title text-2xl">1.2 Hébergeur</h2>
   <div class="bg-gray-50 border-l-4 border-primary p-6 rounded-r-lg">
     <p class="text-gray-700 font-medium">TRIOOTI Web Association</p>
     <p class="text-gray-600 font-light">Avenue de Souza, Hôtel de la Paix, Bè – Lomé, Togo</p>
@@ -207,7 +206,7 @@
 </div>
 
         <div class="legal-card">
-          <h2 class="legal-title text-2xl">3. Conception et développement</h2>
+          <h2 class="legal-title text-2xl">1.3 Conception et développement</h2>
           <p class="text-gray-600 font-light">
             <strong class="text-darkBlue font-medium">Conception et développement web :</strong> M. ADZINDA Jean<br>
             <strong class="text-darkBlue font-medium">Identité visuelle et charte graphique :</strong> M. ADZINDA Jean
@@ -215,7 +214,7 @@
         </div>
 
         <div class="legal-card">
-          <h2 class="legal-title text-2xl">4. Propriété intellectuelle</h2>
+          <h2 class="legal-title text-2xl">1.4 Propriété intellectuelle</h2>
           <div class="text-gray-600 font-light space-y-4">
             <p>
               L'ensemble du contenu du site <strong class="text-primary">aiae.services</strong> (textes, images,
@@ -236,7 +235,7 @@
         </div>
 
         <div class="legal-card">
-          <h2 class="legal-title text-2xl">5. Crédits visuels</h2>
+          <h2 class="legal-title text-2xl">1.5 Crédits visuels</h2>
           <p class="text-gray-600 font-light">
             Les photographies et illustrations proviennent de banques d'images sous licence (Unsplash, Pexels, Adobe
             Stock) ou sont la propriété d'AIAE SARL.
@@ -258,16 +257,20 @@
         </div>
       </div>
 
-      <!-- SECTION 3: CONFIDENTIALITÉ -->
+        <!-- SECTION 3: CONFIDENTIALITÉ -->
       <div id="confidentialite" class="legal-section-anchor">
         <div class="legal-card">
-          <h2 class="legal-title text-2xl">3. Confidentialité</h2>
+          <h2 class="legal-title text-2xl">3. Confidentialité et protection des données</h2>
           <div class="text-gray-700 space-y-4">
             <p>La protection de vos données personnelles est une priorité pour AIAE SARL. Nous collectons uniquement les
               informations nécessaires au traitement de vos demandes de services et de devis.</p>
-            <p>Conformément à la réglementation en vigueur, vous disposez d'un droit d'accès, de rectification et de
-              suppression de vos données. Pour toute demande, veuillez nous contacter à l'adresse :
-              contact@aiae.services.</p>
+            <p>Conformément à la <strong class="text-darkBlue">Loi n° 2019-014 du 24 juin 2019</strong> relative à la protection des données à caractère personnel en République Togolaise, les utilisateurs disposent d'un droit d'accès, de rectification, d'opposition et de suppression de leurs données personnelles.</p>
+            <p>Pour exercer ces droits, veuillez nous contacter à l'adresse email : <a href="mailto:contact@aiae.services" class="text-primary hover:underline">contact@aiae.services</a>.</p>
+            <p class="bg-[#0E1540]/5 p-4 rounded-xl border border-[#0E1540]/20">
+              <strong class="text-darkBlue">Autorité de contrôle compétente :</strong><br>
+              Instance de Protection des Données à Caractère Personnel du Togo (ISPDCP)<br>
+              Tout utilisateur estimant que ses droits ne sont pas respectés peut introduire une réclamation auprès de l'ISPDCP.
+            </p>
           </div>
         </div>
       </div>
@@ -314,7 +317,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">

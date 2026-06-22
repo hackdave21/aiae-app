@@ -580,6 +580,8 @@ const App=()=>{
   const fromHomePage = !!qs.standing;
   
   const [page,setPage]=useState(initSecteur ? 'sim' : 'accueil');
+  const[mode,setMode]=useState('expert');
+  const totalSteps=mode==='express'?3:5;
   const[etape,setEtape]=useState(initSecteur ? (fromHomePage ? 2 : 1) : 1);
   const [secteur,setSecteur]=useState(initSecteur);
   const[typeBat,setTypeBat]=useState('');
@@ -643,6 +645,77 @@ const App=()=>{
   const [paysager,setPaysager]=useState('');
 
   const [isSaving,setIsSaving]=useState(false);
+  const [currency,setCurrency]=useState('FCFA');
+
+  // Helper badge pour mapping standings
+  const getBadge=(opt)=>{
+    if(!opt?.mapping || !standing)return null;
+    const role=opt.mapping[standing];
+    if(!role)return null;
+    if(role==='preselect')return {label:t('Pré-sél.'),cls:'bg-blue-100 text-blue-700 border-blue-300'};
+    if(role==='recom')return {label:t('Recommandé'),cls:'bg-green-100 text-green-700 border-green-300'};
+    if(role==='opt')return {label:t('Optionnel'),cls:'bg-gray-100 text-gray-500 border-gray-200'};
+    return null;
+  };
+
+  // Helper GammeSlider — sélecteur gamme Éco/Standard/Premium
+  const GAMME_LABELS={eco:t('Éco'),standard:t('Standard'),premium:t('Premium')};
+  const GAMME_CLASSES={eco:'from-green-400 to-green-500',standard:'from-blue-400 to-blue-500',premium:'from-amber-400 to-orange-500'};
+  const GammeSlider=({opts,value,onChange,label,desc})=>{
+    const sorted=[...opts].sort((a,b)=>(a.prix||0)-(b.prix||0));
+    const levels=['eco','standard','premium'];
+    const currentIdx=value?sorted.findIndex(o=>o.id===value):-1;
+    const currentLevel=currentIdx>=0&&currentIdx<levels.length?levels[currentIdx]:null;
+    return(
+      <div className="card p-5 mt-6">
+        <h3 className="font-semibold text-gray-700 mb-4">{label}</h3>
+        {desc&&<p className="text-xs text-gray-500 mb-3">{desc}</p>}
+        <div className="flex items-center gap-2 mb-3">
+          <button onClick={()=>onChange('')} className={`px-3 py-1.5 rounded-lg text-sm font-medium ${!value?'bg-gray-200 text-gray-700 ring-2 ring-gray-400':'bg-gray-100 text-gray-500'}`}>{t('Non')}</button>
+          <div className="flex-1 relative h-10 bg-gray-100 rounded-lg overflow-hidden flex">
+            {sorted.slice(0,3).map((opt,i)=>{
+              const level=levels[i];
+              const selected=value===opt.id;
+              return(<button key={opt.id} onClick={()=>onChange(opt.id)} className={`flex-1 relative flex items-center justify-center text-sm font-medium transition-all ${selected?`bg-gradient-to-r ${GAMME_CLASSES[level]} text-white shadow-md scale-[1.02] z-10`:'hover:bg-gray-200 text-gray-600'}`}>
+                <span>{GAMME_LABELS[level]}</span>
+                {selected&&<span className="ml-1.5 text-xs opacity-80">{fmtM(opt.prix)}</span>}
+              </button>);
+            })}
+          </div>
+        </div>
+        {value&&(()=>{
+          const opt=sorted.find(o=>o.id===value);
+          if(!opt)return null;
+          const badge=getBadge(opt);
+          const prixRange=opt.prix_max?`${fmtM(opt.prix)} - ${fmtM(opt.prix_max)} FCFA`:fmtM(opt.prix)+' FCFA';
+          return(<div className="flex items-center justify-between text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
+            <span className="font-medium">{t(opt.name||'')}</span>
+            <span className="flex items-center gap-2">
+              <span className="mono">{prixRange}</span>
+              {badge&&<span className={`px-1.5 py-0.5 rounded text-[9px] font-medium border ${badge.cls}`}>{badge.label}</span>}
+            </span>
+          </div>);
+        })()}
+      </div>
+    );
+  };
+
+  // Auto-sélection des options pré-sélectionnées selon standing
+  useEffect(()=>{
+    const autoSelect=(opts,setter)=>{
+      if(!opts||opts.length===0)return;
+      const preselect=opts.find(o=>o.mapping&&o.mapping[standing]==='preselect');
+      if(preselect)setter(preselect.id);
+    };
+    autoSelect(SECURITE_OPTS.filter(o=>o.id.includes('alarme')),setAlarme);
+    autoSelect(SECURITE_OPTS.filter(o=>o.id.includes('video')),setVideo);
+    autoSelect(EXTERIEUR_OPTS.filter(o=>o.id.includes('portail')),setPortail);
+    autoSelect(EXTERIEUR_OPTS.filter(o=>o.id.includes('piscine')),setPiscine);
+    autoSelect(EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')),setCiterne);
+    autoSelect(EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')),setPaysager);
+    autoSelect(DOMOTIQUE_OPTS,setDomotique);
+    autoSelect(SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')),setVolet);
+  },[standing]);
 
   // Pré-remplissage HSP selon standing
   React.useEffect(() => {
@@ -666,7 +739,8 @@ const App=()=>{
 
   const typeData=TYPES[secteur]?.find(t=>t.id===typeBat);
   const zoneData=ZONES[zone];
-  const solData=SOLS[sol];
+  const solEffectifGlobal=sol||(mode==='express'?'ferralitique':'');
+  const solData=SOLS[solEffectifGlobal];
   const coefTotal=(zoneData?.coef||1)*(solData?.coef||1.15);
 
   // Emprise : plage recommandée 25-65% selon standing/secteur + alertes
@@ -695,10 +769,16 @@ const App=()=>{
   React.useEffect(() => { setEmprise(empriseRec); }, [empriseRec]);
 
   const alerteEmprise=useMemo(()=>{
-    if(emprise<empriseMin) return {type:'alert',msg:t('Emprise inférieure au minimum recommandé')};
-    if(emprise>empriseMax) return {type:'warn',msg:t('Emprise supérieure au maximum autorisé')};
+    const rec = STANDINGS_EMPRISE_REC[standing] || 0.35;
+    const min = 0.25;
+    const max = 0.65;
+    if(emprise<min) return {type:'alert',msg:t("L'emprise est très faible pour ce type de projet. Vérifiez le PLU.")};
+    if(emprise>max) return {type:'alert',msg:t("L'emprise dépasse la limite usuelle. Consultez les règles d'urbanisme.")};
+    if(emprise<rec-0.05) return {type:'warn',msg:t("Emprise inférieure à la recommandation pour ce standing. Optimisation possible.")};
+    if(emprise>rec+0.05) return {type:'info',msg:t("Emprise supérieure à la recommandation. Vérifiez les espaces libres requis.")};
+    if(Math.abs(emprise-rec)<0.03) return {type:'success',msg:t("Emprise idéale pour votre standing.")};
     return null;
-  },[emprise,empriseMin,empriseMax]);
+  },[emprise,standing]);
 
   const surfaceBatie=useMemo(()=>{
     if(secteur==='agricole'&&typeBat?.startsWith('elevage_')){
@@ -778,39 +858,98 @@ const App=()=>{
     return Math.round(Math.max(4,d));
   },[secteur,typeBat,niveaux,ssSol,surfaceBatie,sol]);
 
+  // FACTEURS D'ÉMISSION CO₂ (kgCO₂/kW installé/an — base 8h/j, 300j/an)
+  const CO2_FACTORS = {
+    eclairage: 0.35, // LED basse consommation
+    prises: 0.25,
+    climatisation: 0.65, // Clim split standard
+    eau_chaude: 0.55,
+    cuisine: 0.40,
+    spa: 0.30,
+    electromenager: 0.25,
+    ascenseurs: 0.45,
+    pont: 0.50,
+    froid: 0.70, // Groupe froid haute conso
+    alarme: 0.05,
+    video: 0.12,
+    piscine: 0.35,
+    forage: 0.40,
+    irrigation: 0.30,
+    reseau: 0.60, // Facteur réseau CEET (moyen)
+    solaire: 0.05, // Solaire (très faible)
+    groupe: 0.85, // Groupe électrogène (élevé)
+  };
+
+  const getCo2Factor = (kw, factorKey) => {
+    const f = CO2_FACTORS[factorKey] || 0.30;
+    return Math.round(kw * f * 10) / 10;
+  };
+
   // BESOINS ÉNERGÉTIQUES - CALCULÉS À L'ÉTAPE 5
   const besoins=useMemo(()=>{
     const details=[];
+    let totalCo2 = 0;
     // Éclairage
     let pEcl=surfaceBatie*(secteur==='industriel'?0.008:secteur==='agricole'?0.005:0.012);
-    details.push({label:t('Éclairage'),icon:'Lightbulb',kw:Math.round(pEcl*10)/10,prio:1});
+    let kwEcl=Math.round(pEcl*10)/10;
+    details.push({label:t('Éclairage'),icon:'Lightbulb',kw:kwEcl,prio:1,co2:getCo2Factor(kwEcl,'eclairage')});
     // Prises
-    details.push({label:t('Prises'),icon:'Plug',kw:Math.round(surfaceBatie*0.015*10)/10,prio:2});
+    let kwPr=Math.round(surfaceBatie*0.015*10)/10;
+    details.push({label:t('Prises'),icon:'Plug',kw:kwPr,prio:2,co2:getCo2Factor(kwPr,'prises')});
     // Clim
     let surfClim=surfaceBatie*(secteur==='industriel'?0.15:secteur==='agricole'?0.10:0.70);
-    if(surfClim>0)details.push({label:t('Climatisation'),icon:'Snowflake',kw:Math.round(surfClim*0.10*10)/10,prio:5});
+    if(surfClim>0){
+      let kwClim=Math.round(surfClim*0.10*10)/10;
+      details.push({label:t('Climatisation'),icon:'Snowflake',kw:kwClim,prio:5,co2:getCo2Factor(kwClim,'climatisation')});
+    }
     // Hôtel
     if(typeBat?.startsWith('hotel_')){
-      details.push({label:t('Eau chaude'),icon:'ShowerHead',kw:Math.round(nbChambres*0.3*10)/10,prio:4});
-      if(espacesHotel.includes('restaurant'))details.push({label:t('Cuisine pro'),icon:'CookingPot',kw:15,prio:6});
-      if(espacesHotel.includes('spa'))details.push({label:t('Spa'),icon:'Flower2',kw:12,prio:7});
+      let kwEc=Math.round(nbChambres*0.3*10)/10;
+      details.push({label:t('Eau chaude'),icon:'ShowerHead',kw:kwEc,prio:4,co2:getCo2Factor(kwEc,'eau_chaude')});
+      if(espacesHotel.includes('restaurant'))details.push({label:t('Cuisine pro'),icon:'CookingPot',kw:15,prio:6,co2:getCo2Factor(15,'cuisine')});
+      if(espacesHotel.includes('spa'))details.push({label:t('Spa'),icon:'Flower2',kw:12,prio:7,co2:getCo2Factor(12,'spa')});
     }
-    if(secteur==='residentiel')details.push({label:t('Électroménager'),icon:'CookingPot',kw:Math.round(surfaceBatie*0.008*10)/10,prio:6});
+    if(secteur==='residentiel'){
+      let kwEm=Math.round(surfaceBatie*0.008*10)/10;
+      details.push({label:t('Électroménager'),icon:'CookingPot',kw:kwEm,prio:6,co2:getCo2Factor(kwEm,'electromenager')});
+    }
     // Équipements
-    if(nbAsc>0)details.push({label:t('Ascenseurs'),icon:'ArrowUpSquare',kw:Math.round(nbAsc*12*0.15*10)/10,prio:9});
-    if(pontRoulant)details.push({label:t('Pont roulant'),icon:'Construction',kw:Math.round((pontCap<=5?15:pontCap<=10?25:40)*0.2*10)/10,prio:10});
-    if(typeBat==='chambre_froide'||groupeFroid)details.push({label:t('Groupe froid'),icon:'Snowflake',kw:Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10,prio:3});
+    if(nbAsc>0){
+      let kwAsc=Math.round(nbAsc*12*0.15*10)/10;
+      details.push({label:t('Ascenseurs'),icon:'ArrowUpSquare',kw:kwAsc,prio:9,co2:getCo2Factor(kwAsc,'ascenseurs')});
+    }
+    if(pontRoulant){
+      let kwPont=Math.round((pontCap<=5?15:pontCap<=10?25:40)*0.2*10)/10;
+      details.push({label:t('Pont roulant'),icon:'Construction',kw:kwPont,prio:10,co2:getCo2Factor(kwPont,'pont')});
+    }
+    if(typeBat==='chambre_froide'||groupeFroid){
+      let kwFr=Math.round(surfaceBatie*(groupeFroid==='negatif'?0.15:0.08)*0.7*10)/10;
+      details.push({label:t('Groupe froid'),icon:'Snowflake',kw:kwFr,prio:3,co2:getCo2Factor(kwFr,'froid')});
+    }
     // Sécurité
-    if(alarme)details.push({label:t('Alarme'),icon:'Bell',kw:0.5,prio:11});
-    if(video)details.push({label:t('Vidéo'),icon:'Video',kw:video==='16+'?1.5:0.8,prio:3});
+    if(alarme)details.push({label:t('Alarme'),icon:'Bell',kw:0.5,prio:11,co2:getCo2Factor(0.5,'alarme')});
+    if(video){
+      let kwVid=video==='16+'?1.5:0.8;
+      details.push({label:t('Vidéo'),icon:'Video',kw:kwVid,prio:3,co2:getCo2Factor(kwVid,'video')});
+    }
     // Extérieurs
-    if(piscine)details.push({label:t('Piscine'),icon:'Waves',kw:piscine==='12x5'?5:3.5,prio:8});
-    if(forage)details.push({label:t('Pompe forage'),icon:'Droplets',kw:secteur==='agricole'?5:2,prio:7});
-    if(irrigation==='goutte')details.push({label:t('Irrigation'),icon:'Sprout',kw:surfExploit*0.8,prio:7});
+    if(piscine){
+      let kWp=piscine==='12x5'?5:3.5;
+      details.push({label:t('Piscine'),icon:'Waves',kw:kWp,prio:8,co2:getCo2Factor(kWp,'piscine')});
+    }
+    if(forage){
+      let kwFo=secteur==='agricole'?5:2;
+      details.push({label:t('Pompe forage'),icon:'Droplets',kw:kwFo,prio:7,co2:getCo2Factor(kwFo,'forage')});
+    }
+    if(irrigation==='goutte'){
+      let kwIr=surfExploit*0.8;
+      details.push({label:t('Irrigation'),icon:'Sprout',kw:kwIr,prio:7,co2:getCo2Factor(kwIr,'irrigation')});
+    }
     
     details.sort((a,b)=>a.prio-b.prio);
     const total=Math.ceil(details.reduce((s,d)=>s+d.kw,0));
-    return{details,total};
+    const totalCo2Val=Math.round(details.reduce((s,d)=>s+(d.co2||0),0)*10)/10;
+    return{details,total,totalCo2:totalCo2Val};
   },[surfaceBatie,secteur,typeBat,nbChambres,espacesHotel,nbAsc,pontRoulant,pontCap,groupeFroid,alarme,video,piscine,forage,irrigation,surfExploit]);
 
   // PROPOSITIONS SOLAIRES 40-150%
@@ -935,7 +1074,9 @@ const App=()=>{
 
   // ESTIMATION V5 — Min/Max natif par poste + marges graduées
   const estimation=useMemo(()=>{
-    if(!surfaceBatie||!sol)return null;
+    if(!surfaceBatie)return null;
+    const solEffectif = sol || (mode==='express'?'ferralitique':'');
+    if(!solEffectif)return null;
     const postes=[];
     let total=0, totalMin=0, totalMax=0;
     const marge = STANDINGS_MARGE[standing] || 0.20;
@@ -1132,6 +1273,12 @@ const App=()=>{
   // UTILITAIRES
   const fmt=n=>new Intl.NumberFormat('fr-FR').format(Math.round(n||0));
   const fmtM=n=>n>=1e9?(n/1e9).toFixed(2)+' Mrd':n>=1e6?(n/1e6).toFixed(1)+' M':fmt(n);
+  const CURRENCY_RATES={FCFA:1,EUR:655.957,USD:600};
+  const fmtC=(n,cur)=>{
+    if(cur==='EUR'||cur==='USD')return fmt(n/CURRENCY_RATES[cur])+' '+cur;
+    return fmt(n)+' FCFA';
+  };
+  const conv=(n,cur)=>{if(cur==='EUR'||cur==='USD')return Math.round(n/CURRENCY_RATES[cur]);return n;};
 
   const reset=()=>{
     setSecteur('');setTypeBat('');setStanding('confort');setCatHotel('3s');
@@ -1215,12 +1362,12 @@ const App=()=>{
           </button>
           <div className="w-px h-4 bg-gray-200" />
           <div className="hidden sm:flex items-center gap-1">
-            {[1,2,3,4,5].map(n=>(
+            {Array.from({length:totalSteps},(_,i)=>i+1).map(n=>(
               <div key={n} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n<etape?'bg-[#05482C] text-white':n===etape?'bg-[#0E1540] text-white':'bg-gray-200 text-gray-500'}`}>
                   {n<etape?'✓':n}
                 </div>
-                {n<5&&<div className={`w-6 h-0.5 ${n<etape?'bg-[#05482C]':'bg-gray-200'}`}/>}
+                {n<totalSteps&&<div className={`w-6 h-0.5 ${n<etape?'bg-[#05482C]':'bg-gray-200'}`}/>}
               </div>
             ))}
           </div>
@@ -1242,7 +1389,7 @@ const App=()=>{
         ← {t('Retour')}
       </button>
       <button 
-        onClick={() => etape < 5 ? setEtape(etape + 1) : handleSaveSimulation()} 
+        onClick={() => etape < totalSteps ? setEtape(etape + 1) : handleSaveSimulation()} 
         disabled={!canContinue || isSaving} 
         className="btn-primary flex items-center gap-2"
       >
@@ -1255,7 +1402,7 @@ const App=()=>{
             {t('Chargement...')}
           </span>
         ) : (
-          <>{etape === 5 ? t('Demander un devis') : t('Continuer')} →</>
+          <>{etape === totalSteps ? t('Demander un devis') : t('Continuer')} →</>
         )}
       </button>
     </div>
@@ -1277,7 +1424,30 @@ const App=()=>{
               <img src={window.LOGO_URL} className="w-20 h-20 object-contain mb-6 mx-auto" alt="AIAE Logo" />
             </button>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{t("Simulateur d'Estimation")}</h1>
-            <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY</p>
+            <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURES AND EQUIPEMENTS (AIAE)</p>
+          </div>
+          {/* Sélecteur de mode Express/Expert */}
+          <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-6">
+            <div className="flex items-center justify-center gap-4">
+              <span className="text-white/70 text-sm font-medium">{t('Mode :')}</span>
+              <button onClick={()=>setMode('express')} className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${mode==='express'?'bg-white text-[#0E1540] shadow-lg':'bg-white/20 text-white hover:bg-white/30'}`}>
+                <span className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  {t('Express')}
+                  <span className="text-[10px] opacity-60">3 {t('étapes')}</span>
+                </span>
+              </button>
+              <button onClick={()=>setMode('expert')} className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${mode==='expert'?'bg-white text-[#0E1540] shadow-lg':'bg-white/20 text-white hover:bg-white/30'}`}>
+                <span className="flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  {t('Expert')}
+                  <span className="text-[10px] opacity-60">5 {t('étapes')}</span>
+                </span>
+              </button>
+            </div>
+            <p className="text-blue-200 text-xs text-center mt-3">
+              {mode==='express'?t('Parcours rapide : secteur, surface, estimation directe'):t('Parcours complet : terrain, sol, équipements, énergie')}
+            </p>
           </div>
           <div className="bg-white/10 backdrop-blur rounded-2xl p-6 mb-8">
             <h2 className="text-white font-semibold mb-4">{t('Sélectionnez votre secteur')}</h2>
@@ -1312,10 +1482,16 @@ const App=()=>{
       {/* Encart estimation temps réel */}
       {etape>=3&&estimation&&<div className="fixed right-4 top-24 z-40 no-print w-64 card p-4 shadow-xl hidden lg:block" style={{maxHeight:'calc(100vh - 120px)',overflowY:'auto'}}>
         <div className="text-xs text-gray-500 mb-1">{t('Estimation temps réel')}</div>
-        <div className="text-2xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtM(estimation.foncier+estimation.total)} F</div>
+        <div className="flex gap-1 mb-1">
+          {['FCFA','EUR','USD'].map(c=>(
+            <button key={c} onClick={()=>setCurrency(c)}
+              className={`px-1.5 py-0.5 rounded text-[10px] font-semibold transition ${currency===c?'bg-blue-100 text-blue-700':'text-gray-400 hover:text-gray-600'}`}>{c}</button>
+          ))}
+        </div>
+        <div className="text-2xl font-bold mono" style={{color:'var(--bleu)'}}>{fmtC(estimation.foncier+estimation.total,currency)}</div>
         <div className="flex justify-between text-xs text-gray-500 mt-1">
-          <span>{t('Min')} {fmtM(estimation.totalMin)}</span>
-          <span>{t('Max')} {fmtM(estimation.totalMax)}</span>
+          <span>{t('Min')} {fmtC(estimation.totalMin,currency)}</span>
+          <span>{t('Max')} {fmtC(estimation.totalMax,currency)}</span>
         </div>
         <div className="mt-2 pt-2 border-t border-gray-100 text-xs text-gray-500">
           <div className="flex justify-between"><span>{t('Surface')}</span><span className="mono">{fmt(surfaceBatie)} m²</span></div>
@@ -1329,6 +1505,11 @@ const App=()=>{
         {/* ÉTAPE 1: TYPE - SANS PRIX */}
         {etape===1&&(
           <div>
+            {/* En Express, combiner type + standing + niveaux */}
+            {mode==='express'&&<div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-800">{t('Configurez votre projet')}</h2>
+              <p className="text-gray-500 text-sm">{t('Type, standing et dimensions en un clin d\'œil')}</p>
+            </div>}
             <div className="mb-6">
               <h2 className="text-xl font-bold text-gray-800">{t('Type de projet')}</h2>
               <p className="text-gray-500 text-sm">{t('Secteur:')} {secteur}</p>
@@ -1393,10 +1574,32 @@ const App=()=>{
         {/* ÉTAPE 2: TERRAIN */}
         {etape===2&&(
           <div>
+            {mode==='express'?(
+              <div>
+                <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Surface du projet')}</h2>
+                  <p className="text-gray-500 text-sm">{t('Indiquez la surface bâtie estimée')}</p>
+                </div>
+                <div className="card p-6">
+                  <h3 className="font-semibold text-gray-700 mb-4">{t('Surface')}<InfoIcon text={t("Surface bâtie totale en m². Pour un projet résidentiel, comptez environ 100-200 m² par villa.")}/></h3>
+                  <div className="flex items-center gap-4">
+                    <InputNum value={surfManuelle} onChange={setSurfManuelle} min={20} max={50000} step={10} unit="m²" label={t('Surface bâtie')}/>
+                  </div>
+                  <div className="mt-4 flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+                    <span className="text-sm text-gray-600">{t('Niveaux:')}</span>
+                    <div className="flex gap-2">
+                      {[1,2,3,4,5,6].map(n=>(
+                        <button key={n} onClick={()=>setNiveaux(n)} className={`px-3 py-1.5 rounded text-sm ${niveaux===n?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{n}</button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <Nav/>
+              </div>
+            ):(
             <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Caractéristiques du terrain')}</h2></div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card p-5">
-                <h3 className="font-semibold text-gray-700 mb-4">{t('Forme et dimensions')}</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">{t('Forme et dimensions')}<InfoIcon text={t('La forme du terrain influence le coût des fondations et la faisabilité du projet. Pour les formes irrégulières, entrez la surface directement.')}/></h3>
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   {['carre','rect','irregulier'].map(f=>(
                     <button key={f} onClick={()=>setForme(f)} className={`py-2 px-3 rounded text-sm font-medium ${forme===f?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
@@ -1418,7 +1621,7 @@ const App=()=>{
                 </div>
               </div>
               <div className="card p-5">
-                <h3 className="font-semibold text-gray-700 mb-4">{t('Disponibilité')}</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">{t('Disponibilité')}<InfoIcon text={t("La disponibilité du terrain impacte le délai et le budget. 'Disponible' = construction immédiate. 'En option' = terrain réservé. 'À acquérir' = coût d'acquisition inclus.")}/></h3>
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   {[{id:'oui',n:t('Disponible')},{id:'option',n:t('En option')},{id:'non',n:t('À acquérir')}].map(tObj=>(
                     <button key={tObj.id} onClick={()=>setTerrainDispo(tObj.id)} className={`option-btn text-center py-3 ${terrainDispo===tObj.id?'selected':''}`}>
@@ -1462,7 +1665,7 @@ const App=()=>{
         )}
 
         {/* ÉTAPE 3: BÂTIMENT */}
-        {etape===3&&(
+        {etape===3&&mode!=='express'&&(
           <div>
             <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Configuration du bâtiment')}</h2></div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -1473,24 +1676,36 @@ const App=()=>{
                   <InputNum value={ssSol} onChange={setSsSol} min={0} max={3} label={t('Sous-sols')}/>
                 </div>
                 <div className="grid grid-cols-2 gap-4 mt-4">
-                  <InputNum value={hspRdc} onChange={setHspRdc} min={2.4} max={6} step={0.1} unit="m" label={t('HSP RDC')}/>
-                  <InputNum value={hspEtage} onChange={setHspEtage} min={2.4} max={4} step={0.1} unit="m" label={t('HSP Étages')}/>
-                  {ssSol>0&&<InputNum value={hspSoussol} onChange={setHspSoussol} min={2.2} max={3.5} step={0.1} unit="m" label={t('HSP Sous-sol')}/>}
+                  <InputNum value={hspRdc} onChange={setHspRdc} min={STANDINGS_HSP_RDC[standing]?2.4:2.4} max={STANDINGS_HSP_RDC[standing]?3.6:6} step={0.1} unit="m" label={t('HSP RDC')}/>
+                  <InputNum value={hspEtage} onChange={setHspEtage} min={STANDINGS_HSP_ETAGE[standing]?2.2:2.4} max={STANDINGS_HSP_ETAGE[standing]?3.2:4} step={0.1} unit="m" label={t('HSP Étages')}/>
+                  {ssSol>0&&<InputNum value={hspSoussol} onChange={setHspSoussol} min={2.0} max={3.0} step={0.1} unit="m" label={t('HSP Sous-sol')}/>}
+                </div>
+                <div className="mt-3 text-xs text-gray-400 flex gap-4">
+                  <span className="px-2 py-1 bg-blue-50 rounded">{t('Recommandé')}: RDC {STANDINGS_HSP_RDC[standing]||'3.0'}m · Étage {STANDINGS_HSP_ETAGE[standing]||'2.8'}m · Sous-sol {STANDINGS_HSP_SOL[standing]||'2.5'}m</span>
                 </div>
               </div>
               <div className="card p-5">
-                <h3 className="font-semibold text-gray-700 mb-4">{t('Synthèse technique')}</h3>
+                <h3 className="font-semibold text-gray-700 mb-4">{t('Synthèse technique')}<InfoIcon text={t("L'emprise au sol est le rapport entre la surface bâtie et la surface du terrain. Une emprise de 25-40% est classique pour une villa individuelle.")}/></h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-500">{t('Emprise au sol')}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-400">{Math.round(empriseMin*100)}%</span>
-                      <input type="range" min={Math.round(empriseMin*100)} max={Math.round(empriseMax*100)} value={Math.round(emprise*100)} onChange={e=>setEmprise(e.target.value/100)} className="w-24 h-1.5 accent-[#0E1540]" />
-                      <span className="text-xs text-gray-400">{Math.round(empriseMax*100)}%</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-gray-400">25%</span>
+                      <div className="relative">
+                        <input type="range" min={25} max={65} value={Math.round(emprise*100)} onChange={e=>setEmprise(e.target.value/100)} className="w-28 h-1.5 accent-[#0E1540]" />
+                        <div className="absolute -top-1 left-0 right-0 pointer-events-none flex justify-center">
+                          <div className="w-0.5 h-3 bg-green-500" style={{marginLeft:`${((STANDINGS_EMPRISE_REC[standing]||0.35)*100-25)/40*100}%`}}></div>
+                        </div>
+                      </div>
+                      <span className="text-xs text-gray-400">65%</span>
                       <span className="mono font-semibold w-12 text-right">{Math.round(emprise*100)}%</span>
                     </div>
                   </div>
-                  {alerteEmprise&&<div className={`${alerteEmprise.type==='alert'?'alert-box':'warn-box'} text-xs py-1 px-2`}>{alerteEmprise.msg}</div>}
+                  <div className="flex justify-between text-[10px] text-gray-400 -mt-1">
+                    <span>{t('Recommandé')}: {Math.round((STANDINGS_EMPRISE_REC[standing]||0.35)*100)}%</span>
+                    <span>{t('Votre choix')}</span>
+                  </div>
+                  {alerteEmprise&&<div className={`${alerteEmprise.type==='alert'?'alert-box':alerteEmprise.type==='warn'?'warn-box':alerteEmprise.type==='success'?'success-box':'info-box'} text-xs py-1 px-2`}>{alerteEmprise.msg}</div>}
                   <div className="flex justify-between"><span className="text-gray-500">{t('Surface plancher')}</span><span className="mono font-semibold">{fmt(surfaceBatie)} m²</span></div>
                   <div className="flex justify-between"><span className="text-gray-500">{t('Hauteur totale')}</span><span className="mono font-semibold">{Number(hauteurTotale || 0).toFixed(1)} m</span></div>
                 </div>
@@ -1572,9 +1787,13 @@ const App=()=>{
                     <label className="text-sm text-gray-600">{t('Alarme')}</label>
                     <div className="flex flex-wrap gap-2 mt-2">
                       <button onClick={()=>setAlarme('')} className={`px-2 py-1 rounded text-xs ${!alarme?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                      {SECURITE_OPTS.filter(o=>o.id.includes('alarme')).map(a=>(
-                        <button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-2 py-1 rounded text-xs ${alarme===a.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(a.name||'').replace(t('Alarme'),'').replace('Alarm','').replace('Alarme','').trim()}</button>
-                      ))}
+                        {SECURITE_OPTS.filter(o=>o.id.includes('alarme')).map(a=>{
+                          const badge=getBadge(a);
+                          return (<button key={a.id} onClick={()=>setAlarme(a.id)} className={`px-2 py-1 rounded text-xs relative ${alarme===a.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
+                            {t(a.name||'').replace(t('Alarme'),'').replace('Alarm','').replace('Alarme','').trim()}
+                            {badge&&<span className={`ml-1 px-1 py-0.5 rounded text-[9px] font-medium border ${badge.cls}`}>{badge.label}</span>}
+                          </button>);
+                        })}
                     </div>
                     {alarme&&<InputNum value={nbZones} onChange={setNbZones} min={2} max={24} label={t('Zones')}/>}
                   </div>
@@ -1582,9 +1801,13 @@ const App=()=>{
                     <label className="text-sm text-gray-600">{t('Vidéosurveillance')}</label>
                     <div className="flex flex-wrap gap-2 mt-2">
                       <button onClick={()=>setVideo('')} className={`px-2 py-1 rounded text-xs ${!video?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                      {SECURITE_OPTS.filter(o=>o.id.includes('video')).map(v=>(
-                        <button key={v.id} onClick={()=>setVideo(v.id)} className={`px-2 py-1 rounded text-xs ${video===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(v.name||'').replace(t('Vidéosurveillance'),'').replace('Video Surveillance','').replace('Vidéosurveillance','').trim()}</button>
-                      ))}
+                      {SECURITE_OPTS.filter(o=>o.id.includes('video')).map(v=>{
+                        const badge=getBadge(v);
+                        return (<button key={v.id} onClick={()=>setVideo(v.id)} className={`px-2 py-1 rounded text-xs relative ${video===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
+                          {t(v.name||'').replace(t('Vidéosurveillance'),'').replace('Video Surveillance','').replace('Vidéosurveillance','').trim()}
+                          {badge&&<span className={`ml-1 px-1 py-0.5 rounded text-[9px] font-medium border ${badge.cls}`}>{badge.label}</span>}
+                        </button>);
+                      })}
                     </div>
                   </div>
                   <div>
@@ -1620,18 +1843,26 @@ const App=()=>{
                   <label className="text-sm text-gray-600">{t('Portail')}</label>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <button onClick={()=>setPortail('')} className={`px-2 py-1 rounded text-xs ${!portail?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('portail')).map(p=>(
-                      <button key={p.id} onClick={()=>setPortail(p.id)} className={`px-2 py-1 rounded text-xs ${portail===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(p.name||'').replace(t('Portail'),'').replace('Gate','').replace('Portail','').trim()}</button>
-                    ))}
+                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('portail')).map(p=>{
+                      const badge=getBadge(p);
+                      return (<button key={p.id} onClick={()=>setPortail(p.id)} className={`px-2 py-1 rounded text-xs relative ${portail===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
+                        {t(p.name||'').replace(t('Portail'),'').replace('Gate','').replace('Portail','').trim()}
+                        {badge&&<span className={`ml-1 px-1 py-0.5 rounded text-[9px] font-medium border ${badge.cls}`}>{badge.label}</span>}
+                      </button>);
+                    })}
                   </div>
                 </div>
                 <div>
                   <label className="text-sm text-gray-600">{t('Piscine')}</label>
                   <div className="flex flex-wrap gap-2 mt-2">
                     <button onClick={()=>setPiscine('')} className={`px-2 py-1 rounded text-xs ${!piscine?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('piscine')).map(p=>(
-                      <button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-2 py-1 rounded text-xs ${piscine===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(p.name||'').replace(t('Piscine'),'').replace('Pool','').replace('Piscine','').trim()}</button>
-                    ))}
+                    {EXTERIEUR_OPTS.filter(o=>o.id.includes('piscine')).map(p=>{
+                      const badge=getBadge(p);
+                      return (<button key={p.id} onClick={()=>setPiscine(p.id)} className={`px-2 py-1 rounded text-xs relative ${piscine===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
+                        {t(p.name||'').replace(t('Piscine'),'').replace('Pool','').replace('Piscine','').trim()}
+                        {badge&&<span className={`ml-1 px-1 py-0.5 rounded text-[9px] font-medium border ${badge.cls}`}>{badge.label}</span>}
+                      </button>);
+                    })}
                   </div>
                 </div>
               </div>
@@ -1654,57 +1885,23 @@ const App=()=>{
             </div>
 
             {/* DOMOTIQUE */}
-            {DOMOTIQUE_OPTS.length>0&&<div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Domotique')}</h3>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={()=>setDomotique('')} className={`px-3 py-1.5 rounded text-sm ${!domotique?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                {DOMOTIQUE_OPTS.map(d=>(
-                  <button key={d.id} onClick={()=>setDomotique(d.id)} className={`px-3 py-1.5 rounded text-sm ${domotique===d.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(d.name||'')}</button>
-                ))}
-              </div>
-              {domotique&&<p className="text-xs text-gray-500 mt-2">{t('Éclairage, stores, chauffage connectés')}</p>}
-            </div>}
+            {DOMOTIQUE_OPTS.length>=2&&<GammeSlider opts={DOMOTIQUE_OPTS} value={domotique} onChange={setDomotique} label={t('Domotique')} desc={t('Éclairage, stores, chauffage connectés')}/>}
 
             {/* SECOND ŒUVRE — Volets roulants */}
-            {SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')).length>0&&<div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Volets roulants')}</h3>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={()=>setVolet('')} className={`px-3 py-1.5 rounded text-sm ${!volet?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                {SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')).map(v=>(
-                  <button key={v.id} onClick={()=>setVolet(v.id)} className={`px-3 py-1.5 rounded text-sm ${volet===v.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(v.name||'')}</button>
-                ))}
-              </div>
-              {volet&&<p className="text-xs text-gray-500 mt-2">{t('PVC manuel, alu motorisé ou connecté')}</p>}
-            </div>}
+            {SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet')).length>=2&&<GammeSlider opts={SECONDE_OEUVRE_OPTS.filter(o=>o.id.includes('volet'))} value={volet} onChange={setVolet} label={t('Volets roulants')} desc={t('PVC manuel, alu motorisé ou connecté')}/>}
 
             {/* CITERNE EAU DE PLUIE */}
-            {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).length>0&&<div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Citerne eau de pluie')}</h3>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={()=>setCiterne('')} className={`px-3 py-1.5 rounded text-sm ${!citerne?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).map(c=>(
-                  <button key={c.id} onClick={()=>setCiterne(c.id)} className={`px-3 py-1.5 rounded text-sm ${citerne===c.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(c.name||'')}</button>
-                ))}
-              </div>
-            </div>}
+            {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).length>=2&&<GammeSlider opts={EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne'))} value={citerne} onChange={setCiterne} label={t('Citerne eau de pluie')} desc={t('Récupération et stockage des eaux pluviales')}/>}
 
             {/* AMÉNAGEMENT PAYSAGER */}
-            {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).length>0&&<div className="card p-5 mt-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Aménagement paysager')}</h3>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={()=>setPaysager('')} className={`px-3 py-1.5 rounded text-sm ${!paysager?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Non')}</button>
-                {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).map(p=>(
-                  <button key={p.id} onClick={()=>setPaysager(p.id)} className={`px-3 py-1.5 rounded text-sm ${paysager===p.id?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t(p.name||'')}</button>
-                ))}
-              </div>
-            </div>}
+            {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).length>=2&&<GammeSlider opts={EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager'))} value={paysager} onChange={setPaysager} label={t('Aménagement paysager')} desc={t('Espaces verts et aménagements extérieurs')}/>
 
             <Nav/>
           </div>
         )}
 
         {/* ÉTAPE 5: RÉCAP + ÉNERGIE + ESTIMATION */}
-        {etape===5&&estimation&&(
+        {(etape===5||(mode==='express'&&etape===3))&&estimation&&(
           <div>
             <div className="flex justify-between items-center mb-6 no-print">
               <div>
@@ -1753,17 +1950,39 @@ const App=()=>{
                 <Icon name="Zap" />
                 {t('Besoins énergétiques calculés')}
               </h3>
-              <div className="text-4xl font-bold text-white mb-4 mono">{besoins.total} kW</div>
+              <div className="flex flex-wrap items-end gap-6 mb-4">
+                <div>
+                  <div className="text-4xl font-bold text-white mono">{besoins.total} kW</div>
+                  <div className="text-white/60 text-xs">{t('Puissance totale installée')}</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-white mono">~{besoins.totalCo2} tCO₂e</div>
+                  <div className="text-white/60 text-xs">{t('Émissions annuelles estimées')}</div>
+                </div>
+              </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {besoins.details.map((d,i)=>(
-                  <div key={i} className="bg-white/20 rounded px-3 py-2 flex items-center justify-between text-white">
-                    <div className="flex items-center gap-2">
-                      <Icon name={d.icon} size={14} />
-                      <span className="text-sm">{d.label}</span>
+                  <div key={i} className="bg-white/20 rounded px-3 py-2 text-white">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <Icon name={d.icon} size={14} />
+                        <span className="text-sm">{d.label}</span>
+                      </div>
+                      <span className="mono font-semibold">{Number(d.kw || 0).toFixed(1)}</span>
                     </div>
-                    <span className="mono font-semibold">{Number(d.kw || 0).toFixed(1)}</span>
+                    {d.co2>0&&<div className="text-xs text-white/70 text-right mono">{d.co2} tCO₂e</div>}
                   </div>
                 ))}
+              </div>
+              <div className="mt-4 flex items-center gap-4">
+                <div className="h-2 flex-1 rounded-full bg-white/30 overflow-hidden flex">
+                  <div className="h-full bg-green-400" style={{width:besoins.totalCo2<10?'100%':besoins.totalCo2<30?'60%':'30%'}}></div>
+                  <div className="h-full bg-amber-400" style={{width:besoins.totalCo2<10?'0%':besoins.totalCo2<30?'40%':'40%'}}></div>
+                  <div className="h-full bg-red-400" style={{width:besoins.totalCo2<10?'0%':besoins.totalCo2<30?'0%':'30%'}}></div>
+                </div>
+                <span className="text-white/70 text-xs whitespace-nowrap">
+                  {besoins.totalCo2<10?t('Faible'):besoins.totalCo2<30?t('Modéré'):t('Élevé')}
+                </span>
               </div>
             </div>
 
@@ -1847,10 +2066,16 @@ const App=()=>{
             <div className="card p-6" style={{background:'linear-gradient(135deg, var(--bleu) 0%, #1e3a8a 100%)'}}>
               <div className="text-center">
                 <div className="text-white/70 text-sm mb-2">{t('Estimation totale projet')}</div>
-                <div className="text-4xl md:text-5xl font-bold text-white mono mb-4">{fmtM(estimation.foncier+estimation.total)} FCFA</div>
+                <div className="flex items-center justify-center gap-4 mb-2">
+                  {['FCFA','EUR','USD'].map(c=>(
+                    <button key={c} onClick={()=>setCurrency(c)}
+                      className={`px-3 py-1 rounded text-xs font-semibold transition ${currency===c?'bg-white/20 text-white':'bg-white/5 text-white/50 hover:bg-white/10'}`}>{c}</button>
+                  ))}
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-white mono mb-4">{fmtC(estimation.foncier+estimation.total,currency)}</div>
                 <div className="flex justify-center gap-8 text-white/80 text-sm">
-                  <div><div className="text-xs">{t('Estimation basse')}</div><div className="font-semibold mono">{fmtM(estimation.totalMin)} F</div></div>
-                  <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtM(estimation.totalMax)} F</div></div>
+                  <div><div className="text-xs">{t('Estimation basse')}</div><div className="font-semibold mono">{fmtC(estimation.totalMin,currency)}</div></div>
+                  <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtC(estimation.totalMax,currency)}</div></div>
                 </div>
                 <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
               </div>

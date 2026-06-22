@@ -26,10 +26,11 @@
     .badge-blue { background: #e0e7ff; color: #0E1540; }
     .badge-orange { background: #ffedd5; color: #CC6A00; }
   </style>
+  <script>window.onload=()=>{setTimeout(()=>window.print(),500)}</script>
 </head>
 <body>
   <div class="header">
-    <img src="{{ public_path('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE">
+    <img src="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE">
     <h1>Estimation de Projet</h1>
     <p style="color:#666;font-size:9pt">Afrika Infrastructures And Equipements (AIAE) • Référentiel Décembre 2025</p>
   </div>

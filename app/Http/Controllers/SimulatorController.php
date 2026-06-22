@@ -116,25 +116,22 @@ class SimulatorController extends Controller
             ];
         })->values();
 
-        $securite = $options->where('categorie', 'securite')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
-        })->values();
+        $mapOption = function ($o) {
+            return [
+                'id' => $o->code,
+                'name' => $o->designation,
+                'prix' => $o->prix_min,
+                'prix_max' => $o->prix_max,
+                'unite' => $o->unite ?? 'U',
+                'mapping' => $o->mapping_standings ?: new \stdClass()
+            ];
+        };
 
-        $exterieur = $options->where('categorie', 'exterieur')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max, 'unite' => $o->unite];
-        })->values();
-
-        $domotique = $options->where('categorie', 'domotique')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
-        })->values();
-
-        $secondOeuvre = $options->where('categorie', 'second_oeuvre')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max];
-        })->values();
-
-        $specifique = $options->where('categorie', 'specifique')->map(function ($o) {
-            return ['id' => $o->code, 'name' => $o->designation, 'prix' => $o->prix_min, 'prix_max' => $o->prix_max, 'unite' => $o->unite];
-        })->values();
+        $securite = $options->where('categorie', 'securite')->map($mapOption)->values();
+        $exterieur = $options->where('categorie', 'exterieur')->map($mapOption)->values();
+        $domotique = $options->where('categorie', 'domotique')->map($mapOption)->values();
+        $secondOeuvre = $options->where('categorie', 'second_oeuvre')->map($mapOption)->values();
+        $specifique = $options->where('categorie', 'specifique')->map($mapOption)->values();
 
         $simulatorData = [
             'SECTEURS' => $secteurs,

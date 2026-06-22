@@ -682,7 +682,7 @@
                 {!! __('Direction Technique<br>et Stratégique') !!}
               </div>
               <div class="bg-white p-5 text-[18px] text-gray-700 flex-1 leading-[1.6]">
-                {!! __('<strong class="text-gray-700 font-heavy">Spécialiste en génie civil avec plus de 18 ans d’expérience</strong> en conception et dimensionnement de <strong class="text-gray-700 font-heavy">structures complexes</strong>. <strong class="text-gray-700 font-heavy">Enseignant-chercheur</strong> dans plusieurs disciplines du génie civil (ouvrages d’art, structures de chaussées, modélisation aux éléments finis). <strong class="text-gray-700 font-heavy">Formation complémentaire en administration des entreprises.</strong> Fondateur d’AIAE.') !!}
+                {!! __('<strong class="text-gray-700 font-heavy">Expert en génie civil avec plus de 18 ans d’expérience</strong> en conception et dimensionnement de <strong class="text-gray-700 font-heavy">structures complexes</strong>, ouvrages d’art, structures de chaussées et modélisation aux éléments finis. <strong class="text-gray-700 font-heavy">Compétences en gestion d’entreprise.</strong> Fondateur d’AIAE.') !!}
               </div>
             </div>
 
@@ -916,7 +916,7 @@
         {!! __('Vous avez un projet ? Parlons-en. Premier échange<br> gratuit et sans engagement.') !!}
       </p>
       <div class="flex flex-col md:flex-row justify-center">
-        <a href="#" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
+        <a href="{{ route('contact') }}" class="bg-secondary text-white px-10 py-5 text-center font-heavy">
           {{ __('DEMANDER UN DEVIS GRATUIT') }}
           <span class="block text-sm font-light text-white">
             {{ __('Réponse sous 48h') }}
@@ -964,9 +964,9 @@
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
           <p class="text-4xl font-bold text-gray-300">@ Afrika_AIAE</p>
           <p class="text-lg text-gray-300 font-light">
-            {{ __('Suivez nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez vous') }}</strong>
+            {{ __('Suivez-nous,') }} <strong class="font-heavy text-gray-300">{{ __('Abonnez-vous') }}</strong>
             {{ __('&') }}
-            <strong class="font-heavy text-gray-300">{{ __('Likez nos post') }}</strong>
+            <strong class="font-heavy text-gray-300">{{ __('Likez nos publications') }}</strong>
           </p>
         </div>
       </div>
@@ -1018,7 +1018,7 @@
         <!-- DIVISIONS -->
         <div>
           <h3 class="text-[29px] font-medium mb-6 text-darkBlue">
-            {{ __('Division construction') }}
+            {{ __('Nos divisions') }}
           </h3>
 
           <ul class="space-y-2 text-gray-600 text-[20px] font-light">
