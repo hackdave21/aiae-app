@@ -1596,7 +1596,7 @@ const App=()=>{
                 <Nav/>
               </div>
             ):(
-            <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Caractéristiques du terrain')}</h2></div>
+            <><div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Caractéristiques du terrain')}</h2></div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card p-5">
                 <h3 className="font-semibold text-gray-700 mb-4">{t('Forme et dimensions')}<InfoIcon text={t('La forme du terrain influence le coût des fondations et la faisabilité du projet. Pour les formes irrégulières, entrez la surface directement.')}/></h3>
@@ -1661,6 +1661,7 @@ const App=()=>{
               {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 AVP fortement recommandée.')}</p></div>}
             </div>
             <Nav canContinue={!!sol}/>
+            </>
           </div>
         )}
 
