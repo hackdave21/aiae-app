@@ -89,6 +89,8 @@ class SimulatorController extends Controller
                     'prix' => $t->prix_base_m2 ?? 450000,
                     'ratio' => $t->ratio_surface ?? 1
                 ];
+            })->reject(function ($item) {
+                return in_array($item['id'], ['hangar', 'hangar_agri']);
             })->values();
         });
 

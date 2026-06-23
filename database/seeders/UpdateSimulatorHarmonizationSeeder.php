@@ -26,7 +26,10 @@ class UpdateSimulatorHarmonizationSeeder extends Seeder
         TypeBatiment::where('code', 'hangar')->update(['prix_base_m2' => 150000]);
         TypeBatiment::where('code', 'elevage_bovins')->update(['prix_base_m2' => 120000]);
         
-        // Hangar Agricole
+        // Nettoyer les doublons hangar avant d'ajouter hangar_agricole
+        TypeBatiment::where('code', 'hangar_agri')->delete();
+        TypeBatiment::where('code', 'hangar')->where('secteur', 'agricole')->delete();
+        // Hangar Agricole (un seul)
         TypeBatiment::updateOrCreate(
             ['code' => 'hangar_agricole'],
             ['secteur' => 'agricole', 'nom' => 'Hangar agricole', 'icone' => 'Warehouse', 'prix_base_m2' => 100000, 'niveaux_max' => 1, 'description' => 'Structures agricoles']

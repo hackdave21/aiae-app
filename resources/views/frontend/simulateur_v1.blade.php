@@ -552,7 +552,7 @@ const App=()=>{
       {id:'frigo',name:t('Chambre froide'),max:2,prix:480000,icon:'Snowflake'}
     ],
     agricole:[
-      {id:'hangar',name:t('Hangar'),max:1,prix:120000,icon:'Warehouse'},
+      {id:'hangar_agricole',name:t('Hangar agricole'),max:1,prix:120000,icon:'Warehouse'},
       {id:'elevage_bovins',name:t('Élevage bovins'),max:1,prix:85000,ratio:8,icon:'Beef'},
       {id:'elevage_volailles',name:t('Volailles'),max:1,prix:45000,ratio:0.1,icon:'Bird'},
       {id:'serres',name:t('Serres'),max:1,prix:65000,icon:'Sprout'},
