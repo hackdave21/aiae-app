@@ -1662,8 +1662,9 @@ const App=()=>{
             </div>
             <Nav canContinue={!!sol}/>
             </>
-          </div>
-        )}
+          )}
+        </div>
+      )}
 
         {/* ÉTAPE 3: BÂTIMENT */}
         {etape===3&&mode!=='express'&&(
