@@ -391,7 +391,7 @@ const App = () => {
   const qs = window.QUICK_START || {};
   const initSecteur = qs.secteur || window.INITIAL_SECTEUR || '';
   const fromHomePage = !!qs.standing;
-  const [page, setPage] = useState(initSecteur ? 'sim' : 'accueil');
+  const [mode, setMode] = useState('express');
   const [etape, setEtape] = useState(initSecteur ? fromHomePage ? 2 : 1 : 1);
   const [secteur, setSecteur] = useState(initSecteur);
   const [typeBat, setTypeBat] = useState('');
@@ -853,7 +853,6 @@ const App = () => {
     setForage(false);
     setParkPlaces(0);
     setEtape(1);
-    setPage('accueil');
   };
   const handleSaveSimulation = async () => {
     setIsSaving(true);
@@ -918,100 +917,26 @@ const App = () => {
       setIsSaving(false);
     }
   };
-  const Header = () => React.createElement("header", {
-    className: "bg-white border-b sticky top-0 z-50 no-print"
-  }, React.createElement("div", {
-    className: "max-w-5xl mx-auto px-4 py-3 flex items-center justify-between"
-  }, React.createElement("button", {
-    onClick: () => window.location.href = '/',
-    className: "flex items-center gap-3"
-  }, React.createElement("img", {
-    src: window.LOGO_URL,
-    className: "w-12 h-12 object-contain",
-    alt: "AIAE Logo"
-  })), React.createElement("div", {
-    className: "flex items-center gap-4"
-  }, React.createElement("button", {
-    onClick: () => window.location.href = '/',
-    className: "text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 font-medium transition-colors"
-  }, React.createElement("svg", {
-    className: "w-4 h-4",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor"
-  }, React.createElement("path", {
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    strokeWidth: 2,
-    d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-  })), React.createElement("span", null, t("Accueil"))), React.createElement("div", {
-    className: "w-px h-4 bg-gray-200"
-  }), React.createElement("div", {
-    className: "hidden sm:flex items-center gap-1"
-  }, [1, 2, 3, 4, 5].map(n => React.createElement("div", {
-    key: n,
-    className: "flex items-center"
-  }, React.createElement("div", {
-    className: `w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n < etape ? 'bg-[#05482C] text-white' : n === etape ? 'bg-[#0E1540] text-white' : 'bg-gray-200 text-gray-500'}`
-  }, n < etape ? '✓' : n), n < 5 && React.createElement("div", {
-    className: `w-6 h-0.5 ${n < etape ? 'bg-[#05482C]' : 'bg-gray-200'}`
-  })))), React.createElement("button", {
-    onClick: reset,
-    className: "text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1"
-  }, React.createElement("svg", {
-    className: "w-4 h-4",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    stroke: "currentColor"
-  }, React.createElement("path", {
-    strokeLinecap: "round",
-    strokeWidth: 2,
-    d: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-  })), React.createElement("span", {
-    className: "hidden sm:inline"
-  }, t('Nouveau'))))));
-  const Nav = ({
-    canContinue = true
-  }) => React.createElement("div", {
-    className: "flex justify-between items-center mt-8 pt-6 border-t no-print"
-  }, React.createElement("button", {
-    onClick: () => etape > 1 ? setEtape(etape - 1) : window.location.href = window.BACK_ROUTE,
-    className: "flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
-  }, "\u2190 ", t('Retour')), React.createElement("button", {
-    onClick: () => etape < 5 ? setEtape(etape + 1) : handleSaveSimulation(),
-    disabled: !canContinue || isSaving,
-    className: "btn-primary flex items-center gap-2"
-  }, isSaving ? React.createElement("span", {
-    className: "flex items-center gap-1"
-  }, React.createElement("svg", {
-    className: "animate-spin h-4 w-4 text-white",
-    viewBox: "0 0 24 24"
-  }, React.createElement("circle", {
-    className: "opacity-25",
-    cx: "12",
-    cy: "12",
-    r: "10",
-    stroke: "currentColor",
-    strokeWidth: "4",
-    fill: "none"
-  }), React.createElement("path", {
-    className: "opacity-75",
-    fill: "currentColor",
-    d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-  })), t('Chargement...')) : React.createElement(React.Fragment, null, etape === 5 ? t('Demander un devis') : t('Continuer'), " \u2192")));
-  if (page === 'accueil') {
-    return React.createElement("div", {
-      className: "min-h-screen",
-      style: {
-        background: 'var(--bleu)'
-      }
+  const Header = () => {
+    const stepList = mode === 'express' ? [1, 2, 3] : [1, 2, 3, 4, 5];
+    const maxSteps = mode === 'express' ? 3 : 5;
+    const displayEtape = mode === 'express' ? (etape === 1 ? 1 : etape === 3 ? 2 : 3) : etape;
+    return React.createElement("header", {
+      className: "bg-white border-b sticky top-0 z-50 no-print"
     }, React.createElement("div", {
-      className: "max-w-4xl mx-auto px-4 py-6"
-    }, React.createElement("div", {
-      className: "flex justify-end mb-6"
+      className: "max-w-5xl mx-auto px-4 py-3 flex items-center justify-between"
     }, React.createElement("button", {
-      onClick: () => window.location.href = '/',
-      className: "flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all text-sm font-medium"
+      onClick: reset,
+      className: "flex items-center gap-3"
+    }, React.createElement("img", {
+      src: window.LOGO_URL,
+      className: "w-12 h-12 object-contain",
+      alt: "AIAE Logo"
+    })), React.createElement("div", {
+      className: "flex items-center gap-4"
+    }, React.createElement("button", {
+      onClick: reset,
+      className: "text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 font-medium transition-colors"
     }, React.createElement("svg", {
       className: "w-4 h-4",
       fill: "none",
@@ -1022,70 +947,168 @@ const App = () => {
       strokeLinejoin: "round",
       strokeWidth: 2,
       d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-    })), t("Retour à l'accueil"))), React.createElement("div", {
-      className: "text-center mb-12"
-    }, React.createElement("button", {
-      onClick: () => window.location.href = '/',
-      className: "inline-block hover:scale-105 transition-transform"
-    }, React.createElement("img", {
-      src: window.LOGO_URL,
-      className: "w-20 h-20 object-contain mb-6 mx-auto",
-      alt: "AIAE Logo"
-    })), React.createElement("h1", {
-      className: "text-3xl md:text-4xl font-bold text-white mb-3"
-    }, t("Simulateur d'Estimation")), React.createElement("p", {
-      className: "text-blue-200 text-lg"
-    }, "AFRIKA INFRASTRUCTURE, AUTOMATION & ENERGY")), React.createElement("div", {
-      className: "bg-white/10 backdrop-blur rounded-2xl p-6 mb-8"
-    }, React.createElement("h2", {
-      className: "text-white font-semibold mb-4"
-    }, t('Sélectionnez votre secteur')), React.createElement("div", {
-      className: "grid grid-cols-2 md:grid-cols-4 gap-4"
-    }, [{
-      id: 'residentiel',
-      icon: 'Home',
-      name: t('Résidentiel'),
-      desc: t('Villas, immeubles')
-    }, {
-      id: 'tertiaire',
-      icon: 'Building2',
-      name: t('Tertiaire'),
-      desc: t('Bureaux, hôtels')
-    }, {
-      id: 'industriel',
-      icon: 'Factory',
-      name: t('Industriel'),
-      desc: t('Usines, entrepôts')
-    }, {
-      id: 'agricole',
-      icon: 'Sprout',
-      name: t('Agricole'),
-      desc: t('Élevage, stockage')
-    }].map(s => React.createElement("button", {
-      key: s.id,
-      onClick: () => {
-        setSecteur(s.id);
-        setPage('sim');
-      },
-      className: "bg-white rounded-xl p-5 text-left hover:shadow-lg hover:scale-[1.02] transition-all group"
+    })), React.createElement("span", null, t("Nouveau"))), secteur && React.createElement(React.Fragment, null, React.createElement("div", {
+      className: "w-px h-4 bg-gray-200"
+    }), React.createElement("div", {
+      className: "hidden sm:flex items-center gap-1"
+    }, stepList.map(n => React.createElement("div", {
+      key: n,
+      className: "flex items-center"
     }, React.createElement("div", {
-      className: "mb-3 p-3 bg-gray-50 rounded-lg w-fit group-hover:bg-[#0E1540] group-hover:text-white transition-colors"
-    }, React.createElement(Icon, {
-      name: s.icon,
-      size: 32
-    })), React.createElement("div", {
-      className: "font-semibold text-gray-800"
-    }, s.name), React.createElement("div", {
-      className: "text-xs text-gray-500 mt-1"
-    }, s.desc))))), React.createElement("div", {
-      className: "text-center mt-12 text-blue-300 text-xs"
-    }, "\xA9 2025 AIAE SARL \u2022 Quartier Kl\xE9me Zangu\xE9ra, Lom\xE9, Togo")));
-  }
+      className: `w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n < displayEtape ? 'bg-[#05482C] text-white' : n === displayEtape ? 'bg-[#0E1540] text-white' : 'bg-gray-200 text-gray-500'}`
+    }, n < displayEtape ? '✓' : n), n < maxSteps && React.createElement("div", {
+      className: `w-6 h-0.5 ${n < displayEtape ? 'bg-[#05482C]' : 'bg-gray-200'}`
+    }))))))));
+  };
+  const Nav = ({
+    canContinue = true
+  }) => {
+    const nextStep = () => {
+      if (mode === 'express') {
+        if (etape === 1) { setEtape(3); return; }
+        if (etape === 3) { setEtape(5); return; }
+      }
+      if (etape < 5) setEtape(etape + 1);
+      else handleSaveSimulation();
+    };
+    const prevStep = () => {
+      if (etape > 1) {
+        if (mode === 'express') {
+          if (etape === 5) { setEtape(3); return; }
+          if (etape === 3) { setEtape(1); return; }
+        }
+        setEtape(etape - 1);
+      } else {
+        window.location.href = window.BACK_ROUTE;
+      }
+    };
+    return React.createElement("div", {
+      className: "flex justify-between items-center mt-8 pt-6 border-t no-print"
+    }, React.createElement("button", {
+      onClick: prevStep,
+      className: "flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
+    }, "\u2190 ", t('Retour')), React.createElement("button", {
+      onClick: nextStep,
+      disabled: !canContinue || isSaving,
+      className: "btn-primary flex items-center gap-2"
+    }, isSaving ? React.createElement("span", {
+      className: "flex items-center gap-1"
+    }, React.createElement("svg", {
+      className: "animate-spin h-4 w-4 text-white",
+      viewBox: "0 0 24 24"
+    }, React.createElement("circle", {
+      className: "opacity-25",
+      cx: "12",
+      cy: "12",
+      r: "10",
+      stroke: "currentColor",
+      strokeWidth: "4",
+      fill: "none"
+    }), React.createElement("path", {
+      className: "opacity-75",
+      fill: "currentColor",
+      d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    })), t('Chargement...')) : React.createElement(React.Fragment, null, etape === 5 ? t('Demander un devis') : t('Continuer'), " \u2192")));
+  };
   return React.createElement("div", {
     className: "min-h-screen bg-gray-50"
   }, React.createElement(Header, null), React.createElement("main", {
     className: "max-w-5xl mx-auto px-4 py-6"
-  }, etape === 1 && React.createElement("div", null, React.createElement("div", {
+  }, !secteur ? React.createElement("div", null, React.createElement("div", {
+    className: "bg-white/10 backdrop-blur rounded-2xl p-4 mb-6",
+    style: { background: '#f0f4ff' }
+  }, React.createElement("div", {
+    className: "flex items-center justify-center gap-4"
+  }, React.createElement("span", {
+    className: "text-gray-500 text-sm font-medium"
+  }, t('Mode :')), React.createElement("button", {
+    onClick: () => setMode('express'),
+    className: `px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${mode === 'express' ? 'bg-[#0E1540] text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-gray-100'}`
+  }, React.createElement("span", {
+    className: "flex items-center gap-2"
+  }, React.createElement("svg", {
+    className: "w-4 h-4",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, React.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M13 10V3L4 14h7v7l9-11h-7z"
+  })), t('Express'), React.createElement("span", {
+    className: "text-[10px] opacity-60"
+  }, "3 ", t('étapes')))), React.createElement("button", {
+    onClick: () => setMode('expert'),
+    className: `px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${mode === 'expert' ? 'bg-[#0E1540] text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-gray-100'}`
+  }, React.createElement("span", {
+    className: "flex items-center gap-2"
+  }, React.createElement("svg", {
+    className: "w-4 h-4",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, React.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: 2,
+    d: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+  })), t('Expert'), React.createElement("span", {
+    className: "text-[10px] opacity-60"
+  }, "5 ", t('étapes'))))), React.createElement("p", {
+    className: "text-gray-400 text-xs text-center mt-3"
+  }, mode === 'express' ? t('Parcours rapide : secteur, surface, estimation directe') : t('Parcours complet : terrain, sol, équipements, énergie'))), React.createElement("div", {
+    className: "text-center mb-6"
+  }, React.createElement("h1", {
+    className: "text-2xl font-bold text-gray-800"
+  }, t('Sélectionnez votre secteur')), React.createElement("p", {
+    className: "text-gray-500 text-sm mt-1"
+  }, t('Choisissez le domaine de votre projet'))), React.createElement("div", {
+    className: "grid grid-cols-2 md:grid-cols-4 gap-4"
+  }, [{
+    id: 'residentiel',
+    icon: 'Home',
+    name: t('Résidentiel'),
+    desc: t('Villas, immeubles')
+  }, {
+    id: 'tertiaire',
+    icon: 'Building2',
+    name: t('Tertiaire'),
+    desc: t('Bureaux, hôtels')
+  }, {
+    id: 'industriel',
+    icon: 'Factory',
+    name: t('Industriel'),
+    desc: t('Usines, entrepôts')
+  }, {
+    id: 'agricole',
+    icon: 'Sprout',
+    name: t('Agricole'),
+    desc: t('Élevage, stockage')
+  }].map(s => React.createElement("button", {
+    key: s.id,
+    onClick: () => setSecteur(s.id),
+    className: "bg-white rounded-xl p-5 text-left hover:shadow-lg hover:scale-[1.02] transition-all group border border-gray-100"
+  }, React.createElement("div", {
+    className: "mb-3 p-3 bg-gray-50 rounded-lg w-fit group-hover:bg-[#0E1540] group-hover:text-white transition-colors"
+  }, React.createElement(Icon, {
+    name: s.icon,
+    size: 32
+  })), React.createElement("div", {
+    className: "font-semibold text-gray-800"
+  }, s.name), React.createElement("div", {
+    className: "text-xs text-gray-500 mt-1"
+  }, s.desc))))) : React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "flex items-center justify-end gap-2 mb-4"
+  }, React.createElement("span", {
+    className: "text-xs text-gray-400"
+  }, t('Mode :')), React.createElement("button", {
+    onClick: () => setMode('express'),
+    className: `text-xs px-2 py-1 rounded font-medium ${mode === 'express' ? 'bg-[#0E1540] text-white' : 'bg-gray-100 text-gray-600'}`
+  }, t('Express'), " 3", t('étapes')), React.createElement("button", {
+    onClick: () => setMode('expert'),
+    className: `text-xs px-2 py-1 rounded font-medium ${mode === 'expert' ? 'bg-[#0E1540] text-white' : 'bg-gray-100 text-gray-600'}`
+  }, t('Expert'), " 5", t('étapes'))), etape === 1 && React.createElement("div", null, React.createElement("div", {
     className: "mb-6"
   }, React.createElement("h2", {
     className: "text-xl font-bold text-gray-800"
@@ -1143,7 +1166,7 @@ const App = () => {
     className: "text-xs text-gray-500 mt-2"
   }, "~", h.surfCh, " m\xB2 / ", t('Chambres')))))), React.createElement(Nav, {
     canContinue: !!typeBat
-  })), etape === 2 && React.createElement("div", null, React.createElement("div", {
+  })), mode === 'expert' && etape === 2 && React.createElement("div", null, React.createElement("div", {
     className: "mb-6"
   }, React.createElement("h2", {
     className: "text-xl font-bold text-gray-800"
@@ -1427,7 +1450,7 @@ const App = () => {
     label: typeBat === 'elevage_volailles' ? t('Sujets') : t('Têtes')
   }), React.createElement("div", {
     className: "mt-3 text-sm text-gray-500"
-  }, t('Surface'), " : ", fmt(surfaceBatie), " m\xB2")), React.createElement(Nav, null)), etape === 4 && React.createElement("div", null, React.createElement("div", {
+  }, t('Surface'), " : ", fmt(surfaceBatie), " m\xB2")), React.createElement(Nav, null)), mode === 'expert' && etape === 4 && React.createElement("div", null, React.createElement("div", {
     className: "mb-6"
   }, React.createElement("h2", {
     className: "text-xl font-bold text-gray-800"
@@ -1814,7 +1837,7 @@ const App = () => {
     className: "block mb-1"
   }, t('Avertissement')), React.createElement("p", {
     className: "text-sm"
-  }, t("Cette estimation est indicative et basée sur les paramètres saisis. Une étude détaillée sera réalisée pour l'établissement du devis définitif. Les prix peuvent varier selon la conjoncture du marché.")))), React.createElement(Nav, null))), React.createElement("footer", {
+  }, t("Cette estimation est indicative et basée sur les paramètres saisis. Une étude détaillée sera réalisée pour l'établissement du devis définitif. Les prix peuvent varier selon la conjoncture du marché.")))), React.createElement(Nav, null)))), React.createElement("footer", {
     className: "text-center py-6 text-gray-400 text-xs no-print"
   }, "\xA9 2025 AIAE SARL \u2022 Afrika Infrastructure, Automation & Energy \u2022 Quartier Kl\xE9me Zangu\xE9ra, Lom\xE9, Togo", React.createElement("br", null), t('Simulateur v'), VERSION, " \u2022 ", t('Référentiel Décembre 2025')));
 };
