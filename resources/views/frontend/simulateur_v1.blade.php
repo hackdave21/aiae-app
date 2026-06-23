@@ -1896,7 +1896,7 @@ const App=()=>{
             {EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne')).length>=2&&<GammeSlider opts={EXTERIEUR_OPTS.filter(o=>o.id.includes('citerne'))} value={citerne} onChange={setCiterne} label={t('Citerne eau de pluie')} desc={t('Récupération et stockage des eaux pluviales')}/>}
 
             {/* AMÉNAGEMENT PAYSAGER */}
-            {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).length>=2&&<GammeSlider opts={EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager'))} value={paysager} onChange={setPaysager} label={t('Aménagement paysager')} desc={t('Espaces verts et aménagements extérieurs')}/>
+            {EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager')).length>=2&&<GammeSlider opts={EXTERIEUR_OPTS.filter(o=>o.id.includes('paysager'))} value={paysager} onChange={setPaysager} label={t('Aménagement paysager')} desc={t('Espaces verts et aménagements extérieurs')}/>}
 
             <Nav/>
           </div>
