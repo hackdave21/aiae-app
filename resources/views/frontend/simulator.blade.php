@@ -17,6 +17,27 @@
         {{ __('AFRIKA INFRASTRUCTURE AND EQUIPEMENTS') }}
       </p>
 
+      <!-- MODE SELECTEUR -->
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <span class="text-white/70 text-sm font-medium">{{ __('Mode :') }}</span>
+        <button id="mode-express" onclick="setMode('express')"
+          class="px-6 py-2.5 rounded-lg font-semibold text-sm transition-all bg-white text-[#0E1540] shadow-lg">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            {{ __('Express') }}
+            <span class="text-[10px] opacity-60">3 {{ __('étapes') }}</span>
+          </span>
+        </button>
+        <button id="mode-expert" onclick="setMode('expert')"
+          class="px-6 py-2.5 rounded-lg font-semibold text-sm transition-all bg-white/20 text-white hover:bg-white/30">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            {{ __('Expert') }}
+            <span class="text-[10px] opacity-60">5 {{ __('étapes') }}</span>
+          </span>
+        </button>
+      </div>
+
       <!-- CARD -->
       <div class="relative max-w-5xl mx-auto bg-[#8c93a9]/60 backdrop-blur-md rounded-[40px] p-6 md:p-8">
 
@@ -28,7 +49,7 @@
 
           <!-- RESIDENTIEL -->
           <a href="{{ route('simulator.v1', ['secteur' => 'residentiel']) }}"
-            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+            class="sector-link bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
 
             <img src="{{ asset('aiae-frontend/Images/resid.png') }}" alt="Résidentiel" class="h-12 w-auto mb-4 object-contain">
 
@@ -39,7 +60,7 @@
 
           <!-- TERTIAIRE -->
           <a href="{{ route('simulator.v1', ['secteur' => 'tertiaire']) }}"
-             class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+             class="sector-link bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
 
             <img src="{{ asset('aiae-frontend/Images/tert.png') }}" alt="Tertiaire" class="h-12 w-auto mb-4 object-contain">
 
@@ -50,7 +71,7 @@
 
           <!-- INDUSTRIEL -->
           <a href="{{ route('simulator.v1', ['secteur' => 'industriel']) }}"
-            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+            class="sector-link bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
 
             <img src="{{ asset('aiae-frontend/Images/indus.png') }}" alt="Industriel" class="h-12 w-auto mb-4 object-contain">
 
@@ -61,7 +82,7 @@
 
           <!-- AGRICOLE -->
           <a href="{{ route('simulator.v1', ['secteur' => 'agricole']) }}"
-            class="bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
+            class="sector-link bg-white text-black rounded-[40px] p-6 text-start cursor-pointer hover:scale-105 transition block">
 
             <img src="{{ asset('aiae-frontend/Images/agri.png') }}" alt="Agricole" class="h-12 w-auto mb-4 object-contain">
 
@@ -88,5 +109,26 @@
 
     </div>
   </section>
+
+  <script>
+    let selectedMode = 'express';
+    function setMode(mode) {
+      selectedMode = mode;
+      document.getElementById('mode-express').className = 'px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ' + (mode === 'express' ? 'bg-white text-[#0E1540] shadow-lg' : 'bg-white/20 text-white hover:bg-white/30');
+      document.getElementById('mode-expert').className = 'px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ' + (mode === 'expert' ? 'bg-white text-[#0E1540] shadow-lg' : 'bg-white/20 text-white hover:bg-white/30');
+      document.querySelectorAll('.sector-link').forEach(function(link) {
+        var url = new URL(link.href);
+        url.searchParams.set('mode', mode);
+        link.href = url.toString();
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.sector-link').forEach(function(link) {
+        var url = new URL(link.href);
+        url.searchParams.set('mode', 'express');
+        link.href = url.toString();
+      });
+    });
+  </script>
 @endsection
 

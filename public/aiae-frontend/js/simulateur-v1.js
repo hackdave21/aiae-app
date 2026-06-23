@@ -391,7 +391,7 @@ const App = () => {
   const qs = window.QUICK_START || {};
   const initSecteur = qs.secteur || window.INITIAL_SECTEUR || '';
   const fromHomePage = !!qs.standing;
-  const [mode, setMode] = useState('express');
+  const [mode, setMode] = useState(qs.mode || 'express');
   const [etape, setEtape] = useState(initSecteur ? fromHomePage ? 2 : 1 : 1);
   const [secteur, setSecteur] = useState(initSecteur);
   const [typeBat, setTypeBat] = useState('');

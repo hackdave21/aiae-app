@@ -160,6 +160,7 @@ class SimulatorController extends Controller
 
         $quickStartConfig = [
             'secteur' => $request->query('secteur', 'residentiel'),
+            'mode' => $request->query('mode', 'express'),
             'surface' => $request->query('surface'),
             'surface_terrain' => $request->query('surface_terrain'),
             'standing' => $request->query('standing'),
