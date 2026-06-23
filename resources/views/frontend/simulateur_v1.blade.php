@@ -309,7 +309,7 @@ $simTranslations =[
 </script>
 <script type="text/babel">
 @verbatim
-const {useState,useMemo}=React;
+const {useState,useMemo,useEffect}=React;
 const t = (key) => window.AIAE_SIM_TRANSLATIONS ? (window.AIAE_SIM_TRANSLATIONS[key] || key) : key;
 
 const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
