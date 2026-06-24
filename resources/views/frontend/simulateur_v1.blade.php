@@ -419,7 +419,7 @@ const App=()=>{
   // DONNÉES RÉFÉRENCE - PRIORITÉ AUX DONNÉES BASE DE DONNÉES
   const libConfig = window.SIMULATEUR_CONFIG || {};
 
-  const ZONES = libConfig.ZONES || {
+  const ZONES = Object.keys(libConfig.ZONES||{}).length ? libConfig.ZONES : {
     zone1:{name:'Zone 1 - Grand Lomé',localites:'Lomé, Baguida, Agoè',coef:1.00,forage:25,foncier:75000},
     zone2:{name:'Zone 2 - Maritime',localites:'Tsévié, Tabligbo, Aného',coef:1.08,forage:35,foncier:25000},
     zone3:{name:'Zone 3 - Plateaux',localites:'Atakpamé, Kpalimé, Badou',coef:1.14,forage:50,foncier:12000},
@@ -427,7 +427,7 @@ const App=()=>{
     zone5:{name:'Zone 5 - Kara & Savanes',localites:'Kara, Dapaong, Mango',coef:1.25,forage:75,foncier:4000}
   };
 
-  const SOLS = libConfig.SOLS || {
+  const SOLS = Object.keys(libConfig.SOLS||{}).length ? libConfig.SOLS : {
     inconnu:{name:t('Non déterminé'),coef:1.15,portance:'?',fondation:t('À définir après étude'),prixFond:55000,risque:'moyen'},
     ferralitique:{name:t('Ferralitique (Terre de barre)'),coef:1.00,portance:'1.5-2.5 bars',fondation:t('Semelles filantes'),prixFond:32000,risque:'faible'},
     ferrugineux:{name:t('Ferrugineux tropical'),coef:1.10,portance:'1.0-2.0 bars',fondation:t('Semelles renforcées'),prixFond:38000,risque:'faible'},
@@ -439,7 +439,7 @@ const App=()=>{
   };
 
   // STANDINGS ET PRIX SYNCHRONISÉS
-  const STANDINGS = libConfig.STANDINGS || {
+  const STANDINGS = Object.keys(libConfig.STANDINGS||{}).length ? libConfig.STANDINGS : {
     standard:{name:t('Standard'),desc:t('Fonctionnel et durable — Idéal premier investissement'),icon:'Home',prix:180000,prix_max:250000},
     confort:{name:t('Confort'),desc:t('Qualité supérieure — Notre cœur de gamme'),icon:'Armchair',prix:280000,prix_max:380000},
     premium:{name:t('Premium'),desc:t('Haut de gamme — Piscine incluse, personnalisation poussée'),icon:'Gem',prix:420000,prix_max:550000},
@@ -596,7 +596,7 @@ const App=()=>{
   const[surfManuelle,setSurfManuelle]=useState(initialSurf);
   
   const [terrainDispo,setTerrainDispo]=useState('oui');
-  const [zone,setZone]=useState('zone1');
+  const [zone,setZone]=useState(Object.keys(ZONES)[0]||'zone1');
   const[sol,setSol]=useState('');
   const [niveaux,setNiveaux]=useState(1);
   const [ssSol,setSsSol]=useState(0);
@@ -742,7 +742,7 @@ const App=()=>{
   },[forme,dimA,dimB,surfManuelle]);
 
   const typeData=TYPES[secteur]?.find(t=>t.id===typeBat);
-  const zoneData=ZONES[zone];
+  const zoneData=ZONES[zone]||{};
   const solEffectifGlobal=sol||(mode==='express'?'ferralitique':'');
   const solData=SOLS[solEffectifGlobal];
   const coefTotal=(zoneData?.coef||1)*(solData?.coef||1.15);
@@ -1094,7 +1094,7 @@ const App=()=>{
     // Foncier
     let foncier=0, foncierMin=0, foncierMax=0;
     if(terrainDispo!=='oui'){
-      foncier=surface*zoneData.foncier;
+      foncier=surface*(zoneData?.foncier||0);
       foncierMin=Math.round(foncier*0.90);
       foncierMax=Math.round(foncier*1.10);
       postes.push({code:'0',nom:t('Acquisition foncière'),detail:`${Math.round(surface)} m²`,montant:foncier,montantMin:foncierMin,montantMax:foncierMax});
@@ -1287,7 +1287,7 @@ const App=()=>{
   const reset=()=>{
     setSecteur('');setTypeBat('');setStanding('confort');setCatHotel('3s');
     setForme('rect');setDimA(30);setDimB(20);setTerrainDispo('oui');
-    setZone('zone1');setSol('');setNiveaux(1);setSsSol(0);
+    setZone(Object.keys(ZONES)[0]||'zone1');setSol('');setNiveaux(1);setSsSol(0);
     setHspSoussol(STANDINGS_HSP_SOL['confort']||2.5);
     setNbChambres(30);setEspacesHotel([]);setHauteurLibre(8);setPontRoulant(false);setGroupeFroid('');
     setEffectif(100);setIrrigation('');setNbAsc(0);setSolaire('');setGroupe('');
@@ -1930,7 +1930,7 @@ const App=()=>{
                 <div>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" checked={forage} onChange={e=>setForage(e.target.checked)} className="w-4 h-4"/>
-                    <span>{t('Forage')} (~{zoneData.forage}m)</span>
+                    <span>{t('Forage')} (~{zoneData?.forage||'?'}m)</span>
                   </label>
                   {forage&&<InputNum value={forageProf} onChange={setForageProf} min={15} max={150} unit="m" label={t('Profondeur')}/>}
                 </div>
@@ -2041,7 +2041,7 @@ const App=()=>{
               </h3>
               <div className="grid md:grid-cols-4 gap-4">
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Type')}</div><div className="font-semibold">{t(typeData?.name||typeBat)}</div><div className="text-xs text-gray-500">{secteur==='residentiel'?t(STANDINGS[standing]?.name):''}</div></div>
-                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Terrain')}</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{t(zoneData.name)}</div></div>
+                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Terrain')}</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{t(zoneData?.name||'')}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Surface plancher')}</div><div className="font-semibold mono">{fmt(surfaceBatie)} m²</div><div className="text-xs text-gray-500">{niveaux===1?t('Plain-pied'):`R+${niveaux-1}`}{ssSol>0?` + ${ssSol} ss`:''}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree} {t('mois')}</div></div>
               </div>
