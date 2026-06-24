@@ -717,7 +717,7 @@
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-           {{ __('Pour une villa Standard de 100 m² en zone Grand Lomé, comptez à partir de 33 millions FCFA (environ 50 000 €) pour la construction seule. Ce montant varie selon le standing, la surface et la localisation. Utilisez notre simulateur en ligne pour une estimation personnalisée.') }}
+           {{ __('Pour une villa Standard de 100 m² en zone Grand Lomé, comptez à partir de 33 millions FCFA (environ 50 000 €) pour la construction seule. Ce montant varie selon le standing, la surface et la localisation.') }} <a href="{{ route('simulator.v1') }}" class="text-secondary underline font-semibold hover:text-primary transition">{{ __('Utilisez notre simulateur en ligne') }}</a>{{ __(' pour une estimation personnalisée.') }}
           </div>
         </details>
 
@@ -779,6 +779,36 @@
     </div>
   </section>
 
+  <!-- ================= EXEMPLES CHIFFRÉS DIASPORA ================= -->
+  <section class="bg-white py-16">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <h2 class="text-[32px] md:text-[40px] font-heavy text-darkBlue text-center mb-4">{{ __('Exemples de budgets') }}</h2>
+      <p class="text-gray-500 text-[18px] text-center mb-12">{{ __('Quelques ordres de grandeur pour vous projeter') }}</p>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-primary font-bold text-sm uppercase tracking-wider mb-2">{{ __('Standard') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 100 m² — Grand Lomé') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('Plain-pied, 2 chambres, séjour, cuisine, finitions standards. Délai : 6-8 mois.') }}</p>
+          <div class="text-[28px] font-bold text-primary">33-45 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 50 000 – 68 000 €</div>
+        </div>
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-secondary font-bold text-sm uppercase tracking-wider mb-2">{{ __('Confort') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 150 m² — Lomé') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('R+1, 3 chambres, clim, cuisine aménagée, carrelage grand format. Délai : 8-12 mois.') }}</p>
+          <div class="text-[28px] font-bold text-secondary">55-75 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 84 000 – 114 000 €</div>
+        </div>
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-[#b8860b] font-bold text-sm uppercase tracking-wider mb-2">{{ __('Premium') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 200 m² — Golfe') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('R+1, 4 chambres, piscine, garage, domotique. Délai : 10-14 mois.') }}</p>
+          <div class="text-[28px] font-bold text-[#b8860b]">95-130 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 145 000 – 198 000 €</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ================= SECTION POURQUOI NOUS FAIRE CONFIANCE ================= -->
   <section class="bg-darkBlue py-5 w-full">

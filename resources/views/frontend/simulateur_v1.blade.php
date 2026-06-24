@@ -585,7 +585,7 @@ const App=()=>{
   const[etape,setEtape]=useState(initSecteur ? (fromHomePage ? 2 : 1) : 1);
   const [secteur,setSecteur]=useState(initSecteur);
   const[typeBat,setTypeBat]=useState('');
-  const [standing,setStanding]=useState(qs.standing || 'confort');
+  const [standing,setStanding]=useState(qs.standing || '');
   const [showN2,setShowN2]=useState(null);
   const [catHotel,setCatHotel]=useState('3s');
   const[forme,setForme]=useState('rect');
@@ -850,7 +850,7 @@ const App=()=>{
     return{cat,geoOblig,motifs,mission};
   },[niveaux,hauteurTotale,typeBat,sol,ssSol]);
 
-  // Durée
+  // Durée (fourchette min-max)
   const duree=useMemo(()=>{
     let d=6;
     if(secteur==='residentiel')d=typeBat==='villa'?8:14+(niveaux-2)*1.5;
@@ -859,7 +859,10 @@ const App=()=>{
     else if(secteur==='agricole')d=5;
     if(ssSol>0)d+=ssSol*2.5;
     if(sol==='argileux'||sol==='hydromorphe')d+=2;
-    return Math.round(Math.max(4,d));
+    const base=Math.max(4,d);
+    const min=Math.max(4,Math.round(base*0.85));
+    const max=Math.round(base*1.15);
+    return{min,max};
   },[secteur,typeBat,niveaux,ssSol,surfaceBatie,sol]);
 
   // FACTEURS D'ÉMISSION CO₂ (kgCO₂/kW installé/an — base 8h/j, 300j/an)
@@ -2022,7 +2025,7 @@ const App=()=>{
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Type')}</div><div className="font-semibold">{t(typeData?.name||typeBat)}</div><div className="text-xs text-gray-500">{secteur==='residentiel'?t(STANDINGS[standing]?.name):''}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Terrain')}</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{t(zoneData?.name||'')}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Surface plancher')}</div><div className="font-semibold mono">{fmt(surfaceBatie)} m²</div><div className="text-xs text-gray-500">{niveaux===1?t('Plain-pied'):`R+${niveaux-1}`}{ssSol>0?` + ${ssSol} ss`:''}</div></div>
-                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree} {t('mois')}</div></div>
+                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree.min}-{duree.max} {t('mois')}</div></div>
               </div>
             </div>
 
@@ -2159,7 +2162,7 @@ const App=()=>{
                   <div><div className="text-xs">{t('Estimation basse')}</div><div className="font-semibold mono">{fmtC(estimation.totalMin,currency)}</div></div>
                   <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtC(estimation.totalMax,currency)}</div></div>
                 </div>
-                <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
+                <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree.min}-{duree.max} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
               </div>
             </div>
 

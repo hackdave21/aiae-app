@@ -1320,6 +1320,36 @@
     </div>
   </section>
 
+  <!-- ================= EXEMPLES CHIFFRÉS ================= -->
+  <section class="bg-white py-16">
+    <div class="max-w-[1000px] mx-auto px-6">
+      <h2 class="text-[32px] md:text-[40px] font-heavy text-darkBlue text-center mb-12">{{ __('Exemples de projets réalisés') }}</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-primary font-bold text-sm uppercase tracking-wider mb-2">{{ __('Standard') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 100 m² — Lomé') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('Construction plain-pied, 2 chambres, séjour, cuisine équipée, finitions standards.') }}</p>
+          <div class="text-[28px] font-bold text-primary">33-45 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 50 000 – 68 000 €</div>
+        </div>
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-secondary font-bold text-sm uppercase tracking-wider mb-2">{{ __('Confort') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 150 m² — Lomé') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('R+1, 3 chambres, climatisation, cuisine aménagée, carrelage grand format, chauffe-eau solaire.') }}</p>
+          <div class="text-[28px] font-bold text-secondary">55-75 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 84 000 – 114 000 €</div>
+        </div>
+        <div class="bg-gray-50 rounded-[20px] p-8 border border-gray-200">
+          <div class="text-[#b8860b] font-bold text-sm uppercase tracking-wider mb-2">{{ __('Premium') }}</div>
+          <h3 class="text-[22px] font-heavy text-darkBlue mb-3">{{ __('Villa 200 m² — Golfe') }}</h3>
+          <p class="text-gray-600 text-[16px] mb-4">{{ __('R+1, 4 chambres, piscine, garage, domotique, climatisation centralisée, prestations haut de gamme.') }}</p>
+          <div class="text-[28px] font-bold text-[#b8860b]">95-130 M FCFA</div>
+          <div class="text-gray-400 text-sm">≈ 145 000 – 198 000 €</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= SIMULATEUR CTA ================= -->
   <section class="bg-[#f2f3f5] py-16">
     <div class="max-w-[1000px] mx-auto px-6">

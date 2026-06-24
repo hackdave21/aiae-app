@@ -450,6 +450,26 @@
           </div>
         </div>
 
+        <!-- Standing souhaité -->
+        <div>
+          <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Standing souhaité') }}</label>
+          <div class="relative">
+            <select name="standing" aria-label="{{ __('Standing souhaité') }}"
+              class="w-full bg-transparent border border-gray-400 rounded-xl px-5 py-4 outline-none focus:border-secondary text-gray-400 appearance-none cursor-pointer">
+              <option value="" disabled selected>{{ __('Sélectionnez votre standing') }}</option>
+              <option value="standard">{{ __('Standard — Fonctionnel et économique') }}</option>
+              <option value="confort">{{ __('Confort — Qualité supérieure') }}</option>
+              <option value="premium">{{ __('Premium — Haut de gamme') }}</option>
+              <option value="prestige">{{ __('Prestige — Luxe sur mesure') }}</option>
+              <option value="none">{{ __('Je ne sais pas encore') }}</option>
+            </select>
+            <div
+              class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">
+              +
+            </div>
+          </div>
+        </div>
+
         <!-- Sélectionnez un délai -->
         <div>
           <label class="block text-[20px] font-heavy text-[#4a4a4a] mb-2">{{ __('Sélectionnez un délai') }}</label>

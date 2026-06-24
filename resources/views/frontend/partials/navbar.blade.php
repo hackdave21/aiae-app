@@ -19,7 +19,7 @@
     $menuItems = [
         ['label' => __('Accueil'), 'route' => 'home'],
         ['label' => __('À propos'), 'route' => 'about'],
-        ['label' => __('Nos divisions'), 'route' => 'divisions'],
+        ['label' => __('Division construction'), 'route' => 'divisions'],
         ['label' => __('Simulateurs'), 'route' => 'simulator.index'],
         ['label' => __('Diaspora'), 'route' => 'diaspora'],
         ['label' => __('FAQ'), 'route' => 'faq'],

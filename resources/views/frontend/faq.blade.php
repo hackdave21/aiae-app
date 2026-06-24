@@ -325,7 +325,7 @@
             <li><strong class="font-heavy text-[#343434]">{{ __('Prestige :') }}</strong> {{ __('Sur-mesure total avec des matériaux nobles et exceptionnels.') }}</li>
           </ul>
           <p class="text-[18px] italic text-gray-500 mb-6 font-book">{{ __('* Le prix final de la construction varie également selon les coefficients géographiques (zone), géotechniques (type de sol) et les frais d\'études.') }}</p>
-          <p><strong class="font-heavy text-[#343434]">{{ __('Pour obtenir une estimation précise') }}</strong>{{ __(', nous vous invitons à utiliser notre simulateur en ligne gratuit. Il calculera automatiquement le budget de votre bâtiment (gros œuvre et finitions) ainsi que de vos équipements optionnels (solaire, forage, piscine, etc.).') }}</p>
+          <p><strong class="font-heavy text-[#343434]">{{ __('Pour obtenir une estimation précise') }}</strong>{{ __(', nous vous invitons à utiliser') }} <a href="{{ route('simulator.v1') }}" class="text-secondary underline font-semibold hover:text-primary transition">{{ __('notre simulateur en ligne gratuit') }}</a>{{ __('. Il calculera automatiquement le budget de votre bâtiment (gros œuvre et finitions) ainsi que de vos équipements optionnels (solaire, forage, piscine, etc.).') }}</p>
         </div>
       </details>
 
@@ -445,7 +445,7 @@
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>{{ __('Non. Nos prix au mètre carré concernent la construction uniquement (hors terrain). Le coût du terrain dépend de la localité et n\'est pas estimé par le simulateur. Contactez-nous pour un accompagnement dans votre recherche foncière.') }}</p>
+          <p>{{ __('Non. Nos prix au mètre carré concernent la construction uniquement (hors terrain). Le coût du terrain dépend de la localité et n\'est pas estimé par') }} <a href="{{ route('simulator.v1') }}" class="text-secondary underline font-semibold hover:text-primary transition">{{ __('le simulateur') }}</a>{{ __('. Contactez-nous pour un accompagnement dans votre recherche foncière.') }}</p>
         </div>
       </details>
 
@@ -531,7 +531,7 @@
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
           <p class="mb-4">{{ __('Le budget dépend du standing, de la surface et de la zone géographique. À titre indicatif, pour une villa Standard de 100 m² en Grand Lomé, comptez à partir de 25 millions FCFA (environ 38 000 €) pour la construction seule, hors équipements optionnels.') }}</p>
-          <p>{{ __('Ce montant inclut les coefficients géographiques et géotechniques, les frais d\'études et la marge de gestion. Il peut varier significativement selon les spécificités de votre projet. Notre simulateur en ligne vous donne une estimation personnalisée en 2 minutes.') }}</p>
+          <p>{{ __('Ce montant inclut les coefficients géographiques et géotechniques, les frais d\'études et la marge de gestion. Il peut varier significativement selon les spécificités de votre projet.') }} <a href="{{ route('simulator.v1') }}" class="text-secondary underline font-semibold hover:text-primary transition">{{ __('Notre simulateur en ligne') }}</a>{{ __(' vous donne une estimation personnalisée en 2 minutes.') }}</p>
         </div>
       </details>
 
@@ -755,7 +755,7 @@
           <img src="{{ asset('aiae-frontend/Images/bfaq.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-darkBlue pt-6">
-          <p>{{ __('Énergie (solaire, groupes électrogènes), sécurité (alarme, vidéosurveillance, contrôle d\'accès), extérieurs (clôture, portail, forage, piscine, aménagement paysager), confort (domotique, volets roulants, citerne eau de pluie). Tous les prix sont en fourchette min-max et consultables dans le simulateur.') }}</p>
+          <p>{{ __('Énergie (solaire, groupes électrogènes), sécurité (alarme, vidéosurveillance, contrôle d\'accès), extérieurs (clôture, portail, forage, piscine, aménagement paysager), confort (domotique, volets roulants, citerne eau de pluie). Tous les prix sont en fourchette min-max et consultables dans') }} <a href="{{ route('simulator.v1') }}" class="text-secondary underline font-semibold hover:text-primary transition">{{ __('le simulateur') }}</a>{{ __('.') }}</p>
         </div>
       </details>
 

@@ -86,9 +86,9 @@
           <ul class="space-y-2 text-gray-600 text-[16px]">
 
             <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Construction') }}</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Énergie') }}</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Sécurité') }}</a></li>
-            <li><a href="{{ route('divisions') }}" class="hover:text-[#1a1f4d] transition">{{ __('Préfabrication') }}</a></li>
+            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-[#1a1f4d] transition">{{ __('Énergie') }}</a></li>
+            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-[#1a1f4d] transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-[#1a1f4d] transition">{{ __('Préfabrication') }}</a></li>
 
           </ul>
         </div>
