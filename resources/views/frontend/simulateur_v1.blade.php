@@ -580,8 +580,8 @@ const App=()=>{
   const fromHomePage = !!qs.standing;
   
   const [page,setPage]=useState(initSecteur ? 'sim' : 'accueil');
-  const[mode,setMode]=useState('expert');
-  const totalSteps=mode==='express'?3:5;
+  const[mode,setMode]=useState(qs.mode || 'express');
+  const totalSteps=mode==='express'?3:6;
   const[etape,setEtape]=useState(initSecteur ? (fromHomePage ? 2 : 1) : 1);
   const [secteur,setSecteur]=useState(initSecteur);
   const[typeBat,setTypeBat]=useState('');
@@ -643,6 +643,10 @@ const App=()=>{
   const [volet,setVolet]=useState('');
   const [citerne,setCiterne]=useState('');
   const [paysager,setPaysager]=useState('');
+
+  const [honoraires,setHonoraires]=useState(0);
+  const [assurance,setAssurance]=useState(false);
+  const [prestations,setPrestations]=useState([]);
 
   const [isSaving,setIsSaving]=useState(false);
   const [currency,setCurrency]=useState('FCFA');
@@ -1290,7 +1294,8 @@ const App=()=>{
     setAlarme('');setVideo('');setAcces('');
     setCloture(false);setPortail('');setPiscine('');setForage(false);setParkPlaces(0);
     setDomotique('');setVolet('');setCiterne('');setPaysager('');
-    setEtape(1);setPage('accueil');
+    setHonoraires(0);setAssurance(false);setPrestations([]);
+    setEtape(1);window.location.href = window.BACK_ROUTE;
   };
 
   const handleSaveSimulation = async () => {
@@ -1316,6 +1321,9 @@ const App=()=>{
             forage: forage ? 'oui' : '',
             cloture: cloture ? 'oui' : ''
         },
+        honoraires,
+        assurance,
+        prestations,
         total: estimation.total, 
         base_amount, 
         options_amount,
@@ -1349,29 +1357,26 @@ const App=()=>{
     }
   };
 
-  const Header=()=>(
+  const Header=()=>{
+    const displayEtape = mode === 'express' ? (etape === 1 ? 1 : etape === 3 ? 2 : 3) : etape;
+    return (
     <header className="bg-white border-b sticky top-0 z-50 no-print">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <button onClick={() => window.location.href = '/'} className="flex items-center gap-3">
+        <button onClick={() => window.location.href = window.BACK_ROUTE} className="flex items-center gap-3">
           <img src={window.LOGO_URL} className="w-12 h-12 object-contain" alt="AIAE Logo" />
         </button>
         <div className="flex items-center gap-4">
-          <button onClick={() => window.location.href = '/'} className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 font-medium transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-            <span>{t("Accueil")}</span>
-          </button>
-          <div className="w-px h-4 bg-gray-200" />
           <div className="hidden sm:flex items-center gap-1">
             {Array.from({length:totalSteps},(_,i)=>i+1).map(n=>(
               <div key={n} className="flex items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n<etape?'bg-[#05482C] text-white':n===etape?'bg-[#0E1540] text-white':'bg-gray-200 text-gray-500'}`}>
-                  {n<etape?'✓':n}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${n<displayEtape?'bg-[#05482C] text-white':n===displayEtape?'bg-[#0E1540] text-white':'bg-gray-200 text-gray-500'}`}>
+                  {n<displayEtape?'✓':n}
                 </div>
-                {n<totalSteps&&<div className={`w-6 h-0.5 ${n<etape?'bg-[#05482C]':'bg-gray-200'}`}/>}
+                {n<totalSteps&&<div className={`w-6 h-0.5 ${n<displayEtape?'bg-[#05482C]':'bg-gray-200'}`}/>}
               </div>
             ))}
           </div>
-          <button onClick={reset} className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1">
+          <button onClick={() => window.location.href = window.BACK_ROUTE} className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span className="hidden sm:inline">{t('Nouveau')}</span>
           </button>
@@ -1379,17 +1384,36 @@ const App=()=>{
       </div>
     </header>
   );
+  };
 
-  const Nav=({canContinue=true})=>(
+  const Nav=({canContinue=true})=>{
+    const nextStep = () => {
+      if (mode === 'express') {
+        if (etape === 1) { setEtape(3); return; }
+        if (etape === 3) { handleSaveSimulation(); return; }
+      } else {
+        if (etape < 6) setEtape(etape + 1);
+        else handleSaveSimulation();
+      }
+    };
+    const prevStep = () => {
+      if (etape > 1) {
+        if (mode === 'express' && etape === 3) { setEtape(1); return; }
+        setEtape(etape - 1);
+      } else {
+        window.location.href = window.BACK_ROUTE;
+      }
+    };
+    return (
     <div className="flex justify-between items-center mt-8 pt-6 border-t no-print">
       <button 
-        onClick={() => etape > 1 ? setEtape(etape - 1) : (window.location.href = window.BACK_ROUTE)} 
+        onClick={prevStep}
         className="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
       >
         ← {t('Retour')}
       </button>
       <button 
-        onClick={() => etape < totalSteps ? setEtape(etape + 1) : handleSaveSimulation()} 
+        onClick={nextStep}
         disabled={!canContinue || isSaving} 
         className="btn-primary flex items-center gap-2"
       >
@@ -1402,11 +1426,12 @@ const App=()=>{
             {t('Chargement...')}
           </span>
         ) : (
-          <>{etape === totalSteps ? t('Demander un devis') : t('Continuer')} →</>
+          <>{etape === (mode === 'express' ? 3 : 6) ? t('Demander un devis') : t('Continuer')} →</>
         )}
       </button>
     </div>
   );
+  };
 
   // PAGE ACCUEIL
   if(page==='accueil'){
@@ -1441,12 +1466,12 @@ const App=()=>{
                 <span className="flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                   {t('Expert')}
-                  <span className="text-[10px] opacity-60">5 {t('étapes')}</span>
+                  <span className="text-[10px] opacity-60">6 {t('étapes')}</span>
                 </span>
               </button>
             </div>
             <p className="text-blue-200 text-xs text-center mt-3">
-              {mode==='express'?t('Parcours rapide : secteur, surface, estimation directe'):t('Parcours complet : terrain, sol, équipements, énergie')}
+              {mode==='express'?t('Parcours rapide : secteur, surface, estimation directe'):t('Parcours complet : terrain, sol, équipements, options')}
             </p>
           </div>
           <div className="bg-white/10 backdrop-blur rounded-2xl p-6 mb-8">
@@ -1774,6 +1799,39 @@ const App=()=>{
           </div>
         )}
 
+        {/* EXPRESS: SURFACE + ZONE (à l'étape 3) */}
+        {mode==='express'&&etape===3&&(
+          <div>
+            <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Surface et localisation')}</h2></div>
+            <div className="card p-6 mb-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Surface')}<InfoIcon text={t("Surface bâtie totale en m².")}/></h3>
+              <div className="flex items-center gap-4">
+                <InputNum value={surfManuelle} onChange={(v)=>{setSurfManuelle(v);setForme('irregulier');}} min={20} max={50000} step={10} unit="m²"/>
+              </div>
+              <div className="mt-4 flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+                <span className="text-sm text-gray-600">{t('Niveaux:')}</span>
+                <div className="flex gap-2">
+                  {[1,2,3,4,5,6].map(n=>(
+                    <button key={n} onClick={()=>setNiveaux(n)} className={`px-3 py-1.5 rounded text-sm ${niveaux===n?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{n}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="card p-5 mb-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Zone géographique')}<InfoIcon text={t('La zone influence le coût foncier et le coefficient géographique.')}/></h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {Object.entries(ZONES).map(([id,z])=>(
+                  <button key={id} onClick={()=>setZone(id)} className={`option-btn ${zone===id?'selected':''}`}>
+                    <div className="font-medium">{t(z.name)}</div>
+                    <div className="text-xs text-gray-500">{t(z.localites)}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <Nav/>
+          </div>
+        )}
+
         {/* ÉTAPE 4: ÉQUIPEMENTS */}
         {etape===4&&(
           <div>
@@ -1902,8 +1960,51 @@ const App=()=>{
           </div>
         )}
 
-        {/* ÉTAPE 5: RÉCAP + ÉNERGIE + ESTIMATION */}
-        {(etape===5||(mode==='express'&&etape===3))&&estimation&&(
+        {/* ÉTAPE 5: OPTIONS COMPLÉMENTAIRES */}
+        {mode==='expert'&&etape===5&&(
+          <div>
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-gray-800">{t('Options complémentaires')}</h2>
+              <p className="text-gray-500 text-sm">{t('Honoraires, assurances et prestations')}</p>
+            </div>
+            <div className="card p-5 mb-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t("Honoraires de maîtrise d'œuvre")}</h3>
+              <div className="flex gap-3 flex-wrap">
+                {[
+                  {v:0, label: t('Standard 8%')},
+                  {v:1, label: t('Suivi renforcé 12%')},
+                  {v:2, label: t('Mission complète 15%')}
+                ].map(opt=>(
+                  <button key={opt.v} onClick={()=>setHonoraires(opt.v)} className={`px-4 py-2 rounded text-sm ${honoraires===opt.v?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="card p-5 mb-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Assurance')}</h3>
+              <div className="flex gap-3 flex-wrap">
+                <button onClick={()=>setAssurance(false)} className={`px-4 py-2 rounded text-sm ${!assurance?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Sans')}</button>
+                <button onClick={()=>setAssurance(true)} className={`px-4 py-2 rounded text-sm ${assurance?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{t('Assurance dommage-ouvrage')}</button>
+              </div>
+            </div>
+            <div className="card p-5 mb-6">
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Prestations complémentaires')}</h3>
+              <div className="space-y-2">
+                {[['etude_geotechnique', t('Étude géotechnique G2')],['etude_thermique', t('Étude thermique RT')],['etude_acoustique', t('Étude acoustique')],['topographie', t('Relevé topographique')]].map(([id,label])=>(
+                  <label key={id} className="flex items-center gap-3 cursor-pointer">
+                    <input type="checkbox" checked={prestations.includes(id)} onChange={()=>setPrestations(prev=>prev.includes(id)?prev.filter(p=>p!==id):[...prev,id])} className="w-4 h-4"/>
+                    <span className="text-sm">{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <Nav canContinue={true}/>
+          </div>
+        )}
+
+        {/* ÉTAPE 6: RÉCAP + ÉNERGIE + ESTIMATION (Expert) / ÉTAPE 3 (Express) */}
+        {((mode==='express'&&etape===3)||(mode==='expert'&&etape===6))&&estimation&&(
           <div>
             <div className="flex justify-between items-center mb-6 no-print">
               <div>
