@@ -320,13 +320,13 @@ $calcTranslations = [
 
         {/* SÉLECTEUR ZONE GÉOGRAPHIQUE */}
         {config.zones?.length > 0 && (
-          <div className="card px-6 py-4 mb-6 flex items-center gap-4 no-print">
-            <Icon name="MapPin" size={18} className="text-gray-400" />
+          <div className="card px-4 md:px-6 py-4 mb-6 flex flex-wrap items-center gap-2 md:gap-4 no-print">
+            <Icon name="MapPin" size={18} className="text-gray-400 shrink-0" />
             <label className="text-sm font-semibold text-gray-700 whitespace-nowrap">{t('Zone géographique')}</label>
             <select
               value={zoneIndex}
               onChange={(e) => setZoneIndex(Number(e.target.value))}
-              className="input-field max-w-xs text-sm"
+              className="input-field w-full sm:w-auto sm:max-w-xs text-sm"
             >
               {config.zones.map((z, i) => (
                 <option key={z.zone_code || i} value={i}>{z.zone_nom} ({z.hsp_heures} h/j)</option>
@@ -401,43 +401,50 @@ $calcTranslations = [
                 {/* Liste active */}
                 <div className="space-y-3 mb-6">
                   {monInventaire.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 border rounded-lg bg-white hover:border-[var(--vert)] transition-colors shadow-sm">
-                      <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-[var(--vert)]">
-                        <Icon name={REFERENTIEL.icons[item.icon] || 'Zap'} size={20} />
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-sm text-[var(--bleu)]">{t(item.label) || item.label}</div>
-                        <div className="text-xs text-gray-400">{item.puis} W</div>
-                      </div>
-                      
-                      {/* Contrôle Heures */}
-                      <div className="flex flex-col items-center px-2 border-l border-r border-gray-100">
-                        <label className="text-[10px] text-gray-500 uppercase font-bold tracking-tight">{t('Utilisation')}</label>
-                        <div className="flex items-center gap-1">
-                            <input 
-                              type="number" min="0" max="24" step="0.5"
-                              value={item.h} 
-                              onChange={(e) => changerHeures(item.id, e.target.value)}
-                              className="w-10 text-center font-bold text-sm bg-transparent outline-none"
-                            />
-                            <span className="text-[10px] text-gray-400">{t('h/j')}</span>
+                    <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 border rounded-lg bg-white hover:border-[var(--vert)] transition-colors shadow-sm">
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-[var(--vert)] shrink-0">
+                          <Icon name={REFERENTIEL.icons[item.icon] || 'Zap'} size={20} />
                         </div>
-                      </div>
-
-                      {/* Contrôle Quantité */}
-                      <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1">
-                        <button onClick={() => changerQte(item.id, -1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-red-500 transition-colors">
-                          <Icon name="Minus" size={12} />
-                        </button>
-                        <span className="w-6 text-center text-sm font-bold text-[var(--bleu)]">{item.qty}</span>
-                        <button onClick={() => changerQte(item.id, 1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-[var(--vert)] transition-colors">
-                          <Icon name="Plus" size={12} />
+                        <div className="min-w-0 flex-1">
+                          <div className="font-semibold text-sm text-[var(--bleu)] truncate">{t(item.label) || item.label}</div>
+                          <div className="text-xs text-gray-400">{item.puis} W</div>
+                        </div>
+                        <button onClick={() => retirerEquipement(item.id)} className="text-gray-300 hover:text-red-500 transition-colors shrink-0 sm:hidden">
+                          <Icon name="Trash2" size={16} />
                         </button>
                       </div>
+                      <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
 
-                      <button onClick={() => retirerEquipement(item.id)} className="text-gray-300 hover:text-red-500 transition-colors ml-1">
-                        <Icon name="Trash2" size={16} />
-                      </button>
+                        {/* Contrôle Heures */}
+                        <div className="flex items-center gap-1 px-2 border border-gray-100 rounded-lg">
+                          <label className="text-[10px] text-gray-500 uppercase font-bold whitespace-nowrap">{t('Utilisation')}</label>
+                          <div className="flex items-center gap-1">
+                              <input 
+                                type="number" min="0" max="24" step="0.5"
+                                value={item.h} 
+                                onChange={(e) => changerHeures(item.id, e.target.value)}
+                                className="w-10 text-center font-bold text-sm bg-transparent outline-none"
+                              />
+                              <span className="text-[10px] text-gray-400">{t('h/j')}</span>
+                          </div>
+                        </div>
+
+                        {/* Contrôle Quantité */}
+                        <div className="flex items-center gap-1 bg-gray-50 rounded-lg p-1 shrink-0">
+                          <button onClick={() => changerQte(item.id, -1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-red-500 transition-colors">
+                            <Icon name="Minus" size={12} />
+                          </button>
+                          <span className="w-6 text-center text-sm font-bold text-[var(--bleu)]">{item.qty}</span>
+                          <button onClick={() => changerQte(item.id, 1)} className="w-7 h-7 flex items-center justify-center bg-white rounded shadow-sm hover:text-[var(--vert)] transition-colors">
+                            <Icon name="Plus" size={12} />
+                          </button>
+                        </div>
+
+                        <button onClick={() => retirerEquipement(item.id)} className="text-gray-300 hover:text-red-500 transition-colors shrink-0 hidden sm:block">
+                          <Icon name="Trash2" size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                   {monInventaire.length === 0 && <div className="text-center py-8 text-gray-400 border-2 border-dashed rounded-lg">{t('Aucun équipement ajouté')}</div>}
