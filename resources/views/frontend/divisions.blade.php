@@ -617,8 +617,8 @@
                   <div>
                     <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
-                      <li>{!! __('Fondations : semelles isolées sous poteaux ou filantes sous murs porteurs, en béton armé (C20/25, acier HA FeE500), profondeur 0,80-1,00 m selon étude de sol') !!}</li>
-                      <li>{!! __('Murs porteurs : agglos creux de 15 cm avec chaînages horizontaux et verticaux') !!}</li>
+                      <li>{!! __('Fondations : semelles isolées sous poteaux ou filantes sous murs porteurs, conformes aux Eurocodes et NF DTU, en béton armé (C20/25, acier HA FeE500), profondeur 0,80-1,00 m selon étude de sol') !!}</li>
+                      <li>{!! __('Murs porteurs RDC : agglos creux de 15 cm avec chaînages horizontaux et verticaux (pour R+1, prévoir agglos 20 cm)') !!}</li>
                       <li>{!! __('Cloisons intérieures : agglos creux de 10 cm') !!}</li>
                       <li>{!! __('Planchers : hourdis 16+4 cm (portées ≤ 4 m) ou 20+5 cm (portées > 4 m)') !!}</li>
                       <li>{!! __('Hauteur sous plafond : 2,60 m') !!}</li>
@@ -694,7 +694,7 @@
                   <div>
                     <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
-                      <li>{!! __('Fondations : semelles filantes renforcées en béton armé (C25/30, acier HA FeE500) avec longrines de liaison') !!}</li>
+                      <li>{!! __('Fondations : semelles filantes renforcées conformes aux Eurocodes et NF DTU, en béton armé (C25/30, acier HA FeE500) avec longrines de liaison') !!}</li>
                       <li>{!! __('Murs porteurs : agglos de 20 cm avec chaînages horizontaux à chaque niveau de plancher et verticaux aux angles') !!}</li>
                       <li>{!! __('Cloisons intérieures : agglos de 10 ou 15 cm selon fonction') !!}</li>
                       <li>{!! __('Planchers : hourdis 20+5 cm (standard), dalles pleines pour porte-à-faux') !!}</li>
@@ -713,7 +713,7 @@
                   <div>
                     <p class="font-heavy text-darkBlue text-[16px]">Menuiseries</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
-                      <li>{!! __('Extérieures : aluminium laqué (coloris au choix), double vitrage dans les zones exposées au bruit (façade sur rue, proximité voie principale)') !!}</li>
+                      <li>{!! __('Extérieures : aluminium laqué (coloris au choix), double vitrage (isolation acoustique) dans les zones exposées au bruit (façade sur rue, proximité voie principale)') !!}</li>
                       <li>{!! __('Intérieures : portes pleines MDF stratifié, quincaillerie qualité') !!}</li>
                       <li>{!! __('Baies coulissantes aluminium pour les ouvertures principales') !!}</li>
                     </ul>
@@ -789,8 +789,8 @@
                   <div>
                     <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
-                      <li>{!! __('Fondations : semelles filantes ou radier partiel en béton armé (C25/30 à C30/37, acier HA FeE500) selon étude géotechnique G2 AVP recommandée') !!}</li>
-                      <li>{!! __('Murs porteurs : agglos de 20 cm avec poteaux BA 25×25 cm et chaînages horizontaux à chaque niveau de plancher') !!}</li>
+                      <li>{!! __('Fondations : semelles filantes ou radier partiel conformes aux Eurocodes et NF DTU, en béton armé (C25/30 à C30/37, acier HA FeE500) selon étude géotechnique G2 AVP recommandée') !!}</li>
+                      <li>{!! __('Murs porteurs : agglos de 20 cm ou béton banché selon projet, avec poteaux BA 25×25 cm et chaînages horizontaux à chaque niveau de plancher') !!}</li>
                       <li>{!! __('Isolation thermique des murs : doublage intérieur polystyrène + placo (chambres climatisées)') !!}</li>
                       <li>{!! __('Planchers : hourdis 20+5 ou dalles pleines BA (portées > 5 m, porte-à-faux terrasses)') !!}</li>
                       <li>{!! __('Hauteur sous plafond : 3,00 m') !!}</li>
@@ -887,7 +887,7 @@
                   <div>
                     <p class="font-heavy text-darkBlue text-[16px]">Structure et gros œuvre</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1 text-gray-700">
-                      <li>{!! __('Fondations : radier général ou fondations profondes en béton armé (C30/37, acier HA FeE500) selon étude géotechnique G2 PRO obligatoire') !!}</li>
+                      <li>{!! __('Fondations : radier général ou fondations profondes conformes aux Eurocodes et NF DTU, en béton armé (C30/37, acier HA FeE500) selon étude géotechnique G2 PRO obligatoire') !!}</li>
                       <li>{!! __('Structure : poteaux-poutres BA surdimensionnés, murs agglos 20 cm + doublage isolation') !!}</li>
                       <li>{!! __('Béton architectonique pour éléments de façade apparents') !!}</li>
                       <li>{!! __('Planchers : dalles pleines BA (portées libres, flexibilité architecturale) ou hourdis 25+5') !!}</li>
@@ -1005,7 +1005,7 @@
     <div class="max-w-[1000px] mx-auto px-6">
       <h2 class="text-[35px] md:text-[50px] font-heavy mb-6">{{ __('Des Compétences Rares Au Togo') }}</h2>
       <p class="text-[20px] md:text-[22px] leading-relaxed max-w-[850px] mx-auto">
-        {!! __("Au-delà du bâtiment, <strong class=\"text-white font-heavy\">AIAE dispose d'une expertise de haut niveau en ouvrages d'art<br> et structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br> d'expérience en calcul des structures et béton précontraint.") !!}
+        {!! __("Au-delà du bâtiment, <strong class=\"text-white font-heavy\">AIAE dispose d'une expertise de haut niveau en ouvrages d'art<br> et structures complexes</strong>. Cette compétence différenciante s'appuie sur plus de 15 ans<br> d'expérience en calcul des structures et béton précontraint. <strong class=\"text-white font-heavy\">Conception selon Eurocodes et NF DTU.</strong>") !!}
       </p>
     </div>
   </section>
@@ -1206,7 +1206,9 @@
             </ul>
           </div>
           <div class="space-y-4">
-            <h3 class="text-primary font-bold text-xl mb-2">{{ __('Fascicules 61 à 74 — CCTG') }}</h3>
+            <h3 class="text-primary font-bold text-xl mb-2">{{ __('NF DTU — Normes Françaises') }}</h3>
+            <p>{{ __('Nos chantiers suivent les NF DTU (Documents Techniques Unifiés) en vigueur : DTU 13.11 (fondations), DTU 20.1 (maçonnerie), DTU 21 (planchers), DTU 23.1 (murs), DTU 40.41 (couverture), DTU 60.1 (plomberie), DTU 70.1 (installations électriques).') }}</p>
+            <h3 class="text-primary font-bold text-xl mb-2 mt-6">{{ __('Fascicules 61 à 74 — CCTG') }}</h3>
             <p>{{ __('Nos études de voirie et réseaux divers (VRD) suivent les prescriptions des Fascicules 61 à 74 du Cahier des Clauses Techniques Générales (CCTG), applicables aux marchés publics et privés en Afrique.') }}</p>
             <ul class="list-disc list-inside space-y-1 text-gray-600">
               <li><strong>Fasc. 61</strong> — {{ __('Terrassements généraux') }}</li>

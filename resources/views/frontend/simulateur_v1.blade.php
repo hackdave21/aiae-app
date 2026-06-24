@@ -473,7 +473,7 @@ const App=()=>{
       title: t('STANDARD — 180 000 à 250 000 FCFA/m² (≈ 275 à 380 €/m²)'),
       desc: t('Un logement fonctionnel, solide et durable à prix maîtrisé. Idéal pour un premier investissement, un projet locatif ou une résidence principale économique.'),
       includes: [
-        t('Structure béton armé aux normes internationales (fondations, murs porteurs, planchers béton)'),
+        t('Structure béton armé conforme aux Eurocodes et NF DTU (fondations, murs porteurs, planchers béton)'),
         t('Menuiseries aluminium, vitrage simple'),
         t('Sols carrelés, plafonds en lambris PVC'),
         t('Installation électrique complète aux normes, prête pour l\'ajout futur de climatisation'),
@@ -487,8 +487,8 @@ const App=()=>{
       title: t('CONFORT — 280 000 à 380 000 FCFA/m² (≈ 425 à 580 €/m²)'),
       desc: t('Notre cœur de gamme. Des finitions soignées, des espaces généreux et des équipements complets pour un quotidien agréable. Le meilleur rapport qualité-prix.'),
       includes: [
-        t('Structure renforcée (murs porteurs de 20 cm, planchers béton armé)'),
-        t('Menuiseries aluminium laqué coloris au choix, double vitrage dans les zones exposées au bruit'),
+        t('Structure renforcée conforme aux Eurocodes et NF DTU (murs porteurs de 20 cm, planchers béton armé)'),
+        t('Menuiseries aluminium laqué coloris au choix, double vitrage (isolation acoustique) dans les zones exposées au bruit'),
         t('Carrelage grand format 60×60 cm, faux-plafonds en plâtre, peinture lessivable'),
         t('Climatisation dans toutes les pièces principales'),
         t('Cuisine aménagée (plan de travail granit, meubles, évier double bac)'),
@@ -502,7 +502,7 @@ const App=()=>{
       title: t('PREMIUM — 420 000 à 550 000 FCFA/m² (≈ 640 à 840 €/m²)'),
       desc: t('Des prestations haut de gamme avec une personnalisation poussée. Piscine et garage inclus, volets roulants motorisés et maison partiellement connectée.'),
       includes: [
-        t('Structure haute performance, étude de sol recommandée'),
+        t('Structure haute performance conforme aux Eurocodes et NF DTU, étude de sol recommandée'),
         t('Menuiseries aluminium haut de gamme, double vitrage intégral (isolation acoustique + protection UV)'),
         t('Parquet dans les chambres, carrelage haut de gamme 80×80 cm dans les séjours'),
         t('Piscine carrelée 8×4 m avec pool house'),
@@ -518,7 +518,7 @@ const App=()=>{
       title: t('PRESTIGE — 600 000 à 900 000 FCFA/m² (≈ 915 à 1 370 €/m²)'),
       desc: t('L\'excellence sans compromis. Villa d\'architecte avec matériaux d\'exception, maison entièrement connectée et équipements de luxe. Chaque projet Prestige est unique.'),
       includes: [
-        t('Structure sur mesure pour grandes portées et volumes exceptionnels, étude de sol obligatoire'),
+        t('Structure sur mesure conforme aux Eurocodes et NF DTU pour grandes portées et volumes exceptionnels, étude de sol obligatoire'),
         t('Menuiseries importées sur mesure, double ou triple vitrage'),
         t('Sols en marbre, travertin ou parquet massif importé'),
         t('Piscine à débordement 12×5 m avec éclairage subaquatique et pool house aménagé'),
@@ -2163,6 +2163,7 @@ const App=()=>{
                   <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtC(estimation.totalMax,currency)}</div></div>
                 </div>
                 <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree.min}-{duree.max} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
+                <div className="mt-2 text-amber-300/70 text-[10px]">{t('⚠ Délai hors impact saison des pluies (juin-sept.). Prévoir +20-30% si le gros œuvre couvre cette période.')}</div>
               </div>
             </div>
 
