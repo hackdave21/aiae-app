@@ -1358,7 +1358,7 @@ const App=()=>{
   };
 
   const Header=()=>{
-    const displayEtape = mode === 'express' ? (etape === 1 ? 1 : etape === 3 ? 2 : 3) : etape;
+    const displayEtape = etape;
     return (
     <header className="bg-white border-b sticky top-0 z-50 no-print">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -1389,8 +1389,8 @@ const App=()=>{
   const Nav=({canContinue=true})=>{
     const nextStep = () => {
       if (mode === 'express') {
-        if (etape === 1) { setEtape(3); return; }
-        if (etape === 3) { handleSaveSimulation(); return; }
+        if (etape < 3) { setEtape(etape + 1); return; }
+        handleSaveSimulation(); return;
       } else {
         if (etape < 6) setEtape(etape + 1);
         else handleSaveSimulation();
@@ -1398,7 +1398,6 @@ const App=()=>{
     };
     const prevStep = () => {
       if (etape > 1) {
-        if (mode === 'express' && etape === 3) { setEtape(1); return; }
         setEtape(etape - 1);
       } else {
         window.location.href = window.BACK_ROUTE;
@@ -1799,8 +1798,8 @@ const App=()=>{
           </div>
         )}
 
-        {/* EXPRESS: SURFACE + ZONE (à l'étape 3) */}
-        {mode==='express'&&etape===3&&(
+        {/* ÉTAPE 2: SURFACE ET LOCALISATION (Express) */}
+        {mode==='express'&&etape===2&&(
           <div>
             <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Surface et localisation')}</h2></div>
             <div className="card p-6 mb-6">
