@@ -1380,6 +1380,10 @@ const App=()=>{
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span className="hidden sm:inline">{t('Nouveau')}</span>
           </button>
+          <button onClick={() => window.location.href = window.BACK_ROUTE} className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm text-gray-600 hover:text-gray-800">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span className="hidden sm:inline">{t('Accueil')}</span>
+          </button>
         </div>
       </div>
     </header>
@@ -1595,32 +1599,10 @@ const App=()=>{
           </div>
         )}
 
-        {/* ÉTAPE 2: TERRAIN */}
-        {etape===2&&(
+        {/* ÉTAPE 2: TERRAIN (Expert) */}
+        {mode!=='express'&&etape===2&&(
           <div>
-            {mode==='express'?(
-              <div>
-                <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Surface du projet')}</h2>
-                  <p className="text-gray-500 text-sm">{t('Indiquez la surface bâtie estimée')}</p>
-                </div>
-                <div className="card p-6">
-                  <h3 className="font-semibold text-gray-700 mb-4">{t('Surface')}<InfoIcon text={t("Surface bâtie totale en m². Pour un projet résidentiel, comptez environ 100-200 m² par villa.")}/></h3>
-                  <div className="flex items-center gap-4">
-                    <InputNum value={surfManuelle} onChange={setSurfManuelle} min={20} max={50000} step={10} unit="m²" label={t('Surface bâtie')}/>
-                  </div>
-                  <div className="mt-4 flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
-                    <span className="text-sm text-gray-600">{t('Niveaux:')}</span>
-                    <div className="flex gap-2">
-                      {[1,2,3,4,5,6].map(n=>(
-                        <button key={n} onClick={()=>setNiveaux(n)} className={`px-3 py-1.5 rounded text-sm ${niveaux===n?'bg-[#0E1540] text-white':'bg-gray-100'}`}>{n}</button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <Nav/>
-              </div>
-            ):(
-            <><div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Caractéristiques du terrain')}</h2></div>
+            <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Caractéristiques du terrain')}</h2></div>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card p-5">
                 <h3 className="font-semibold text-gray-700 mb-4">{t('Forme et dimensions')}<InfoIcon text={t('La forme du terrain influence le coût des fondations et la faisabilité du projet. Pour les formes irrégulières, entrez la surface directement.')}/></h3>
@@ -1685,8 +1667,6 @@ const App=()=>{
               {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 AVP fortement recommandée.')}</p></div>}
             </div>
             <Nav canContinue={!!sol}/>
-            </>
-          )}
         </div>
       )}
 

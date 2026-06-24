@@ -679,6 +679,7 @@
     <!-- BARRE VERTE -->
     <div class="bg-[#0b4a2b] text-white py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6">
+        {{--
         <!-- ICÔNES -->
         <div class="flex items-center gap-6">
           <!-- TikTok -->
@@ -701,6 +702,7 @@
             <img src="{{ asset('aiae-frontend/Images/YoutubeLogo.svg') }}" alt="YouTube" class="h-16 w-16" />
           </a>
         </div>
+        --}}
 
         <!-- TEXTE DROIT -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">

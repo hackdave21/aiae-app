@@ -1749,6 +1749,7 @@
     <!-- BARRE VERTE -->
     <div class="bg-[#0b4a2b] text-white py-6">
       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6">
+        {{--
         <!-- ICÔNES -->
         <div class="flex items-center gap-6">
           <!-- TikTok -->
@@ -1758,12 +1759,12 @@
 
           <!-- Instagram -->
           <a href="#" aria-label="Instagram">
-            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/InstagramLogo.svg') }}" alt="Instagram" class="h-16 w-16" />
           </a>
 
           <!-- Facebook -->
           <a href="#" aria-label="Facebook">
-            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="TikTok" class="h-16 w-16" />
+            <img src="{{ asset('aiae-frontend/Images/FacebookLogo.svg') }}" alt="Facebook" class="h-16 w-16" />
           </a>
 
           <!-- YouTube -->
@@ -1771,6 +1772,7 @@
             <img src="{{ asset('aiae-frontend/Images/YoutubeLogo.svg') }}" alt="YouTube" class="h-16 w-16" />
           </a>
         </div>
+        --}}
 
         <!-- TEXTE DROIT -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">

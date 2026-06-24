@@ -18,7 +18,7 @@
       </p>
 
       <!-- MODE SELECTEUR -->
-      <div class="flex items-center justify-center gap-4 mb-6">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <span class="text-white/70 text-sm font-medium">{{ __('Mode :') }}</span>
         <button id="mode-express" onclick="setMode('express')"
           class="px-6 py-2.5 rounded-lg font-semibold text-sm transition-all bg-white text-[#0E1540] shadow-lg">
