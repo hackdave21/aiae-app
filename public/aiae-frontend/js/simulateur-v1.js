@@ -438,6 +438,9 @@ const App = () => {
   const [forageProf, setForageProf] = useState(30);
   const [parkType, setParkType] = useState('');
   const [parkPlaces, setParkPlaces] = useState(0);
+  const [honoraires, setHonoraires] = useState(0);
+  const [assurance, setAssurance] = useState(false);
+  const [prestations, setPrestations] = useState([]);
   const [isSaving, setIsSaving] = useState(false);
   const surface = useMemo(() => {
     if (forme === 'carre') return dimA * dimA;
@@ -852,6 +855,9 @@ const App = () => {
     setPiscine('');
     setForage(false);
     setParkPlaces(0);
+    setHonoraires(0);
+    setAssurance(false);
+    setPrestations([]);
     setEtape(1);
   };
   const handleSaveSimulation = async () => {
@@ -885,6 +891,9 @@ const App = () => {
         forage: forage ? 'oui' : '',
         cloture: cloture ? 'oui' : ''
       },
+      honoraires,
+      assurance,
+      prestations,
       total: estimation.total,
       base_amount,
       options_amount,
@@ -918,15 +927,15 @@ const App = () => {
     }
   };
   const Header = () => {
-    const stepList = mode === 'express' ? [1, 2, 3] : [1, 2, 3, 4, 5];
-    const maxSteps = mode === 'express' ? 3 : 5;
+    const stepList = mode === 'express' ? [1, 2, 3] : [1, 2, 3, 4, 5, 6];
+    const maxSteps = mode === 'express' ? 3 : 6;
     const displayEtape = mode === 'express' ? (etape === 1 ? 1 : etape === 3 ? 2 : 3) : etape;
     return React.createElement("header", {
       className: "bg-white border-b sticky top-0 z-50 no-print"
     }, React.createElement("div", {
       className: "max-w-5xl mx-auto px-4 py-3 flex items-center justify-between"
     }, React.createElement("button", {
-      onClick: reset,
+      onClick: () => window.location.href = window.BACK_ROUTE,
       className: "flex items-center gap-3"
     }, React.createElement("img", {
       src: window.LOGO_URL,
@@ -935,7 +944,7 @@ const App = () => {
     })), React.createElement("div", {
       className: "flex items-center gap-4"
     }, React.createElement("button", {
-      onClick: reset,
+      onClick: () => window.location.href = window.BACK_ROUTE,
       className: "text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1.5 font-medium transition-colors"
     }, React.createElement("svg", {
       className: "w-4 h-4",
@@ -963,25 +972,25 @@ const App = () => {
   const Nav = ({
     canContinue = true
   }) => {
+    const lastEtape = mode === 'express' ? 3 : 6;
     const nextStep = () => {
       if (mode === 'express') {
         if (etape === 1) { setEtape(3); return; }
-        if (etape === 3) { setEtape(5); return; }
+        if (etape === 3) { handleSaveSimulation(); return; }
+      } else {
+        if (etape < 6) setEtape(etape + 1);
+        else handleSaveSimulation();
       }
-      if (etape < 5) setEtape(etape + 1);
-      else handleSaveSimulation();
     };
     const prevStep = () => {
       if (etape > 1) {
-        if (mode === 'express') {
-          if (etape === 5) { setEtape(3); return; }
-          if (etape === 3) { setEtape(1); return; }
-        }
+        if (mode === 'express' && etape === 3) { setEtape(1); return; }
         setEtape(etape - 1);
       } else {
         window.location.href = window.BACK_ROUTE;
       }
     };
+    const isLast = mode === 'express' ? etape === 3 : etape === 6;
     return React.createElement("div", {
       className: "flex justify-between items-center mt-8 pt-6 border-t no-print"
     }, React.createElement("button", {
@@ -1008,7 +1017,7 @@ const App = () => {
       className: "opacity-75",
       fill: "currentColor",
       d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-    })), t('Chargement...')) : React.createElement(React.Fragment, null, etape === 5 ? t('Demander un devis') : t('Continuer'), " \u2192")));
+    })), t('Chargement...')) : React.createElement(React.Fragment, null, isLast ? t('Demander un devis') : t('Continuer'), " \u2192")));
   };
   return React.createElement("div", {
     className: "min-h-screen bg-gray-50"
@@ -1055,9 +1064,9 @@ const App = () => {
     d: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
   })), t('Expert'), React.createElement("span", {
     className: "text-[10px] opacity-60"
-  }, "5 ", t('étapes'))))), React.createElement("p", {
+  }, "6 ", t('étapes'))))), React.createElement("p", {
     className: "text-gray-400 text-xs text-center mt-3"
-  }, mode === 'express' ? t('Parcours rapide : secteur, surface, estimation directe') : t('Parcours complet : terrain, sol, équipements, énergie'))), React.createElement("div", {
+  }, mode === 'express' ? t('Parcours rapide : secteur, surface, estimation directe') : t('Parcours complet : terrain, sol, équipements, options'))), React.createElement("div", {
     className: "text-center mb-6"
   }, React.createElement("h1", {
     className: "text-2xl font-bold text-gray-800"
@@ -1103,12 +1112,12 @@ const App = () => {
   }, React.createElement("span", {
     className: "text-xs text-gray-400"
   }, t('Mode :')), React.createElement("button", {
-    onClick: () => setMode('express'),
+    onClick: () => { setMode('express'); setEtape(1); },
     className: `text-xs px-2 py-1 rounded font-medium ${mode === 'express' ? 'bg-[#0E1540] text-white' : 'bg-gray-100 text-gray-600'}`
   }, t('Express'), " 3", t('étapes')), React.createElement("button", {
-    onClick: () => setMode('expert'),
+    onClick: () => { setMode('expert'); setEtape(1); },
     className: `text-xs px-2 py-1 rounded font-medium ${mode === 'expert' ? 'bg-[#0E1540] text-white' : 'bg-gray-100 text-gray-600'}`
-  }, t('Expert'), " 5", t('étapes'))), etape === 1 && React.createElement("div", null, React.createElement("div", {
+  }, t('Expert'), " 6", t('étapes'))), etape === 1 && React.createElement("div", null, React.createElement("div", {
     className: "mb-6"
   }, React.createElement("h2", {
     className: "text-xl font-bold text-gray-800"
@@ -1610,7 +1619,58 @@ const App = () => {
     min: 0,
     max: 200,
     label: t('Places')
-  })))), React.createElement(Nav, null)), etape === 5 && estimation && React.createElement("div", null, React.createElement("div", {
+  })))), React.createElement(Nav, null)), mode === 'expert' && etape === 5 && React.createElement("div", null, React.createElement("div", {
+    className: "mb-6"
+  }, React.createElement("h2", {
+    className: "text-xl font-bold text-gray-800"
+  }, t('Options complémentaires')), React.createElement("p", {
+    className: "text-gray-500 text-sm"
+  }, t('Honoraires, assurances et prestations'))), React.createElement("div", {
+    className: "card p-5 mb-6"
+  }, React.createElement("h3", {
+    className: "font-semibold text-gray-700 mb-4"
+  }, t("Honoraires de maîtrise d'œuvre")), React.createElement("div", {
+    className: "flex gap-3 flex-wrap"
+  }, React.createElement("button", {
+    onClick: () => setHonoraires(0),
+    className: `px-4 py-2 rounded text-sm ${honoraires === 0 ? 'bg-[#0E1540] text-white' : 'bg-gray-100'}`
+  }, t('Standard 8%')), React.createElement("button", {
+    onClick: () => setHonoraires(1),
+    className: `px-4 py-2 rounded text-sm ${honoraires === 1 ? 'bg-[#0E1540] text-white' : 'bg-gray-100'}`
+  }, t('Suivi renforcé 12%')), React.createElement("button", {
+    onClick: () => setHonoraires(2),
+    className: `px-4 py-2 rounded text-sm ${honoraires === 2 ? 'bg-[#0E1540] text-white' : 'bg-gray-100'}`
+  }, t('Mission complète 15%')))), React.createElement("div", {
+    className: "card p-5 mb-6"
+  }, React.createElement("h3", {
+    className: "font-semibold text-gray-700 mb-4"
+  }, t('Assurance')), React.createElement("div", {
+    className: "flex gap-3 flex-wrap"
+  }, React.createElement("button", {
+    onClick: () => setAssurance(false),
+    className: `px-4 py-2 rounded text-sm ${!assurance ? 'bg-[#0E1540] text-white' : 'bg-gray-100'}`
+  }, t('Sans')), React.createElement("button", {
+    onClick: () => setAssurance(true),
+    className: `px-4 py-2 rounded text-sm ${assurance ? 'bg-[#0E1540] text-white' : 'bg-gray-100'}`
+  }, t('Assurance dommage-ouvrage')))), React.createElement("div", {
+    className: "card p-5 mb-6"
+  }, React.createElement("h3", {
+    className: "font-semibold text-gray-700 mb-4"
+  }, t('Prestations complémentaires')), React.createElement("div", {
+    className: "space-y-2"
+  }, [['etude_geotechnique', t('Étude géotechnique G2')], ['etude_thermique', t('Étude thermique RT')], ['etude_acoustique', t('Étude acoustique')], ['topographie', t('Relevé topographique')]].map(([id, label]) => React.createElement("label", {
+    key: id,
+    className: "flex items-center gap-3 cursor-pointer"
+  }, React.createElement("input", {
+    type: "checkbox",
+    checked: prestations.includes(id),
+    onChange: () => setPrestations(prev => prev.includes(id) ? prev.filter(p => p !== id) : [...prev, id]),
+    className: "w-4 h-4"
+  }), React.createElement("span", {
+    className: "text-sm"
+  }, label))))), React.createElement(Nav, {
+    canContinue: true
+  })), ((mode === 'express' && etape === 3) || (mode === 'expert' && etape === 6)) && estimation && React.createElement("div", null, React.createElement("div", {
     className: "flex justify-between items-center mb-6 no-print"
   }, React.createElement("div", null, React.createElement("h2", {
     className: "text-xl font-bold text-gray-800"
