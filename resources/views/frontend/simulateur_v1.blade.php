@@ -440,10 +440,10 @@ const App=()=>{
 
   // STANDINGS ET PRIX SYNCHRONISÉS
   const STANDINGS = Object.keys(libConfig.STANDINGS||{}).length ? libConfig.STANDINGS : {
-    standard:{name:t('Standard'),desc:t('Fonctionnel et durable — Idéal premier investissement'),icon:'Home',prix:180000,prix_max:250000},
-    confort:{name:t('Confort'),desc:t('Qualité supérieure — Notre cœur de gamme'),icon:'Armchair',prix:280000,prix_max:380000},
-    premium:{name:t('Premium'),desc:t('Haut de gamme — Piscine incluse, personnalisation poussée'),icon:'Gem',prix:420000,prix_max:550000},
-    prestige:{name:t('Prestige'),desc:t('Luxe sur mesure — Matériaux d\'exception, domotique complète'),icon:'Crown',prix:600000,prix_max:900000}
+    standard:{name:t('Standard'),desc:t('Fonctionnel et durable — Idéal premier investissement'),icon:'Home',prix:180000,prix_max:250000,terrain_min:200},
+    confort:{name:t('Confort'),desc:t('Qualité supérieure — Notre cœur de gamme'),icon:'Armchair',prix:280000,prix_max:380000,terrain_min:400},
+    premium:{name:t('Premium'),desc:t('Haut de gamme — Piscine incluse, personnalisation poussée'),icon:'Gem',prix:420000,prix_max:550000,terrain_min:500},
+    prestige:{name:t('Prestige'),desc:t('Luxe sur mesure — Matériaux d\'exception, domotique complète'),icon:'Crown',prix:600000,prix_max:900000,terrain_min:800}
   };
   const STANDINGS_PRIX = {};
   const STANDINGS_PRIX_MAX = {};
@@ -590,7 +590,9 @@ const App=()=>{
   const [catHotel,setCatHotel]=useState('3s');
   const[forme,setForme]=useState('rect');
   
-  const initialSurf = qs.surface || 600;
+  const initialStanding = qs.standing || '';
+  const defaultSurf = STANDINGS[initialStanding]?.terrain_min || 600;
+  const initialSurf = qs.surface || defaultSurf;
   const [dimA,setDimA]=useState(Math.round(Math.sqrt(initialSurf)));
   const[dimB,setDimB]=useState(Math.round(Math.sqrt(initialSurf)));
   const[surfManuelle,setSurfManuelle]=useState(initialSurf);

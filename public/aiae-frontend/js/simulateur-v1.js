@@ -222,22 +222,26 @@ const App = () => {
     standard: {
       name: t('Standard'),
       desc: t('Économique et fonctionnel'),
-      icon: 'Home'
+      icon: 'Home',
+      terrain_min: 200
     },
     confort: {
       name: t('Confort'),
       desc: t('Qualité-prix optimal'),
-      icon: 'Armchair'
+      icon: 'Armchair',
+      terrain_min: 400
     },
     premium: {
       name: t('Premium'),
       desc: t('Excellence et personnalisation'),
-      icon: 'Gem'
+      icon: 'Gem',
+      terrain_min: 500
     },
     prestige: {
       name: t('Prestige'),
       desc: t('Luxe sans compromis'),
-      icon: 'Crown'
+      icon: 'Crown',
+      terrain_min: 800
     }
   };
   const STANDINGS_PRIX = {};
@@ -398,7 +402,9 @@ const App = () => {
   const [standing, setStanding] = useState(qs.standing || 'confort');
   const [catHotel, setCatHotel] = useState('3s');
   const [forme, setForme] = useState('rect');
-  const initialSurf = qs.surface || 600;
+  const initialStanding = qs.standing || '';
+  const defaultSurf = STANDINGS[initialStanding]?.terrain_min || 600;
+  const initialSurf = qs.surface || defaultSurf;
   const [dimA, setDimA] = useState(Math.round(Math.sqrt(initialSurf)));
   const [dimB, setDimB] = useState(Math.round(Math.sqrt(initialSurf)));
   const [surfManuelle, setSurfManuelle] = useState(initialSurf);

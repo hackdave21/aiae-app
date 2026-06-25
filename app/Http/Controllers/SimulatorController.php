@@ -61,6 +61,7 @@ class SimulatorController extends Controller
                 'prix_max' => $st->prix_m2_max,
                 'emprise' => ($st->emprise_max / 100),
                 'emprise_recommandee' => $st->emprise_recommandee ?? 0.35,
+                'terrain_min' => $st->terrain_min ?? 200,
                 'emprise_min' => $st->emprise_min ?? 0.25,
                 'hsp' => $st->hsp,
                 'hsp_rdc' => $st->hsp_rdc ?? 3.0,

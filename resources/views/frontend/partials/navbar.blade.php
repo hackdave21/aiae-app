@@ -19,7 +19,17 @@
     $menuItems = [
         ['label' => __('Accueil'), 'route' => 'home'],
         ['label' => __('À propos'), 'route' => 'about'],
-        ['label' => __('Division construction'), 'route' => 'divisions'],
+        [
+            'label' => __('Nos divisions'),
+            'type' => 'dropdown',
+            'active_route' => 'divisions',
+            'items' => [
+                ['label' => __('Construction'), 'route' => 'divisions'],
+                ['label' => __('Énergie'), 'alert' => __('Cette section sera bientôt disponible.')],
+                ['label' => __('Sécurité'), 'alert' => __('Cette section sera bientôt disponible.')],
+                ['label' => __('Préfabrication'), 'alert' => __('Cette section sera bientôt disponible.')],
+            ]
+        ],
         ['label' => __('Simulateurs'), 'route' => 'simulator.index'],
         ['label' => __('Diaspora'), 'route' => 'diaspora'],
         ['label' => __('FAQ'), 'route' => 'faq'],
@@ -61,17 +71,39 @@
 
         <ul class="hidden lg:flex items-center gap-2 text-sm font-medium">
             @foreach($menuItems as $item)
-                @php
-                    $isActive = Route::is($item['route']);
-                    $activeCls = "bg-white text-[{$config['color']}] shadow";
-                    $inactiveCls = "bg-glassDark text-white hover:bg-white hover:text-[{$config['color']}]";
-                @endphp
-                <li>
-                    <a href="{{ route($item['route']) }}" 
-                       class="px-4 py-2 rounded-full block whitespace-nowrap font-light transition-colors {{ $isActive ? $activeCls : $inactiveCls }}">
-                        {{ $item['label'] }}
-                    </a>
-                </li>
+                @if(isset($item['type']) && $item['type'] === 'dropdown')
+                    @php
+                        $isActive = Route::is($item['active_route']);
+                        $activeCls = "bg-white text-[{$config['color']}] shadow";
+                        $inactiveCls = "bg-glassDark text-white hover:bg-white hover:text-[{$config['color']}]";
+                    @endphp
+                    <li class="relative group">
+                        <span class="px-4 py-2 rounded-full block whitespace-nowrap font-light transition-colors cursor-pointer {{ $isActive ? $activeCls : $inactiveCls }}">
+                            {{ $item['label'] }} ▾
+                        </span>
+                        <ul class="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] border border-gray-100 overflow-hidden">
+                            @foreach($item['items'] as $sub)
+                                @if(isset($sub['route']))
+                                    <li><a href="{{ route($sub['route']) }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">{{ $sub['label'] }}</a></li>
+                                @else
+                                    <li><a href="#" onclick="alert('{{ $sub['alert'] }}'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">{{ $sub['label'] }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
+                @else
+                    @php
+                        $isActive = Route::is($item['route']);
+                        $activeCls = "bg-white text-[{$config['color']}] shadow";
+                        $inactiveCls = "bg-glassDark text-white hover:bg-white hover:text-[{$config['color']}]";
+                    @endphp
+                    <li>
+                        <a href="{{ route($item['route']) }}" 
+                           class="px-4 py-2 rounded-full block whitespace-nowrap font-light transition-colors {{ $isActive ? $activeCls : $inactiveCls }}">
+                            {{ $item['label'] }}
+                        </a>
+                    </li>
+                @endif
             @endforeach
         </ul>
 
@@ -115,11 +147,31 @@
         </button>
 
         @foreach($menuItems as $item)
-            @php $isActive = Route::is($item['route']); @endphp
-            <a href="{{ route($item['route']) }}" 
-               class="block px-4 py-3 rounded-lg transition-colors {{ $isActive ? "bg-white text-[{$config['color']}]" : "bg-white/20 text-white hover:bg-white/30" }}">
-                {{ $item['label'] }}
-            </a>
+            @if(isset($item['type']) && $item['type'] === 'dropdown')
+                @php $isActive = Route::is($item['active_route']); @endphp
+                <div>
+                    <div class="flex items-center justify-between px-4 py-3 rounded-lg transition-colors cursor-pointer {{ $isActive ? "bg-white text-[{$config['color']}]" : "bg-white/20 text-white hover:bg-white/30" }}"
+                         onclick="this.nextElementSibling.classList.toggle('hidden')">
+                        <span>{{ $item['label'] }}</span>
+                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="hidden pl-4 space-y-1">
+                        @foreach($item['items'] as $sub)
+                            @if(isset($sub['route']))
+                                <a href="{{ route($sub['route']) }}" class="block px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20">{{ $sub['label'] }}</a>
+                            @else
+                                <a href="#" onclick="alert('{{ $sub['alert'] }}'); return false;" class="block px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20">{{ $sub['label'] }}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                @php $isActive = Route::is($item['route']); @endphp
+                <a href="{{ route($item['route']) }}" 
+                   class="block px-4 py-3 rounded-lg transition-colors {{ $isActive ? "bg-white text-[{$config['color']}]" : "bg-white/20 text-white hover:bg-white/30" }}">
+                    {{ $item['label'] }}
+                </a>
+            @endif
         @endforeach
         
         <a href="{{ route('contact') }}" class="block px-4 py-3 rounded-lg bg-white text-center text-[{{ $config['color'] }}] sm:hidden">
