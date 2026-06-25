@@ -154,6 +154,20 @@
     }, 300);
   }
 
+  function openComingSoon() {
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        title: "{{ __('Information') }}",
+        text: "{{ __('Cette section sera bientôt disponible.') }}",
+        icon: 'info',
+        confirmButtonColor: '#162064',
+        confirmButtonText: "{{ __('OK') }}"
+      });
+    } else {
+      alert("{{ __('Cette section sera bientôt disponible.') }}");
+    }
+  }
+
   // Form submission
   document.addEventListener('DOMContentLoaded', function() {
     const rdvForm = document.getElementById('rdvForm');

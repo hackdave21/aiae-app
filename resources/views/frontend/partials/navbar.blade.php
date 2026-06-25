@@ -86,7 +86,7 @@
                                 @if(isset($sub['route']))
                                     <li><a href="{{ route($sub['route']) }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">{{ $sub['label'] }}</a></li>
                                 @else
-                                    <li><a href="#" onclick="alert('{{ $sub['alert'] }}'); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">{{ $sub['label'] }}</a></li>
+                                    <li><a href="#" onclick="openComingSoon(); return false;" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">{{ $sub['label'] }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -160,7 +160,7 @@
                             @if(isset($sub['route']))
                                 <a href="{{ route($sub['route']) }}" class="block px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20">{{ $sub['label'] }}</a>
                             @else
-                                <a href="#" onclick="alert('{{ $sub['alert'] }}'); return false;" class="block px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20">{{ $sub['label'] }}</a>
+                                <a href="#" onclick="openComingSoon(); return false;" class="block px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20">{{ $sub['label'] }}</a>
                             @endif
                         @endforeach
                     </div>

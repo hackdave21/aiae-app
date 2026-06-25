@@ -1027,9 +1027,9 @@
 
             <li><a href="{{ route('divisions') }}" class="hover:text-darkBlue transition">{{ __('Construction') }}</a>
             </li>
-            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-darkBlue transition">{{ __('Énergie') }}</a></li>
-            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-darkBlue transition">{{ __('Sécurité') }}</a></li>
-            <li><a href="#" onclick="alert('{{ __('Cette section sera bientôt disponible.') }}'); return false;" class="hover:text-darkBlue transition">{{ __('Préfabrication') }}</a>
+            <li><a href="#" onclick="openComingSoon(); return false;" class="hover:text-darkBlue transition">{{ __('Énergie') }}</a></li>
+            <li><a href="#" onclick="openComingSoon(); return false;" class="hover:text-darkBlue transition">{{ __('Sécurité') }}</a></li>
+            <li><a href="#" onclick="openComingSoon(); return false;" class="hover:text-darkBlue transition">{{ __('Préfabrication') }}</a>
             </li>
 
           </ul>
