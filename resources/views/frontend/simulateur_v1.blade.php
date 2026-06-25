@@ -322,7 +322,7 @@ const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
         <button onClick={()=>{
           const current = parseFloat(value) || 0;
           const next = Math.max(min, current - step);
-          onChange(isDecimal ? Math.round(next * 100) / 100 : Math.round(next));
+          onChange(isDecimal ? Math.round(next * 10) / 10 : Math.round(next));
         }}>−</button>
         <div className="flex-1 flex items-center justify-center min-w-[70px]">
           <input 
@@ -348,7 +348,7 @@ const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
             onBlur={() => {
               let val = parseFloat(value);
               if (isNaN(val)) val = min;
-              const rounded = isDecimal ? Math.round(val * 100) / 100 : Math.round(val);
+              const rounded = isDecimal ? Math.round(val * 10) / 10 : Math.round(val);
               onChange(Math.min(max, Math.max(min, rounded)));
             }}
             className="w-full text-center font-semibold font-mono bg-transparent border-none outline-none focus:outline-none focus:ring-0 p-0 text-gray-800"
@@ -359,7 +359,7 @@ const InputNum=({value,onChange,min=0,max=999,step=1,unit='',label=''})=>{
         <button onClick={()=>{
           const current = parseFloat(value) || 0;
           const next = Math.min(max, current + step);
-          onChange(isDecimal ? Math.round(next * 100) / 100 : Math.round(next));
+          onChange(isDecimal ? Math.round(next * 10) / 10 : Math.round(next));
         }}>+</button>
       </div>
     </div>
@@ -1618,11 +1618,11 @@ const App=()=>{
                 </div>
                 {forme!=='irregulier'?(
                   <div className="grid grid-cols-2 gap-4">
-                    <InputNum value={dimA} onChange={setDimA} min={10} max={200} unit="m" label={forme==='carre'?t('Côté'):t('Longueur')}/>
-                    {forme!=='carre'&&<InputNum value={dimB} onChange={setDimB} min={10} max={200} unit="m" label={t('Largeur')}/>}
+                    <InputNum value={dimA} onChange={setDimA} min={10} max={200} step={0.5} unit="m" label={forme==='carre'?t('Côté'):t('Longueur')}/>
+                    {forme!=='carre'&&<InputNum value={dimB} onChange={setDimB} min={10} max={200} step={0.5} unit="m" label={t('Largeur')}/>}
                   </div>
                 ):(
-                  <InputNum value={surfManuelle} onChange={setSurfManuelle} min={100} max={50000} step={50} unit="m²" label={t('Surface')}/>
+                  <InputNum value={surfManuelle} onChange={setSurfManuelle} min={100} max={50000} step={0.5} unit="m²" label={t('Surface')}/>
                 )}
                 <div className="mt-4 p-4 bg-blue-50 rounded-lg grid grid-cols-2 gap-4">
                   <div><div className="text-xs text-gray-500">{t('Surface')}</div><div className="text-xl font-bold mono" style={{color:'var(--bleu)'}}>{fmt(surface)} m²</div></div>
@@ -1788,7 +1788,7 @@ const App=()=>{
             <div className="card p-6 mb-6">
               <h3 className="font-semibold text-gray-700 mb-4">{t('Surface')}<InfoIcon text={t("Surface bâtie totale en m².")}/></h3>
               <div className="flex items-center gap-4">
-                <InputNum value={surfManuelle} onChange={(v)=>{setSurfManuelle(v);setForme('irregulier');}} min={20} max={50000} step={10} unit="m²"/>
+                <InputNum value={surfManuelle} onChange={(v)=>{setSurfManuelle(v);setForme('irregulier');}} min={20} max={50000} step={0.5} unit="m²"/>
               </div>
               <div className="mt-4 flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
                 <span className="text-sm text-gray-600">{t('Niveaux:')}</span>
