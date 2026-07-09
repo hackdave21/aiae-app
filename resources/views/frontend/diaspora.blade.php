@@ -735,7 +735,7 @@
             <img src="{{ asset('aiae-frontend/Images/bfaqvert.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
           </summary>
           <div class="px-16 pb-6 text-darkBlue font-book text-xl border-t border-primary pt-6">
-           {{ __('De 8 à 18 mois selon la surface et le standing. Une villa Standard de 150 m² prend environ 8-12 mois. Les délais sont contractuels.') }}
+           {{ __('De 8 à 18 mois selon la surface et le standing. Une villa Standard de 150 m² prend environ 8-12 mois. Ces délais sont indicatifs. Les délais définitifs sont inscrits au contrat.') }}
           </div>
         </details>
 

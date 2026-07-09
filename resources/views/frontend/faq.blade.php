@@ -349,7 +349,7 @@
             <li><strong class="font-heavy text-[#343434]">{{ __('Villa Confort/Premium 200-400 m² :') }}</strong> {{ __('12-18 mois.') }}</li>
             <li><strong class="font-heavy text-[#343434]">{{ __('Villa Prestige 400 m²+ :') }}</strong> {{ __('16-22 mois.') }}</li>
           </ul>
-          <p>{{ __('Les délais sont contractuels et inscrits au contrat.') }}</p>
+          <p>{{ __('Ces délais sont indicatifs. Les délais définitifs sont définis ensemble et inscrits au contrat.') }}</p>
         </div>
       </details>
 
@@ -876,7 +876,7 @@
           <img src="{{ asset('aiae-frontend/Images/bfaqorange.png') }}" alt="icon" class="w-9 h-9 transition-transform duration-300 group-open:rotate-180" />
         </summary>
         <div class="px-16 pb-6 text-[#343434] font-book text-2xl border-t border-secondary pt-6">
-          <p>{{ __('Les délais sont contractuels. En cas de retard imputable à AIAE, des pénalités sont prévues au contrat. En cas de force majeure (intempéries exceptionnelles, pénurie de matériaux), le délai est prolongé d\'une durée équivalente, documentée et communiquée.') }}</p>
+          <p>{{ __('En cas de retard imputable à AIAE, des pénalités sont prévues au contrat. En cas de force majeure (intempéries exceptionnelles, pénurie de matériaux), le délai est prolongé d\'une durée équivalente, documentée et communiquée.') }}</p>
         </div>
       </details>
 

@@ -952,11 +952,11 @@
 
           <div>
             <h3 class="text-darkBlue font-extrabold text-2xl mb-2">
-              {{ __('PLANNING CONTRACTUEL') }}
+              {{ __('PLANNING ESTIMATIF') }}
             </h3>
 
             <p class="text-gray-700 text-[18px] xl:text-[24px] leading-relaxed font-medium">
-              {!! __('Les délais sont inscrits au contrat. <span class="font-heavy">En<br> cas de retard de notre fait, des<br> pénalités s’appliquent.</span>') !!}
+              {!! __('Les délais sont estimés. Les délais définitifs sont inscrits au contrat. <span class="font-heavy">En<br> cas de retard de notre fait, des<br> pénalités s’appliquent.</span>') !!}
             </p>
           </div>
 

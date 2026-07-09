@@ -1145,7 +1145,7 @@
               <h4 class="text-darkBlue text-[30px] font-bold mb-2">{{ __('02. Études techniques') }}</h4>
               <p class="text-secondary text-[15px] font-bold mb-3 uppercase tracking-wide">{{ __('Durée : 3-6 sem.') }}</p>
               <p class="text-gray-700 text-[18px] leading-relaxed">
-                {{ __('Plans architecturaux définitifs, calculs de structure, devis détaillé basé sur le BPU, planning contractuel, obtention du permis de construire.') }}
+                {{ __('Plans architecturaux définitifs, calculs de structure, devis détaillé basé sur le BPU, planning prévisionnel, obtention du permis de construire.') }}
               </p>
             </div>
 
@@ -1260,8 +1260,8 @@
           <div>
             <h3
               class="text-primary text-[24px] md:text-[27px] font-bold uppercase mb-2 leading-tight tracking-wide">
-              {!! __('PLANNING<br> CONTRACTUEL') !!}</h3>
-            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">{{ __('Les délais sont inscrits au contrat.') }} <strong
+              {!! __('PLANNING<br> PRÉVISIONNEL') !!}</h3>
+            <p class="text-gray-600 text-[18px] xl:text-[24px] leading-relaxed">{{ __('Les délais sont estimés. Les délais définitifs sont inscrits au contrat.') }} <strong
                 class="text-gray-800 font-heavy">{{ __('Pénalités en cas de retard de notre fait.') }}</strong></p>
           </div>
         </div>

@@ -159,6 +159,9 @@ $simTranslations =[
     'Type' => __('Type'),
     'Terrain' => __('Terrain'),
     'Durée estimée' => __('Durée estimée'),
+    'estimatif' => __('estimatif'),
+    'estimatif, non contractuel' => __('estimatif, non contractuel'),
+    '⚠ Délai estimatif hors impact saison des pluies (juin-sept.). Prévoir +20-30% si le gros œuvre couvre cette période.' => __('⚠ Délai estimatif hors impact saison des pluies (juin-sept.). Prévoir +20-30% si le gros œuvre couvre cette période.'),
     'mois' => __('mois'),
     'Plain-pied' => __('Plain-pied'),
     'Besoins énergétiques calculés' => __('Besoins énergétiques calculés'),
@@ -853,10 +856,21 @@ const App=()=>{
     return{cat,geoOblig,motifs,mission};
   },[niveaux,hauteurTotale,typeBat,sol,ssSol]);
 
-  // Durée (fourchette min-max)
+  // Durée (fourchette min-max) — alignée sur la grille FAQ
   const duree=useMemo(()=>{
-    let d=6;
-    if(secteur==='residentiel')d=typeBat==='villa'?8:14+(niveaux-2)*1.5;
+    let d=6, dMin=0, dMax=0;
+    if(secteur==='residentiel'&&typeBat==='villa'){
+      // Fourchettes définies par la FAQ (par standing)
+      if(standing==='prestige'){dMin=16;dMax=22;}
+      else if(standing==='premium'||standing==='confort'){dMin=12;dMax=18;}
+      else{dMin=8;dMax=12;}// standard par défaut
+      // Ajustements terrain/soil
+      const adjSol=(sol==='argileux'||sol==='hydromorphe')?2:0;
+      const adjSsSol=ssSol>0?Math.round(ssSol*2.5):0;
+      dMin+=adjSol+adjSsSol; dMax+=adjSol+adjSsSol;
+      return{min:dMin,max:dMax};
+    }
+    if(secteur==='residentiel')d=14+(niveaux-2)*1.5;
     else if(secteur==='tertiaire')d=typeBat?.startsWith('hotel_')?18+(niveaux-3)*2:12+(niveaux-2)*1.5;
     else if(secteur==='industriel')d=surfaceBatie>3000?14:surfaceBatie>1500?10:7;
     else if(secteur==='agricole')d=5;
@@ -866,7 +880,7 @@ const App=()=>{
     const min=Math.max(4,Math.round(base*0.85));
     const max=Math.round(base*1.15);
     return{min,max};
-  },[secteur,typeBat,niveaux,ssSol,surfaceBatie,sol]);
+  },[secteur,typeBat,niveaux,ssSol,surfaceBatie,sol,standing]);
 
   // FACTEURS D'ÉMISSION CO₂ (kgCO₂/kW installé/an — base 8h/j, 300j/an)
   const CO2_FACTORS = {
@@ -1091,7 +1105,7 @@ const App=()=>{
     let total=0, totalMin=0, totalMax=0;
     const marge = STANDINGS_MARGE[standing] || 0.20;
     const add=(code,nom,detail,montant,montantMin,montantMax)=>{
-      const min = montantMin ?? Math.round(montant * 0.90);
+      const min = montantMin ?? Math.round(montant * (1 - marge));
       const max = montantMax ?? Math.round(montant * (1 + marge));
       postes.push({code,nom,detail,montant,montantMin:min,montantMax:max});
       total+=montant; totalMin+=min; totalMax+=max;
@@ -1116,142 +1130,137 @@ const App=()=>{
     
     // Gros œuvre 38% — avec marge du standing
     const baseGo = surfaceBatie*prixM2*coefTotal*0.38;
-    add('3',t('Gros œuvre'),t('Structure, maçonnerie, planchers'),baseGo, baseGo, Math.round(baseGo*(1+marge)));
+    add('3',t('Gros œuvre'),t('Structure, maçonnerie, planchers'),baseGo, Math.round(baseGo*(1-marge)), Math.round(baseGo*(1+marge)));
     // Second œuvre 25%
     const baseSo = surfaceBatie*prixM2*coefTotal*0.25;
-    add('4',t('Second œuvre'),t('Menuiseries, cloisons, plâtrerie'),baseSo, baseSo, Math.round(baseSo*(1+marge)));
+    add('4',t('Second œuvre'),t('Menuiseries, cloisons, plâtrerie'),baseSo, Math.round(baseSo*(1-marge)), Math.round(baseSo*(1+marge)));
     // Lots techniques 18%
     const baseLt = surfaceBatie*prixM2*coefTotal*0.18;
-    add('5',t('Lots techniques'),t('Électricité, plomberie, CVC'),baseLt, baseLt, Math.round(baseLt*(1+marge)));
+    add('5',t('Lots techniques'),t('Électricité, plomberie, CVC'),baseLt, Math.round(baseLt*(1-marge)), Math.round(baseLt*(1+marge)));
     // Finitions 11%
     const baseFn = surfaceBatie*prixM2*coefTotal*0.11;
-    add('6',t('Finitions'),t('Revêtements, peinture, sanitaires'),baseFn, baseFn, Math.round(baseFn*(1+marge)));
+    add('6',t('Finitions'),t('Revêtements, peinture, sanitaires'),baseFn, Math.round(baseFn*(1-marge)), Math.round(baseFn*(1+marge)));
     
-    // Équipements spécifiques (poste 7) — avec prix_min/prix_max
+    // Équipements spécifiques (poste 7) — fourchette symétrique
     let equip=0, equipMin=0, equipMax=0;
     if(nbAsc>0){
       const ascId = niveaux<=5 ? 'ascenseur_5n' : 'ascenseur_10n';
       const optAsc = SPECIFIQUES.find(o => o.id === ascId);
       const ascPrix = optAsc ? optAsc.prix : 28000000;
-      const ascMax = optAsc?.prix_max || Math.round(ascPrix*1.25);
-      equip+=nbAsc*ascPrix; equipMin+=nbAsc*ascPrix; equipMax+=nbAsc*ascMax;
+      equip+=nbAsc*ascPrix; equipMin+=nbAsc*Math.round(ascPrix*(1-marge)); equipMax+=nbAsc*Math.round(ascPrix*(1+marge));
     }
     if(nbQuais>0&&secteur==='industriel') {
       const optQuai = SPECIFIQUES.find(o => o.id === 'quai_chargement');
       const qPrix = optQuai ? optQuai.prix : 3500000;
-      const qMax = optQuai?.prix_max || Math.round(qPrix*1.15);
       equip += nbQuais * qPrix;
-      equipMin += nbQuais * qPrix;
-      equipMax += nbQuais * qMax;
+      equipMin += nbQuais * Math.round(qPrix*(1-marge));
+      equipMax += nbQuais * Math.round(qPrix*(1+marge));
     }
     if(pontRoulant) {
       const pRoulantId = pontCap <= 5 ? 'pont_roulant_5t' : 'pont_roulant_10t';
       const optPont = SPECIFIQUES.find(o => o.id === pRoulantId);
       const pPrix = optPont ? optPont.prix : (pontCap<=5?15000000:25000000);
-      const pMax = optPont?.prix_max || Math.round(pPrix*1.15);
       equip += pPrix;
-      equipMin += pPrix;
-      equipMax += pMax;
+      equipMin += Math.round(pPrix*(1-marge));
+      equipMax += Math.round(pPrix*(1+marge));
     }
     if(groupeFroid){
       const fPrix = surfaceBatie*(groupeFroid==='negatif'?95000:55000);
-      equip+=fPrix; equipMin+=fPrix; equipMax+=Math.round(fPrix*1.15);
+      equip+=fPrix; equipMin+=Math.round(fPrix*(1-marge)); equipMax+=Math.round(fPrix*(1+marge));
     }
     if(irrigation) {
       const irrId = irrigation === 'goutte' ? 'irrigation_goutte_a_goutte' : 'irrigation_aspersion';
       const optIrr = EXTERIEUR_OPTS.find(o => o.id === irrId);
       const iPrix = surfExploit * (optIrr ? optIrr.prix : (irrigation === 'goutte' ? 1500000 : 2500000));
-      const iMax = optIrr?.prix_max ? surfExploit * optIrr.prix_max : Math.round(iPrix*1.15);
-      equip += iPrix; equipMin += iPrix; equipMax += iMax;
+      equip += iPrix; equipMin += Math.round(iPrix*(1-marge)); equipMax += Math.round(iPrix*(1+marge));
     }
     if(equip>0)add('7',t('Équipements spécifiques'),t('Ascenseurs, quais, pont, froid'),equip,equipMin,equipMax);
 
-    // Énergie (poste 8)
+    // Énergie (poste 8) — fourchette symétrique
     const kitSol = SOLAIRES.find(k => k.id === solaire);
     const grpKva = GROUPES.find(g => g.id === groupe);
     const enerPrix = (kitSol?.prix || 0) + (grpKva?.prix || 0);
-    const enerMax = (kitSol?.prix_max||kitSol?.prix||0) + (grpKva?.prix_max||grpKva?.prix||0);
-    if (enerPrix > 0) add('8', t('Énergie'), `${kitSol ? kitSol.kw + ' kWc' : ''}${grpKva ? ' + ' + grpKva.kva + ' kVA' : ''}`.trim(), enerPrix, enerPrix, enerMax);
+    if (enerPrix > 0) add('8', t('Énergie'), `${kitSol ? kitSol.kw + ' kWc' : ''}${grpKva ? ' + ' + grpKva.kva + ' kVA' : ''}`.trim(), enerPrix);
 
-    // Sécurité (poste 9)
+    // Sécurité (poste 9) — fourchette symétrique
     let secu = 0, secuMin = 0, secuMax = 0;
     const optAlarme = SECURITE_OPTS.find(o => o.id === alarme);
     const optVideo = SECURITE_OPTS.find(o => o.id === video);
     const optAcces = SECURITE_OPTS.find(o => o.id === acces);
     if (optAlarme){ 
-      secu += optAlarme.prix + (nbZones * 125000);
-      secuMin += optAlarme.prix + (nbZones * 125000);
-      secuMax += (optAlarme.prix_max||optAlarme.prix) + (nbZones * 125000);
+      const aPrix = optAlarme.prix + (nbZones * 125000);
+      secu += aPrix;
+      secuMin += Math.round(aPrix*(1-marge));
+      secuMax += Math.round(aPrix*(1+marge));
     }
     if (optVideo){ 
       secu += optVideo.prix;
-      secuMin += optVideo.prix;
-      secuMax += (optVideo.prix_max||optVideo.prix);
+      secuMin += Math.round(optVideo.prix*(1-marge));
+      secuMax += Math.round(optVideo.prix*(1+marge));
     }
     if (optAcces){ 
-      secu += optAcces.prix + (nbPortes * 320000);
-      secuMin += optAcces.prix + (nbPortes * 320000);
-      secuMax += (optAcces.prix_max||optAcces.prix) + (nbPortes * 320000);
+      const cPrix = optAcces.prix + (nbPortes * 320000);
+      secu += cPrix;
+      secuMin += Math.round(cPrix*(1-marge));
+      secuMax += Math.round(cPrix*(1+marge));
     }
     if (secu > 0) add('9', t('Sécurité'), t('Alarme, vidéo, contrôle accès'), secu, secuMin, secuMax);
 
-    // VRD (poste 10)
-    let vrd = surface * SIMULATOR_PARAMS.vrd_base_prix, vrdMin = surface * SIMULATOR_PARAMS.vrd_base_prix, vrdMax = surface * SIMULATOR_PARAMS.vrd_base_prix;
+    // VRD (poste 10) — fourchette symétrique
+    let vrd = surface * SIMULATOR_PARAMS.vrd_base_prix, vrdMin = Math.round(surface * SIMULATOR_PARAMS.vrd_base_prix*(1-marge)), vrdMax = Math.round(surface * SIMULATOR_PARAMS.vrd_base_prix*(1+marge));
     const optPortail = EXTERIEUR_OPTS.find(o => o.id === portail);
     const optPiscine = EXTERIEUR_OPTS.find(o => o.id === piscine);
     const optCiterne = EXTERIEUR_OPTS.find(o => o.id === citerne);
     const optPaysager = EXTERIEUR_OPTS.find(o => o.id === paysager);
     if (cloture){ 
       const clotPrix = perimetre * (clotureH <= 2 ? SIMULATOR_PARAMS.cloture_prix_bas : SIMULATOR_PARAMS.cloture_prix_haut);
-      vrd += clotPrix; vrdMin += clotPrix; vrdMax += clotPrix;
+      vrd += clotPrix; vrdMin += Math.round(clotPrix*(1-marge)); vrdMax += Math.round(clotPrix*(1+marge));
     }
     if (optPortail){ 
       vrd += optPortail.prix;
-      vrdMin += optPortail.prix;
-      vrdMax += (optPortail.prix_max||optPortail.prix);
+      vrdMin += Math.round(optPortail.prix*(1-marge));
+      vrdMax += Math.round(optPortail.prix*(1+marge));
     }
     if (optPiscine){ 
       vrd += optPiscine.prix;
-      vrdMin += optPiscine.prix;
-      vrdMax += (optPiscine.prix_max||optPiscine.prix);
+      vrdMin += Math.round(optPiscine.prix*(1-marge));
+      vrdMax += Math.round(optPiscine.prix*(1+marge));
     }
     if (optCiterne){ 
       vrd += optCiterne.prix;
-      vrdMin += optCiterne.prix;
-      vrdMax += (optCiterne.prix_max||optCiterne.prix);
+      vrdMin += Math.round(optCiterne.prix*(1-marge));
+      vrdMax += Math.round(optCiterne.prix*(1+marge));
     }
     if (optPaysager){ 
       vrd += optPaysager.prix;
-      vrdMin += optPaysager.prix;
-      vrdMax += (optPaysager.prix_max||optPaysager.prix);
+      vrdMin += Math.round(optPaysager.prix*(1-marge));
+      vrdMax += Math.round(optPaysager.prix*(1+marge));
     }
     if (forage){
       const forageId = forageProf <= 30 ? 'forage_30m' : forageProf <= 60 ? 'forage_60m' : 'forage_60m';
       const optForage = EXTERIEUR_OPTS.find(o => o.id === forageId);
       const fPrix = optForage ? optForage.prix : (forageProf * SIMULATOR_PARAMS.forage_prix_m) + SIMULATOR_PARAMS.forage_fixe;
-      const fMax = optForage?.prix_max || Math.round(fPrix*1.15);
-      vrd += fPrix; vrdMin += fPrix; vrdMax += fMax;
+      vrd += fPrix; vrdMin += Math.round(fPrix*(1-marge)); vrdMax += Math.round(fPrix*(1+marge));
     }
     if (parkPlaces > 0){
       const pkId = parkType === 'souterrain' ? 'parking_souterrain' : parkType === 'couvert' ? 'parking_couvert' : 'parking_ext';
       const optPk = EXTERIEUR_OPTS.find(o => o.id === pkId);
       const pkPrix = parkPlaces * (optPk ? optPk.prix : 420000);
-      const pkMax = parkPlaces * (optPk?.prix_max || Math.round(pkPrix/parkPlaces*1.2));
-      vrd += pkPrix; vrdMin += pkPrix; vrdMax += pkMax;
+      vrd += pkPrix; vrdMin += Math.round(pkPrix*(1-marge)); vrdMax += Math.round(pkPrix*(1+marge));
     }
     // Domotique (intégré au poste 10)
     const optDomotique = DOMOTIQUE_OPTS.find(o => o.id === domotique);
     if (optDomotique){
       vrd += optDomotique.prix;
-      vrdMin += optDomotique.prix;
-      vrdMax += (optDomotique.prix_max||optDomotique.prix);
+      vrdMin += Math.round(optDomotique.prix*(1-marge));
+      vrdMax += Math.round(optDomotique.prix*(1+marge));
     }
     // Volets roulants (intégré au poste 10)
     const optVolet = SECONDE_OEUVRE_OPTS.find(o => o.id === volet);
     if (optVolet){
       vrd += optVolet.prix;
-      vrdMin += optVolet.prix;
-      vrdMax += (optVolet.prix_max||optVolet.prix);
+      vrdMin += Math.round(optVolet.prix*(1-marge));
+      vrdMax += Math.round(optVolet.prix*(1+marge));
     }
     add('10', t('VRD et aménagements'), t('Clôture, portail, piscine, parking'), vrd, vrdMin, vrdMax);
 
@@ -2028,7 +2037,7 @@ const App=()=>{
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Type')}</div><div className="font-semibold">{t(typeData?.name||typeBat)}</div><div className="text-xs text-gray-500">{secteur==='residentiel'?t(STANDINGS[standing]?.name):''}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Terrain')}</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{t(zoneData?.name||'')}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Surface plancher')}</div><div className="font-semibold mono">{fmt(surfaceBatie)} m²</div><div className="text-xs text-gray-500">{niveaux===1?t('Plain-pied'):`R+${niveaux-1}`}{ssSol>0?` + ${ssSol} ss`:''}</div></div>
-                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree.min}-{duree.max} {t('mois')}</div></div>
+                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree.min}-{duree.max} {t('mois')} <span className="text-[10px] text-gray-400 font-normal">({t('estimatif')})</span></div></div>
               </div>
             </div>
 
@@ -2165,8 +2174,8 @@ const App=()=>{
                   <div><div className="text-xs">{t('Estimation basse')}</div><div className="font-semibold mono">{fmtC(estimation.totalMin,currency)}</div></div>
                   <div><div className="text-xs">{t('Estimation haute')}</div><div className="font-semibold mono">{fmtC(estimation.totalMax,currency)}</div></div>
                 </div>
-                <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree.min}-{duree.max} {t('mois')} • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
-                <div className="mt-2 text-amber-300/70 text-[10px]">{t('⚠ Délai hors impact saison des pluies (juin-sept.). Prévoir +20-30% si le gros œuvre couvre cette période.')}</div>
+                <div className="mt-4 text-white/60 text-xs">{t('Durée estimée:')} {duree.min}-{duree.max} {t('mois')} <span className="text-white/40">({t('estimatif, non contractuel')})</span> • {t('Catégorie:')} {categorie.cat} • {t('Géotechnique:')} {categorie.mission}</div>
+                <div className="mt-2 text-amber-300/70 text-[10px]">{t('⚠ Délai estimatif hors impact saison des pluies (juin-sept.). Prévoir +20-30% si le gros œuvre couvre cette période.')}</div>
               </div>
             </div>
 
