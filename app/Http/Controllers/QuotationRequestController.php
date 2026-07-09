@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\QuotationRequestConfirmation;
+use App\Mail\QuotationRequestNotification;
 use App\Models\Lead;
 use App\Models\Quotation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -67,6 +70,38 @@ class QuotationRequestController extends Controller
         }
 
         $quotation->save();
+
+        // Prepare email data
+        $emailData = [
+            'quotation_number' => $quotation->quotation_number,
+            'full_name' => $request->full_name,
+            'first_name' => $firstName,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country_residence' => $request->country_residence,
+            'project_type' => $request->project_type,
+            'standing' => $request->standing,
+            'delay' => $request->delay,
+            'project_description' => $request->project_description,
+            'location' => $request->location,
+            'budget' => $request->budget,
+            'source_discovery' => $request->source_discovery,
+            'has_attachment' => $request->hasFile('attachment'),
+        ];
+
+        // Send notification to admin
+        try {
+            Mail::to('contact@aiae.services')->send(new QuotationRequestNotification($emailData));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send admin notification for quotation ' . $quotation->quotation_number . ': ' . $e->getMessage());
+        }
+
+        // Send confirmation to client
+        try {
+            Mail::to($request->email)->send(new QuotationRequestConfirmation($emailData));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send client confirmation for quotation ' . $quotation->quotation_number . ': ' . $e->getMessage());
+        }
 
         return response()->json([
             'success' => true,
