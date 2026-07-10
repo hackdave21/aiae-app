@@ -14,7 +14,7 @@
       </h1>
 
       <p class="text-sm sm:text-base opacity-80 mb-10 tracking-wide break-words font-light">
-        {{ __('AFRIKA INFRASTRUCTURE AND EQUIPEMENTS') }}
+        {{ __('Afrika Infrastructures And Equipements') }}
       </p>
 
       <!-- MODE SELECTEUR -->

@@ -32,7 +32,7 @@
   <div class="header">
     <img src="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL_Clr.png') }}" alt="AIAE">
     <h1>Estimation de Projet</h1>
-    <p style="color:#666;font-size:9pt">Afrika Infrastructures And Equipements (AIAE) • Référentiel Décembre 2025</p>
+    <p style="color:#666;font-size:9pt">Afrika Infrastructures And Equipements (AIAE) • Référentiel Juillet 2026</p>
   </div>
 
   @if(isset($config))

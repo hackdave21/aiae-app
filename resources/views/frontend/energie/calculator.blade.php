@@ -263,6 +263,8 @@ $calcTranslations = [
       };
     }, [mode, factureMensuelle, monInventaire, zoneIndex, ensoleillement]);
 
+    const montantInvalide = mode === 'facture' && (!factureMensuelle || factureMensuelle <= 0);
+
     // --- GESTIONNAIRES D'ÉVÉNEMENTS ---
     const ajouterEquipement = (id) => {
       const ref = REFERENTIEL.equipements.find(e => e.id === id);
@@ -387,6 +389,12 @@ $calcTranslations = [
                 <div className="mt-4 p-4 bg-orange-50 rounded-lg border border-orange-100 text-sm text-orange-800">
                   <p> <strong>{t('Note :')}</strong> {t('Ce mode estime vos besoins globaux. Pour une précision technique, le mode Appareils est recommandé.')}</p>
                 </div>
+                {montantInvalide && (
+                  <div className="mt-3 flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                    <span>{t('Veuillez saisir un montant mensuel supérieur à 0 FCFA.')}</span>
+                  </div>
+                )}
               </div>
             )}
 
@@ -473,7 +481,17 @@ $calcTranslations = [
           <div className="lg:col-span-5">
             <div className="sticky top-6 space-y-4">
               
-              {resultats.overLimit ? (
+              {montantInvalide ? (
+                <div className="card p-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+                    <Icon name="AlertCircle" size={32} className="text-red-500" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{t('Montant invalide')}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {t('Veuillez saisir un montant mensuel d\'électricité supérieur à 0 FCFA pour obtenir une estimation.')}.
+                  </p>
+                </div>
+              ) : resultats.overLimit ? (
                 <div className="card p-8 text-center">
                   <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-4">
                     <Icon name="Zap" size={32} className="text-orange-500" />

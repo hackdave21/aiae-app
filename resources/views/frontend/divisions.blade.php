@@ -1207,17 +1207,17 @@
           </div>
           <div class="space-y-4">
             <h3 class="text-primary font-bold text-xl mb-2">{{ __('NF DTU — Normes Françaises') }}</h3>
-            <p>{{ __('Nos chantiers suivent les NF DTU (Documents Techniques Unifiés) en vigueur : DTU 13.11 (fondations), DTU 20.1 (maçonnerie), DTU 21 (planchers), DTU 23.1 (murs), DTU 40.41 (couverture), DTU 60.1 (plomberie), DTU 70.1 (installations électriques).') }}</p>
-            <h3 class="text-primary font-bold text-xl mb-2 mt-6">{{ __('Fascicules 61 à 74 — CCTG') }}</h3>
-            <p>{{ __('Nos études de voirie et réseaux divers (VRD) suivent les prescriptions des Fascicules 61 à 74 du Cahier des Clauses Techniques Générales (CCTG), applicables aux marchés publics et privés en Afrique.') }}</p>
+            <p>{{ __('Nos chantiers suivent les NF DTU (Documents Techniques Unifiés) en vigueur : NF DTU 13.1 — Fondations superficielles, DTU 20.1 (maçonnerie), DTU 21 — Exécution des ouvrages en béton, DTU 23.1 (murs), DTU 60.1 (plomberie), NF C 15-100 (installations électriques).') }}</p>
+            <h3 class="text-primary font-bold text-xl mb-2 mt-6">{{ __('Fascicules 70 et 71 — CCTG') }}</h3>
+            <p>{{ __('Nos études de voirie et réseaux divers (VRD) suivent les prescriptions des Fascicules 70 et 71 du Cahier des Clauses Techniques Générales (CCTG), applicables aux marchés publics et privés en Afrique.') }}</p>
             <ul class="list-disc list-inside space-y-1 text-gray-600">
-              <li><strong>Fasc. 61</strong> — {{ __('Terrassements généraux') }}</li>
-              <li><strong>Fasc. 62</strong> — {{ __('Chaussées et voiries') }}</li>
-              <li><strong>Fasc. 64</strong> — {{ __('Assainissement et drainage') }}</li>
-              <li><strong>Fasc. 65</strong> — {{ __('Alimentation en eau potable') }}</li>
-              <li><strong>Fasc. 69</strong> — {{ __('Ouvrages d\'assainissement') }}</li>
-              <li><strong>Fasc. 74</strong> — {{ __('Installations électriques') }}</li>
+              <li><strong>Fasc. 70</strong> — {{ __('Assainissement') }}</li>
+              <li><strong>Fasc. 71</strong> — {{ __('Alimentation en eau potable (AEP)') }}</li>
             </ul>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-primary font-bold text-xl mb-2">{{ __('BAEL 91 révisé 99') }}</h3>
+            <p>{{ __('Nos calculs de béton armé sont conformes au Règle BAEL 91 révisée 99 (Révision des règles nationales NF P 18-200 et NF P 18-201), en complément des Eurocodes.') }}</p>
           </div>
         </div>
         <p class="mt-8 text-center text-gray-500 text-sm">

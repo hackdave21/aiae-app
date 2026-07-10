@@ -524,6 +524,12 @@
               </option>
               <option value="reseaux">{{ __('Réseaux Sociaux') }}</option>
               <option value="recherche">{{ __('Recherche Google') }}</option>
+              <option value="recommandation">{{ __('Recommandation') }}</option>
+              <option value="bouche_a_oreille">{{ __('Bouche-à-oreille') }}</option>
+              <option value="partenaire">{{ __('Partenaire') }}</option>
+              <option value="salon">{{ __('Salon professionnel / Événement') }}</option>
+              <option value="presse">{{ __('Presse / Média') }}</option>
+              <option value="autre">{{ __('Autre (à préciser)') }}</option>
             </select>
             <div
               class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500 font-light text-2xl">

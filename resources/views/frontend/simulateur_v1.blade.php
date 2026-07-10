@@ -238,7 +238,7 @@ $simTranslations =[
     'Clôture, portail, piscine, parking' => __('Clôture, portail, piscine, parking'),
     'Provisions aléas' => __('Provisions aléas'),
     '5% recommandé' => __('5% recommandé'),
-    'Référentiel Décembre 2025' => __('Référentiel Décembre 2025'),
+    'Référentiel Juillet 2026' => __('Référentiel Juillet 2026'),
     'Matériaux standards, agglos pleins, chaînages verticaux conformes DTU' => __('Matériaux standards, agglos pleins, chaînages verticaux conformes DTU'),
     'Matériaux de qualité, poteaux/chaînages renforcés, isolation thermique naturelle' => __('Matériaux de qualité, poteaux/chaînages renforcés, isolation thermique naturelle'),
     'Matériaux haut de gamme, structure optimisée, performances thermiques supérieures' => __('Matériaux haut de gamme, structure optimisée, performances thermiques supérieures'),
@@ -1500,7 +1500,7 @@ const App=()=>{
               <img src={window.LOGO_URL} className="w-20 h-20 object-contain mb-6 mx-auto" alt="AIAE Logo" />
             </button>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{t("Simulateur d'Estimation")}</h1>
-            <p className="text-blue-200 text-lg">AFRIKA INFRASTRUCTURES AND EQUIPEMENTS (AIAE)</p>
+            <p className="text-blue-200 text-lg">Afrika Infrastructures And Equipements (AIAE)</p>
           </div>
           {/* Sélecteur de mode Express/Expert */}
           <div className="bg-white/10 backdrop-blur rounded-2xl p-4 mb-6">
@@ -1545,7 +1545,7 @@ const App=()=>{
               ))}
             </div>
           </div>
-          <div className="text-center mt-12 text-blue-300 text-xs">© 2025 AIAE (Afrika Infrastructures And Equipements) • Quartier Kléme Zanguéra, Lomé, Togo</div>
+          <div className="text-center mt-12 text-blue-300 text-xs">© {new Date().getFullYear()} AIAE (Afrika Infrastructures And Equipements) • Quartier Kléme Zanguéra, Lomé, Togo</div>
         </div>
       </div>
     );
@@ -2232,8 +2232,8 @@ const App=()=>{
 
       </main>
       <footer className="text-center py-6 text-gray-400 text-xs no-print">
-        © 2025 AIAE (Afrika Infrastructures And Equipements) • contact@aiae.services • Quartier Kléme Zanguéra, Lomé, Togo<br/>
-        {t('Simulateur v')}{VERSION} • {t('Référentiel Décembre 2025')}
+        © {new Date().getFullYear()} AIAE (Afrika Infrastructures And Equipements) • contact@aiae.services • Quartier Kléme Zanguéra, Lomé, Togo<br/>
+        {t('Simulateur v')}{VERSION} • {t('Référentiel Juillet 2026')}
       </footer>
 
       {/* MODALE NIVEAU 2 — En savoir plus */}
