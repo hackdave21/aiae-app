@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - AIAE</title>
+  <title>{{ __('Contact - AIAE') }}</title>
   @include('frontend.partials.head-seo')
   @include('frontend.partials.schema-org')
   <link rel="icon" type="image/png" href="{{ asset('aiae-frontend/Images/logos/Symbole_AIAE_FINAL.png') }}">
@@ -968,14 +968,39 @@
         console.error('Error fetching countries:', error);
         // Fallback for offline or API issues
         const fallback = [
+          { name: 'France', iso: 'fr', code: '+33', flag: 'https://flagcdn.com/w20/fr.png' },
+          { name: 'Canada', iso: 'ca', code: '+1', flag: 'https://flagcdn.com/w20/ca.png' },
+          { name: 'États-Unis', iso: 'us', code: '+1', flag: 'https://flagcdn.com/w20/us.png' },
+          { name: 'Allemagne', iso: 'de', code: '+49', flag: 'https://flagcdn.com/w20/de.png' },
+          { name: 'Royaume-Uni', iso: 'gb', code: '+44', flag: 'https://flagcdn.com/w20/gb.png' },
+          { name: 'Belgique', iso: 'be', code: '+32', flag: 'https://flagcdn.com/w20/be.png' },
+          { name: 'Suisse', iso: 'ch', code: '+41', flag: 'https://flagcdn.com/w20/ch.png' },
           { name: 'Togo', iso: 'tg', code: '+228', flag: 'https://flagcdn.com/w20/tg.png' },
           { name: 'Bénin', iso: 'bj', code: '+229', flag: 'https://flagcdn.com/w20/bj.png' },
           { name: 'Côte d\'Ivoire', iso: 'ci', code: '+225', flag: 'https://flagcdn.com/w20/ci.png' },
-          { name: 'France', iso: 'fr', code: '+33', flag: 'https://flagcdn.com/w20/fr.png' },
           { name: 'Sénégal', iso: 'sn', code: '+221', flag: 'https://flagcdn.com/w20/sn.png' },
           { name: 'Burkina Faso', iso: 'bf', code: '+226', flag: 'https://flagcdn.com/w20/bf.png' },
           { name: 'Gabon', iso: 'ga', code: '+241', flag: 'https://flagcdn.com/w20/ga.png' },
-          { name: 'Cameroun', iso: 'cm', code: '+237', flag: 'https://flagcdn.com/w20/cm.png' }
+          { name: 'Cameroun', iso: 'cm', code: '+237', flag: 'https://flagcdn.com/w20/cm.png' },
+          { name: 'Niger', iso: 'ne', code: '+227', flag: 'https://flagcdn.com/w20/ne.png' },
+          { name: 'Mali', iso: 'ml', code: '+223', flag: 'https://flagcdn.com/w20/ml.png' },
+          { name: 'Guinée', iso: 'gn', code: '+224', flag: 'https://flagcdn.com/w20/gn.png' },
+          { name: 'Congo (RDC)', iso: 'cd', code: '+243', flag: 'https://flagcdn.com/w20/cd.png' },
+          { name: 'Congo', iso: 'cg', code: '+242', flag: 'https://flagcdn.com/w20/cg.png' },
+          { name: 'Madagascar', iso: 'mg', code: '+261', flag: 'https://flagcdn.com/w20/mg.png' },
+          { name: 'Maroc', iso: 'ma', code: '+212', flag: 'https://flagcdn.com/w20/ma.png' },
+          { name: 'Algérie', iso: 'dz', code: '+213', flag: 'https://flagcdn.com/w20/dz.png' },
+          { name: 'Tunisie', iso: 'tn', code: '+216', flag: 'https://flagcdn.com/w20/tn.png' },
+          { name: 'Italie', iso: 'it', code: '+39', flag: 'https://flagcdn.com/w20/it.png' },
+          { name: 'Espagne', iso: 'es', code: '+34', flag: 'https://flagcdn.com/w20/es.png' },
+          { name: 'Pays-Bas', iso: 'nl', code: '+31', flag: 'https://flagcdn.com/w20/nl.png' },
+          { name: 'Chine', iso: 'cn', code: '+86', flag: 'https://flagcdn.com/w20/cn.png' },
+          { name: 'Inde', iso: 'in', code: '+91', flag: 'https://flagcdn.com/w20/in.png' },
+          { name: 'Liban', iso: 'lb', code: '+961', flag: 'https://flagcdn.com/w20/lb.png' },
+          { name: 'Turquie', iso: 'tr', code: '+90', flag: 'https://flagcdn.com/w20/tr.png' },
+          { name: 'Émirats arabes unis', iso: 'ae', code: '+971', flag: 'https://flagcdn.com/w20/ae.png' },
+          { name: 'Nigeria', iso: 'ng', code: '+234', flag: 'https://flagcdn.com/w20/ng.png' },
+          { name: 'Ghana', iso: 'gh', code: '+233', flag: 'https://flagcdn.com/w20/gh.png' }
         ];
         allCountries = fallback;
         populateSelectors(fallback);

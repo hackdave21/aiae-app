@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Simulateur AIAE')
+@section('title', __('Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction'))
 
 @section('content')
   <!-- ================= HERO SIMULATEUR ================= -->

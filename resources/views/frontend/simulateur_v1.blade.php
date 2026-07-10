@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,6 +62,24 @@ $simTranslations =[
     'Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction' => __('Simulateur AIAE (Afrika Infrastructures And Equipements) - Estimation Construction'),
     'Simulateur d\'Estimation' => __('Simulateur d\'Estimation'),
     'Sélectionnez votre secteur' => __('Sélectionnez votre secteur'),
+    'Accueil' => __('Accueil'),
+    'Configurez votre projet' => __('Configurez votre projet'),
+    'Type, standing et dimensions en un clin d\'œil' => __('Type, standing et dimensions en un clin d\'œil'),
+    'En savoir plus' => __('En savoir plus'),
+    'Surface et localisation' => __('Surface et localisation'),
+    'Retour à l\'accueil' => __('Retour à l\'accueil'),
+    'Prix/m²' => __('Prix/m²'),
+    'Votre choix' => __('Votre choix'),
+    'Recommandé' => __('Recommandé'),
+    'étapes' => __('étapes'),
+    'Express' => __('Express'),
+    'Expert' => __('Expert'),
+    'Mode :' => __('Mode :'),
+    'Restaurant' => __('Restaurant'),
+    'Bar' => __('Bar'),
+    'Salle de conférence' => __('Salle de conférence'),
+    'Parcours rapide : secteur, surface, estimation directe' => __('Parcours rapide : secteur, surface, estimation directe'),
+    'Parcours complet : terrain, sol, équipements, options' => __('Parcours complet : terrain, sol, équipements, options'),
     'Résidentiel' => __('Résidentiel'),
     'Villas, immeubles' => __('Villas, immeubles'),
     'Tertiaire' => __('Tertiaire'),
@@ -1555,7 +1573,7 @@ const App=()=>{
             </div>}
             <div className="mb-6">
               <h2 className="text-xl font-bold text-gray-800">{t('Type de projet')}</h2>
-              <p className="text-gray-500 text-sm">{t('Secteur:')} {secteur}</p>
+              <p className="text-gray-500 text-sm">{t('Secteur:')} {{'residentiel':t('Résidentiel'),'tertiaire':t('Tertiaire'),'industriel':t('Industriel'),'agricole':t('Agricole')}[secteur]||secteur}</p>
             </div>
             <div className="card p-5 mb-6">
               <h3 className="font-semibold text-gray-700 mb-4">{t('Type de bâtiment')}</h3>
@@ -1750,7 +1768,7 @@ const App=()=>{
                   {['restaurant','bar','spa','piscine','salle_conf','parking'].map(e=>(
                     <button key={e} onClick={()=>setEspacesHotel(espacesHotel.includes(e)?espacesHotel.filter(x=>x!==e):[...espacesHotel,e])}
                       className={`px-3 py-1.5 rounded-full text-sm ${espacesHotel.includes(e)?'bg-[#0E1540] text-white':'bg-gray-100'}`}>
-                      {e === 'salle_conf' ? 'Salle conf' : t(e.charAt(0).toUpperCase() + e.slice(1))}
+                      {e === 'salle_conf' ? t('Salle de conférence') : t(e.charAt(0).toUpperCase() + e.slice(1))}
                     </button>
                   ))}
                 </div>
