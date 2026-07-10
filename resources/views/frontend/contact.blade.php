@@ -955,59 +955,257 @@
     let allCountries = [];
 
     async function fetchCountries() {
+      const priorityISOs = ['tg', 'bj', 'ci', 'fr', 'sn', 'bf', 'ga', 'cm', 'ca', 'us', 'de', 'gb', 'be', 'ch'];
+
+      const fallback = [
+        // Priorités en tête de liste
+        { name: 'Togo', iso: 'tg', code: '+228', flag: 'https://flagcdn.com/w20/tg.png' },
+        { name: 'Bénin', iso: 'bj', code: '+229', flag: 'https://flagcdn.com/w20/bj.png' },
+        { name: 'Côte d\'Ivoire', iso: 'ci', code: '+225', flag: 'https://flagcdn.com/w20/ci.png' },
+        { name: 'France', iso: 'fr', code: '+33', flag: 'https://flagcdn.com/w20/fr.png' },
+        { name: 'Sénégal', iso: 'sn', code: '+221', flag: 'https://flagcdn.com/w20/sn.png' },
+        { name: 'Burkina Faso', iso: 'bf', code: '+226', flag: 'https://flagcdn.com/w20/bf.png' },
+        { name: 'Gabon', iso: 'ga', code: '+241', flag: 'https://flagcdn.com/w20/ga.png' },
+        { name: 'Cameroun', iso: 'cm', code: '+237', flag: 'https://flagcdn.com/w20/cm.png' },
+        { name: 'Canada', iso: 'ca', code: '+1', flag: 'https://flagcdn.com/w20/ca.png' },
+        { name: 'États-Unis', iso: 'us', code: '+1', flag: 'https://flagcdn.com/w20/us.png' },
+        { name: 'Allemagne', iso: 'de', code: '+49', flag: 'https://flagcdn.com/w20/de.png' },
+        { name: 'Royaume-Uni', iso: 'gb', code: '+44', flag: 'https://flagcdn.com/w20/gb.png' },
+        { name: 'Belgique', iso: 'be', code: '+32', flag: 'https://flagcdn.com/w20/be.png' },
+        { name: 'Suisse', iso: 'ch', code: '+41', flag: 'https://flagcdn.com/w20/ch.png' },
+        // Reste par ordre alphabétique en français
+        { name: 'Afghanistan', iso: 'af', code: '+93', flag: 'https://flagcdn.com/w20/af.png' },
+        { name: 'Afrique du Sud', iso: 'za', code: '+27', flag: 'https://flagcdn.com/w20/za.png' },
+        { name: 'Albanie', iso: 'al', code: '+355', flag: 'https://flagcdn.com/w20/al.png' },
+        { name: 'Algérie', iso: 'dz', code: '+213', flag: 'https://flagcdn.com/w20/dz.png' },
+        { name: 'Andorre', iso: 'ad', code: '+376', flag: 'https://flagcdn.com/w20/ad.png' },
+        { name: 'Angola', iso: 'ao', code: '+244', flag: 'https://flagcdn.com/w20/ao.png' },
+        { name: 'Antigua-et-Barbuda', iso: 'ag', code: '+1-268', flag: 'https://flagcdn.com/w20/ag.png' },
+        { name: 'Arabie saoudite', iso: 'sa', code: '+966', flag: 'https://flagcdn.com/w20/sa.png' },
+        { name: 'Argentine', iso: 'ar', code: '+54', flag: 'https://flagcdn.com/w20/ar.png' },
+        { name: 'Arménie', iso: 'am', code: '+374', flag: 'https://flagcdn.com/w20/am.png' },
+        { name: 'Australie', iso: 'au', code: '+61', flag: 'https://flagcdn.com/w20/au.png' },
+        { name: 'Autriche', iso: 'at', code: '+43', flag: 'https://flagcdn.com/w20/at.png' },
+        { name: 'Azerbaïdjan', iso: 'az', code: '+994', flag: 'https://flagcdn.com/w20/az.png' },
+        { name: 'Bahamas', iso: 'bs', code: '+1-242', flag: 'https://flagcdn.com/w20/bs.png' },
+        { name: 'Bahreïn', iso: 'bh', code: '+973', flag: 'https://flagcdn.com/w20/bh.png' },
+        { name: 'Bangladesh', iso: 'bd', code: '+880', flag: 'https://flagcdn.com/w20/bd.png' },
+        { name: 'Barbade', iso: 'bb', code: '+1-246', flag: 'https://flagcdn.com/w20/bb.png' },
+        { name: 'Belize', iso: 'bz', code: '+501', flag: 'https://flagcdn.com/w20/bz.png' },
+        { name: 'Bhoutan', iso: 'bt', code: '+975', flag: 'https://flagcdn.com/w20/bt.png' },
+        { name: 'Biélorussie', iso: 'by', code: '+375', flag: 'https://flagcdn.com/w20/by.png' },
+        { name: 'Birmanie (Myanmar)', iso: 'mm', code: '+95', flag: 'https://flagcdn.com/w20/mm.png' },
+        { name: 'Bolivie', iso: 'bo', code: '+591', flag: 'https://flagcdn.com/w20/bo.png' },
+        { name: 'Bosnie-Herzégovine', iso: 'ba', code: '+387', flag: 'https://flagcdn.com/w20/ba.png' },
+        { name: 'Botswana', iso: 'bw', code: '+267', flag: 'https://flagcdn.com/w20/bw.png' },
+        { name: 'Brésil', iso: 'br', code: '+55', flag: 'https://flagcdn.com/w20/br.png' },
+        { name: 'Brunei', iso: 'bn', code: '+673', flag: 'https://flagcdn.com/w20/bn.png' },
+        { name: 'Bulgarie', iso: 'bg', code: '+359', flag: 'https://flagcdn.com/w20/bg.png' },
+        { name: 'Burundi', iso: 'bi', code: '+257', flag: 'https://flagcdn.com/w20/bi.png' },
+        { name: 'Cambodge', iso: 'kh', code: '+855', flag: 'https://flagcdn.com/w20/kh.png' },
+        { name: 'Cap-Vert', iso: 'cv', code: '+238', flag: 'https://flagcdn.com/w20/cv.png' },
+        { name: 'Centrafrique', iso: 'cf', code: '+236', flag: 'https://flagcdn.com/w20/cf.png' },
+        { name: 'Chili', iso: 'cl', code: '+56', flag: 'https://flagcdn.com/w20/cl.png' },
+        { name: 'Chine', iso: 'cn', code: '+86', flag: 'https://flagcdn.com/w20/cn.png' },
+        { name: 'Chypre', iso: 'cy', code: '+357', flag: 'https://flagcdn.com/w20/cy.png' },
+        { name: 'Colombie', iso: 'co', code: '+57', flag: 'https://flagcdn.com/w20/co.png' },
+        { name: 'Comores', iso: 'km', code: '+269', flag: 'https://flagcdn.com/w20/km.png' },
+        { name: 'Congo-Brazzaville', iso: 'cg', code: '+242', flag: 'https://flagcdn.com/w20/cg.png' },
+        { name: 'Congo-Kinshasa (RDC)', iso: 'cd', code: '+243', flag: 'https://flagcdn.com/w20/cd.png' },
+        { name: 'Corée du Nord', iso: 'kp', code: '+850', flag: 'https://flagcdn.com/w20/kp.png' },
+        { name: 'Corée du Sud', iso: 'kr', code: '+82', flag: 'https://flagcdn.com/w20/kr.png' },
+        { name: 'Costa Rica', iso: 'cr', code: '+506', flag: 'https://flagcdn.com/w20/cr.png' },
+        { name: 'Croatie', iso: 'hr', code: '+385', flag: 'https://flagcdn.com/w20/hr.png' },
+        { name: 'Cuba', iso: 'cu', code: '+53', flag: 'https://flagcdn.com/w20/cu.png' },
+        { name: 'Danemark', iso: 'dk', code: '+45', flag: 'https://flagcdn.com/w20/dk.png' },
+        { name: 'Djibouti', iso: 'dj', code: '+253', flag: 'https://flagcdn.com/w20/dj.png' },
+        { name: 'Dominique', iso: 'dm', code: '+1-767', flag: 'https://flagcdn.com/w20/dm.png' },
+        { name: 'Égypte', iso: 'eg', code: '+20', flag: 'https://flagcdn.com/w20/eg.png' },
+        { name: 'Émirats arabes unis', iso: 'ae', code: '+971', flag: 'https://flagcdn.com/w20/ae.png' },
+        { name: 'Équateur', iso: 'ec', code: '+593', flag: 'https://flagcdn.com/w20/ec.png' },
+        { name: 'Érythrée', iso: 'er', code: '+291', flag: 'https://flagcdn.com/w20/er.png' },
+        { name: 'Espagne', iso: 'es', code: '+34', flag: 'https://flagcdn.com/w20/es.png' },
+        { name: 'Estonie', iso: 'ee', code: '+372', flag: 'https://flagcdn.com/w20/ee.png' },
+        { name: 'Eswatini', iso: 'sz', code: '+268', flag: 'https://flagcdn.com/w20/sz.png' },
+        { name: 'Éthiopie', iso: 'et', code: '+251', flag: 'https://flagcdn.com/w20/et.png' },
+        { name: 'Fidji', iso: 'fj', code: '+679', flag: 'https://flagcdn.com/w20/fj.png' },
+        { name: 'Finlande', iso: 'fi', code: '+358', flag: 'https://flagcdn.com/w20/fi.png' },
+        { name: 'Gambie', iso: 'gm', code: '+220', flag: 'https://flagcdn.com/w20/gm.png' },
+        { name: 'Géorgie', iso: 'ge', code: '+995', flag: 'https://flagcdn.com/w20/ge.png' },
+        { name: 'Ghana', iso: 'gh', code: '+233', flag: 'https://flagcdn.com/w20/gh.png' },
+        { name: 'Gibraltar', iso: 'gi', code: '+350', flag: 'https://flagcdn.com/w20/gi.png' },
+        { name: 'Grèce', iso: 'gr', code: '+30', flag: 'https://flagcdn.com/w20/gr.png' },
+        { name: 'Grenade', iso: 'gd', code: '+1-473', flag: 'https://flagcdn.com/w20/gd.png' },
+        { name: 'Groenland', iso: 'gl', code: '+299', flag: 'https://flagcdn.com/w20/gl.png' },
+        { name: 'Guatemala', iso: 'gt', code: '+502', flag: 'https://flagcdn.com/w20/gt.png' },
+        { name: 'Guinée', iso: 'gn', code: '+224', flag: 'https://flagcdn.com/w20/gn.png' },
+        { name: 'Guinée équatoriale', iso: 'gq', code: '+240', flag: 'https://flagcdn.com/w20/gq.png' },
+        { name: 'Guinée-Bissau', iso: 'gw', code: '+245', flag: 'https://flagcdn.com/w20/gw.png' },
+        { name: 'Guyana', iso: 'gy', code: '+592', flag: 'https://flagcdn.com/w20/gy.png' },
+        { name: 'Haïti', iso: 'ht', code: '+509', flag: 'https://flagcdn.com/w20/ht.png' },
+        { name: 'Honduras', iso: 'hn', code: '+504', flag: 'https://flagcdn.com/w20/hn.png' },
+        { name: 'Hongrie', iso: 'hu', code: '+36', flag: 'https://flagcdn.com/w20/hu.png' },
+        { name: 'Inde', iso: 'in', code: '+91', flag: 'https://flagcdn.com/w20/in.png' },
+        { name: 'Indonésie', iso: 'id', code: '+62', flag: 'https://flagcdn.com/w20/id.png' },
+        { name: 'Irak', iso: 'iq', code: '+964', flag: 'https://flagcdn.com/w20/iq.png' },
+        { name: 'Iran', iso: 'ir', code: '+98', flag: 'https://flagcdn.com/w20/ir.png' },
+        { name: 'Irlande', iso: 'ie', code: '+353', flag: 'https://flagcdn.com/w20/ie.png' },
+        { name: 'Islande', iso: 'is', code: '+354', flag: 'https://flagcdn.com/w20/is.png' },
+        { name: 'Israël', iso: 'il', code: '+972', flag: 'https://flagcdn.com/w20/il.png' },
+        { name: 'Italie', iso: 'it', code: '+39', flag: 'https://flagcdn.com/w20/it.png' },
+        { name: 'Jamaïque', iso: 'jm', code: '+1-876', flag: 'https://flagcdn.com/w20/jm.png' },
+        { name: 'Japon', iso: 'jp', code: '+81', flag: 'https://flagcdn.com/w20/jp.png' },
+        { name: 'Jordanie', iso: 'jo', code: '+962', flag: 'https://flagcdn.com/w20/jo.png' },
+        { name: 'Kazakhstan', iso: 'kz', code: '+7', flag: 'https://flagcdn.com/w20/kz.png' },
+        { name: 'Kenya', iso: 'ke', code: '+254', flag: 'https://flagcdn.com/w20/ke.png' },
+        { name: 'Kirghizistan', iso: 'kg', code: '+996', flag: 'https://flagcdn.com/w20/kg.png' },
+        { name: 'Kiribati', iso: 'ki', code: '+686', flag: 'https://flagcdn.com/w20/ki.png' },
+        { name: 'Koweït', iso: 'kw', code: '+965', flag: 'https://flagcdn.com/w20/kw.png' },
+        { name: 'Laos', iso: 'la', code: '+856', flag: 'https://flagcdn.com/w20/la.png' },
+        { name: 'Lesotho', iso: 'ls', code: '+266', flag: 'https://flagcdn.com/w20/ls.png' },
+        { name: 'Lettonie', iso: 'lv', code: '+371', flag: 'https://flagcdn.com/w20/lv.png' },
+        { name: 'Liban', iso: 'lb', code: '+961', flag: 'https://flagcdn.com/w20/lb.png' },
+        { name: 'Liberia', iso: 'lr', code: '+231', flag: 'https://flagcdn.com/w20/lr.png' },
+        { name: 'Libye', iso: 'ly', code: '+218', flag: 'https://flagcdn.com/w20/ly.png' },
+        { name: 'Liechtenstein', iso: 'li', code: '+423', flag: 'https://flagcdn.com/w20/li.png' },
+        { name: 'Lituanie', iso: 'lt', code: '+370', flag: 'https://flagcdn.com/w20/lt.png' },
+        { name: 'Luxembourg', iso: 'lu', code: '+352', flag: 'https://flagcdn.com/w20/lu.png' },
+        { name: 'Macédoine du Nord', iso: 'mk', code: '+389', flag: 'https://flagcdn.com/w20/mk.png' },
+        { name: 'Madagascar', iso: 'mg', code: '+261', flag: 'https://flagcdn.com/w20/mg.png' },
+        { name: 'Malaisie', iso: 'my', code: '+60', flag: 'https://flagcdn.com/w20/my.png' },
+        { name: 'Malawi', iso: 'mw', code: '+265', flag: 'https://flagcdn.com/w20/mw.png' },
+        { name: 'Maldives', iso: 'mv', code: '+960', flag: 'https://flagcdn.com/w20/mv.png' },
+        { name: 'Mali', iso: 'ml', code: '+223', flag: 'https://flagcdn.com/w20/ml.png' },
+        { name: 'Malte', iso: 'mt', code: '+356', flag: 'https://flagcdn.com/w20/mt.png' },
+        { name: 'Maroc', iso: 'ma', code: '+212', flag: 'https://flagcdn.com/w20/ma.png' },
+        { name: 'Maurice', iso: 'mu', code: '+230', flag: 'https://flagcdn.com/w20/mu.png' },
+        { name: 'Mauritanie', iso: 'mr', code: '+222', flag: 'https://flagcdn.com/w20/mr.png' },
+        { name: 'Mexique', iso: 'mx', code: '+52', flag: 'https://flagcdn.com/w20/mx.png' },
+        { name: 'Micronésie', iso: 'fm', code: '+691', flag: 'https://flagcdn.com/w20/fm.png' },
+        { name: 'Moldavie', iso: 'md', code: '+373', flag: 'https://flagcdn.com/w20/md.png' },
+        { name: 'Monaco', iso: 'mc', code: '+377', flag: 'https://flagcdn.com/w20/mc.png' },
+        { name: 'Mongolie', iso: 'mn', code: '+976', flag: 'https://flagcdn.com/w20/mn.png' },
+        { name: 'Monténégro', iso: 'me', code: '+382', flag: 'https://flagcdn.com/w20/me.png' },
+        { name: 'Mozambique', iso: 'mz', code: '+258', flag: 'https://flagcdn.com/w20/mz.png' },
+        { name: 'Namibie', iso: 'na', code: '+264', flag: 'https://flagcdn.com/w20/na.png' },
+        { name: 'Nauru', iso: 'nr', code: '+674', flag: 'https://flagcdn.com/w20/nr.png' },
+        { name: 'Népal', iso: 'np', code: '+977', flag: 'https://flagcdn.com/w20/np.png' },
+        { name: 'Nicaragua', iso: 'ni', code: '+505', flag: 'https://flagcdn.com/w20/ni.png' },
+        { name: 'Niger', iso: 'ne', code: '+227', flag: 'https://flagcdn.com/w20/ne.png' },
+        { name: 'Nigeria', iso: 'ng', code: '+234', flag: 'https://flagcdn.com/w20/ng.png' },
+        { name: 'Norvège', iso: 'no', code: '+47', flag: 'https://flagcdn.com/w20/no.png' },
+        { name: 'Nouvelle-Zélande', iso: 'nz', code: '+64', flag: 'https://flagcdn.com/w20/nz.png' },
+        { name: 'Oman', iso: 'om', code: '+968', flag: 'https://flagcdn.com/w20/om.png' },
+        { name: 'Ouganda', iso: 'ug', code: '+256', flag: 'https://flagcdn.com/w20/ug.png' },
+        { name: 'Ouzbékistan', iso: 'uz', code: '+998', flag: 'https://flagcdn.com/w20/uz.png' },
+        { name: 'Pakistan', iso: 'pk', code: '+92', flag: 'https://flagcdn.com/w20/pk.png' },
+        { name: 'Palaos', iso: 'pw', code: '+680', flag: 'https://flagcdn.com/w20/pw.png' },
+        { name: 'Palestine', iso: 'ps', code: '+970', flag: 'https://flagcdn.com/w20/ps.png' },
+        { name: 'Panama', iso: 'pa', code: '+507', flag: 'https://flagcdn.com/w20/pa.png' },
+        { name: 'Papouasie-Nouvelle-Guinée', iso: 'pg', code: '+675', flag: 'https://flagcdn.com/w20/pg.png' },
+        { name: 'Paraguay', iso: 'py', code: '+595', flag: 'https://flagcdn.com/w20/py.png' },
+        { name: 'Pays-Bas', iso: 'nl', code: '+31', flag: 'https://flagcdn.com/w20/nl.png' },
+        { name: 'Pérou', iso: 'pe', code: '+51', flag: 'https://flagcdn.com/w20/pe.png' },
+        { name: 'Philippines', iso: 'ph', code: '+63', flag: 'https://flagcdn.com/w20/ph.png' },
+        { name: 'Pologne', iso: 'pl', code: '+48', flag: 'https://flagcdn.com/w20/pl.png' },
+        { name: 'Porto Rico', iso: 'pr', code: '+1-787', flag: 'https://flagcdn.com/w20/pr.png' },
+        { name: 'Portugal', iso: 'pt', code: '+351', flag: 'https://flagcdn.com/w20/pt.png' },
+        { name: 'Qatar', iso: 'qa', code: '+974', flag: 'https://flagcdn.com/w20/qa.png' },
+        { name: 'République dominicaine', iso: 'do', code: '+1-809', flag: 'https://flagcdn.com/w20/do.png' },
+        { name: 'République tchèque', iso: 'cz', code: '+420', flag: 'https://flagcdn.com/w20/cz.png' },
+        { name: 'Roumanie', iso: 'ro', code: '+40', flag: 'https://flagcdn.com/w20/ro.png' },
+        { name: 'Russie', iso: 'ru', code: '+7', flag: 'https://flagcdn.com/w20/ru.png' },
+        { name: 'Rwanda', iso: 'rw', code: '+250', flag: 'https://flagcdn.com/w20/rw.png' },
+        { name: 'Saint-Christophe-et-Niévès', iso: 'kn', code: '+1-869', flag: 'https://flagcdn.com/w20/kn.png' },
+        { name: 'Saint-Marin', iso: 'sm', code: '+378', flag: 'https://flagcdn.com/w20/sm.png' },
+        { name: 'Saint-Vincent-et-les-Grenadines', iso: 'vc', code: '+1-784', flag: 'https://flagcdn.com/w20/vc.png' },
+        { name: 'Sainte-Lucie', iso: 'lc', code: '+1-758', flag: 'https://flagcdn.com/w20/lc.png' },
+        { name: 'Salomon', iso: 'sb', code: '+677', flag: 'https://flagcdn.com/w20/sb.png' },
+        { name: 'Salvador', iso: 'sv', code: '+503', flag: 'https://flagcdn.com/w20/sv.png' },
+        { name: 'Samoa', iso: 'ws', code: '+685', flag: 'https://flagcdn.com/w20/ws.png' },
+        { name: 'Sao Tomé-et-Principe', iso: 'st', code: '+239', flag: 'https://flagcdn.com/w20/st.png' },
+        { name: 'Seychelles', iso: 'sc', code: '+248', flag: 'https://flagcdn.com/w20/sc.png' },
+        { name: 'Sierra Leone', iso: 'sl', code: '+232', flag: 'https://flagcdn.com/w20/sl.png' },
+        { name: 'Singapour', iso: 'sg', code: '+65', flag: 'https://flagcdn.com/w20/sg.png' },
+        { name: 'Slovaquie', iso: 'sk', code: '+421', flag: 'https://flagcdn.com/w20/sk.png' },
+        { name: 'Slovénie', iso: 'si', code: '+386', flag: 'https://flagcdn.com/w20/si.png' },
+        { name: 'Somalie', iso: 'so', code: '+252', flag: 'https://flagcdn.com/w20/so.png' },
+        { name: 'Soudan', iso: 'sd', code: '+249', flag: 'https://flagcdn.com/w20/sd.png' },
+        { name: 'Soudan du Sud', iso: 'ss', code: '+211', flag: 'https://flagcdn.com/w20/ss.png' },
+        { name: 'Sri Lanka', iso: 'lk', code: '+94', flag: 'https://flagcdn.com/w20/lk.png' },
+        { name: 'Suède', iso: 'se', code: '+46', flag: 'https://flagcdn.com/w20/se.png' },
+        { name: 'Suriname', iso: 'sr', code: '+597', flag: 'https://flagcdn.com/w20/sr.png' },
+        { name: 'Syrie', iso: 'sy', code: '+963', flag: 'https://flagcdn.com/w20/sy.png' },
+        { name: 'Tadjikistan', iso: 'tj', code: '+992', flag: 'https://flagcdn.com/w20/tj.png' },
+        { name: 'Taïwan', iso: 'tw', code: '+886', flag: 'https://flagcdn.com/w20/tw.png' },
+        { name: 'Tanzanie', iso: 'tz', code: '+255', flag: 'https://flagcdn.com/w20/tz.png' },
+        { name: 'Tchad', iso: 'td', code: '+235', flag: 'https://flagcdn.com/w20/td.png' },
+        { name: 'Thaïlande', iso: 'th', code: '+66', flag: 'https://flagcdn.com/w20/th.png' },
+        { name: 'Timor oriental', iso: 'tl', code: '+670', flag: 'https://flagcdn.com/w20/tl.png' },
+        { name: 'Tonga', iso: 'to', code: '+676', flag: 'https://flagcdn.com/w20/to.png' },
+        { name: 'Trinité-et-Tobago', iso: 'tt', code: '+1-868', flag: 'https://flagcdn.com/w20/tt.png' },
+        { name: 'Tunisie', iso: 'tn', code: '+216', flag: 'https://flagcdn.com/w20/tn.png' },
+        { name: 'Turkménistan', iso: 'tm', code: '+993', flag: 'https://flagcdn.com/w20/tm.png' },
+        { name: 'Turquie', iso: 'tr', code: '+90', flag: 'https://flagcdn.com/w20/tr.png' },
+        { name: 'Tuvalu', iso: 'tv', code: '+688', flag: 'https://flagcdn.com/w20/tv.png' },
+        { name: 'Ukraine', iso: 'ua', code: '+380', flag: 'https://flagcdn.com/w20/ua.png' },
+        { name: 'Uruguay', iso: 'uy', code: '+598', flag: 'https://flagcdn.com/w20/uy.png' },
+        { name: 'Vanuatu', iso: 'vu', code: '+678', flag: 'https://flagcdn.com/w20/vu.png' },
+        { name: 'Vatican', iso: 'va', code: '+39-06', flag: 'https://flagcdn.com/w20/va.png' },
+        { name: 'Venezuela', iso: 've', code: '+58', flag: 'https://flagcdn.com/w20/ve.png' },
+        { name: 'Viêt Nam', iso: 'vn', code: '+84', flag: 'https://flagcdn.com/w20/vn.png' },
+        { name: 'Yémen', iso: 'ye', code: '+967', flag: 'https://flagcdn.com/w20/ye.png' },
+        { name: 'Zambie', iso: 'zm', code: '+260', flag: 'https://flagcdn.com/w20/zm.png' },
+        { name: 'Zimbabwe', iso: 'zw', code: '+263', flag: 'https://flagcdn.com/w20/zw.png' }
+      ];
+
       try {
         // Fetch all countries with specific fields
-        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,cca2,idd,flags');
+        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,cca2,idd,flags,translations');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         
-        allCountries = data.map(c => ({
-          name: c.name.common,
-          iso: c.cca2.toLowerCase(),
-          // Correctly format IDD code (root + first suffix)
-          code: c.idd.root ? (c.idd.root + (c.idd.suffixes ? c.idd.suffixes[0] : '')) : '',
-          flag: c.flags.png || `https://flagcdn.com/w20/${c.cca2.toLowerCase()}.png`
-        })).filter(c => c.code !== '').sort((a,b) => a.name.localeCompare(b.name));
+        const mapped = data.map(c => {
+          const name = c.translations && c.translations.fra && c.translations.fra.common
+            ? c.translations.fra.common
+            : c.name.common;
+          let code = '';
+          if (c.idd && c.idd.root) {
+            code = (c.idd.root === '+1' || c.idd.root === '+7') 
+              ? c.idd.root 
+              : (c.idd.root + (c.idd.suffixes ? c.idd.suffixes[0] : ''));
+          }
+          return {
+            name: name,
+            iso: c.cca2.toLowerCase(),
+            code: code,
+            flag: c.flags.png || `https://flagcdn.com/w20/${c.cca2.toLowerCase()}.png`
+          };
+        }).filter(c => c.code !== '');
 
+        // Placer les pays de la diaspora et prioritaires en tête de liste
+        const priorityList = [];
+        const otherList = [];
+
+        priorityISOs.forEach(iso => {
+          const found = mapped.find(c => c.iso === iso);
+          if (found) {
+            priorityList.push(found);
+          }
+        });
+
+        mapped.forEach(c => {
+          if (!priorityISOs.includes(c.iso)) {
+            otherList.push(c);
+          }
+        });
+
+        otherList.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+
+        allCountries = [...priorityList, ...otherList];
         populateSelectors(allCountries);
       } catch (error) {
         console.error('Error fetching countries:', error);
-        // Fallback for offline or API issues
-        const fallback = [
-          { name: 'France', iso: 'fr', code: '+33', flag: 'https://flagcdn.com/w20/fr.png' },
-          { name: 'Canada', iso: 'ca', code: '+1', flag: 'https://flagcdn.com/w20/ca.png' },
-          { name: 'États-Unis', iso: 'us', code: '+1', flag: 'https://flagcdn.com/w20/us.png' },
-          { name: 'Allemagne', iso: 'de', code: '+49', flag: 'https://flagcdn.com/w20/de.png' },
-          { name: 'Royaume-Uni', iso: 'gb', code: '+44', flag: 'https://flagcdn.com/w20/gb.png' },
-          { name: 'Belgique', iso: 'be', code: '+32', flag: 'https://flagcdn.com/w20/be.png' },
-          { name: 'Suisse', iso: 'ch', code: '+41', flag: 'https://flagcdn.com/w20/ch.png' },
-          { name: 'Togo', iso: 'tg', code: '+228', flag: 'https://flagcdn.com/w20/tg.png' },
-          { name: 'Bénin', iso: 'bj', code: '+229', flag: 'https://flagcdn.com/w20/bj.png' },
-          { name: 'Côte d\'Ivoire', iso: 'ci', code: '+225', flag: 'https://flagcdn.com/w20/ci.png' },
-          { name: 'Sénégal', iso: 'sn', code: '+221', flag: 'https://flagcdn.com/w20/sn.png' },
-          { name: 'Burkina Faso', iso: 'bf', code: '+226', flag: 'https://flagcdn.com/w20/bf.png' },
-          { name: 'Gabon', iso: 'ga', code: '+241', flag: 'https://flagcdn.com/w20/ga.png' },
-          { name: 'Cameroun', iso: 'cm', code: '+237', flag: 'https://flagcdn.com/w20/cm.png' },
-          { name: 'Niger', iso: 'ne', code: '+227', flag: 'https://flagcdn.com/w20/ne.png' },
-          { name: 'Mali', iso: 'ml', code: '+223', flag: 'https://flagcdn.com/w20/ml.png' },
-          { name: 'Guinée', iso: 'gn', code: '+224', flag: 'https://flagcdn.com/w20/gn.png' },
-          { name: 'Congo (RDC)', iso: 'cd', code: '+243', flag: 'https://flagcdn.com/w20/cd.png' },
-          { name: 'Congo', iso: 'cg', code: '+242', flag: 'https://flagcdn.com/w20/cg.png' },
-          { name: 'Madagascar', iso: 'mg', code: '+261', flag: 'https://flagcdn.com/w20/mg.png' },
-          { name: 'Maroc', iso: 'ma', code: '+212', flag: 'https://flagcdn.com/w20/ma.png' },
-          { name: 'Algérie', iso: 'dz', code: '+213', flag: 'https://flagcdn.com/w20/dz.png' },
-          { name: 'Tunisie', iso: 'tn', code: '+216', flag: 'https://flagcdn.com/w20/tn.png' },
-          { name: 'Italie', iso: 'it', code: '+39', flag: 'https://flagcdn.com/w20/it.png' },
-          { name: 'Espagne', iso: 'es', code: '+34', flag: 'https://flagcdn.com/w20/es.png' },
-          { name: 'Pays-Bas', iso: 'nl', code: '+31', flag: 'https://flagcdn.com/w20/nl.png' },
-          { name: 'Chine', iso: 'cn', code: '+86', flag: 'https://flagcdn.com/w20/cn.png' },
-          { name: 'Inde', iso: 'in', code: '+91', flag: 'https://flagcdn.com/w20/in.png' },
-          { name: 'Liban', iso: 'lb', code: '+961', flag: 'https://flagcdn.com/w20/lb.png' },
-          { name: 'Turquie', iso: 'tr', code: '+90', flag: 'https://flagcdn.com/w20/tr.png' },
-          { name: 'Émirats arabes unis', iso: 'ae', code: '+971', flag: 'https://flagcdn.com/w20/ae.png' },
-          { name: 'Nigeria', iso: 'ng', code: '+234', flag: 'https://flagcdn.com/w20/ng.png' },
-          { name: 'Ghana', iso: 'gh', code: '+233', flag: 'https://flagcdn.com/w20/gh.png' }
-        ];
         allCountries = fallback;
         populateSelectors(fallback);
       }
