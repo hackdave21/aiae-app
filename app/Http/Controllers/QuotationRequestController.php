@@ -87,13 +87,17 @@ class QuotationRequestController extends Controller
             'budget' => $request->budget,
             'source_discovery' => $request->source_discovery,
             'has_attachment' => $request->hasFile('attachment'),
+            'attachment_path' => $quotation->pdf_path ?? null,
         ];
+
+        $mailErrors = [];
 
         // Send notification to admin
         try {
             Mail::to('contact@aiae.services')->send(new QuotationRequestNotification($emailData));
         } catch (\Exception $e) {
             \Log::error('Failed to send admin notification for quotation ' . $quotation->quotation_number . ': ' . $e->getMessage());
+            $mailErrors[] = 'admin';
         }
 
         // Send confirmation to client
@@ -101,13 +105,21 @@ class QuotationRequestController extends Controller
             Mail::to($request->email)->send(new QuotationRequestConfirmation($emailData));
         } catch (\Exception $e) {
             \Log::error('Failed to send client confirmation for quotation ' . $quotation->quotation_number . ': ' . $e->getMessage());
+            $mailErrors[] = 'client';
         }
 
-        return response()->json([
+        $response = [
             'success' => true,
             'message' => 'Votre demande de devis a été envoyée avec succès. Notre équipe vous contactera sous 48h.',
-            'quotation_number' => $quotation->quotation_number
-        ]);
+            'quotation_number' => $quotation->quotation_number,
+        ];
+
+        if (!empty($mailErrors)) {
+            $response['mail_warning'] = 'Votre demande a été enregistrée. L\'envoi de l\'e-mail de confirmation a rencontré un problème technique. Notre équipe vous recontactera manuellement.';
+            $response['mail_errors'] = $mailErrors;
+        }
+
+        return response()->json($response);
     }
 
     /**

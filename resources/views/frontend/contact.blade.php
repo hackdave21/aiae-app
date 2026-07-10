@@ -1133,11 +1133,14 @@
               console.log("Server response:", result);
 
               if (response.ok && result.success) {
+                const displayMessage = result.mail_warning || result.message;
+                const displayIcon = result.mail_warning ? 'warning' : 'success';
+                const displayTitle = result.mail_warning ? 'Demande enregistrée' : 'Succès !';
                 if (typeof Swal !== 'undefined') {
                   Swal.fire({
-                    title: 'Succès !',
-                    text: result.message,
-                    icon: 'success',
+                    title: displayTitle,
+                    text: displayMessage,
+                    icon: displayIcon,
                     confirmButtonColor: '#111736',
                     confirmButtonText: 'OK'
                   }).then(() => {
@@ -1149,7 +1152,7 @@
                     }
                   });
                 } else {
-                  alert(result.message);
+                  alert(displayMessage);
                   form.reset();
                 }
               } else {
