@@ -607,12 +607,12 @@ const App=()=>{
   const[etape,setEtape]=useState(initSecteur ? (fromHomePage ? 2 : 1) : 1);
   const [secteur,setSecteur]=useState(initSecteur);
   const[typeBat,setTypeBat]=useState('');
-  const [standing,setStanding]=useState(qs.standing || '');
+  const [standing,setStanding]=useState(qs.standing || 'standard');
   const [showN2,setShowN2]=useState(null);
   const [catHotel,setCatHotel]=useState('3s');
   const[forme,setForme]=useState('rect');
   
-  const initialStanding = qs.standing || '';
+  const initialStanding = qs.standing || 'standard';
   const defaultSurf = STANDINGS[initialStanding]?.terrain_min || 600;
   const initialSurf = qs.surface || defaultSurf;
   const [dimA,setDimA]=useState(Math.round(Math.sqrt(initialSurf)));
@@ -1318,10 +1318,10 @@ const App=()=>{
   const conv=(n,cur)=>{if(cur==='EUR'||cur==='USD')return Math.round(n/CURRENCY_RATES[cur]);return n;};
 
   const reset=()=>{
-    setSecteur('');setTypeBat('');setStanding('confort');setCatHotel('3s');
+    setSecteur('');setTypeBat('');setStanding('standard');setCatHotel('3s');
     setForme('rect');setDimA(30);setDimB(20);setTerrainDispo('oui');
     setZone(Object.keys(ZONES)[0]||'zone1');setSol('');setNiveaux(1);setSsSol(0);
-    setHspSoussol(STANDINGS_HSP_SOL['confort']||2.5);
+    setHspSoussol(STANDINGS_HSP_SOL['standard']||2.5);
     setNbChambres(30);setEspacesHotel([]);setHauteurLibre(8);setPontRoulant(false);setGroupeFroid('');
     setEffectif(100);setIrrigation('');setNbAsc(0);setSolaire('');setGroupe('');
     setAlarme('');setVideo('');setAcces('');
@@ -1409,6 +1409,13 @@ const App=()=>{
               </div>
             ))}
           </div>
+          {standing&&secteur==='residentiel'&&(
+            <button onClick={()=>setEtape(1)} className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 hover:bg-amber-100 transition-colors cursor-pointer" title={t('Modifier le standing')}>
+              <Icon name={STANDINGS[standing]?.icon||'Home'} size={14}/>
+              <span className="font-medium">{t(STANDINGS[standing]?.name||standing)}</span>
+              <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            </button>
+          )}
           <button onClick={() => window.location.href = window.BACK_ROUTE} className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span className="hidden sm:inline">{t('Nouveau')}</span>
@@ -1423,7 +1430,7 @@ const App=()=>{
   );
   };
 
-  const Nav=({canContinue=true})=>{
+  const Nav=({canContinue=true, validationMsg=''})=>{
     const nextStep = () => {
       if (mode === 'express') {
         if (etape < 3) { setEtape(etape + 1); return; }
@@ -1441,30 +1448,38 @@ const App=()=>{
       }
     };
     return (
-    <div className="flex justify-between items-center mt-8 pt-6 border-t no-print">
-      <button 
-        onClick={prevStep}
-        className="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
-      >
-        ← {t('Retour')}
-      </button>
-      <button 
-        onClick={nextStep}
-        disabled={!canContinue || isSaving} 
-        className="btn-primary flex items-center gap-2"
-      >
-        {isSaving ? (
-          <span className="flex items-center gap-1">
-            <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            {t('Chargement...')}
-          </span>
-        ) : (
-          <>{etape === (mode === 'express' ? 3 : 6) ? t('Demander un devis') : t('Continuer')} →</>
-        )}
-      </button>
+    <div className="mt-8 pt-6 border-t no-print">
+      {!canContinue&&validationMsg&&(
+        <div className="mb-3 flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-700">
+          <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+          <span>{validationMsg}</span>
+        </div>
+      )}
+      <div className="flex justify-between items-center">
+        <button 
+          onClick={prevStep}
+          className="flex items-center gap-2 px-5 py-2.5 text-gray-600 hover:text-gray-800 rounded-lg"
+        >
+          ← {t('Retour')}
+        </button>
+        <button 
+          onClick={nextStep}
+          disabled={!canContinue || isSaving} 
+          className="btn-primary flex items-center gap-2"
+        >
+          {isSaving ? (
+            <span className="flex items-center gap-1">
+              <svg className="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              {t('Chargement...')}
+            </span>
+          ) : (
+            <>{etape === (mode === 'express' ? 3 : 6) ? t('Demander un devis') : t('Continuer')} →</>
+          )}
+        </button>
+      </div>
     </div>
   );
   };
@@ -1628,7 +1643,7 @@ const App=()=>{
                 </div>
               </div>
             )}
-            <Nav canContinue={!!typeBat}/>
+            <Nav canContinue={!!typeBat} validationMsg={!typeBat?t('Veuillez sélectionner un type de bâtiment pour continuer.'):''}/>
           </div>
         )}
 
@@ -1699,7 +1714,7 @@ const App=()=>{
               </div>
               {sol&&(sol==='argileux'||sol==='hydromorphe')&&<div className="alert-box mt-4"><strong>⚠️ {t('Sol à risque')}</strong><p className="text-sm mt-1">{t('Étude géotechnique G2 AVP fortement recommandée.')}</p></div>}
             </div>
-            <Nav canContinue={!!sol}/>
+            <Nav canContinue={!!sol} validationMsg={!sol?t('Veuillez sélectionner un type de sol pour continuer.'):''}/>
         </div>
       )}
 
@@ -1816,7 +1831,7 @@ const App=()=>{
           <div>
             <div className="mb-6"><h2 className="text-xl font-bold text-gray-800">{t('Surface et localisation')}</h2></div>
             <div className="card p-6 mb-6">
-              <h3 className="font-semibold text-gray-700 mb-4">{t('Surface')}<InfoIcon text={t("Surface bâtie totale en m².")}/></h3>
+              <h3 className="font-semibold text-gray-700 mb-4">{t('Surface du terrain')}<InfoIcon text={t("Surface totale du terrain en m². La surface de plancher (bâtie) sera calculée selon l'emprise au sol.")}/></h3>
               <div className="flex items-center gap-4">
                 <InputNum value={surfManuelle} onChange={(v)=>{setSurfManuelle(v);setForme('irregulier');}} min={20} max={50000} step={0.5} unit="m²"/>
               </div>
@@ -2052,11 +2067,17 @@ const App=()=>{
                 {t('Synthèse du projet')}
               </h3>
               <div className="grid md:grid-cols-4 gap-4">
-                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Type')}</div><div className="font-semibold">{t(typeData?.name||typeBat)}</div><div className="text-xs text-gray-500">{secteur==='residentiel'?t(STANDINGS[standing]?.name):''}</div></div>
+                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Type')}</div><div className="font-semibold">{t(typeData?.name||typeBat)}</div><div className="text-xs text-gray-500">{standing?t(STANDINGS[standing]?.name):''}</div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Terrain')}</div><div className="font-semibold mono">{fmt(surface)} m²</div><div className="text-xs text-gray-500">{t(zoneData?.name||'')}</div></div>
-                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Surface plancher')}</div><div className="font-semibold mono">{fmt(surfaceBatie)} m²</div><div className="text-xs text-gray-500">{niveaux===1?t('Plain-pied'):`R+${niveaux-1}`}{ssSol>0?` + ${ssSol} ss`:''}</div></div>
+                <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Surface plancher')}</div><div className="font-semibold mono">{fmt(surfaceBatie)} m²</div><div className="text-xs text-gray-500">{niveaux===1?t('Plain-pied'):`R+${niveaux-1}`}{ssSol>0?` + ${ssSol} ss`:''} <span className="text-gray-400">·</span> <span className="mono">{fmt(Math.round(emprise*100))}% emprise</span></div></div>
                 <div className="p-3 bg-gray-50 rounded-lg"><div className="text-xs text-gray-500">{t('Durée estimée')}</div><div className="font-semibold">{duree.min}-{duree.max} {t('mois')} <span className="text-[10px] text-gray-400 font-normal">({t('estimatif')})</span></div></div>
               </div>
+              {secteur!=='agricole'&&(
+                <div className="mt-3 px-3 py-2 bg-blue-50 rounded-lg text-xs text-blue-600 flex items-center gap-2">
+                  <Icon name="Info" size={14}/>
+                  <span>{t('Surface plancher')} = {t('Terrain')} × {t('emprise')} → <span className="mono font-semibold">{fmt(surface)} m² × {fmt(Math.round(emprise*100))}% = {fmt(surfaceBatie)} m²</span></span>
+                </div>
+              )}
             </div>
 
             {/* BESOINS ÉNERGÉTIQUES */}
