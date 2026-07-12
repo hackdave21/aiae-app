@@ -316,6 +316,15 @@ $simTranslations =[
     'Piscine béton carrelée 10x5m' => __('Piscine béton carrelée 10x5m'),
     'Piscine à débordement 12x5m' => __('Piscine à débordement 12x5m'),
     'Piscine plage immergée 8x4m' => __('Piscine plage immergée 8x4m'),
+    // Messages de validation des étapes (M-4 - fix)
+    'Veuillez sélectionner un type de bâtiment pour continuer.' => __('Veuillez sélectionner un type de bâtiment pour continuer.'),
+    'Veuillez sélectionner un type de sol pour continuer.' => __('Veuillez sélectionner un type de sol pour continuer.'),
+    // Libellés estimation basse/haute manquants
+    'Estimation basse' => __('Estimation basse'),
+    'Estimation haute' => __('Estimation haute'),
+    // Option standing
+    'En option :' => __('En option :'),
+    'Ce que vous obtenez :' => __('Ce que vous obtenez :'),
 ];
 @endphp
 <div id="root"><div style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#64748b;font-family:sans-serif;font-size:18px">{{ __('Chargement du simulateur...') }}</div></div>

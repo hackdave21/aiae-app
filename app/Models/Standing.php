@@ -18,6 +18,7 @@ class Standing extends Model
             'hsp_rdc' => 'float',
             'hsp_etage' => 'float',
             'hsp_soussol' => 'float',
+            'marge' => 'float',
         ];
     }
 }
