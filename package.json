@@ -3,8 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build && node scripts/copy-vendor-js.mjs && node scripts/build-frontend-apps.mjs",
-        "build:frontend-apps": "node scripts/copy-vendor-js.mjs && node scripts/build-frontend-apps.mjs",
+        "build": "vite build",
         "dev": "vite"
     },
     "devDependencies": {
