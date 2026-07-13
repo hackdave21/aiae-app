@@ -31,6 +31,27 @@ jobs:
           ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       # --------------------------------------------------------
+      # 2.5 Diagnostics serveur (debug)
+      # --------------------------------------------------------
+      - name: 🔍 Diagnostics serveur
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && \
+             echo '--- Espace disque ---' && \
+             df -h /home/sites/42a/d/dbb41a432c && \
+             echo '--- Node / npm ---' && \
+             (node -v 2>&1 || echo 'node NOT FOUND') && \
+             (npm -v 2>&1 || echo 'npm NOT FOUND') && \
+             echo '--- PHP ---' && \
+             (php -v 2>&1 | head -1) && \
+             echo '--- Composer ---' && \
+             (composer --version 2>&1 || echo 'composer NOT FOUND') && \
+             echo '--- Git status ---' && \
+             git status --short && \
+             echo '--- Git remote ---' && \
+             git remote -v"
+
+      # --------------------------------------------------------
       # 3. Passer en mode maintenance
       # --------------------------------------------------------
       - name: 🔒 Maintenance ON
@@ -52,15 +73,20 @@ jobs:
       - name: 🎵 Composer install
         run: |
           ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "cd /home/sites/42a/d/dbb41a432c/aiae-app && composer install --no-dev --optimize-autoloader --no-interaction"
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && composer install --no-dev --optimize-autoloader --no-interaction 2>&1"
 
       # --------------------------------------------------------
-      # 6. Build assets Vite (CSS + JS)
+      # 6. npm ci + build assets Vite (CSS + JS)
       # --------------------------------------------------------
-      - name: 🏗️ npm ci && npm run build
+      - name: 🏗️ npm ci
         run: |
           ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "cd /home/sites/42a/d/dbb41a432c/aiae-app && npm ci && npm run build"
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && npm ci 2>&1"
+
+      - name: 🔨 npm run build (vite)
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && npm run build 2>&1"
 
       # --------------------------------------------------------
       # 7. Migrations
@@ -68,7 +94,7 @@ jobs:
       - name: 🗄️ Migrations
         run: |
           ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "cd /home/sites/42a/d/dbb41a432c/aiae-app && php artisan migrate --force"
+            "cd /home/sites/42a/d/dbb41a432c/aiae-app && php artisan migrate --force 2>&1"
 
       # --------------------------------------------------------
       # 8. Caches Laravel
@@ -77,10 +103,10 @@ jobs:
         run: |
           ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             "cd /home/sites/42a/d/dbb41a432c/aiae-app && \
-             php artisan config:cache && \
-             php artisan route:cache && \
-             php artisan view:cache && \
-             php artisan optimize"
+             php artisan config:cache 2>&1 && \
+             php artisan route:cache 2>&1 && \
+             php artisan view:cache 2>&1 && \
+             php artisan optimize 2>&1"
 
       # --------------------------------------------------------
       # 9. Sortie du mode maintenance
